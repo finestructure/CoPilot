@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import Cocoa
 
 var sharedPlugin: CoPilotPlugin?
 
@@ -33,7 +34,8 @@ class CoPilotPlugin: NSObject {
     func createMenuItems() {
         var item = NSApp.mainMenu!!.itemWithTitle("Edit")
         if item != nil {
-            var actionMenuItem = NSMenuItem(title:"Do Action", action:"doMenuAction", keyEquivalent:"")
+            var actionMenuItem = NSMenuItem(title:"CoPilot", action:"doMenuAction", keyEquivalent:"x")
+            actionMenuItem.keyEquivalentModifierMask = Int((NSEventModifierFlags.ControlKeyMask | NSEventModifierFlags.CommandKeyMask).rawValue)
             actionMenuItem.target = self
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(actionMenuItem)
