@@ -11,6 +11,7 @@
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
+		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,34 @@
 			remoteGlobalIDString = 1F925EAC195C0D6300ED456B;
 			remoteInfo = "Nimble-OSX";
 		};
+		5A0156BE1AE263F500EED621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = DiffMatchPatch;
+		};
+		5A0156C01AE263F500EED621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D5BC0AF128CA8E200B8F5FF;
+			remoteInfo = DiffMatchPatchTest;
+		};
+		5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AD1E7CE1AE266530017CEEE;
+			remoteInfo = "DiffMatchPatch-OSX";
+		};
+		5AD1E7FE1AE26B1F0017CEEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5AD1E7CD1AE266530017CEEE;
+			remoteInfo = "DiffMatchPatch-OSX";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +85,8 @@
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPluginTests.swift; sourceTree = "<group>"; };
 		5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = External/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
+		5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "External/aerogear-diffmatchpatch/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
+		5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPluginTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
@@ -67,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */,
 				5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +111,7 @@
 			children = (
 				5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
+				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
 			);
 			path = CoPilotPluginTests;
 			sourceTree = "<group>";
@@ -94,6 +127,7 @@
 		5A0156A21AE2629200EED621 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */,
 				5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */,
 			);
 			name = External;
@@ -106,6 +140,16 @@
 				5A0156AD1AE2629C00EED621 /* NimbleTests.xctest */,
 				5A0156AF1AE2629C00EED621 /* Nimble.framework */,
 				5A0156B11AE2629C00EED621 /* NimbleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A0156BA1AE263F500EED621 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A0156BF1AE263F500EED621 /* DiffMatchPatch.framework */,
+				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
+				5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +205,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */,
 				5A0156B41AE262F800EED621 /* PBXTargetDependency */,
 			);
 			name = CoPilotPluginTests;
@@ -213,6 +258,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 5A0156BA1AE263F500EED621 /* Products */;
+					ProjectRef = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+				},
+				{
 					ProductGroup = 5A0156A41AE2629C00EED621 /* Products */;
 					ProjectRef = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
 				},
@@ -252,6 +301,27 @@
 			fileType = wrapper.cfbundle;
 			path = NimbleTests.xctest;
 			remoteRef = 5A0156B01AE2629C00EED621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A0156BF1AE263F500EED621 /* DiffMatchPatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DiffMatchPatch.framework;
+			remoteRef = 5A0156BE1AE263F500EED621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DiffMatchPatchTest.xctest;
+			remoteRef = 5A0156C01AE263F500EED621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DiffMatchPatch.framework;
+			remoteRef = 5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -299,12 +369,18 @@
 			name = "Nimble-OSX";
 			targetProxy = 5A0156B31AE262F800EED621 /* PBXContainerItemProxy */;
 		};
+		5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DiffMatchPatch-OSX";
+			targetProxy = 5AD1E7FE1AE26B1F0017CEEE /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5A01569F1AE2619700EED621 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -315,11 +391,17 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/External/**",
+				);
 				INFOPLIST_FILE = CoPilotPluginTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotPluginTests/CoPilotPluginTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -327,17 +409,24 @@
 		5A0156A01AE2619700EED621 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/External/**",
+				);
 				INFOPLIST_FILE = CoPilotPluginTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotPluginTests/CoPilotPluginTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -375,6 +464,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIT)/External/**",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 			};
@@ -408,6 +502,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIT)/External/**",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 			};
 			name = Release;
@@ -424,6 +523,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Debug;
@@ -440,6 +540,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;

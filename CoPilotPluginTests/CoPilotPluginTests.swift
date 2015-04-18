@@ -10,6 +10,8 @@ import Cocoa
 import XCTest
 import Nimble
 
+let dmp = DiffMatchPatch()
+
 class CoPilotPluginTests: XCTestCase {
     
     func test1() {
