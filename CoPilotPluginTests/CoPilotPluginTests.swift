@@ -13,13 +13,31 @@ import Nimble
 import CryptoSwift
 
 
-let dmp = DiffMatchPatch()
-
-
-func diff(a: String!, b: String!, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {
+func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {
     let d = DiffMatchPatch()
-    let diffs = d.diff_mainOfOldString(a, andNewString: b, checkLines: checklines, deadline: deadline)
-    return NSArray(array: diffs) as! [Diff]
+    if let diffs = d.diff_mainOfOldString(a, andNewString: b, checkLines: checklines, deadline: deadline) {
+        return NSArray(array: diffs) as! [Diff]
+    } else {
+        return [Diff]()
+    }
+}
+
+
+func patch(diffs: [Diff]) -> [Patch] {
+    let d = DiffMatchPatch()
+    if let patches = d.patch_makeFromDiffs(NSMutableArray(array: diffs)) {
+        return NSArray(array: patches) as! [Patch]
+    } else {
+        return [Patch]()
+    }
+}
+
+
+struct Document {
+    var text: String
+    var hash: String {
+        return self.text.md5()!
+    }
 }
 
 
@@ -37,9 +55,34 @@ class CoPilotPluginTests: XCTestCase {
     }
     
     
-    func test_md5() {
-        let hash = "The quick brown fox jumps over the lazy dog".md5()
-        expect(hash) == "9e107d9d372bb6826bd81d3542a419d6".uppercaseString
+    func test_patches() {
+        let diffs = diff("foo2bar", "foobar")
+        let patches = patch(diffs)
+        expect(patches.count) == 1
+        let lines = patches[0].description.componentsSeparatedByString("\n")
+        expect(lines[0]) == "@@ -1,7 +1,6 @@"
+        expect(lines[1]) == " foo"
+        expect(lines[2]) == "-2"
+        expect(lines[3]) == " bar"
+        expect(patches[0].start1) == 0
+        expect(patches[0].start2) == 0
+        expect(patches[0].length1) == 7
+        expect(patches[0].length2) == 6
+    }
+    
+    
+    func test_apply() {
+        let diffs = diff("foo2bar", "foobar")
+        let patches = patch(diffs)
+        let dmp = DiffMatchPatch()
+        let res = dmp.patch_apply(NSArray(array: patches) as [AnyObject], toString: "foo2bar")
+        println(res)
+    }
+    
+    
+    func test_hash() {
+        let doc = Document(text: "The quick brown fox jumps over the lazy dog")
+        expect(doc.hash) == "9e107d9d372bb6826bd81d3542a419d6".uppercaseString
     }
     
 }
