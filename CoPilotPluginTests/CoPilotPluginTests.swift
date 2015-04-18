@@ -11,6 +11,7 @@ import XCTest
 import Nimble
 
 import CryptoSwift
+import FeinstrukturUtils
 
 
 func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {

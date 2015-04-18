@@ -7,3 +7,6 @@
 [submodule "External/CryptoSwift"]
 	path = External/CryptoSwift
 	url = git@github.com:krzyzanowskim/CryptoSwift.git
+[submodule "External/FeinstrukturUtils"]
+	path = External/FeinstrukturUtils
+	url = git@bitbucket.org:feinstruktur/feinstrukturutils.git
