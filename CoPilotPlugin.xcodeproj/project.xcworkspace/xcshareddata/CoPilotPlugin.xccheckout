@@ -14,6 +14,8 @@
 		<string>bitbucket.org:sven_schmidt/copilot.git</string>
 		<key>95438028B10BBB846574013D29F154A00556A9D1</key>
 		<string>github.com:Quick/Nimble.git</string>
+		<key>DAA19F4F923C1982D440E1A401FC51BC084FF297</key>
+		<string>github.com:feinstruktur/aerogear-diffmatchpatch-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CoPilotPlugin.xcodeproj</string>
@@ -22,7 +24,9 @@
 		<key>5DECC3D92606A8E639BB23E9F74A619917E98DD9</key>
 		<string>../..</string>
 		<key>95438028B10BBB846574013D29F154A00556A9D1</key>
-		<string>../..External/Nimble/</string>
+		<string>../..External/Nimble</string>
+		<key>DAA19F4F923C1982D440E1A401FC51BC084FF297</key>
+		<string>../../External/aerogear-diffmatchpatch/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>bitbucket.org:sven_schmidt/copilot.git</string>
@@ -32,6 +36,14 @@
 	<string>5DECC3D92606A8E639BB23E9F74A619917E98DD9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DAA19F4F923C1982D440E1A401FC51BC084FF297</string>
+			<key>IDESourceControlWCCName</key>
+			<string>aerogear-diffmatchpatch</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
