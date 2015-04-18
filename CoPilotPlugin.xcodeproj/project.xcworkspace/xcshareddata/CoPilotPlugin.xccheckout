@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F5920920-3911-493F-86D0-369A229582EC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CoPilotPlugin</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5DECC3D92606A8E639BB23E9F74A619917E98DD9</key>
+		<string>bitbucket.org:sven_schmidt/copilot.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CoPilotPlugin.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5DECC3D92606A8E639BB23E9F74A619917E98DD9</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:sven_schmidt/copilot.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5DECC3D92606A8E639BB23E9F74A619917E98DD9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5DECC3D92606A8E639BB23E9F74A619917E98DD9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CoPilotPlugin</string>
+		</dict>
+	</array>
+</dict>
+</plist>

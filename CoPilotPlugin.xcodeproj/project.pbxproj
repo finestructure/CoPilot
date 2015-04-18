@@ -7,22 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A0156991AE2619700EED621 /* CoPilotPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPluginTests.swift; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		5A0156961AE2619700EED621 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		5A01569A1AE2619700EED621 /* CoPilotPluginTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */,
+				5A01569B1AE2619700EED621 /* Supporting Files */,
+			);
+			path = CoPilotPluginTests;
+			sourceTree = "<group>";
+		};
+		5A01569B1AE2619700EED621 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5A01569C1AE2619700EED621 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		5A9BE1751AD90862002817C0 = {
 			isa = PBXGroup;
 			children = (
 				5A9BE17F1AD90862002817C0 /* CoPilotPlugin */,
+				5A01569A1AE2619700EED621 /* CoPilotPluginTests */,
 				5A9BE17E1AD90862002817C0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -31,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */,
+				5A0156991AE2619700EED621 /* CoPilotPluginTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,6 +89,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5A0156981AE2619700EED621 /* CoPilotPluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A0156A11AE2619700EED621 /* Build configuration list for PBXNativeTarget "CoPilotPluginTests" */;
+			buildPhases = (
+				5A0156951AE2619700EED621 /* Sources */,
+				5A0156961AE2619700EED621 /* Frameworks */,
+				5A0156971AE2619700EED621 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoPilotPluginTests;
+			productName = CoPilotPluginTests;
+			productReference = 5A0156991AE2619700EED621 /* CoPilotPluginTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5A9BE17C1AD90862002817C0 /* CoPilotPlugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A9BE1881AD90862002817C0 /* Build configuration list for PBXNativeTarget "CoPilotPlugin" */;
@@ -81,6 +131,9 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = feinstruktur;
 				TargetAttributes = {
+					5A0156981AE2619700EED621 = {
+						CreatedOnToolsVersion = 6.3;
+					};
 					5A9BE17C1AD90862002817C0 = {
 						CreatedOnToolsVersion = 6.3;
 					};
@@ -99,11 +152,19 @@
 			projectRoot = "";
 			targets = (
 				5A9BE17C1AD90862002817C0 /* CoPilotPlugin */,
+				5A0156981AE2619700EED621 /* CoPilotPluginTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5A0156971AE2619700EED621 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5A9BE17B1AD90862002817C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +176,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5A0156951AE2619700EED621 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5A9BE17A1AD90862002817C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,6 +195,45 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		5A01569F1AE2619700EED621 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CoPilotPluginTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5A0156A01AE2619700EED621 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CoPilotPluginTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		5A9BE1861AD90862002817C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -232,6 +340,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5A0156A11AE2619700EED621 /* Build configuration list for PBXNativeTarget "CoPilotPluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A01569F1AE2619700EED621 /* Debug */,
+				5A0156A01AE2619700EED621 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5A9BE1791AD90862002817C0 /* Build configuration list for PBXProject "CoPilotPlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -248,6 +364,7 @@
 				5A9BE18A1AD90862002817C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "890A4B3E171F031300AFE577"
+               BlueprintIdentifier = "5A9BE17C1AD90862002817C0"
                BuildableName = "CoPilotPlugin.xcplugin"
                BlueprintName = "CoPilotPlugin"
                ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8966AFCA173EB7BF004150C0"
+               BlueprintIdentifier = "5A0156981AE2619700EED621"
                BuildableName = "CoPilotPluginTests.xctest"
                BlueprintName = "CoPilotPluginTests"
                ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
@@ -42,6 +42,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5A0156981AE2619700EED621"
+               BuildableName = "CoPilotPluginTests.xctest"
+               BlueprintName = "CoPilotPluginTests"
+               ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -56,12 +66,14 @@
       allowLocationSimulation = "NO"
       viewDebuggingEnabled = "No">
       <PathRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.dt.Xcode"
          FilePath = "/Applications/Xcode.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "890A4B3E171F031300AFE577"
+            BlueprintIdentifier = "5A9BE17C1AD90862002817C0"
             BuildableName = "CoPilotPlugin.xcplugin"
             BlueprintName = "CoPilotPlugin"
             ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
