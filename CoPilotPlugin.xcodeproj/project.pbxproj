@@ -454,6 +454,7 @@
 				5A0156A01AE2619700EED621 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A9BE1791AD90862002817C0 /* Build configuration list for PBXProject "CoPilotPlugin" */ = {
 			isa = XCConfigurationList;
