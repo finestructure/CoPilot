@@ -50,9 +50,39 @@ func apply(source: String, patches: [Patch]) -> Result<String> {
 }
 
 
+struct Changeset {
+    let patches: [Patch]
+    let baseRev: Hash
+    let targetRev: Hash
+}
+
+
+func apply(source: Document, changeSet: Changeset) -> Result<Document> {
+    if source.hash == changeSet.baseRev {
+        // this should apply cleanly
+        switch apply(source.text, changeSet.patches) {
+        case .Success(let value):
+            let target = Document(text: value.unbox)
+            assert(target.hash == changeSet.targetRev)
+            return Result(target)
+        case .Failure(let error):
+            return Result(error)
+        }
+    } else {
+        // we have local changes
+        // try applying this but it might fail
+        let res = apply(source.text, changeSet.patches)
+        return map(res) { Document(text: $0) }
+    }
+}
+
+
+typealias Hash = String
+
+
 struct Document {
     var text: String
-    var hash: String {
+    var hash: Hash {
         return self.text.md5()!
     }
 }
@@ -88,12 +118,24 @@ class CoPilotPluginTests: XCTestCase {
     }
     
     
-    func test_apply() {
+    func test_apply_String() {
         let diffs = diff("foo2bar", "foobar")
         let patches = patch(diffs)
         let res = apply("foo2bar", patches)
         expect(res.succeeded) == true
         expect(res.value!) == "foobar"
+    }
+    
+    
+    func test_apply_Document() {
+        let source = Document(text: "The quick brown fox jumps over the lazy dog")
+        let newText = "The quick brown cat jumps over the lazy dog"
+        let diffs = diff(source.text, newText)
+        let patches = patch(diffs)
+        let changeSet = Changeset(patches: patches, baseRev: source.hash, targetRev: newText.md5()!)
+        let res = apply(source, changeSet)
+        expect(res.succeeded) == true
+        expect(res.value!.text) == newText
     }
     
     
