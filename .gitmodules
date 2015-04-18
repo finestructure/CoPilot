@@ -4,3 +4,6 @@
 [submodule "External/aerogear-diffmatchpatch"]
 	path = External/aerogear-diffmatchpatch
 	url = git@github.com:aerogear/aerogear-diffmatchpatch-ios.git
+[submodule "External/CryptoSwift"]
+	path = External/CryptoSwift
+	url = git@github.com:krzyzanowskim/CryptoSwift.git

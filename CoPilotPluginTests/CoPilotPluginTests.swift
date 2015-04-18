@@ -10,6 +10,8 @@ import Cocoa
 import XCTest
 import Nimble
 
+import CryptoSwift
+
 
 let dmp = DiffMatchPatch()
 
@@ -32,6 +34,12 @@ class CoPilotPluginTests: XCTestCase {
         expect(d[1].text) == "2"
         expect(d[2].operation) == Operation.DiffEqual
         expect(d[2].text) == "bar"
+    }
+    
+    
+    func test_md5() {
+        let hash = "The quick brown fox jumps over the lazy dog".md5()
+        expect(hash) == "9e107d9d372bb6826bd81d3542a419d6".uppercaseString
     }
     
 }
