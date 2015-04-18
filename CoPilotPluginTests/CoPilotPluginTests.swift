@@ -14,8 +14,8 @@ import CryptoSwift
 
 
 func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {
-    let d = DiffMatchPatch()
-    if let diffs = d.diff_mainOfOldString(a, andNewString: b, checkLines: checklines, deadline: deadline) {
+    let dmp = DiffMatchPatch()
+    if let diffs = dmp.diff_mainOfOldString(a, andNewString: b, checkLines: checklines, deadline: deadline) {
         return NSArray(array: diffs) as! [Diff]
     } else {
         return [Diff]()
@@ -24,12 +24,33 @@ func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInter
 
 
 func patch(diffs: [Diff]) -> [Patch] {
-    let d = DiffMatchPatch()
-    if let patches = d.patch_makeFromDiffs(NSMutableArray(array: diffs)) {
+    let dmp = DiffMatchPatch()
+    if let patches = dmp.patch_makeFromDiffs(NSMutableArray(array: diffs)) {
         return NSArray(array: patches) as! [Patch]
     } else {
         return [Patch]()
     }
+}
+
+
+extension String {
+    
+    mutating func apply(patches: [Patch]) -> Bool {
+        let dmp = DiffMatchPatch()
+        if let res = dmp.patch_apply(NSArray(array: patches) as [AnyObject], toString: self) {
+            assert(res.count == 2, "results array must have two entries: (text, results)")
+            if let text = res[0] as? String {
+                let results = res[1] as! NSArray
+                let success = reduce(results, true) { (res, elem) in res && (elem as! NSNumber).boolValue }
+                if success {
+                    self = text
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
 }
 
 
@@ -74,9 +95,10 @@ class CoPilotPluginTests: XCTestCase {
     func test_apply() {
         let diffs = diff("foo2bar", "foobar")
         let patches = patch(diffs)
-        let dmp = DiffMatchPatch()
-        let res = dmp.patch_apply(NSArray(array: patches) as [AnyObject], toString: "foo2bar")
-        println(res)
+        var text = "foo2bar"
+        let success = text.apply(patches)
+        expect(success) == true
+        expect(text) == "foobar"
     }
     
     
