@@ -34,24 +34,19 @@ func patch(diffs: [Diff]) -> [Patch] {
 }
 
 
-extension String {
-    
-    mutating func apply(patches: [Patch]) -> Bool {
-        let dmp = DiffMatchPatch()
-        if let res = dmp.patch_apply(NSArray(array: patches) as [AnyObject], toString: self) {
-            assert(res.count == 2, "results array must have two entries: (text, results)")
-            if let text = res[0] as? String {
-                let results = res[1] as! NSArray
-                let success = reduce(results, true) { (res, elem) in res && (elem as! NSNumber).boolValue }
-                if success {
-                    self = text
-                    return true
-                }
+func apply(source: String, patches: [Patch]) -> Result<String> {
+    let dmp = DiffMatchPatch()
+    if let res = dmp.patch_apply(NSArray(array: patches) as [AnyObject], toString: source) {
+        assert(res.count == 2, "results array must have two entries: (text, results)")
+        if let target = res[0] as? String {
+            let results = res[1] as! NSArray
+            let success = reduce(results, true) { (res, elem) in res && (elem as! NSNumber).boolValue }
+            if success {
+                return Result(target)
             }
         }
-        return false
     }
-    
+    return Result(NSError())
 }
 
 
@@ -96,10 +91,9 @@ class CoPilotPluginTests: XCTestCase {
     func test_apply() {
         let diffs = diff("foo2bar", "foobar")
         let patches = patch(diffs)
-        var text = "foo2bar"
-        let success = text.apply(patches)
-        expect(success) == true
-        expect(text) == "foobar"
+        let res = apply("foo2bar", patches)
+        expect(res.succeeded) == true
+        expect(res.value!) == "foobar"
     }
     
     
