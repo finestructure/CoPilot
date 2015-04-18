@@ -1,0 +1,3 @@
+[submodule "External/Nimble"]
+	path = External/Nimble
+	url = git@github.com:Quick/Nimble.git
