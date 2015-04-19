@@ -41,9 +41,8 @@ class CoPilotPluginTests: XCTestCase {
     
     
     func test_apply_String() {
-        let diffs = diff("foo2bar", "foobar")
-        let patches = patch(diffs)
-        let res = apply("foo2bar", patches)
+        let p = patches("foo2bar", "foobar")
+        let res = apply("foo2bar", p)
         expect(res.succeeded) == true
         expect(res.value!) == "foobar"
     }
@@ -52,9 +51,8 @@ class CoPilotPluginTests: XCTestCase {
     func test_apply_Document() {
         let source = Document(text: "The quick brown fox jumps over the lazy dog")
         let newText = "The quick brown cat jumps over the lazy dog"
-        let diffs = diff(source.text, newText)
-        let patches = patch(diffs)
-        let changeSet = Changeset(patches: patches, baseRev: source.hash, targetRev: newText.md5()!)
+        let p = patches(source.text, newText)
+        let changeSet = Changeset(patches: p, baseRev: source.hash, targetRev: newText.md5()!)
         let res = apply(source, changeSet)
         expect(res.succeeded) == true
         expect(res.value!.text) == newText

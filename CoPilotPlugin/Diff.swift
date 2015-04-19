@@ -22,7 +22,7 @@ func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInter
 }
 
 
-func patch(diffs: [Diff]) -> [Patch] {
+func patches(diffs: [Diff]) -> [Patch] {
     let dmp = DiffMatchPatch()
     if let patches = dmp.patch_makeFromDiffs(NSMutableArray(array: diffs)) {
         return NSArray(array: patches) as! [Patch]
