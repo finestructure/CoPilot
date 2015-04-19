@@ -32,6 +32,16 @@ func patch(diffs: [Diff]) -> [Patch] {
 }
 
 
+func patches(a: String?, b: String?) -> [Patch] {
+    let dmp = DiffMatchPatch()
+    if let res = dmp.patch_makeFromOldString(a, andNewString: b) {
+        return NSArray(array: res) as! [Patch]
+    } else {
+        return [Patch]()
+    }
+}
+
+
 func apply(source: String, patches: [Patch]) -> Result<String> {
     let dmp = DiffMatchPatch()
     if let res = dmp.patch_apply(NSArray(array: patches) as [AnyObject], toString: source) {

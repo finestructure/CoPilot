@@ -26,18 +26,17 @@ class CoPilotPluginTests: XCTestCase {
     
     
     func test_patches() {
-        let diffs = diff("foo2bar", "foobar")
-        let patches = patch(diffs)
-        expect(patches.count) == 1
-        let lines = patches[0].description.componentsSeparatedByString("\n")
+        let res = patches("foo2bar", "foobar")
+        expect(res.count) == 1
+        let lines = res[0].description.componentsSeparatedByString("\n")
         expect(lines[0]) == "@@ -1,7 +1,6 @@"
         expect(lines[1]) == " foo"
         expect(lines[2]) == "-2"
         expect(lines[3]) == " bar"
-        expect(patches[0].start1) == 0
-        expect(patches[0].start2) == 0
-        expect(patches[0].length1) == 7
-        expect(patches[0].length2) == 6
+        expect(res[0].start1) == 0
+        expect(res[0].start2) == 0
+        expect(res[0].length1) == 7
+        expect(res[0].length2) == 6
     }
     
     
@@ -59,6 +58,11 @@ class CoPilotPluginTests: XCTestCase {
         let res = apply(source, changeSet)
         expect(res.succeeded) == true
         expect(res.value!.text) == newText
+    }
+    
+    
+    func test_apply_Document_conflict() {
+        
     }
     
     
