@@ -12,7 +12,7 @@ import FeinstrukturUtils
 import CryptoSwift
 
 
-func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {
+func computeDiff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {
     let dmp = DiffMatchPatch()
     if let diffs = dmp.diff_mainOfOldString(a, andNewString: b, checkLines: checklines, deadline: deadline) {
         return NSArray(array: diffs) as! [Diff]

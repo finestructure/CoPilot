@@ -13,8 +13,8 @@ import Nimble
 
 class CoPilotPluginTests: XCTestCase {
     
-    func test_diff() {
-        let d = diff("foo2bar", "foobar")
+    func test_computeDiff() {
+        let d = computeDiff("foo2bar", "foobar")
         expect(d.count) == 3
         expect(d[0].operation) == Operation.DiffEqual
         expect(d[0].text) == "foo"
