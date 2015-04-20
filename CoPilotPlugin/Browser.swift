@@ -12,6 +12,7 @@ import Foundation
 class Browser: NSObject {
     private let browser: NSNetServiceBrowser
     var onFind: (NSNetService -> Void)?
+    var onRemove: (NSNetService -> Void)?
     var services = Set<NSNetService>()
     
     init(service: BonjourService, onFind: (NSNetService -> Void) = {_ in}) {
@@ -31,5 +32,6 @@ extension Browser: NSNetServiceBrowserDelegate {
     
     func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didRemoveService aNetService: NSNetService, moreComing: Bool) {
         self.services.remove(aNetService)
+        self.onRemove?(aNetService)
     }
 }
