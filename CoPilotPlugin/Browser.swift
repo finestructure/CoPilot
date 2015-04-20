@@ -9,16 +9,6 @@
 import Foundation
 
 
-let CoPilotService = BonjourService(domain: "local", type: "_copilot._tcp", port: 8137)
-
-
-struct BonjourService {
-    let domain: String
-    let type: String
-    let port: Int32
-}
-
-
 class Browser: NSObject {
     private let browser: NSNetServiceBrowser
     var onFind: (NSNetService -> Void)?

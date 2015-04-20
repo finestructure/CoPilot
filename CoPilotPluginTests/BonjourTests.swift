@@ -11,11 +11,6 @@ import XCTest
 import Nimble
 
 
-func publish(# service: BonjourService, # name: String) -> NSNetService {
-    let s = NSNetService(domain: service.domain, type: service.type, name: name, port: service.port)
-    s.publish()
-    return s
-}
 
 
 class BonjourTests: XCTestCase {
@@ -35,14 +30,14 @@ class BonjourTests: XCTestCase {
         expect(found.type) == "_copilot._tcp."
     }
 
-    var service: NSNetService!
     
     func test_resolve() {
-        let service = publish(service: CoPilotService, name: "Test")
+        let publishedService = publish(service: CoPilotService, name: "Test")
         
+        var resolvedService: NSNetService!
         self.resolved = false
         let b = Browser(service: CoPilotService) { service in
-            self.service = service
+            resolvedService = service
             service.delegate = self
             service.resolveWithTimeout(1)
         }
