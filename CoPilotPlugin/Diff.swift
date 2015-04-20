@@ -63,7 +63,7 @@ func apply(source: Document, changeSet: Changeset) -> Result<Document> {
         // this should apply cleanly
         switch apply(source.text, changeSet.patches) {
         case .Success(let value):
-            let target = Document(text: value.unbox)
+            let target = Document(value.unbox)
             assert(target.hash == changeSet.targetRev)
             return Result(target)
         case .Failure(let error):
@@ -73,7 +73,7 @@ func apply(source: Document, changeSet: Changeset) -> Result<Document> {
         // we have local changes
         // try applying this but it might fail
         let res = apply(source.text, changeSet.patches)
-        return map(res) { Document(text: $0) }
+        return map(res) { Document($0) }
     }
 }
 
@@ -97,6 +97,9 @@ struct Document {
     var text: String
     var hash: Hash {
         return self.text.md5()!
+    }
+    init(_ text: String) {
+        self.text = text
     }
 }
 
