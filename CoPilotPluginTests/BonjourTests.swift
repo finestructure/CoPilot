@@ -58,31 +58,14 @@ class BonjourTests: XCTestCase {
     func test_resolve() {
         let publishedService = publish(service: CoPilotService, name: "Test")
         
-        var resolvedService: NSNetService!
         self.resolved = false
         let b = Browser(service: CoPilotService) { service in
-            resolvedService = service
             service.delegate = self
             service.resolveWithTimeout(1)
         }
         expect(self.resolved).toEventually(beTrue(), timeout: 2)
     }
 
-}
-
-
-class BrowserDelegate: NSObject, NSNetServiceBrowserDelegate {
-    
-    var serviceFound: (NSNetService -> Void)?
-    
-    init(serviceFound: (NSNetService -> Void)) {
-        self.serviceFound = serviceFound
-    }
-
-    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
-        self.serviceFound?(aNetService)
-    }
-    
 }
 
 
