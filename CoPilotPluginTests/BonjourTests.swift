@@ -31,11 +31,56 @@ func publish(service: BonjourService) -> NSNetService {
 
 class BonjourTests: XCTestCase {
 
+    var browser: NSNetServiceBrowser!
     
     func test_publish() {
-        let s = publish(CoPilotService)
+        var s: NSNetService!
+        s = publish(CoPilotService)
         expect(s).toNot(beNil())
+        
+        var found: NSNetService!
+        let delegate = BrowserDelegate(serviceFound: { service in
+            found = service
+        })
+        self.browser = NSNetServiceBrowser()
+        self.browser.delegate = delegate
+        self.browser.searchForServicesOfType(CoPilotService.type, inDomain: CoPilotService.domain)
+
+        expect(found).toEventuallyNot(beNil(), timeout: 5)
+        expect(found.type) == "_copilot._tcp."
     }
-    
+
 
 }
+
+
+class BrowserDelegate: NSObject, NSNetServiceBrowserDelegate {
+    
+    var serviceFound: (NSNetService -> Void)?
+    
+    init(serviceFound: (NSNetService -> Void)) {
+        self.serviceFound = serviceFound
+    }
+
+    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
+        self.serviceFound?(aNetService)
+    }
+    
+}
+
+
+//extension BonjourTests: NSNetServiceDelegate {
+//    
+//    func netServiceDidResolveAddress(sender: NSNetService) {
+//        NSLog("netServiceDidResolveAddress \(sender)")
+//    }
+//    
+//    func netService(sender: NSNetService, didNotResolve errorDict: [NSObject : AnyObject]) {
+//        NSLog("netService:didNotResolve \(errorDict)")
+//    }
+//    
+//    func netServiceDidStop(sender: NSNetService) {
+//        NSLog("netServiceDidStop")
+//    }
+//
+//}
