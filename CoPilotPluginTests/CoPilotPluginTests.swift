@@ -62,10 +62,21 @@ class CoPilotPluginTests: XCTestCase {
         let fox = Document(text: "The quick brown fox jumps over the lazy dog")
         let cat = Document(text: "The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
-        let horse = Document(text: "The quick brown horse jumps over the lazy dog")
-        let res = apply(horse, change)
+        let source = Document(text: "The quick brown horse jumps over the lazy dog")
+        let res = apply(source, change)
         expect(res.succeeded) == true
         expect(res.value!.text) == "The quick brown leopard jumps over the lazy dog"
+    }
+    
+    
+    func test_apply_Document_conflict() {
+        let fox = Document(text: "The quick brown fox jumps over the lazy dog")
+        let cat = Document(text: "The quick brown leopard jumps over the lazy dog")
+        let change = Changeset(source: fox, target: cat)
+        let source = Document(text: "The quick thing likes the lazy dog")
+        let res = apply(source, change)
+        expect(res.succeeded) == false
+        expect(res.value).to(beNil())
     }
     
     
