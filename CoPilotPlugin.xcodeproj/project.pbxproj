@@ -16,6 +16,8 @@
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
+		5A9FDA061AE553CD00AF912B /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9FDA051AE553CD00AF912B /* Resolver.swift */; };
+		5A9FDA071AE553CD00AF912B /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9FDA051AE553CD00AF912B /* Resolver.swift */; };
 		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
 		5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
 		5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
@@ -175,6 +177,7 @@
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
+		5A9FDA051AE553CD00AF912B /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonjourTests.swift; sourceTree = "<group>"; };
 		5AC8A9731AE541C80097FF8D /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		5AC8A9761AE542440097FF8D /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
@@ -282,6 +285,7 @@
 			children = (
 				5AC8A9761AE542440097FF8D /* Bonjour.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
+				5A9FDA051AE553CD00AF912B /* Resolver.swift */,
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
@@ -528,6 +532,7 @@
 				5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */,
 				5AC8A9781AE542440097FF8D /* Bonjour.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
+				5A9FDA071AE553CD00AF912B /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */,
 			);
@@ -537,6 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A9FDA061AE553CD00AF912B /* Resolver.swift in Sources */,
 				5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,

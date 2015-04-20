@@ -58,30 +58,13 @@ class BonjourTests: XCTestCase {
     func test_resolve() {
         let publishedService = publish(service: CoPilotService, name: "Test")
         
-        self.resolved = false
+        var resolver: Resolver!
         let b = Browser(service: CoPilotService) { service in
-            service.delegate = self
-            service.resolveWithTimeout(1)
+            resolver = Resolver(service: service, timeout: 1)
         }
-        expect(self.resolved).toEventually(beTrue(), timeout: 2)
+        expect(resolver).toEventuallyNot(beNil(), timeout: 5)
+        expect(resolver.resolved).toEventually(beTrue())
     }
 
 }
 
-
-extension BonjourTests: NSNetServiceDelegate {
-    
-    func netServiceDidResolveAddress(sender: NSNetService) {
-        NSLog("### netServiceDidResolveAddress \(sender)")
-        self.resolved = true
-    }
-    
-    func netService(sender: NSNetService, didNotResolve errorDict: [NSObject : AnyObject]) {
-        NSLog("### netService:didNotResolve \(errorDict)")
-    }
-    
-    func netServiceDidStop(sender: NSNetService) {
-        NSLog("### netServiceDidStop")
-    }
-
-}
