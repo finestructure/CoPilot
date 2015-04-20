@@ -16,6 +16,7 @@
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
+		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
 		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
@@ -170,6 +171,7 @@
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
+		5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonjourTests.swift; sourceTree = "<group>"; };
 		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +204,7 @@
 		5A01569A1AE2619700EED621 /* CoPilotPluginTests */ = {
 			isa = PBXGroup;
 			children = (
+				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
 				5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
 				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
@@ -515,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
+				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
