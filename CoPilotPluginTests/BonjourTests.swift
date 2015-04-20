@@ -11,45 +11,73 @@ import XCTest
 import Nimble
 
 
-let CoPilotService = BonjourService(name: "CoPilot", domain: "local", type: "_copilot._tcp", port: 8137)
+let CoPilotService = BonjourService(domain: "local", type: "_copilot._tcp", port: 8137)
 
 
 struct BonjourService {
-    let name: String
     let domain: String
     let type: String
     let port: Int32
 }
 
 
-func publish(service: BonjourService) -> NSNetService {
-    let s = NSNetService(domain: service.domain, type: service.type, name: service.name, port: service.port)
+func publish(# service: BonjourService, # name: String) -> NSNetService {
+    let s = NSNetService(domain: service.domain, type: service.type, name: name, port: service.port)
     s.publish()
     return s
 }
 
 
+class Browser: NSObject {
+    private let browser: NSNetServiceBrowser
+    var onFind: (NSNetService -> Void)?
+
+    init(service: BonjourService, onFind: (NSNetService -> Void) = {_ in}) {
+        self.browser = NSNetServiceBrowser()
+        super.init()
+        self.browser.delegate = self
+        self.onFind = onFind
+        self.browser.searchForServicesOfType(service.type, inDomain: service.domain)
+    }
+}
+
+extension Browser: NSNetServiceBrowserDelegate {
+    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
+        self.onFind?(aNetService)
+    }
+}
+
+
 class BonjourTests: XCTestCase {
 
-    var browser: NSNetServiceBrowser!
+    var resolved = false
     
     func test_publish() {
-        var s: NSNetService!
-        s = publish(CoPilotService)
-        expect(s).toNot(beNil())
+        let service = publish(service: CoPilotService, name: "Test")
+        expect(service).toNot(beNil())
         
         var found: NSNetService!
-        let delegate = BrowserDelegate(serviceFound: { service in
+        let b = Browser(service: CoPilotService) { service in
             found = service
-        })
-        self.browser = NSNetServiceBrowser()
-        self.browser.delegate = delegate
-        self.browser.searchForServicesOfType(CoPilotService.type, inDomain: CoPilotService.domain)
+        }
 
         expect(found).toEventuallyNot(beNil(), timeout: 5)
         expect(found.type) == "_copilot._tcp."
     }
 
+    var service: NSNetService!
+    
+    func test_resolve() {
+        let service = publish(service: CoPilotService, name: "Test")
+        
+        self.resolved = false
+        let b = Browser(service: CoPilotService) { service in
+            self.service = service
+            service.delegate = self
+            service.resolveWithTimeout(1)
+        }
+        expect(self.resolved).toEventually(beTrue(), timeout: 2)
+    }
 
 }
 
@@ -69,18 +97,19 @@ class BrowserDelegate: NSObject, NSNetServiceBrowserDelegate {
 }
 
 
-//extension BonjourTests: NSNetServiceDelegate {
-//    
-//    func netServiceDidResolveAddress(sender: NSNetService) {
-//        NSLog("netServiceDidResolveAddress \(sender)")
-//    }
-//    
-//    func netService(sender: NSNetService, didNotResolve errorDict: [NSObject : AnyObject]) {
-//        NSLog("netService:didNotResolve \(errorDict)")
-//    }
-//    
-//    func netServiceDidStop(sender: NSNetService) {
-//        NSLog("netServiceDidStop")
-//    }
-//
-//}
+extension BonjourTests: NSNetServiceDelegate {
+    
+    func netServiceDidResolveAddress(sender: NSNetService) {
+        NSLog("### netServiceDidResolveAddress \(sender)")
+        self.resolved = true
+    }
+    
+    func netService(sender: NSNetService, didNotResolve errorDict: [NSObject : AnyObject]) {
+        NSLog("### netService:didNotResolve \(errorDict)")
+    }
+    
+    func netServiceDidStop(sender: NSNetService) {
+        NSLog("### netServiceDidStop")
+    }
+
+}
