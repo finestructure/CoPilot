@@ -22,7 +22,7 @@ func diff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInter
 }
 
 
-func patches(diffs: [Diff]) -> [Patch] {
+func computePatches(diffs: [Diff]) -> [Patch] {
     let dmp = DiffMatchPatch()
     if let patches = dmp.patch_makeFromDiffs(NSMutableArray(array: diffs)) {
         return NSArray(array: patches) as! [Patch]
@@ -32,7 +32,7 @@ func patches(diffs: [Diff]) -> [Patch] {
 }
 
 
-func patches(a: String?, b: String?) -> [Patch] {
+func computePatches(a: String?, b: String?) -> [Patch] {
     let dmp = DiffMatchPatch()
     if let res = dmp.patch_makeFromOldString(a, andNewString: b) {
         return NSArray(array: res) as! [Patch]
@@ -82,6 +82,11 @@ struct Changeset {
     let patches: [Patch]
     let baseRev: Hash
     let targetRev: Hash
+    init(source: Document, target: Document) {
+        self.patches = computePatches(source.text, target.text)
+        self.baseRev = source.hash
+        self.targetRev = target.hash
+    }
 }
 
 

@@ -26,7 +26,7 @@ class CoPilotPluginTests: XCTestCase {
     
     
     func test_patches() {
-        let res = patches("foo2bar", "foobar")
+        let res = computePatches("foo2bar", "foobar")
         expect(res.count) == 1
         let lines = res[0].description.componentsSeparatedByString("\n")
         expect(lines[0]) == "@@ -1,7 +1,6 @@"
@@ -41,7 +41,7 @@ class CoPilotPluginTests: XCTestCase {
     
     
     func test_apply_String() {
-        let p = patches("foo2bar", "foobar")
+        let p = computePatches("foo2bar", "foobar")
         let res = apply("foo2bar", p)
         expect(res.succeeded) == true
         expect(res.value!) == "foobar"
@@ -51,16 +51,21 @@ class CoPilotPluginTests: XCTestCase {
     func test_apply_Document() {
         let source = Document(text: "The quick brown fox jumps over the lazy dog")
         let newText = "The quick brown cat jumps over the lazy dog"
-        let p = patches(source.text, newText)
-        let changeSet = Changeset(patches: p, baseRev: source.hash, targetRev: newText.md5()!)
+        let changeSet = Changeset(source: source, target: Document(text: newText))
         let res = apply(source, changeSet)
         expect(res.succeeded) == true
         expect(res.value!.text) == newText
     }
     
     
-    func test_apply_Document_conflict() {
-        
+    func test_apply_Document_diverged() {
+        let fox = Document(text: "The quick brown fox jumps over the lazy dog")
+        let cat = Document(text: "The quick brown leopard jumps over the lazy dog")
+        let change = Changeset(source: fox, target: cat)
+        let horse = Document(text: "The quick brown horse jumps over the lazy dog")
+        let res = apply(horse, change)
+        expect(res.succeeded) == true
+        expect(res.value!.text) == "The quick brown leopard jumps over the lazy dog"
     }
     
     
