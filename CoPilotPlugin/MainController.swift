@@ -10,12 +10,35 @@ import Cocoa
 
 class MainController: NSWindowController {
 
-    var items = ["Some", "Item", "Here"]
+    @IBOutlet weak var servicesTableView: NSTableView!
+    var browser: Browser!
+    var publishedService: NSNetService?
     
     override func windowDidLoad() {
         super.windowDidLoad()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.browser = Browser(service: CoPilotService) { _ in
+            self.servicesTableView.reloadData()
+        }
+        self.browser.onRemove = { _ in
+            self.servicesTableView.reloadData()
+        }
+    }
+}
 
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+// MARK: - Actions
+extension MainController {
+    
+    @IBAction func publishPressed(sender: AnyObject) {
+        let name = NSHost.currentHost().localizedName
+        self.publishedService = publish(service: CoPilotService, name: name!)
+    }
+    
+    @IBAction func subscribePressed(sender: AnyObject) {
     }
     
 }
@@ -25,11 +48,7 @@ class MainController: NSWindowController {
 extension MainController: NSTableViewDataSource {
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return self.items.count
-    }
-    
-    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        return self.items[row]
+        return self.browser.services.count
     }
     
 }
@@ -40,7 +59,9 @@ extension MainController: NSTableViewDelegate {
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier("MyCell", owner: self) as? NSTableCellView
-        cell?.textField?.stringValue = self.items[row]
+        println(self.browser.services)
+        let item = self.browser.services[row] as! NSNetService
+        cell?.textField?.stringValue = item.name
         return cell
     }
     
