@@ -1,8 +1,8 @@
 //
-//  Resolver.swift
+//  Foo.swift
 //  CoPilotPlugin
 //
-//  Created by Sven Schmidt on 20/04/2015.
+//  Created by Sven Schmidt on 21/04/2015.
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
 //
 
@@ -39,3 +39,4 @@ extension Resolver: NSNetServiceDelegate {
     }
     
 }
+
