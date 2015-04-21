@@ -12,6 +12,7 @@ var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
     var bundle: NSBundle
+    var mainController: MainController?
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -43,8 +44,10 @@ class CoPilotPlugin: NSObject {
     }
 
     func doMenuAction() {
-        let error = NSError(domain: "Hello World!", code:42, userInfo:nil)
-        NSAlert(error: error).runModal()
+        if self.mainController == nil {
+            self.mainController = MainController(windowNibName: "MainController")
+        }
+        self.mainController?.showWindow(self)
     }
 }
 

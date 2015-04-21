@@ -15,6 +15,8 @@
 		5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
+		5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B14251AE674E3006EBB31 /* MainController.swift */; };
+		5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B14261AE674E3006EBB31 /* MainController.xib */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
@@ -98,6 +100,13 @@
 			remoteGlobalIDString = 5AD1E7CD1AE266530017CEEE;
 			remoteInfo = "DiffMatchPatch-OSX";
 		};
+		5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
+			remoteInfo = "DiffMatchPatch OSX Tests";
+		};
 		5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
@@ -173,6 +182,8 @@
 		5A0983CF1AE39E5B001ADB1F /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A6B13EB1AE655FF006EBB31 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
+		5A6B14251AE674E3006EBB31 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
@@ -254,10 +265,20 @@
 			isa = PBXGroup;
 			children = (
 				5A0156BF1AE263F500EED621 /* DiffMatchPatch.framework */,
-				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
 				5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */,
+				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
+				5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5A6B14241AE65AEB006EBB31 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5A6B14251AE674E3006EBB31 /* MainController.swift */,
+				5A6B14261AE674E3006EBB31 /* MainController.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		5A9BE1751AD90862002817C0 = {
@@ -285,6 +306,7 @@
 				5AC8A9761AE542440097FF8D /* Bonjour.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
+				5A6B14241AE65AEB006EBB31 /* UI */,
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
@@ -461,6 +483,13 @@
 			remoteRef = 5A0156C01AE263F500EED621 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "DiffMatchPatch OSX Tests.xctest";
+			remoteRef = 5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -517,6 +546,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */,
 				5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +574,7 @@
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
+				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
