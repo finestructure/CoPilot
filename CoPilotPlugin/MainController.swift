@@ -10,6 +10,8 @@ import Cocoa
 
 class MainController: NSWindowController {
 
+    var items = ["Some", "Item", "Here"]
+    
     override func windowDidLoad() {
         super.windowDidLoad()
 
@@ -17,3 +19,30 @@ class MainController: NSWindowController {
     }
     
 }
+
+
+// MARK: - NSTableViewDataSource
+extension MainController: NSTableViewDataSource {
+    
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+        return self.items.count
+    }
+    
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+        return self.items[row]
+    }
+    
+}
+
+
+// MARK: - NSTableViewDelegate
+extension MainController: NSTableViewDelegate {
+    
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeViewWithIdentifier("MyCell", owner: self) as? NSTableCellView
+        cell?.textField?.stringValue = self.items[row]
+        return cell
+    }
+    
+}
+
