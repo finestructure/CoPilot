@@ -9,46 +9,6 @@ import AppKit
 import Cocoa
 
 
-var currentWindow: NSWindow? {
-get {
-    return NSApplication.sharedApplication().keyWindow
-}
-}
-
-
-var currentWorkspaceWindowController: NSObject? {
-get {
-    let type: AnyClass! = NSClassFromString("IDEWorkspaceWindowController")
-    if currentWindow?.windowController()?.isKindOfClass(type) != nil {
-        return currentWindow?.windowController() as? NSObject
-    } else {
-        return nil
-    }
-}
-}
-
-
-var currentEditorArea: IDEEditorArea? {
-get {
-    return DTXcodeUtils.currentEditorArea()
-}
-}
-
-
-//var currentEditorContext: AnyObject? {
-//get {
-//    return currentEditorArea?.lastActiveEditorContext
-//}
-//}
-//
-//
-//var currentEditor: AnyObject? {
-//get {
-//    return currentEditorContext?.editor
-//}
-//}
-
-
 var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
@@ -103,7 +63,8 @@ extension CoPilotPlugin {
 extension CoPilotPlugin {
 
     func publish() {
-        
+        let ts = DTXcodeUtils.currentTextStorage()
+        println(ts.string)
     }
     
     func browse() {
