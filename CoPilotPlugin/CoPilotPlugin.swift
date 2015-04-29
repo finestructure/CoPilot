@@ -28,13 +28,13 @@ get {
 }
 
 
-//var currentEditorArea: AnyObject? {
-//get {
-//    return currentWorkspaceWindowController?.editorArea
-//}
-//}
-//
-//
+var currentEditorArea: IDEEditorArea? {
+get {
+    return DTXcodeUtils.currentEditorArea()
+}
+}
+
+
 //var currentEditorContext: AnyObject? {
 //get {
 //    return currentEditorArea?.lastActiveEditorContext
