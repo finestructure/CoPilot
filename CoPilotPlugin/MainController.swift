@@ -84,9 +84,17 @@ extension MainController {
 extension MainController: NSTableViewDataSource {
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return self.browser?.services.count ?? 0
+        return 3 //self.browser?.services.count ?? 0
     }
     
+}
+
+
+extension CGRect {
+    public func withWidth(width: CGFloat) -> CGRect {
+        let size = CGSize(width: width, height: self.size.height)
+        return CGRect(origin: self.origin, size: size)
+    }
 }
 
 
@@ -94,11 +102,12 @@ extension MainController: NSTableViewDataSource {
 extension MainController: NSTableViewDelegate {
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        println(tableColumn?.width)
         let cell = tableView.makeViewWithIdentifier("MyCell", owner: self) as? NSTableCellView
-        if row < self.browser.services.count { // guarding against race condition
-            let item = self.browser.services[row] as! NSNetService
-            cell?.textField?.stringValue = item.name
-        }
+//        if row < self.browser.services.count { // guarding against race condition
+//            let item = self.browser.services[row] as! NSNetService
+            cell?.textField?.stringValue = "guarding against race condition guarding against race condition " //item.name
+//        }
         return cell
     }
     
