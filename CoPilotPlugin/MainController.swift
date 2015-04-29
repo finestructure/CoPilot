@@ -59,9 +59,10 @@ extension MainController: NSTableViewDelegate {
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier("MyCell", owner: self) as? NSTableCellView
-        println(self.browser.services)
-        let item = self.browser.services[row] as! NSNetService
-        cell?.textField?.stringValue = item.name
+        if row < self.browser.services.count { // guarding against race condition
+            let item = self.browser.services[row] as! NSNetService
+            cell?.textField?.stringValue = item.name
+        }
         return cell
     }
     

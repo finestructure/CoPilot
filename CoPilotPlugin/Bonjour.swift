@@ -16,12 +16,16 @@ struct BonjourService {
     let domain: String
     let type: String
     let port: Int32
+    var description: String {
+        return "\(domain):\(type):\(port)"
+    }
 }
 
 
 func publish(# service: BonjourService, # name: String) -> NSNetService {
     let s = NSNetService(domain: service.domain, type: service.type, name: name, port: service.port)
     s.publish()
+    NSLog("published \(name) - \(service)")
     return s
 }
 
