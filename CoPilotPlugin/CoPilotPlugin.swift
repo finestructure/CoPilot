@@ -26,7 +26,7 @@ class CoPilotPlugin: NSObject {
         self.bundle = bundle
 
         super.init()
-        createMenuItems()
+        self.createMenuItems()
     }
 
     deinit {

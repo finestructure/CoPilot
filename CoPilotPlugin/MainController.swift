@@ -8,8 +8,18 @@
 
 import Cocoa
 
+
+func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
+    let nc = NSNotificationCenter.defaultCenter()
+    let queue = NSOperationQueue.mainQueue()
+    return nc.addObserverForName(name, object: object, queue: queue, usingBlock: block)
+}
+
+
 class MainController: NSWindowController {
 
+    @IBOutlet weak var publishButton: NSButton!
+    @IBOutlet weak var documentNameLabel: NSTextField!
     @IBOutlet weak var servicesTableView: NSTableView!
     var browser: Browser!
     var publishedService: NSNetService?
@@ -26,6 +36,10 @@ class MainController: NSWindowController {
         self.browser.onRemove = { _ in
             self.servicesTableView.reloadData()
         }
+        observe("NSTextViewDidChangeSelectionNotification") { _ in
+            self.updateUI()
+        }
+        self.updateUI()
     }
 }
 
@@ -39,6 +53,22 @@ extension MainController {
     }
     
     @IBAction func subscribePressed(sender: AnyObject) {
+    }
+    
+}
+
+
+// MARK: - Helpers
+extension MainController {
+    
+    func updateUI() {
+        if let doc = DTXcodeUtils.currentSourceCodeDocument() {
+            self.publishButton.enabled = true
+            self.documentNameLabel.stringValue = doc.displayName
+        } else {
+            self.publishButton.enabled = false
+            self.documentNameLabel.stringValue = ""
+        }
     }
     
 }
