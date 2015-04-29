@@ -9,36 +9,40 @@ import AppKit
 import Cocoa
 
 
-//var currentWindow: NSWindow? {
-//get {
-//    return NSApplication.sharedApplication().keyWindow
-//}
-//}
-//
-//
-//var currentWorkspaceWindowController: AnyObject? {
-//get {
-////    let type: AnyClass! = NSClassFromString("IDEWorkspaceWindowController")
-//    return currentWindow?.windowController() // as? type.dynamicType
-//}
-//}
-//
-//
-//var currentEditorArea: IDEEditorArea? {
+var currentWindow: NSWindow? {
+get {
+    return NSApplication.sharedApplication().keyWindow
+}
+}
+
+
+var currentWorkspaceWindowController: NSObject? {
+get {
+    let type: AnyClass! = NSClassFromString("IDEWorkspaceWindowController")
+    if currentWindow?.windowController()?.isKindOfClass(type) != nil {
+        return currentWindow?.windowController() as? NSObject
+    } else {
+        return nil
+    }
+}
+}
+
+
+//var currentEditorArea: AnyObject? {
 //get {
 //    return currentWorkspaceWindowController?.editorArea
 //}
 //}
 //
 //
-//var currentEditorContext: IDEEditorContext? {
+//var currentEditorContext: AnyObject? {
 //get {
 //    return currentEditorArea?.lastActiveEditorContext
 //}
 //}
 //
 //
-//var currentEditor: IDEEditor? {
+//var currentEditor: AnyObject? {
 //get {
 //    return currentEditorContext?.editor
 //}
