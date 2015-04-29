@@ -19,10 +19,11 @@ func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -
 class MainController: NSWindowController {
 
     @IBOutlet weak var publishButton: NSButton!
-    @IBOutlet weak var documentNameLabel: NSTextField!
+    @IBOutlet weak var documentsPopupButton: NSPopUpButton!
     @IBOutlet weak var servicesTableView: NSTableView!
     var browser: Browser!
     var publishedService: NSNetService?
+    var lastSelectedDoc: NSDocument?
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -30,6 +31,7 @@ class MainController: NSWindowController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.window?.delegate = self
         self.browser = Browser(service: CoPilotService) { _ in
             self.servicesTableView.reloadData()
         }
@@ -38,9 +40,13 @@ class MainController: NSWindowController {
         }
         observe("NSTextViewDidChangeSelectionNotification") { _ in
             self.updateUI()
+            if let doc = DTXcodeUtils.currentSourceCodeDocument() {
+                self.documentsPopupButton.selectItemWithTitle(doc.displayName)
+                self.lastSelectedDoc = doc
+            }
         }
-        self.updateUI()
     }
+    
 }
 
 
@@ -48,27 +54,27 @@ class MainController: NSWindowController {
 extension MainController {
     
     @IBAction func publishPressed(sender: AnyObject) {
-        let name = NSHost.currentHost().localizedName
-        self.publishedService = publish(service: CoPilotService, name: name!)
+        if let doc = self.lastSelectedDoc {
+            let name = "\(doc.displayName)@\(NSHost.currentHost().localizedName)"
+            self.publishedService = publish(service: CoPilotService, name: name)
+        }
     }
     
     @IBAction func subscribePressed(sender: AnyObject) {
     }
     
 }
-
-
+    
+    
 // MARK: - Helpers
 extension MainController {
     
     func updateUI() {
-        if let doc = DTXcodeUtils.currentSourceCodeDocument() {
-            self.publishButton.enabled = true
-            self.documentNameLabel.stringValue = doc.displayName
-        } else {
-            self.publishButton.enabled = false
-            self.documentNameLabel.stringValue = ""
-        }
+        let docs = DTXcodeUtils.sourceCodeDocuments()
+        self.publishButton.enabled = (docs.count > 0)
+        let titles = docs.map { $0.displayName!! }
+        self.documentsPopupButton.removeAllItems()
+        self.documentsPopupButton.addItemsWithTitles(titles)
     }
     
 }
@@ -78,7 +84,7 @@ extension MainController {
 extension MainController: NSTableViewDataSource {
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return self.browser.services.count
+        return self.browser?.services.count ?? 0
     }
     
 }
@@ -94,6 +100,16 @@ extension MainController: NSTableViewDelegate {
             cell?.textField?.stringValue = item.name
         }
         return cell
+    }
+    
+}
+
+
+// MARK: - NSWindowDelegate
+extension MainController: NSWindowDelegate {
+    
+    func windowDidBecomeKey(notification: NSNotification) {
+        self.updateUI()
     }
     
 }

@@ -20,4 +20,9 @@
 + (NSScrollView *)currentScrollView;
 
 + (NSMenuItem *)getMainMenuItemWithTitle:(NSString *)title;
+
++ (IDEWorkspaceWindowController *)workspaceWindowControllerForController:(id)controller;
++ (IDESourceCodeDocument *)sourceCodeDocumentForEditor:(id)editor;
++ (NSArray *)sourceCodeDocuments;
+
 @end
