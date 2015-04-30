@@ -14,13 +14,23 @@ enum Message {
     case Data(NSData)
     init(_ string: String) { self = .Text(string) }
     init(_ data: NSData) { self = .Data(data) }
-    var string: String {
+    var string: String? {
         get {
             switch self {
             case .Text(let s):
                 return s
+            case .Data:
+                return nil
+            }
+        }
+    }
+    var data: NSData? {
+        get {
+            switch self {
+            case .Text:
+                return nil
             case .Data(let d):
-                return (NSString(data: d, encoding: NSUTF8StringEncoding) as? String) ?? ""
+                return d
             }
         }
     }
@@ -49,9 +59,10 @@ class WebSocket: NSObject {
         self.socket.delegate = self
     }
     
-    func send(message: String) {
+    func send(message: AnyObject) {
         self.socket.send(message)
     }
+    
 }
 
 extension WebSocket: PSWebSocketDelegate {

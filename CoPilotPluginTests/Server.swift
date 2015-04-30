@@ -39,7 +39,7 @@ class Server: NSObject {
     }
     
     
-    func broadcast(message: String) {
+    func broadcast(message: AnyObject) {
         for s in self.sockets {
             s.send(message)
         }

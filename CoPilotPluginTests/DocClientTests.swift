@@ -11,16 +11,77 @@ import XCTest
 import Nimble
 
 
-typealias ChangeHandler = (Void -> Void)
+let TestUrl = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
 
-class DocClient {
-    private let service: NSNetService
-    private let onChange: ChangeHandler
-    init(service: NSNetService, onChange: ChangeHandler) {
-        self.service = service
-        self.onChange = onChange
+
+//typealias ChangeHandler = (Void -> Void)
+//
+//class DocClient {
+//    private let service: NSNetService
+//    private let onChange: ChangeHandler
+//    init(service: NSNetService, onChange: ChangeHandler) {
+//        self.service = service
+//        self.onChange = onChange
+//    }
+//}
+
+
+
+class DocClientTests: XCTestCase {
+
+    func test_server() {
+        let server = startServer()
+        var open = false
+        let socket = WebSocket(url: TestUrl) {
+            open = true
+        }
+        expect(open).toEventually(beTrue(), timeout: 5)
+        expect(server.sockets.count) == 1
     }
+
+    
+    func test_broadcast() {
+        let server = startServer()
+        let client = createClient()
+        var received: String?
+        server.broadcast("hello")
+        expect(client.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
+    }
+    
+    
+    func test_send() {
+        let server = startServer()
+        let client = createClient()
+        var received: String?
+        client.send("foo")
+        expect(server.sockets.count).toEventually(equal(1), timeout: 5)
+        expect(server.sockets[0].lastMessage?.string).toEventually(equal("foo"), timeout: 5)
+    }
+    
+    
+    func test_sendChanges() {
+        let initialServerDoc = Document("Some Document")
+        let finalServerDoc = Document("Server Document")
+        let clientDoc = Document("Some Document")
+        let changeSet = Changeset(source: initialServerDoc, target: finalServerDoc)
+        
+        let server = startServer()
+        let client = createClient()
+        
+        server.broadcast(changeSet.data)
+        expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
+        let d = client.lastMessage!.data!
+        
+        let decoder = NSKeyedUnarchiver(forReadingWithData: d)
+        let patches = decoder.decodeObjectForKey("patches") as! NSArray
+        expect(patches).toNot(beNil())
+        println(patches)
+    }
+    
 }
+
+
+// MARK: - Helpers
 
 
 func startServer() -> Server {
@@ -36,7 +97,7 @@ func startServer() -> Server {
 }
 
 
-func createSocket() -> WebSocket {
+func createClient() -> WebSocket {
     var open = false
     let socket = WebSocket(url: TestUrl) {
         open = true
@@ -44,39 +105,3 @@ func createSocket() -> WebSocket {
     expect(open).toEventually(beTrue(), timeout: 5)
     return socket
 }
-
-
-let TestUrl = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
-
-
-class DocClientTests: XCTestCase {
-
-    func test_server() {
-        let server = startServer()
-        var open = false
-        let socket = WebSocket(url: TestUrl) {
-            open = true
-        }
-        expect(open).toEventually(beTrue(), timeout: 5)
-        expect(server.sockets.count) == 1
-    }
-
-    func test_broadcast() {
-        let server = startServer()
-        let socket = createSocket()
-        var received: String?
-        server.broadcast("hello")
-        expect(socket.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
-    }
-    
-    func test_send() {
-        let server = startServer()
-        let socket = createSocket()
-        var received: String?
-        socket.send("foo")
-        expect(server.sockets.count).toEventually(equal(1), timeout: 5)
-        expect(server.sockets[0].lastMessage?.string).toEventually(equal("foo"), timeout: 5)
-    }
-    
-}
-

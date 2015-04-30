@@ -87,6 +87,15 @@ struct Changeset {
         self.baseRev = source.hash
         self.targetRev = target.hash
     }
+    var data: NSData {
+        get {
+            let data = NSMutableData()
+            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+            archiver.encodeObject(self.patches, forKey: "patches")
+            archiver.finishEncoding()
+            return data
+        }
+    }
 }
 
 
