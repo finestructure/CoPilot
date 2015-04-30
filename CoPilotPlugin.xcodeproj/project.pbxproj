@@ -30,6 +30,7 @@
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5AD85FBB1AF2263E007A52F9 /* DocClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */; };
+		5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +229,7 @@
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
 		5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientTests.swift; sourceTree = "<group>"; };
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
+		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,6 +264,7 @@
 		5A01569A1AE2619700EED621 /* CoPilotPluginTests */ = {
 			isa = PBXGroup;
 			children = (
+				5ADA75801AF230CB0074D8F0 /* Server.swift */,
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
 				5A01569D1AE2619700EED621 /* DiffTests.swift */,
 				5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */,
@@ -695,6 +698,7 @@
 				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
+				5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* DocClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

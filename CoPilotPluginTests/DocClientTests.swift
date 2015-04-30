@@ -25,8 +25,15 @@ class DocClient {
 
 class DocClientTests: XCTestCase {
 
-    func test1() {
-        expect(1+2) == 3
+    func test_server() {
+        let s = Server(name: "foo", service: CoPilotService)
+        var started = false
+        s.onPublished = { ns in
+            expect(ns).toNot(beNil())
+            started = true
+        }
+        s.start()
+        expect(started).toEventually(beTrue(), timeout: 5)
     }
     
 }
