@@ -33,6 +33,8 @@
 		5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
+		5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
+		5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
 		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +241,7 @@
 		5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientTests.swift; sourceTree = "<group>"; };
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
 		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = CoPilotPluginTests/Server.swift; sourceTree = SOURCE_ROOT; };
+		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -363,6 +366,7 @@
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
 				5ADA75801AF230CB0074D8F0 /* Server.swift */,
+				5ADA75911AF24D220074D8F0 /* WebSocket.swift */,
 				5A6B14241AE65AEB006EBB31 /* UI */,
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
@@ -710,6 +714,7 @@
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */,
+				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* DocClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,6 +724,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */,
+				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
