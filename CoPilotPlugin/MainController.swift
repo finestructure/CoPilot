@@ -39,12 +39,12 @@ class MainController: NSWindowController {
             self.servicesTableView.reloadData()
         }
         observe("NSTextViewDidChangeSelectionNotification") { _ in
-            self.updateUI()
             if let doc = DTXcodeUtils.currentSourceCodeDocument() {
-                self.documentsPopupButton.selectItemWithTitle(doc.displayName)
                 self.lastSelectedDoc = doc
+                self.updateUI()
             }
         }
+        
     }
     
 }
@@ -55,7 +55,7 @@ extension MainController {
     
     @IBAction func publishPressed(sender: AnyObject) {
         if let doc = self.lastSelectedDoc {
-            let name = "\(doc.displayName)@\(NSHost.currentHost().localizedName)"
+            let name = "\(doc.displayName) @ \(NSHost.currentHost().localizedName!)"
             self.publishedService = publish(service: CoPilotService, name: name)
         }
     }
@@ -71,10 +71,17 @@ extension MainController {
     
     func updateUI() {
         let docs = DTXcodeUtils.sourceCodeDocuments()
-        self.publishButton.enabled = (docs.count > 0)
         let titles = docs.map { $0.displayName!! }
         self.documentsPopupButton.removeAllItems()
         self.documentsPopupButton.addItemsWithTitles(titles)
+
+        if let doc = self.lastSelectedDoc {
+            self.publishButton.enabled = true
+            self.documentsPopupButton.selectItemWithTitle(doc.displayName)
+        } else {
+            self.publishButton.enabled = false
+            self.documentsPopupButton.selectItem(nil)
+        }
     }
     
 }
@@ -84,7 +91,7 @@ extension MainController {
 extension MainController: NSTableViewDataSource {
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return 3 //self.browser?.services.count ?? 0
+        return self.browser?.services.count ?? 0
     }
     
 }
@@ -102,12 +109,11 @@ extension CGRect {
 extension MainController: NSTableViewDelegate {
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        println(tableColumn?.width)
         let cell = tableView.makeViewWithIdentifier("MyCell", owner: self) as? NSTableCellView
-//        if row < self.browser.services.count { // guarding against race condition
-//            let item = self.browser.services[row] as! NSNetService
-            cell?.textField?.stringValue = "guarding against race condition guarding against race condition " //item.name
-//        }
+        if row < self.browser.services.count { // guarding against race condition
+            let item = self.browser.services[row] as! NSNetService
+            cell?.textField?.stringValue = item.name
+        }
         return cell
     }
     
@@ -118,7 +124,11 @@ extension MainController: NSTableViewDelegate {
 extension MainController: NSWindowDelegate {
     
     func windowDidBecomeKey(notification: NSNotification) {
-        self.updateUI()
+        let docs = DTXcodeUtils.sourceCodeDocuments()
+        if docs.count > 0 && self.lastSelectedDoc == nil {
+            self.lastSelectedDoc = docs[0] as! NSDocument
+            self.updateUI()
+        }
     }
     
 }
