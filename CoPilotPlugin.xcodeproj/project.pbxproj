@@ -15,6 +15,9 @@
 		5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
+		5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B14251AE674E3006EBB31 /* MainController.swift */; };
+		5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B14261AE674E3006EBB31 /* MainController.xib */; };
+		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
@@ -25,6 +28,7 @@
 		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
+		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +102,13 @@
 			remoteGlobalIDString = 5AD1E7CD1AE266530017CEEE;
 			remoteInfo = "DiffMatchPatch-OSX";
 		};
+		5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
+			remoteInfo = "DiffMatchPatch OSX Tests";
+		};
 		5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
@@ -164,6 +175,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F2235F46F0E3D045D99009C /* Pods-CoPilotPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.release.xcconfig"; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPluginTests.swift; sourceTree = "<group>"; };
@@ -173,6 +185,8 @@
 		5A0983CF1AE39E5B001ADB1F /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A6B13EB1AE655FF006EBB31 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
+		5A6B14251AE674E3006EBB31 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
@@ -182,6 +196,8 @@
 		5AC8A9761AE542440097FF8D /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
 		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
+		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +219,7 @@
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
 				5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */,
 				5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */,
+				AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,10 +271,20 @@
 			isa = PBXGroup;
 			children = (
 				5A0156BF1AE263F500EED621 /* DiffMatchPatch.framework */,
-				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
 				5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */,
+				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
+				5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5A6B14241AE65AEB006EBB31 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5A6B14251AE674E3006EBB31 /* MainController.swift */,
+				5A6B14261AE674E3006EBB31 /* MainController.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		5A9BE1751AD90862002817C0 = {
@@ -267,6 +294,8 @@
 				5A01569A1AE2619700EED621 /* CoPilotPluginTests */,
 				5A9BE17E1AD90862002817C0 /* Products */,
 				5A0156A21AE2629200EED621 /* External */,
+				D933B4F85EA6979C452E7313 /* Pods */,
+				BD2F004D9881D13D7864FD9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +314,7 @@
 				5AC8A9761AE542440097FF8D /* Bonjour.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
+				5A6B14241AE65AEB006EBB31 /* UI */,
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
@@ -321,6 +351,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D933B4F85EA6979C452E7313 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */,
+				0F2235F46F0E3D045D99009C /* Pods-CoPilotPlugin.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -349,9 +396,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A9BE1881AD90862002817C0 /* Build configuration list for PBXNativeTarget "CoPilotPlugin" */;
 			buildPhases = (
+				E47B13D07D9C77AA3FE67339 /* Check Pods Manifest.lock */,
 				5A9BE17A1AD90862002817C0 /* Sources */,
 				5A9BE17B1AD90862002817C0 /* Resources */,
 				5A0983DA1AE39ECA001ADB1F /* Frameworks */,
+				6A99EF398B3026E826CCE97F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -461,6 +510,13 @@
 			remoteRef = 5A0156C01AE263F500EED621 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "DiffMatchPatch OSX Tests.xctest";
+			remoteRef = 5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -517,11 +573,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */,
 				5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A99EF398B3026E826CCE97F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E47B13D07D9C77AA3FE67339 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5A0156951AE2619700EED621 /* Sources */ = {
@@ -531,6 +621,7 @@
 				5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */,
 				5AC8A9781AE542440097FF8D /* Bonjour.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
+				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */,
 			);
@@ -544,6 +635,7 @@
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
+				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,6 +817,7 @@
 		};
 		5A9BE1891AD90862002817C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -750,6 +843,7 @@
 		};
 		5A9BE18A1AD90862002817C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F2235F46F0E3D045D99009C /* Pods-CoPilotPlugin.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;

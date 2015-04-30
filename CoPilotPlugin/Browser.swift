@@ -13,7 +13,7 @@ class Browser: NSObject {
     private let browser: NSNetServiceBrowser
     var onFind: (NSNetService -> Void)?
     var onRemove: (NSNetService -> Void)?
-    var services = Set<NSNetService>()
+    var services = NSMutableOrderedSet()
     
     init(service: BonjourService, onFind: (NSNetService -> Void) = {_ in}) {
         self.browser = NSNetServiceBrowser()
@@ -26,12 +26,12 @@ class Browser: NSObject {
 
 extension Browser: NSNetServiceBrowserDelegate {
     func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
-        self.services.insert(aNetService)
+        self.services.addObject(aNetService)
         self.onFind?(aNetService)
     }
     
     func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didRemoveService aNetService: NSNetService, moreComing: Bool) {
-        self.services.remove(aNetService)
+        self.services.removeObject(aNetService)
         self.onRemove?(aNetService)
     }
 }

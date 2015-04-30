@@ -8,10 +8,12 @@
 import AppKit
 import Cocoa
 
+
 var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
     var bundle: NSBundle
+    var mainController: MainController?
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -24,27 +26,53 @@ class CoPilotPlugin: NSObject {
         self.bundle = bundle
 
         super.init()
-        createMenuItems()
+        self.createMenuItems()
     }
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
+}
+
+
+// MARK: - Helpers
+extension CoPilotPlugin {
+    
     func createMenuItems() {
         var item = NSApp.mainMenu!!.itemWithTitle("Edit")
         if item != nil {
-            var actionMenuItem = NSMenuItem(title:"CoPilot", action:"doMenuAction", keyEquivalent:"x")
-            actionMenuItem.keyEquivalentModifierMask = Int((NSEventModifierFlags.ControlKeyMask | NSEventModifierFlags.CommandKeyMask).rawValue)
-            actionMenuItem.target = self
             item!.submenu!.addItem(NSMenuItem.separatorItem())
-            item!.submenu!.addItem(actionMenuItem)
+            item!.submenu!.addItem(menuItem("CoPilot Publish", action:"publish", key:"p"))
+            item!.submenu!.addItem(menuItem("CoPilot Browse", action:"browse", key:"x"))
         }
     }
 
-    func doMenuAction() {
-        let error = NSError(domain: "Hello World!", code:42, userInfo:nil)
-        NSAlert(error: error).runModal()
+    
+    func menuItem(title: String, action: Selector, key: String) -> NSMenuItem {
+        let m = NSMenuItem(title: title, action: action, keyEquivalent: key)
+        m.keyEquivalentModifierMask = Int((NSEventModifierFlags.ControlKeyMask | NSEventModifierFlags.CommandKeyMask).rawValue)
+        m.target = self
+        return m
     }
+    
+}
+
+
+// MARK: - Actions
+extension CoPilotPlugin {
+
+    func publish() {
+        let ts = DTXcodeUtils.currentTextStorage()
+        println(ts.string)
+    }
+    
+    func browse() {
+        if self.mainController == nil {
+            self.mainController = MainController(windowNibName: "MainController")
+        }
+        self.mainController?.showWindow(self)
+    }
+    
 }
 
