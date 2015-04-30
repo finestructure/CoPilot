@@ -1,6 +1,6 @@
 //
 //  DiffTests.swift
-//  CoPilotPluginTests
+//  CoPilotPlugin
 //
 //  Created by Sven Schmidt on 18/04/2015.
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
