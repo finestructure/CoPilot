@@ -36,27 +36,23 @@ func startServer() -> Server {
 }
 
 
-class DocClientTests: XCTestCase {
-    var open = false
-
-    func test_client() {
-        let s = startServer()
-        let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+class WebSocket: NSObject {
+    let socket: PSWebSocket
+    var onConnect: (Void -> Void)?
+    init(url: NSURL, onConnect: (Void -> Void)) {
+        self.onConnect = onConnect
         let req = NSURLRequest(URL: url)
-        self.open = false
-        let socket = PSWebSocket.clientSocketWithRequest(req)
-        socket.delegate = self
-        socket.open()
-        expect(self.open).toEventually(beTrue(), timeout: 5)
+        self.socket = PSWebSocket.clientSocketWithRequest(req)
+        super.init()
+        self.socket.delegate = self
+        self.socket.open()
     }
-    
 }
 
-
-extension DocClientTests: PSWebSocketDelegate {
+extension WebSocket: PSWebSocketDelegate {
     
     func webSocketDidOpen(webSocket: PSWebSocket!) {
-        self.open = true
+        self.onConnect?()
     }
     
     func webSocket(webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
@@ -70,5 +66,20 @@ extension DocClientTests: PSWebSocketDelegate {
     func webSocket(webSocket: PSWebSocket!, didFailWithError error: NSError!) {
         
     }
+}
+
+
+class DocClientTests: XCTestCase {
+
+    func test_client() {
+        let s = startServer()
+        let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+        var open = false
+        let socket = WebSocket(url: url) {
+            open = true
+        }
+        expect(open).toEventually(beTrue(), timeout: 5)
+    }
     
 }
+
