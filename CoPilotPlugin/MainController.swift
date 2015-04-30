@@ -126,7 +126,7 @@ extension MainController: NSWindowDelegate {
     func windowDidBecomeKey(notification: NSNotification) {
         let docs = DTXcodeUtils.sourceCodeDocuments()
         if docs.count > 0 && self.lastSelectedDoc == nil {
-            self.lastSelectedDoc = docs[0] as! NSDocument
+            self.lastSelectedDoc = docs[0] as? NSDocument
             self.updateUI()
         }
     }
