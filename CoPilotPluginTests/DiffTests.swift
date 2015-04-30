@@ -1,5 +1,5 @@
 //
-//  CoPilotPluginTests.swift
+//  DiffTests.swift
 //  CoPilotPluginTests
 //
 //  Created by Sven Schmidt on 18/04/2015.
@@ -11,7 +11,7 @@ import XCTest
 import Nimble
 
 
-class CoPilotPluginTests: XCTestCase {
+class DiffTests: XCTestCase {
     
     func test_computeDiff() {
         let d = computeDiff("foo2bar", "foobar")

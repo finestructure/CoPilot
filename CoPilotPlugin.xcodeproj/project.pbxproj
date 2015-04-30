@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */; };
+		5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* DiffTests.swift */; };
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
 		5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
@@ -178,7 +178,7 @@
 		0F2235F46F0E3D045D99009C /* Pods-CoPilotPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.release.xcconfig"; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPluginTests.swift; sourceTree = "<group>"; };
+		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
 		5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = External/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "External/aerogear-diffmatchpatch/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
 		5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPluginTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -230,9 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
-				5A01569D1AE2619700EED621 /* CoPilotPluginTests.swift */,
+				5A01569D1AE2619700EED621 /* DiffTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
-				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
 			);
 			path = CoPilotPluginTests;
 			sourceTree = "<group>";
@@ -240,6 +239,7 @@
 		5A01569B1AE2619700EED621 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
 				5A01569C1AE2619700EED621 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -313,12 +313,11 @@
 			children = (
 				5AC8A9761AE542440097FF8D /* Bonjour.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
+				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
 				5A6B14241AE65AEB006EBB31 /* UI */,
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
-				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
-				5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */,
 			);
 			path = CoPilotPlugin;
 			sourceTree = "<group>";
@@ -326,6 +325,7 @@
 		5A9BE1801AD90862002817C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */,
 				5A9BE1811AD90862002817C0 /* Info.plist */,
 				5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */,
 			);
@@ -623,7 +623,7 @@
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
-				5A01569E1AE2619700EED621 /* CoPilotPluginTests.swift in Sources */,
+				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
