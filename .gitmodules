@@ -3,13 +3,13 @@
 	url = git@github.com:Quick/Nimble.git
 [submodule "External/aerogear-diffmatchpatch"]
 	path = External/aerogear-diffmatchpatch
-	url = git@github.com:aerogear/aerogear-diffmatchpatch-ios.git
+	url = git@github.com:feinstruktur/aerogear-diffmatchpatch-ios.git
 [submodule "External/CryptoSwift"]
 	path = External/CryptoSwift
-	url = git@github.com:krzyzanowskim/CryptoSwift.git
+	url = git@github.com:feinstruktur/CryptoSwift.git
 [submodule "External/FeinstrukturUtils"]
 	path = External/FeinstrukturUtils
 	url = git@bitbucket.org:feinstruktur/feinstrukturutils.git
 [submodule "External/PocketSocket"]
 	path = External/PocketSocket
-	url = git@github.com:zwopple/PocketSocket.git
+	url = git@github.com:feinstruktur/PocketSocket.git
