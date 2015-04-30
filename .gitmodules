@@ -10,3 +10,6 @@
 [submodule "External/FeinstrukturUtils"]
 	path = External/FeinstrukturUtils
 	url = git@bitbucket.org:feinstruktur/feinstrukturutils.git
+[submodule "External/PocketSocket"]
+	path = External/PocketSocket
+	url = git@github.com:zwopple/PocketSocket.git

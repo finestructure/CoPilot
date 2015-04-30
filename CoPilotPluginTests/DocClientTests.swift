@@ -10,6 +10,7 @@ import Cocoa
 import XCTest
 import Nimble
 
+
 typealias ChangeHandler = (Void -> Void)
 
 class DocClient {

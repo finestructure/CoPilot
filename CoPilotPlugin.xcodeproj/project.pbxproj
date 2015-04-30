@@ -20,6 +20,7 @@
 		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
+		5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
 		5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
 		5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
@@ -110,6 +111,20 @@
 			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
 			remoteInfo = "DiffMatchPatch OSX Tests";
 		};
+		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AB35B5B1AF22DC500AF2F22;
+			remoteInfo = "PocketSocket-OSX";
+		};
+		5AB35B901AF22F4100AF2F22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5AB35B5A1AF22DC500AF2F22;
+			remoteInfo = "PocketSocket-OSX";
+		};
 		5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
@@ -173,6 +188,20 @@
 			remoteGlobalIDString = 5AD1E8301AE2A0A60017CEEE;
 			remoteInfo = "FeinstrukturUtils-OSX";
 		};
+		5AD85FC61AF22C95007A52F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EEE5E30A18B37DD500BAE47A;
+			remoteInfo = PocketSocket;
+		};
+		5AD85FC81AF22C95007A52F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EEE5E36018B37F8700BAE47A;
+			remoteInfo = PSAutobahnClientTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -198,6 +227,7 @@
 		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
 		5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientTests.swift; sourceTree = "<group>"; };
+		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
 		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */,
 				5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */,
 				5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */,
@@ -251,6 +282,7 @@
 		5A0156A21AE2629200EED621 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */,
 				5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */,
 				5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */,
 				5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */,
@@ -354,6 +386,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5AD85FC21AF22C95007A52F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AD85FC71AF22C95007A52F9 /* libPocketSocket.a */,
+				5AD85FC91AF22C95007A52F9 /* PSAutobahnClientTests.xctest */,
+				5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +427,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */,
 				5AD1E87E1AE2A3090017CEEE /* PBXTargetDependency */,
 				5AD1E8181AE273A20017CEEE /* PBXTargetDependency */,
 				5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */,
@@ -461,6 +504,10 @@
 					ProductGroup = 5A0156A41AE2629C00EED621 /* Products */;
 					ProjectRef = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
 				},
+				{
+					ProductGroup = 5AD85FC21AF22C95007A52F9 /* Products */;
+					ProjectRef = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -520,6 +567,13 @@
 			remoteRef = 5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libPocketSocket-OSX.dylib";
+			remoteRef = 5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -560,6 +614,20 @@
 			fileType = wrapper.framework;
 			path = FeinstrukturUtils.framework;
 			remoteRef = 5AD1E8741AE2A2BC0017CEEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5AD85FC71AF22C95007A52F9 /* libPocketSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPocketSocket.a;
+			remoteRef = 5AD85FC61AF22C95007A52F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5AD85FC91AF22C95007A52F9 /* PSAutobahnClientTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PSAutobahnClientTests.xctest;
+			remoteRef = 5AD85FC81AF22C95007A52F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -666,6 +734,11 @@
 			isa = PBXTargetDependency;
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5A0983E21AE39EF0001ADB1F /* PBXContainerItemProxy */;
+		};
+		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PocketSocket-OSX";
+			targetProxy = 5AB35B901AF22F4100AF2F22 /* PBXContainerItemProxy */;
 		};
 		5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
