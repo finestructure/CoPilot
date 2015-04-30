@@ -36,16 +36,46 @@ func startServer() -> Server {
 }
 
 
+func createSocket() -> WebSocket {
+    var open = false
+    let socket = WebSocket(url: TestUrl) {
+        open = true
+    }
+    expect(open).toEventually(beTrue(), timeout: 5)
+    return socket
+}
+
+
+let TestUrl = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+
+
 class DocClientTests: XCTestCase {
 
-    func test_client() {
-        let s = startServer()
-        let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+    func test_server() {
+        let server = startServer()
         var open = false
-        let socket = WebSocket(url: url) {
+        let socket = WebSocket(url: TestUrl) {
             open = true
         }
         expect(open).toEventually(beTrue(), timeout: 5)
+        expect(server.sockets.count) == 1
+    }
+
+    func test_broadcast() {
+        let server = startServer()
+        let socket = createSocket()
+        var received: String?
+        server.broadcast("hello")
+        expect(socket.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
+    }
+    
+    func test_send() {
+        let server = startServer()
+        let socket = createSocket()
+        var received: String?
+        socket.send("foo")
+        expect(server.sockets.count).toEventually(equal(1), timeout: 5)
+        expect(server.sockets[0].lastMessage?.string).toEventually(equal("foo"), timeout: 5)
     }
     
 }

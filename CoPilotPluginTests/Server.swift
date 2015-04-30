@@ -19,7 +19,8 @@ class Server: NSObject {
     let host: String?
     var onPublished: ((NSNetService) -> Void)?
     var onError: ((NSError!) -> Void)?
-    var onConnect: ((PSWebSocket!) -> Void)?
+    var onConnect: ((WebSocket!) -> Void)?
+    var sockets = [WebSocket]()
     
     init(name: String, service: BonjourService, host: String? = nil) {
         self.name = name
@@ -35,6 +36,13 @@ class Server: NSObject {
         NSLog("starting server...")
         self.publishService()
         self.server.start()
+    }
+    
+    
+    func broadcast(message: String) {
+        for s in self.sockets {
+            s.send(message)
+        }
     }
     
 }
@@ -71,7 +79,9 @@ extension Server: PSWebSocketServerDelegate {
     }
     
     func server(server: PSWebSocketServer!, webSocketDidOpen webSocket: PSWebSocket!) {
-        self.onConnect?(webSocket)
+        let socket = WebSocket(socket: webSocket)
+        self.sockets.append(socket)
+        self.onConnect?(socket)
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
@@ -79,10 +89,12 @@ extension Server: PSWebSocketServerDelegate {
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: NSError!) {
+        self.sockets = self.sockets.filter { s in s.socket != webSocket }
         self.onError?(error)
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
+        self.sockets = self.sockets.filter { $0 != webSocket }
         NSLog("closed: \(code) \(reason) clean: \(wasClean)")
     }
 
