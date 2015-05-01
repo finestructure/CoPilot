@@ -41,10 +41,10 @@ class DocServer: NSObject {
         
         let command: Command = {
             if self.lastDoc == nil {
-                return Command(command: .Init, data: newDoc.serialize())
+                return Command(initialize: newDoc)
             } else {
                 let changes = Changeset(source: self.lastDoc!, target: newDoc)
-                return Command(command: .Changeset, data: changes.serialize())
+                return Command(update: changes)
             }
         }()
 
@@ -103,7 +103,7 @@ class DocServerTests: XCTestCase {
     }
     
     
-    func _test_serve_file() {
+    func test_serve_file() {
         // manual test, open test file in editor and type 'foobar'
         let s = DocServer(name: "foo", textProvider: fileTextProvider)
         let c = createClient()
@@ -112,11 +112,10 @@ class DocServerTests: XCTestCase {
 //            println(msg)
             let cmd = Command(data: msg.data!)
             println(cmd)
-            switch cmd.command {
-            case .Init:
-                doc = Document(data: cmd.data!)
-            case .Changeset:
-                let changes = Changeset(data: cmd.data!)
+            switch cmd {
+            case .Initialize(let d):
+                doc = d
+            case .Update(let changes):
                 if let d = doc {
                     let res = apply(d, changes)
                     if res.succeeded {

@@ -9,53 +9,68 @@
 import Foundation
 
 
-struct Command {
+enum Command {
     
-    // FIXME: this should be an enum like so:
-    // Undefined
-    // Init(Document)
-    // Changeset(Changeset)
-    enum Type: Int {
-        case Undefined
-        case Init
-        case Changeset
+    case Undefined
+    case Initialize(Document)
+    case Update(Changeset)
+    
+    init(initialize document: Document) {
+        self = .Initialize(document)
     }
-    
-    let command: Type
-    let data: NSData?
-    
-    init(command: Type, data: NSData? = nil) {
-        self.command = command
-        self.data = data
+
+    init(update changes: Changeset) {
+        self = .Update(changes)
     }
     
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
-        self.command = Type(rawValue: decoder.decodeIntegerForKey("command")) ?? .Undefined
-        self.data = decoder.decodeObjectForKey("data") as? NSData
+        let obj: AnyObject? = decoder.decodeObjectForKey("data")
+        if let doc = obj as? Document {
+            self = .Initialize(doc)
+        } else if let changes = obj as? Changeset {
+            self = .Update(changes)
+        } else {
+            self = .Undefined
+        }
     }
     
     func serialize() -> NSData {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-        archiver.encodeInteger(self.command.rawValue, forKey: "command")
-        archiver.encodeObject(self.data, forKey: "data")
+        switch self {
+        case .Initialize(let doc):
+            archiver.encodeObject((doc as! AnyObject), forKey: "data")
+        case .Update(let changes):
+            archiver.encodeObject((changes as! AnyObject), forKey: "data")
+        default: break
+        }
         archiver.finishEncoding()
         return data
     }
+    
+    var document: Document? {
+        switch self {
+        case .Initialize(let doc):
+            return doc
+        default:
+            return nil
+        }
+    }
+    
 }
 
 
 extension Command: Printable {
     
     var description: String {
-        switch self.command {
+        switch self {
         case .Undefined:
             return ".Undefined"
-        case .Init:
-            return ".Init"
-        case .Changeset:
-            return ".Changeset"
+        case .Initialize:
+            return ".Initialize"
+        case .Update:
+            return ".Update"
         }
     }
     
