@@ -32,6 +32,14 @@ class CoPilotPlugin: NSObject {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == Selector("publish") {
+            return self.hasDoc
+        } else {
+            return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
+        }
+    }
 
 }
 
@@ -56,17 +64,29 @@ extension CoPilotPlugin {
         return m
     }
     
+    
+    var hasDoc: Bool {
+        get {
+            // looks weird but return (DTXcodeUtils.currentTextStorage() != nil) causes a linker error
+            if let ts = DTXcodeUtils.currentSourceCodeDocument() {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+
 }
 
 
 // MARK: - Actions
 extension CoPilotPlugin {
-
+    
     func publish() {
         let ts = DTXcodeUtils.currentTextStorage()
         println(ts.string)
     }
-    
+
     func browse() {
         if self.mainController == nil {
             self.mainController = MainController(windowNibName: "MainController")
