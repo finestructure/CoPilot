@@ -68,7 +68,7 @@ class DocClientTests: XCTestCase {
         let server = startServer()
         let client = createClient()
         
-        server.broadcast(changeSet.data)
+        server.broadcast(changeSet.serialize())
         expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
         let d = client.lastMessage!.data
         expect(d).toNot(beNil())

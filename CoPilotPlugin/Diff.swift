@@ -97,16 +97,14 @@ struct Changeset {
         self.targetRev = decoder.decodeObjectForKey("targetRev") as! Hash
     }
 
-    var data: NSData {
-        get {
-            let data = NSMutableData()
-            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(self.patches, forKey: "patches")
-            archiver.encodeObject(self.baseRev, forKey: "baseRev")
-            archiver.encodeObject(self.targetRev, forKey: "targetRev")
-            archiver.finishEncoding()
-            return data
-        }
+    func serialize() -> NSData {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+        archiver.encodeObject(self.patches, forKey: "patches")
+        archiver.encodeObject(self.baseRev, forKey: "baseRev")
+        archiver.encodeObject(self.targetRev, forKey: "targetRev")
+        archiver.finishEncoding()
+        return data
     }
     
 }
