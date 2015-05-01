@@ -70,12 +70,22 @@ class DocClientTests: XCTestCase {
         
         server.broadcast(changeSet.data)
         expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
-        let d = client.lastMessage!.data!
-        
-        let decoder = NSKeyedUnarchiver(forReadingWithData: d)
-        let patches = decoder.decodeObjectForKey("patches") as! NSArray
-        expect(patches).toNot(beNil())
-        println(patches)
+        let d = client.lastMessage!.data
+        expect(d).toNot(beNil())
+        let c = Changeset(data: d!)
+        expect(c).toNot(beNil())
+        expect(c.patches.count) == 1
+        expect(c.patches[0].diffs.count) == 4
+        expect(c.patches[0].diffs[0].operation) == Operation.DiffEqual
+        expect(c.patches[0].diffs[0].text) == "S"
+        expect(c.patches[0].diffs[1].operation) == Operation.DiffDelete
+        expect(c.patches[0].diffs[1].text) == "ome"
+        expect(c.patches[0].diffs[2].operation) == Operation.DiffInsert
+        expect(c.patches[0].diffs[2].text) == "erver"
+        expect(c.patches[0].diffs[3].operation) == Operation.DiffEqual
+        expect(c.patches[0].diffs[3].text) == " Doc"
+        expect(c.baseRev) == changeSet.baseRev
+        expect(c.targetRev) == changeSet.targetRev
     }
     
 }

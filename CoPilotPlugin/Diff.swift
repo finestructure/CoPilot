@@ -79,23 +79,36 @@ func apply(source: Document, changeSet: Changeset) -> Result<Document> {
 
 
 struct Changeset {
+    
     let patches: [Patch]
     let baseRev: Hash
     let targetRev: Hash
+    
     init(source: Document, target: Document) {
         self.patches = computePatches(source.text, target.text)
         self.baseRev = source.hash
         self.targetRev = target.hash
     }
+    
+    init(data: NSData) {
+        let decoder = NSKeyedUnarchiver(forReadingWithData: data)
+        self.patches = decoder.decodeObjectForKey("patches") as! [Patch]
+        self.baseRev = decoder.decodeObjectForKey("baseRev") as! Hash
+        self.targetRev = decoder.decodeObjectForKey("targetRev") as! Hash
+    }
+
     var data: NSData {
         get {
             let data = NSMutableData()
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
             archiver.encodeObject(self.patches, forKey: "patches")
+            archiver.encodeObject(self.baseRev, forKey: "baseRev")
+            archiver.encodeObject(self.targetRev, forKey: "targetRev")
             archiver.finishEncoding()
             return data
         }
     }
+    
 }
 
 
