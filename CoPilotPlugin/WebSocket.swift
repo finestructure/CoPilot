@@ -42,7 +42,7 @@ class WebSocket: NSObject {
     var lastMessage: Message?
     
     var onConnect: (Void -> Void)?
-    
+    var onReceive: (Message -> Void)?
     
     init(url: NSURL, onConnect: (Void -> Void) = {}) {
         self.onConnect = onConnect
@@ -76,6 +76,9 @@ extension WebSocket: PSWebSocketDelegate {
             self.lastMessage = Message(s)
         } else if let d = message as? NSData {
             self.lastMessage = Message(d)
+        }
+        if let msg = self.lastMessage {
+            self.onReceive?(msg)
         }
     }
     
