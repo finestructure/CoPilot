@@ -14,6 +14,7 @@
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
+		5A17D91C1AF3CF9100429B79 /* testfile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* testfile.txt */; };
 		5A4B411E1AF3C71400BEC7BF /* DocServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B411D1AF3C71400BEC7BF /* DocServerTests.swift */; };
 		5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
 		5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
@@ -230,6 +231,7 @@
 		5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPluginTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A0983CF1AE39E5B001ADB1F /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A17D91B1AF3CF9100429B79 /* testfile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testfile.txt; sourceTree = "<group>"; };
 		5A4B411D1AF3C71400BEC7BF /* DocServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocServerTests.swift; sourceTree = "<group>"; };
 		5A4D7D9C1AF363FB005E0294 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			children = (
 				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
 				5A01569C1AE2619700EED621 /* Info.plist */,
+				5A17D91B1AF3CF9100429B79 /* testfile.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A17D91C1AF3CF9100429B79 /* testfile.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
