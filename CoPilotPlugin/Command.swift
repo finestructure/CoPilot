@@ -14,7 +14,7 @@ struct Command {
     enum Type: Int {
         case Undefined
         case Init
-        case Patch
+        case Changeset
     }
     
     let command: Type

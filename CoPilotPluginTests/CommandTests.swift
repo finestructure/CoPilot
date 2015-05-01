@@ -23,7 +23,7 @@ class CommandTests: XCTestCase {
     }
     
     func test_serialize_2() {
-        let orig = Command(command: .Patch, data: "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
+        let orig = Command(command: .Changeset, data: "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
         let d = orig.serialize()
         expect(d).toNot(beNil())
         let copy = Command(data: d)

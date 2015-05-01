@@ -11,6 +11,7 @@ import XCTest
 import Nimble
 import FeinstrukturUtils
 
+let PollInterval = 0.5
 
 typealias TextProvider = (Void -> String)
 
@@ -19,6 +20,7 @@ class DocServer: NSObject {
     private let textProvider: TextProvider
     private let server: Server
     private var timer: NSTimer?
+    private var lastDoc: Document?
     
     init(name: String, service: BonjourService = CoPilotService, textProvider: TextProvider) {
         self.textProvider = textProvider
@@ -26,13 +28,28 @@ class DocServer: NSObject {
         self.server.start()
         self.timer = nil
         super.init()
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "pollProvider", userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(PollInterval, target: self, selector: "pollProvider", userInfo: nil, repeats: true)
         self.timer = timer
     }
 
     func pollProvider() {
-        let s = self.textProvider()
-        self.server.broadcast(s)
+        let newDoc = Document(self.textProvider())
+        
+        if newDoc.hash == self.lastDoc?.hash {
+            return
+        }
+        
+        let command: Command = {
+            if self.lastDoc == nil {
+                return Command(command: .Init, data: newDoc.data)
+            } else {
+                let changes = Changeset(source: self.lastDoc!, target: newDoc)
+                return Command(command: .Changeset, data: changes.serialize())
+            }
+        }()
+
+        self.server.broadcast(command.serialize())
+        self.lastDoc = newDoc
     }
     
 }
@@ -51,10 +68,8 @@ let words = [
 
 
 var TestFilePath: String {
-get {
     let bundle = NSBundle(forClass: DocServerTests.classForCoder())
     return bundle.pathForResource("testfile", ofType: "txt")!
-}
 }
 
 
@@ -79,6 +94,7 @@ class DocServerTests: XCTestCase {
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
+            println(msg)
             messages.append(msg)
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
@@ -95,7 +111,7 @@ class DocServerTests: XCTestCase {
             }
         }
         println(TestFilePath)
-        expect(c.lastMessage?.string).toEventually(equal("foobar"), timeout: 60)
+        expect(c.lastMessage?.string).toEventually(equal("foobar"), timeout: 600)
     }
     
 }

@@ -118,6 +118,9 @@ struct Document {
     var hash: Hash {
         return self.text.md5()!
     }
+    var data: NSData? {
+        return self.text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+    }
     init(_ text: String) {
         self.text = text
     }

@@ -9,29 +9,33 @@
 import Foundation
 
 
-enum Message {
+enum Message: Printable {
     case Text(String)
     case Data(NSData)
     init(_ string: String) { self = .Text(string) }
     init(_ data: NSData) { self = .Data(data) }
     var string: String? {
-        get {
-            switch self {
-            case .Text(let s):
-                return s
-            case .Data:
-                return nil
-            }
+        switch self {
+        case .Text(let s):
+            return s
+        case .Data:
+            return nil
         }
     }
     var data: NSData? {
-        get {
-            switch self {
-            case .Text:
-                return nil
-            case .Data(let d):
-                return d
-            }
+        switch self {
+        case .Text:
+            return nil
+        case .Data(let d):
+            return d
+        }
+    }
+    var description: String {
+        switch self {
+        case .Text(let s):
+            return ".Text (\(s))"
+        case .Data:
+            return ".Data (\(self.data!.length) bytes)"
         }
     }
 }
