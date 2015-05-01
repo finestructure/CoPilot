@@ -41,7 +41,7 @@ class DocServer: NSObject {
         
         let command: Command = {
             if self.lastDoc == nil {
-                return Command(command: .Init, data: newDoc.data)
+                return Command(command: .Init, data: newDoc.serialize())
             } else {
                 let changes = Changeset(source: self.lastDoc!, target: newDoc)
                 return Command(command: .Changeset, data: changes.serialize())
@@ -94,8 +94,10 @@ class DocServerTests: XCTestCase {
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
-            println(msg)
+//            println(msg)
             messages.append(msg)
+            let cmd = Command(data: msg.data!)
+            println(cmd)
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
     }
@@ -105,13 +107,34 @@ class DocServerTests: XCTestCase {
         // manual test, open test file in editor and type 'foobar'
         let s = DocServer(name: "foo", textProvider: fileTextProvider)
         let c = createClient()
+        var doc: Document?
         c.onReceive = { msg in
-            if let s = msg.string {
-                println("received: \(s)")
+//            println(msg)
+            let cmd = Command(data: msg.data!)
+            println(cmd)
+            switch cmd.command {
+            case .Init:
+                doc = Document(data: cmd.data!)
+            case .Changeset:
+                let changes = Changeset(data: cmd.data!)
+                if let d = doc {
+                    let res = apply(d, changes)
+                    if res.succeeded {
+                        doc = res.value
+                    } else {
+                        println("applying patch failed: \(res.error?.localizedDescription)")
+                    }
+                }
+            case .Undefined:
+                println("received undefined command")
+            }
+            if let d = doc {
+                println("###\n\(d.text)\n###")
             }
         }
         println(TestFilePath)
-        expect(c.lastMessage?.string).toEventually(equal("foobar"), timeout: 600)
+//        expect(c.lastMessage?.string).toEventually(equal("quit"), timeout: 600)
+        expect(doc?.text).toEventually(equal("quit"), timeout: 600)
     }
     
 }

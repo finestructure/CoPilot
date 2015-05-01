@@ -118,11 +118,19 @@ struct Document {
     var hash: Hash {
         return self.text.md5()!
     }
-    var data: NSData? {
-        return self.text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-    }
     init(_ text: String) {
         self.text = text
+    }
+    init(data: NSData) {
+        let decoder = NSKeyedUnarchiver(forReadingWithData: data)
+        self.text = decoder.decodeObjectForKey("text") as! String
+    }
+    func serialize() -> NSData {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+        archiver.encodeObject(self.text, forKey: "text")
+        archiver.finishEncoding()
+        return data
     }
 }
 

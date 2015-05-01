@@ -11,6 +11,10 @@ import Foundation
 
 struct Command {
     
+    // FIXME: this should be an enum like so:
+    // Undefined
+    // Init(Document)
+    // Changeset(Changeset)
     enum Type: Int {
         case Undefined
         case Init
@@ -39,4 +43,20 @@ struct Command {
         archiver.finishEncoding()
         return data
     }
+}
+
+
+extension Command: Printable {
+    
+    var description: String {
+        switch self.command {
+        case .Undefined:
+            return ".Undefined"
+        case .Init:
+            return ".Init"
+        case .Changeset:
+            return ".Changeset"
+        }
+    }
+    
 }
