@@ -13,6 +13,7 @@ let PollInterval = 0.5
 
 typealias TextProvider = (Void -> String)
 
+
 class DocServer: NSObject {
     
     private let textProvider: TextProvider
@@ -59,3 +60,4 @@ class DocServer: NSObject {
     }
     
 }
+
