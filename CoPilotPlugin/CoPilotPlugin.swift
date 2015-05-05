@@ -34,9 +34,12 @@ class CoPilotPlugin: NSObject {
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == Selector("publish") {
+        switch menuItem.action {
+        case Selector("publish"):
             return self.hasDoc
-        } else {
+        case Selector("browse"):
+            return true
+        default:
             return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
         }
     }
