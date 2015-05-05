@@ -31,11 +31,21 @@ class Server: NSObject {
         self.server.delegate = self
     }
     
+    deinit {
+        self.stop()
+    }
     
     func start() {
         NSLog("starting server...")
         self.publishService()
         self.server.start()
+    }
+    
+    
+    func stop() {
+        NSLog("stopping server...")
+        self.unpublishService()
+        self.server.stop()
     }
     
     
@@ -57,7 +67,12 @@ extension Server {
             self.onPublished?(self.netService)
         }
     }
+
     
+    func unpublishService() {
+        self.netService?.stop()
+    }
+
 }
 
 
@@ -91,6 +106,7 @@ extension Server: PSWebSocketServerDelegate {
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: NSError!) {
         self.sockets = self.sockets.filter { s in s.socket != webSocket }
         self.onError?(error)
+        NSLog("failed: \(error.localizedDescription)")
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {

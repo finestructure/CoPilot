@@ -32,6 +32,14 @@ class DocServer: NSObject {
         self.timer = timer
     }
 
+    deinit {
+        self.stop()
+    }
+    
+    func stop() {
+        self.server.stop()
+    }
+    
     func pollProvider() {
         let newDoc = Document(self.textProvider())
         
@@ -87,14 +95,19 @@ func fileTextProvider() -> String {
 
 class DocServerTests: XCTestCase {
 
+    var server: DocServer!
+    
+    override func tearDown() {
+        self.server.stop()
+    }
+    
     func test_server() {
-        let s = DocServer(name: "foo", textProvider: {
+        self.server = DocServer(name: "foo", textProvider: {
             return randomElement(words)!
         })
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
-//            println(msg)
             messages.append(msg)
             let cmd = Command(data: msg.data!)
             println(cmd)
@@ -103,13 +116,12 @@ class DocServerTests: XCTestCase {
     }
     
     
-    func _test_serve_file() {
-        // manual test, open test file in editor and type 'foobar'
-        let s = DocServer(name: "foo", textProvider: fileTextProvider)
+    func test_serve_file() {
+        // manual test, open test file (path is print below) in editor and type 'quit'
+        self.server = DocServer(name: "foo", textProvider: fileTextProvider)
         let c = createClient()
         var doc: Document?
         c.onReceive = { msg in
-//            println(msg)
             let cmd = Command(data: msg.data!)
             println(cmd)
             switch cmd {
@@ -131,8 +143,7 @@ class DocServerTests: XCTestCase {
                 println("###\n\(d.text)\n###")
             }
         }
-        println(TestFilePath)
-//        expect(c.lastMessage?.string).toEventually(equal("quit"), timeout: 600)
+        println("test file path:\n\(TestFilePath)")
         expect(doc?.text).toEventually(equal("quit"), timeout: 600)
     }
     
