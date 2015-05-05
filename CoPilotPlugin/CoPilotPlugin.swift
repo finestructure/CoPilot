@@ -32,15 +32,14 @@ class CoPilotPlugin: NSObject {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-
-    // FIXME: Plugin will not load with this method present - WTF?
-//    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-//        if menuItem.action == Selector("publish") {
-//            return self.hasDoc
-//        } else {
-//            return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
-//        }
-//    }
+    
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == Selector("publish") {
+            return self.hasDoc
+        } else {
+            return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
+        }
+    }
 
 }
 
