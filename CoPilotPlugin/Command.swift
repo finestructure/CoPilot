@@ -9,53 +9,107 @@
 import Foundation
 
 
-struct Command {
+enum Command {
     
-    // FIXME: this should be an enum like so:
-    // Undefined
-    // Init(Document)
-    // Changeset(Changeset)
-    enum Type: Int {
-        case Undefined
-        case Init
-        case Changeset
+    case Undefined
+    case Initialize(Document)
+    case Update(Changeset)
+    
+    init(initialize document: Document) {
+        self = .Initialize(document)
     }
-    
-    let command: Type
-    let data: NSData?
-    
-    init(command: Type, data: NSData? = nil) {
-        self.command = command
-        self.data = data
+
+    init(update changes: Changeset) {
+        self = .Update(changes)
     }
     
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
-        self.command = Type(rawValue: decoder.decodeIntegerForKey("command")) ?? .Undefined
-        self.data = decoder.decodeObjectForKey("data") as? NSData
+        if let type = decoder.decodeObjectForKey(EncodingKeys.TypName.rawValue) as? String,
+           let data = decoder.decodeObjectForKey(EncodingKeys.Data.rawValue) as? NSData {
+            switch type {
+            case TypeNames.Initialize.rawValue:
+                let doc = Document(data: data)
+                self = .Initialize(doc)
+            case TypeNames.Update.rawValue:
+                let changes = Changeset(data: data)
+                self = .Update(changes)
+            default:
+                self = .Undefined
+            }
+        } else {
+            self = .Undefined
+        }
     }
     
     func serialize() -> NSData {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-        archiver.encodeInteger(self.command.rawValue, forKey: "command")
-        archiver.encodeObject(self.data, forKey: "data")
+        archiver.encodeObject(self.typeName, forKey: EncodingKeys.TypName.rawValue)
+        switch self {
+        case .Initialize(let doc):
+            archiver.encodeObject(doc.serialize(), forKey: EncodingKeys.Data.rawValue)
+        case .Update(let changes):
+            archiver.encodeObject(changes.serialize(), forKey: EncodingKeys.Data.rawValue)
+        default: break
+        }
         archiver.finishEncoding()
         return data
     }
+    
+    var document: Document? {
+        switch self {
+        case .Initialize(let doc):
+            return doc
+        default:
+            return nil
+        }
+    }
+    
+    var changes: Changeset? {
+        switch self {
+        case .Update(let changes):
+            return changes
+        default:
+            return nil
+        }
+    }
+    
+    private enum EncodingKeys: String {
+        case TypName = "typeName"
+        case Data = "data"
+    }
+    
+    private enum TypeNames: String {
+        case Undefined = "Undefined"
+        case Initialize = "Initialize"
+        case Update = "Update"
+    }
+    
+    var typeName: String {
+        switch self {
+        case .Undefined:
+            return TypeNames.Undefined.rawValue
+        case .Initialize:
+            return TypeNames.Initialize.rawValue
+        case .Update:
+            return TypeNames.Update.rawValue
+        }
+    }
+    
 }
 
 
 extension Command: Printable {
     
     var description: String {
-        switch self.command {
+        switch self {
         case .Undefined:
             return ".Undefined"
-        case .Init:
-            return ".Init"
-        case .Changeset:
-            return ".Changeset"
+        case .Initialize:
+            return ".Initialize"
+        case .Update:
+            return ".Update"
         }
     }
     
