@@ -13,7 +13,7 @@ import Nimble
 
 class CommandTests: XCTestCase {
 
-    func test_serialize_1() {
+    func test_serialize_doc() {
         let doc = Document("foo")
         let orig = Command(initialize: doc)
         let d = orig.serialize()
@@ -23,29 +23,30 @@ class CommandTests: XCTestCase {
         expect(copy.document?.text) == "foo"
     }
 
-    // FIXME: re-enable
-//    func test_serialize_2() {
-//        let orig = Command(command: .Changeset, data: "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
-//        let d = orig.serialize()
-//        expect(d).toNot(beNil())
-//        let copy = Command(data: d)
-//        expect(copy.command.rawValue) == 2
-//        expect(copy.data).toNot(beNil())
-//        let s = NSString(data: copy.data!, encoding: NSUTF8StringEncoding)
-//        expect(s) == "foo"
-//    }
+    func test_serialize_changes() {
+        let doc1 = Document("foo")
+        let doc2 = Document("bar")
+        let changes = Changeset(source: doc1, target: doc2)
+        let data = Command(update: changes).serialize()
+        expect(data).toNot(beNil())
+        let copy = Command(data: data)
+        expect(copy.typeName) == "Update"
+        expect(copy.changes).toNot(beNil())
+        let res = apply(doc1, copy.changes!)
+        expect(res.succeeded) == true
+        expect(res.value!.text) == "bar"
+    }
     
-    // FIXME: re-enable
-//    func test_serialize_undefined() {
-//        let d = NSMutableData()
-//        let archiver = NSKeyedArchiver(forWritingWithMutableData: d)
-//        archiver.encodeInteger(-1, forKey: "command")
-//        archiver.encodeObject(nil, forKey: "data")
-//        archiver.finishEncoding()
-//        expect(d).toNot(beNil())
-//        let copy = Command(data: d)
-//        expect(copy.command.rawValue) == 0
-//        expect(copy.data).to(beNil())
-//    }
+    func test_serialize_undefined() {
+        let d = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWithMutableData: d)
+        archiver.encodeObject(nil, forKey: "foo")
+        archiver.finishEncoding()
+        expect(d).toNot(beNil())
+        let copy = Command(data: d)
+        expect(copy.typeName) == "Undefined"
+        expect(copy.document).to(beNil())
+        expect(copy.changes).to(beNil())
+    }
     
 }

@@ -103,7 +103,7 @@ class DocServerTests: XCTestCase {
     }
     
     
-    func test_serve_file() {
+    func _test_serve_file() {
         // manual test, open test file in editor and type 'foobar'
         let s = DocServer(name: "foo", textProvider: fileTextProvider)
         let c = createClient()

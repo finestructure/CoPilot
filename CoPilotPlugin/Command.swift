@@ -25,11 +25,18 @@ enum Command {
     
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
-        let obj: AnyObject? = decoder.decodeObjectForKey("data")
-        if let doc = obj as? Document {
-            self = .Initialize(doc)
-        } else if let changes = obj as? Changeset {
-            self = .Update(changes)
+        if let type = decoder.decodeObjectForKey(EncodingKeys.TypName.rawValue) as? String,
+           let data = decoder.decodeObjectForKey(EncodingKeys.Data.rawValue) as? NSData {
+            switch type {
+            case TypeNames.Initialize.rawValue:
+                let doc = Document(data: data)
+                self = .Initialize(doc)
+            case TypeNames.Update.rawValue:
+                let changes = Changeset(data: data)
+                self = .Update(changes)
+            default:
+                self = .Undefined
+            }
         } else {
             self = .Undefined
         }
@@ -38,11 +45,12 @@ enum Command {
     func serialize() -> NSData {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+        archiver.encodeObject(self.typeName, forKey: EncodingKeys.TypName.rawValue)
         switch self {
         case .Initialize(let doc):
-            archiver.encodeObject((doc as! AnyObject), forKey: "data")
+            archiver.encodeObject(doc.serialize(), forKey: EncodingKeys.Data.rawValue)
         case .Update(let changes):
-            archiver.encodeObject((changes as! AnyObject), forKey: "data")
+            archiver.encodeObject(changes.serialize(), forKey: EncodingKeys.Data.rawValue)
         default: break
         }
         archiver.finishEncoding()
@@ -55,6 +63,37 @@ enum Command {
             return doc
         default:
             return nil
+        }
+    }
+    
+    var changes: Changeset? {
+        switch self {
+        case .Update(let changes):
+            return changes
+        default:
+            return nil
+        }
+    }
+    
+    private enum EncodingKeys: String {
+        case TypName = "typeName"
+        case Data = "data"
+    }
+    
+    private enum TypeNames: String {
+        case Undefined = "Undefined"
+        case Initialize = "Initialize"
+        case Update = "Update"
+    }
+    
+    var typeName: String {
+        switch self {
+        case .Undefined:
+            return TypeNames.Undefined.rawValue
+        case .Initialize:
+            return TypeNames.Initialize.rawValue
+        case .Update:
+            return TypeNames.Update.rawValue
         }
     }
     
