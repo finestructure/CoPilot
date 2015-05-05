@@ -1,5 +1,5 @@
 //
-//  DocClientTests.swift
+//  ServerTests.swift
 //  CoPilotPlugin
 //
 //  Created by Sven Schmidt on 30/04/2015.
@@ -14,20 +14,7 @@ import Nimble
 let TestUrl = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
 
 
-//typealias ChangeHandler = (Void -> Void)
-//
-//class DocClient {
-//    private let service: NSNetService
-//    private let onChange: ChangeHandler
-//    init(service: NSNetService, onChange: ChangeHandler) {
-//        self.service = service
-//        self.onChange = onChange
-//    }
-//}
-
-
-
-class DocClientTests: XCTestCase {
+class ServerTests: XCTestCase {
 
     func test_server() {
         let server = startServer()

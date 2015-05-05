@@ -36,7 +36,7 @@
 		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
-		5AD85FBB1AF2263E007A52F9 /* DocClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */; };
+		5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */; };
 		5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
@@ -250,7 +250,7 @@
 		5AC8A9761AE542440097FF8D /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
 		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
-		5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientTests.swift; sourceTree = "<group>"; };
+		5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
 		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = CoPilotPluginTests/Server.swift; sourceTree = SOURCE_ROOT; };
 		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
 				5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */,
 				5A01569D1AE2619700EED621 /* DiffTests.swift */,
-				5AD85FBA1AF2263E007A52F9 /* DocClientTests.swift */,
+				5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */,
 				5A4B411D1AF3C71400BEC7BF /* DocServerTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
 			);
@@ -736,7 +736,7 @@
 				5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
-				5AD85FBB1AF2263E007A52F9 /* DocClientTests.swift in Sources */,
+				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
 				5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
