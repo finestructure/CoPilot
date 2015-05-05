@@ -42,6 +42,40 @@ func fileTextProvider() -> String {
 }
 
 
+class DocClient {
+    private let socket: WebSocket
+    private var document: Document?
+    
+    init(url: NSURL) {
+        self.socket = WebSocket(url: url)
+        self.socket.onReceive = { msg in
+            let cmd = Command(data: msg.data!)
+            println("DocClient: \(cmd)")
+            switch cmd {
+            case .Initialize(let doc):
+                self.document = doc
+            case .Update(let changes):
+                self.applyChanges(changes)
+            case .Undefined:
+                println("DocClient: ignoring undefined command")
+            }
+       }
+    }
+    
+    func applyChanges(changes: Changeset) {
+        if let doc = self.document {
+            let res = apply(doc, changes)
+            if res.succeeded {
+                self.document = res.value
+            } else {
+                println("DocClient: applying patch failed: \(res.error?.localizedDescription)")
+            }
+        }
+    }
+    
+}
+
+
 class DocServerTests: XCTestCase {
 
     var server: DocServer!
@@ -68,32 +102,9 @@ class DocServerTests: XCTestCase {
     func test_serve_file() {
         // manual test, open test file (path is print below) in editor and type 'quit'
         self.server = DocServer(name: "foo", textProvider: fileTextProvider)
-        let c = createClient()
-        var doc: Document?
-        c.onReceive = { msg in
-            let cmd = Command(data: msg.data!)
-            println(cmd)
-            switch cmd {
-            case .Initialize(let d):
-                doc = d
-            case .Update(let changes):
-                if let d = doc {
-                    let res = apply(d, changes)
-                    if res.succeeded {
-                        doc = res.value
-                    } else {
-                        println("applying patch failed: \(res.error?.localizedDescription)")
-                    }
-                }
-            case .Undefined:
-                println("received undefined command")
-            }
-            if let d = doc {
-                println("###\n\(d.text)\n###")
-            }
-        }
+        let client = DocClient(url: TestUrl)
         println("test file path:\n\(TestFilePath)")
-        expect(doc?.text).toEventually(equal("quit"), timeout: 600)
+        expect(client.document?.text).toEventually(equal("quit"), timeout: 600)
     }
     
 }
