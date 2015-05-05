@@ -67,6 +67,9 @@ class WebSocket: NSObject {
         self.socket.send(message)
     }
     
+    var open: Bool {
+        return self.socket.readyState == .Open
+    }
 }
 
 extension WebSocket: PSWebSocketDelegate {
