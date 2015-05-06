@@ -44,6 +44,7 @@ class MainController: NSWindowController {
                 self.updateUI()
             }
         }
+        self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
         self.updateUI()
     }
     
@@ -61,6 +62,12 @@ extension MainController {
     }
     
     @IBAction func subscribePressed(sender: AnyObject) {
+    }
+    
+    
+    func rowDoubleClicked(sender: AnyObject) {
+        let row = self.servicesTableView.clickedRow
+        let service = self.browser.services[row] as! NSNetService
     }
     
 }
