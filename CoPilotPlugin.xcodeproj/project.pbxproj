@@ -27,6 +27,8 @@
 		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
+		5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
+		5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
 		5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
 		5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
@@ -245,6 +247,7 @@
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
+		5AA336EE1AFA06B2000E37B2 /* DocClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClient.swift; sourceTree = "<group>"; };
 		5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonjourTests.swift; sourceTree = "<group>"; };
 		5AC8A9731AE541C80097FF8D /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		5AC8A9761AE542440097FF8D /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
@@ -380,6 +383,7 @@
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
 				5A4D7D9C1AF363FB005E0294 /* Command.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
+				5AA336EE1AFA06B2000E37B2 /* DocClient.swift */,
 				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
 				5ADA75801AF230CB0074D8F0 /* Server.swift */,
@@ -738,6 +742,7 @@
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
 				5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */,
+				5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,6 +753,7 @@
 				5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
+				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
 				5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
