@@ -44,7 +44,7 @@ class MainController: NSWindowController {
                 self.updateUI()
             }
         }
-        
+        self.updateUI()
     }
     
 }
@@ -77,9 +77,11 @@ extension MainController {
 
         if let doc = self.lastSelectedDoc {
             self.publishButton.enabled = true
+            self.documentsPopupButton.enabled = true
             self.documentsPopupButton.selectItemWithTitle(doc.displayName)
         } else {
             self.publishButton.enabled = false
+            self.documentsPopupButton.enabled = false
             self.documentsPopupButton.selectItem(nil)
         }
     }
