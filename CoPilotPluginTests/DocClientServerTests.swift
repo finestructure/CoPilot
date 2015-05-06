@@ -75,7 +75,7 @@ class DocClientServerTests: XCTestCase {
     func test_sync_files() {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
         self.server = DocServer(name: "foo", textProvider: fileTextProvider("/tmp/server.txt"))
-        let client = DocClient(url: TestUrl)
+        let client = DocClient(url: TestUrl, document: Document(""))
         client.onInitialize = { doc in
             println("client doc: \(doc.text)")
             if try({ e in
@@ -85,7 +85,25 @@ class DocClientServerTests: XCTestCase {
             }
         }
         client.onChange = client.onInitialize
-        expect(client.document?.text).toEventually(equal("quit"), timeout: 600)
+        expect(client.document.text).toEventually(equal("quit"), timeout: 600)
+    }
+    
+    
+    func test_init_nsNetService() {
+        self.server = DocServer(name: "foo", textProvider: {
+            return randomElement(words)!
+        })
+        var service: NSNetService!
+        let browser = Browser(service: CoPilotService) { s in service = s }
+        expect(service).toEventuallyNot(beNil(), timeout: 5)
+        
+        let client = DocClient(service: service, document: Document(""))
+        var changeCount = 0
+        client.onInitialize = { _ in
+            changeCount++
+        }
+        client.onChange = client.onInitialize
+        expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
     
 }

@@ -13,15 +13,31 @@ typealias ChangeHandler = (Document -> Void)
 
 
 class DocClient {
-    private let socket: WebSocket
-    var document: Document?
+    private var socket: WebSocket?
+    private var resolver: Resolver?
+    var document: Document
     var onInitialize: ChangeHandler?
     var onChange: ChangeHandler?
     
-    init(url: NSURL) {
-        self.socket = WebSocket(url: url)
-        self.socket.onReceive = { msg in
+    
+    init(service: NSNetService, document: Document) {
+        self.document = document
+        self.resolver = Resolver(service: service, timeout: 5)
+        self.resolver!.onResolve = resolve
+    }
+    
+    
+    init(url: NSURL, document: Document) {
+        self.document = document
+        let ws = WebSocket(url: url)
+        self.resolve(ws)
+    }
+    
+    
+    func resolve(websocket: WebSocket) {
+        websocket.onReceive = { msg in
             let cmd = Command(data: msg.data!)
+            // TODO: remove
             println("DocClient: \(cmd)")
             switch cmd {
             case .Initialize(let doc):
@@ -32,22 +48,23 @@ class DocClient {
                 println("DocClient: ignoring undefined command")
             }
         }
+        self.socket = websocket
     }
+    
     
     func initializeDocument(document: Document) {
         self.document = document
         self.onInitialize?(document)
     }
     
+    
     func applyChanges(changes: Changeset) {
-        if let doc = self.document {
-            let res = apply(doc, changes)
-            if res.succeeded {
-                self.document = res.value
-                self.onChange?(self.document!)
-            } else {
-                println("DocClient: applying patch failed: \(res.error?.localizedDescription)")
-            }
+        let res = apply(self.document, changes)
+        if res.succeeded {
+            self.document = res.value!
+            self.onChange?(self.document)
+        } else {
+            println("DocClient: applying patch failed: \(res.error?.localizedDescription)")
         }
     }
     
