@@ -30,23 +30,38 @@ var TestFilePath: String {
 }
 
 
-func fileTextProvider() -> String {
-    var result: NSString?
-    if let error = try({ error in
-        result = NSString(contentsOfFile: TestFilePath, encoding: NSUTF8StringEncoding, error: error)
-        return
-    }) {
-        fail("failed to load test file: \(error.localizedDescription)")
+func fileTextProvider(path: String) -> (Void -> String) {
+    return {
+        var result: NSString?
+        if let error = try({ error in
+            result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
+            return
+        }) {
+            if error.code == 260 { // does not exist
+                result = ""
+                let res = try({ error in
+                    result?.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
+                })
+                if res.failed {
+                    fail("could not create file: \(res.error!.localizedDescription)")
+                }
+            } else {
+                fail("failed to load test file: \(error.localizedDescription)")
+            }
+        }
+        return result! as String
     }
-    return result! as String
 }
 
+
+typealias ChangeHandler = (Document -> Void)
 
 class DocClient {
     private let socket: WebSocket
     private var document: Document?
+    private var onChange: ChangeHandler?
     
-    init(url: NSURL) {
+    init(url: NSURL, onChange: ChangeHandler = {_ in}) {
         self.socket = WebSocket(url: url)
         self.socket.onReceive = { msg in
             let cmd = Command(data: msg.data!)
@@ -60,6 +75,7 @@ class DocClient {
                 println("DocClient: ignoring undefined command")
             }
        }
+        self.onChange = onChange
     }
     
     func applyChanges(changes: Changeset) {
@@ -67,6 +83,7 @@ class DocClient {
             let res = apply(doc, changes)
             if res.succeeded {
                 self.document = res.value
+                self.onChange?(self.document!)
             } else {
                 println("DocClient: applying patch failed: \(res.error?.localizedDescription)")
             }
@@ -99,13 +116,18 @@ class DocServerTests: XCTestCase {
     }
     
     
-    func test_serve_file() {
-        // manual test, open test file (path is print below) in editor and type 'quit'
-        self.server = DocServer(name: "foo", textProvider: fileTextProvider)
-        let client = DocClient(url: TestUrl)
-        println("test file path:\n\(TestFilePath)")
+    func test_sync_files() {
+        // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
+        self.server = DocServer(name: "foo", textProvider: fileTextProvider("/tmp/server.txt"))
+        let client = DocClient(url: TestUrl) { doc in
+            println("client doc: \(doc.text)")
+            if try({ e in
+                doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding, error: e)
+            }).failed {
+                println("writing file failed")
+            }
+        }
         expect(client.document?.text).toEventually(equal("quit"), timeout: 600)
     }
-    
 }
 
