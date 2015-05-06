@@ -1,5 +1,5 @@
 //
-//  DocServerTests.swift
+//  DocClientServerTests.swift
 //  CoPilotPlugin
 //
 //  Created by Sven Schmidt on 01/05/2015.
@@ -49,7 +49,7 @@ func fileTextProvider(path: String) -> (Void -> String) {
 
 
 
-class DocServerTests: XCTestCase {
+class DocClientServerTests: XCTestCase {
 
     var server: DocServer!
     
@@ -87,5 +87,6 @@ class DocServerTests: XCTestCase {
         client.onChange = client.onInitialize
         expect(client.document?.text).toEventually(equal("quit"), timeout: 600)
     }
+    
 }
 
