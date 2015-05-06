@@ -19,6 +19,7 @@ func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -
 class MainController: NSWindowController {
 
     @IBOutlet weak var publishButton: NSButton!
+    @IBOutlet weak var subscribeButton: NSButton!
     @IBOutlet weak var documentsPopupButton: NSPopUpButton!
     @IBOutlet weak var servicesTableView: NSTableView!
     var browser: Browser!
@@ -124,6 +125,10 @@ extension MainController: NSTableViewDelegate {
             cell?.textField?.stringValue = item.name
         }
         return cell
+    }
+    
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        self.subscribeButton.enabled = (self.servicesTableView.selectedRow != -1)
     }
     
 }
