@@ -11,9 +11,9 @@ import Foundation
 
 class Browser: NSObject {
     private let browser: NSNetServiceBrowser
+    private var services = NSMutableOrderedSet()
     var onFind: (NSNetService -> Void)?
     var onRemove: (NSNetService -> Void)?
-    var services = NSMutableOrderedSet()
     
     init(service: BonjourService, onFind: (NSNetService -> Void) = {_ in}) {
         self.browser = NSNetServiceBrowser()
@@ -34,4 +34,20 @@ extension Browser: NSNetServiceBrowserDelegate {
         self.services.removeObject(aNetService)
         self.onRemove?(aNetService)
     }
+}
+
+
+// Service access
+extension Browser {
+    
+    var count: Int {
+        get {
+            return self.services.count
+        }
+    }
+    
+    subscript(index: Int) -> NSNetService {
+        return self.services[index] as! NSNetService
+    }
+    
 }

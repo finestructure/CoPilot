@@ -63,12 +63,23 @@ extension MainController {
     }
     
     @IBAction func subscribePressed(sender: AnyObject) {
+        let index = self.servicesTableView.selectedRow
+        if index != -1 {
+            let service = self.browser[index]
+            self.subscribe(service)
+        }
     }
     
     
     func rowDoubleClicked(sender: AnyObject) {
-        let row = self.servicesTableView.clickedRow
-        let service = self.browser.services[row] as! NSNetService
+        let index = self.servicesTableView.clickedRow
+        let service = self.browser[index]
+        self.subscribe(service)
+    }
+    
+    
+    func subscribe(service: NSNetService) {
+        println("subscribing to \(service)")
     }
     
 }
@@ -101,7 +112,7 @@ extension MainController {
 extension MainController: NSTableViewDataSource {
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return self.browser?.services.count ?? 0
+        return self.browser?.count ?? 0
     }
     
 }
@@ -120,8 +131,8 @@ extension MainController: NSTableViewDelegate {
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier("MyCell", owner: self) as? NSTableCellView
-        if row < self.browser.services.count { // guarding against race condition
-            let item = self.browser.services[row] as! NSNetService
+        if row < self.browser.count { // guarding against race condition
+            let item = self.browser[row]
             cell?.textField?.stringValue = item.name
         }
         return cell
