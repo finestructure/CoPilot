@@ -80,6 +80,15 @@ extension MainController {
     
     func subscribe(service: NSNetService) {
         println("subscribing to \(service)")
+        // let client = DocClient(service: service)
+        // client.onInit = { doc in
+        //    if source doc not empty, show alert before overwriting
+        //    set source text to doc.text
+        // }
+        // client.onChange = { doc in
+        //    check hash in source doc before applying change -> roll this into DocClient?
+        // }
+        // self.docClient = client
     }
     
 }
