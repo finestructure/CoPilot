@@ -75,7 +75,8 @@ class DocServerTests: XCTestCase {
     func test_sync_files() {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
         self.server = DocServer(name: "foo", textProvider: fileTextProvider("/tmp/server.txt"))
-        let client = DocClient(url: TestUrl) { doc in
+        let client = DocClient(url: TestUrl)
+        client.onInitialize = { doc in
             println("client doc: \(doc.text)")
             if try({ e in
                 doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding, error: e)
@@ -83,6 +84,7 @@ class DocServerTests: XCTestCase {
                 println("writing file failed")
             }
         }
+        client.onChange = client.onInitialize
         expect(client.document?.text).toEventually(equal("quit"), timeout: 600)
     }
 }

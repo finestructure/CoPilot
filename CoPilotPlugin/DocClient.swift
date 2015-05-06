@@ -11,26 +11,32 @@ import Foundation
 
 typealias ChangeHandler = (Document -> Void)
 
+
 class DocClient {
     private let socket: WebSocket
     var document: Document?
+    var onInitialize: ChangeHandler?
     var onChange: ChangeHandler?
     
-    init(url: NSURL, onChange: ChangeHandler = {_ in}) {
+    init(url: NSURL) {
         self.socket = WebSocket(url: url)
         self.socket.onReceive = { msg in
             let cmd = Command(data: msg.data!)
             println("DocClient: \(cmd)")
             switch cmd {
             case .Initialize(let doc):
-                self.document = doc
+                self.initializeDocument(doc)
             case .Update(let changes):
                 self.applyChanges(changes)
             case .Undefined:
                 println("DocClient: ignoring undefined command")
             }
         }
-        self.onChange = onChange
+    }
+    
+    func initializeDocument(document: Document) {
+        self.document = document
+        self.onInitialize?(document)
     }
     
     func applyChanges(changes: Changeset) {
