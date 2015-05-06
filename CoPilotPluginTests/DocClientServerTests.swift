@@ -24,31 +24,6 @@ let words = [
 ]
 
 
-func fileTextProvider(path: String) -> (Void -> String) {
-    return {
-        var result: NSString?
-        if let error = try({ error in
-            result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
-            return
-        }) {
-            if error.code == 260 { // does not exist
-                result = ""
-                let res = try({ error in
-                    result?.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
-                })
-                if res.failed {
-                    fail("could not create file: \(res.error!.localizedDescription)")
-                }
-            } else {
-                fail("failed to load test file: \(error.localizedDescription)")
-            }
-        }
-        return result! as String
-    }
-}
-
-
-
 class DocClientServerTests: XCTestCase {
 
     var server: DocServer!
@@ -74,7 +49,7 @@ class DocClientServerTests: XCTestCase {
     
     func test_sync_files() {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
-        self.server = DocServer(name: "foo", textProvider: fileTextProvider("/tmp/server.txt"))
+        self.server = DocServer(name: "foo", textProvider: fileProvider("/tmp/server.txt"))
         let client = DocClient(url: TestUrl, document: Document(""))
         client.onInitialize = { doc in
             println("client doc: \(doc.text)")
