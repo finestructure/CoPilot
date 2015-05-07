@@ -49,8 +49,8 @@ class Server: NSObject {
     }
     
     
-    func broadcast(message: AnyObject) {
-        for s in self.sockets {
+    func broadcast(message: AnyObject, exclude: WebSocket? = nil) {
+        for s in self.sockets.filter({ $0 != exclude }) {
             s.send(message)
         }
     }
