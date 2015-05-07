@@ -12,6 +12,11 @@ import FeinstrukturUtils
 import CryptoSwift
 
 
+enum ErrorCodes: Int {
+    case ApplyFailed = 100
+}
+
+
 func computeDiff(a: String?, b: String?, checklines: Bool = true, deadline: NSTimeInterval = 1) -> [Diff] {
     let dmp = DiffMatchPatch()
     if let diffs = dmp.diff_mainOfOldString(a, andNewString: b, checkLines: checklines, deadline: deadline) {
@@ -54,7 +59,8 @@ func apply(source: String, patches: [Patch]) -> Result<String> {
             }
         }
     }
-    return Result(NSError())
+    let info = ["NSLocalizedDescriptionKey": "failed to apply patches"]
+    return Result(NSError(domain: "Diff", code: ErrorCodes.ApplyFailed.rawValue, userInfo: info))
 }
 
 

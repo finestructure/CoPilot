@@ -64,7 +64,7 @@ class DocClient {
             self.document = res.value!
             self.onChange?(self.document)
         } else {
-            println("DocClient: applying patch failed: \(res.error?.localizedDescription)")
+            println("DocClient: applying patch failed: \(res.error!.localizedDescription)")
         }
     }
     

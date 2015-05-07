@@ -9,6 +9,26 @@
 import Cocoa
 import XCTest
 import Nimble
+import FeinstrukturUtils
+
+
+func pathForResource(#name: String, #type: String) -> String {
+    let bundle = NSBundle(forClass: DiffTests.classForCoder())
+    return bundle.pathForResource(name, ofType: type)!
+}
+
+
+func contentsOfFile(#name: String, #type: String) -> String {
+    var result: NSString?
+    if let error = try({ error in
+        let path = pathForResource(name: name, type: type)
+        result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
+        return
+    }) {
+        fail("failed to load test file: \(error.localizedDescription)")
+    }
+    return result! as String
+}
 
 
 class DiffTests: XCTestCase {
@@ -77,6 +97,17 @@ class DiffTests: XCTestCase {
         let res = apply(source, change)
         expect(res.succeeded) == false
         expect(res.value).to(beNil())
+    }
+    
+    
+    func test_apply_error() {
+        let clientDoc = Document(contentsOfFile(name: "new_playground", type: "txt"))
+        let serverDoc = Document("foo")
+        let changes = Changeset(source: serverDoc, target: Document("foobar"))
+        let res = apply(clientDoc, changes)
+        expect(res.succeeded) == false
+        expect(res.error).toNot(beNil())
+        expect(res.error?.localizedDescription) == "The operation couldn’t be completed. (Diff error 100.)"
     }
     
     
