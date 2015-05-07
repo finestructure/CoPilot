@@ -25,6 +25,8 @@ class MainController: NSWindowController {
     var browser: Browser!
     var publishedService: NSNetService?
     var lastSelectedDoc: NSDocument?
+    var docServer: DocServer?
+    var docClient: DocClient?
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -56,6 +58,11 @@ class MainController: NSWindowController {
 extension MainController {
     
     @IBAction func publishPressed(sender: AnyObject) {
+        // FIXME: test hack
+        let name = "server.txt @ \(NSHost.currentHost().localizedName!)"
+        self.docServer = DocServer(name: name, service: CoPilotService, textProvider: fileProvider("/tmp/server.txt"))
+        return
+        
         if let doc = self.lastSelectedDoc {
             let name = "\(doc.displayName) @ \(NSHost.currentHost().localizedName!)"
             self.publishedService = publish(service: CoPilotService, name: name)
@@ -79,16 +86,25 @@ extension MainController {
     
     
     func subscribe(service: NSNetService) {
+        let editors = DTXcodeUtils.ideEditors()
+        println("editors: \(editors.count)")
         println("subscribing to \(service)")
-        // let client = DocClient(service: service)
-        // client.onInit = { doc in
-        //    if source doc not empty, show alert before overwriting
-        //    set source text to doc.text
-        // }
-        // client.onChange = { doc in
-        //    check hash in source doc before applying change -> roll this into DocClient?
-        // }
-        // self.docClient = client
+        // FIXME: we need to make sure to warn against overwrite here
+        if let ts = DTXcodeUtils.textStorageForEditor(editors[0]) {
+            self.docClient = {
+                let doc = Document(ts.string)
+                let client = DocClient(service: service, document: doc)
+                client.onInitialize = { doc in
+                    //    if source doc not empty, show alert before overwriting
+                    //    set source text to doc.text
+                    let range = NSRange(location: 0, length: ts.length)
+                    println("range: \(range)")
+                    ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
+                }
+                client.onChange = client.onInitialize
+                return client
+            }()
+        }
     }
     
 }
@@ -105,10 +121,12 @@ extension MainController {
 
         if let doc = self.lastSelectedDoc {
             self.publishButton.enabled = true
+            self.subscribeButton.enabled = true
             self.documentsPopupButton.enabled = true
             self.documentsPopupButton.selectItemWithTitle(doc.displayName)
         } else {
             self.publishButton.enabled = false
+            self.subscribeButton.enabled = false
             self.documentsPopupButton.enabled = false
             self.documentsPopupButton.selectItem(nil)
         }

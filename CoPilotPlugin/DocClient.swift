@@ -19,7 +19,6 @@ class DocClient {
     var onInitialize: ChangeHandler?
     var onChange: ChangeHandler?
     
-    
     init(service: NSNetService, document: Document) {
         self.document = document
         self.resolver = Resolver(service: service, timeout: 5)
