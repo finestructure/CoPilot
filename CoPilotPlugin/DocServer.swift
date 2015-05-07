@@ -17,35 +17,41 @@ typealias TextProvider = (Void -> String)
 class DocServer: NSObject {
     
     private let textProvider: TextProvider
-    private let server: Server
-    private var timer: NSTimer?
+    private var server: Server! = nil
+    private var timer: NSTimer! = nil
     private var lastDoc: Document?
+    private var clients = [DocClient]()
     
     init(name: String, service: BonjourService = CoPilotService, textProvider: TextProvider) {
         self.textProvider = textProvider
+        super.init()
         self.server = {
             let s = Server(name: name, service: service)
             s.onConnect = { ws in
                 let doc = Document(textProvider())
-                let cmd = Command(document: doc)
-                ws.send(cmd.serialize())
+                self.clients.append({
+                    let client = DocClient(websocket: ws, document: doc)
+                    client.send(Command(document: doc))
+                    return client
+                    }()
+                )
             }
             s.start()
             return s
         }()
-        self.timer = nil
-        super.init()
-        let timer = NSTimer.scheduledTimerWithTimeInterval(PollInterval, target: self, selector: "pollProvider", userInfo: nil, repeats: true)
-        self.timer = timer
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(PollInterval, target: self, selector: "pollProvider", userInfo: nil, repeats: true)
     }
+
     
     deinit {
         self.stop()
     }
     
+    
     func stop() {
         self.server.stop()
     }
+    
     
     func pollProvider() {
         let newDoc = Document(self.textProvider())
@@ -63,8 +69,15 @@ class DocServer: NSObject {
             }
             }()
         
-        self.server.broadcast(command.serialize())
+        self.broadcast(command)
         self.lastDoc = newDoc
+    }
+    
+    
+    func broadcast(command: Command) {
+        for c in self.clients {
+            c.send(command)
+        }
     }
     
 }

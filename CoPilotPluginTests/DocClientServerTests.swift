@@ -49,7 +49,7 @@ class DocClientServerTests: XCTestCase {
     func test_sync_files() {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
         self.server = DocServer(name: "foo", textProvider: fileProvider("/tmp/server.txt"))
-        let client = DocClient(url: TestUrl, document: Document(""))
+        let client = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
         client.onInitialize = { doc in
             println("client doc: \(doc.text)")
             if try({ e in
@@ -85,11 +85,11 @@ class DocClientServerTests: XCTestCase {
         var serverDoc = Document("foo")
         self.server = DocServer(name: "foo") { serverDoc.text }
         // we're doing this to not send an intialize to the client2 subscriber
-        let client1 = DocClient(url: TestUrl, document: Document(""))
+        let client1 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
-        let client2 = DocClient(url: TestUrl, document: client2Doc)
+        let client2 = DocClient(websocket: WebSocket(url: TestUrl), document: client2Doc)
         serverDoc.text = "foobar"
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
     }

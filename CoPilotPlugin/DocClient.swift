@@ -39,10 +39,9 @@ class DocClient {
     }
     
     
-    init(url: NSURL, document: Document) {
+    init(websocket: WebSocket, document: Document) {
         self._document = document
-        let ws = WebSocket(url: url)
-        self.resolve(ws)
+        self.resolve(websocket)
     }
     
     
@@ -87,6 +86,11 @@ class DocClient {
         } else {
             println("DocClient: applying patch failed: \(res.error!.localizedDescription)")
         }
+    }
+    
+    
+    func send(command: Command) {
+        self.socket?.send(command.serialize())
     }
     
 }
