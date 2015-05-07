@@ -52,10 +52,19 @@ class DocClient {
             // TODO: remove
             println("DocClient: \(cmd)")
             switch cmd {
-            case .Initialize(let doc):
+            case .Doc(let doc):
                 self.initializeDocument(doc)
             case .Update(let changes):
                 self.applyChanges(changes)
+            case .Version(let version):
+                // TODO: handle remote version event
+                break
+            case .GetDoc:
+                // TODO: handle remote get doc event
+                break
+            case .GetVersion:
+                // TODO: handle remote get version event
+                break
             case .Undefined:
                 println("DocClient: ignoring undefined command")
             }

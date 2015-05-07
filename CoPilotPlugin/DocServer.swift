@@ -27,7 +27,7 @@ class DocServer: NSObject {
             let s = Server(name: name, service: service)
             s.onConnect = { ws in
                 let doc = Document(textProvider())
-                let cmd = Command(initialize: doc)
+                let cmd = Command(document: doc)
                 ws.send(cmd.serialize())
             }
             s.start()
@@ -56,7 +56,7 @@ class DocServer: NSObject {
         
         let command: Command = {
             if self.lastDoc == nil {
-                return Command(initialize: newDoc)
+                return Command(document: newDoc)
             } else {
                 let changes = Changeset(source: self.lastDoc!, target: newDoc)
                 return Command(update: changes)
