@@ -15,19 +15,32 @@ typealias ChangeHandler = (Document -> Void)
 class DocClient {
     private var socket: WebSocket?
     private var resolver: Resolver?
-    var document: Document
+    private var _document: Document
+    var document: Document {
+        get {
+            if let provider = self.documentProvider {
+                return provider()
+            } else {
+                return _document
+            }
+        }
+        set {
+            _document = newValue
+        }
+    }
+    var documentProvider: (Void -> Document)?
     var onInitialize: ChangeHandler?
     var onChange: ChangeHandler?
     
     init(service: NSNetService, document: Document) {
-        self.document = document
+        self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
         self.resolver!.onResolve = resolve
     }
     
     
     init(url: NSURL, document: Document) {
-        self.document = document
+        self._document = document
         let ws = WebSocket(url: url)
         self.resolve(ws)
     }

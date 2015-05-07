@@ -27,6 +27,7 @@ class MainController: NSWindowController {
     var lastSelectedDoc: NSDocument?
     var docServer: DocServer?
     var docClient: DocClient?
+    var observers = [NSObjectProtocol]()
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -41,12 +42,14 @@ class MainController: NSWindowController {
         self.browser.onRemove = { _ in
             self.servicesTableView.reloadData()
         }
-        observe("NSTextViewDidChangeSelectionNotification") { _ in
-            if let doc = DTXcodeUtils.currentSourceCodeDocument() {
-                self.lastSelectedDoc = doc
-                self.updateUI()
+        self.observers.append(
+            observe("NSTextViewDidChangeSelectionNotification") { _ in
+                if let doc = DTXcodeUtils.currentSourceCodeDocument() {
+                    self.lastSelectedDoc = doc
+                    self.updateUI()
+                }
             }
-        }
+        )
         self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
         self.updateUI()
     }
@@ -86,11 +89,18 @@ extension MainController {
     
     
     func subscribe(service: NSNetService) {
-        let editors = DTXcodeUtils.ideEditors()
-        println("editors: \(editors.count)")
         println("subscribing to \(service)")
+
+        
+        let editors = DTXcodeUtils.ideEditors()
         // FIXME: we need to make sure to warn against overwrite here
         if let ts = DTXcodeUtils.textStorageForEditor(editors[0]) {
+            self.observers.append(
+                observe("NSTextStorageDidProcessEditingNotification", object: ts) { _ in
+                    println("#### client updated!")
+                }
+            )
+            
             self.docClient = {
                 let doc = Document(ts.string)
                 let client = DocClient(service: service, document: doc)
@@ -102,6 +112,7 @@ extension MainController {
                     ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
                 }
                 client.onChange = client.onInitialize
+                client.documentProvider = { Document(ts.string) }
                 return client
             }()
         }
@@ -180,6 +191,12 @@ extension MainController: NSWindowDelegate {
         if docs.count > 0 && self.lastSelectedDoc == nil {
             self.lastSelectedDoc = docs[0] as? NSDocument
             self.updateUI()
+        }
+    }
+    
+    func windowWillClose(notification: NSNotification) {
+        for o in self.observers {
+            NSNotificationCenter.defaultCenter().removeObserver(o)
         }
     }
     
