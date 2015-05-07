@@ -120,6 +120,15 @@ struct Changeset {
 }
 
 
+extension Changeset: Printable {
+    
+    var description: String {
+        return "Changeset (\(self.patches))"
+    }
+    
+}
+
+
 typealias Hash = String
 
 
@@ -142,5 +151,14 @@ struct Document {
         archiver.finishEncoding()
         return data
     }
+}
+
+
+extension Document: Printable {
+    
+    var description: String {
+        return "Document (\(self.text))"
+    }
+    
 }
 

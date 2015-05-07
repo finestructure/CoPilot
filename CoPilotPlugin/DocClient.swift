@@ -12,35 +12,35 @@ import Foundation
 typealias ChangeHandler = (Document -> Void)
 
 
-class DocClient {
+class DocClient: NSObject {
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var _document: Document
     var document: Document {
-        get {
-            if let provider = self.documentProvider {
-                return provider()
-            } else {
-                return _document
+        set {
+            if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
+                self.send(command)
+                self._document = newValue
             }
         }
-        set {
-            _document = newValue
+        get {
+            return _document
         }
     }
-    var documentProvider: (Void -> Document)?
     var onInitialize: ChangeHandler?
     var onChange: ChangeHandler?
     
     init(service: NSNetService, document: Document) {
         self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
+        super.init()
         self.resolver!.onResolve = resolve
     }
     
     
     init(websocket: WebSocket, document: Document) {
         self._document = document
+        super.init()
         self.resolve(websocket)
     }
     
@@ -73,16 +73,16 @@ class DocClient {
     
     
     func initializeDocument(document: Document) {
-        self.document = document
+        self._document = document
         self.onInitialize?(document)
     }
     
     
     func applyChanges(changes: Changeset) {
-        let res = apply(self.document, changes)
+        let res = apply(self._document, changes)
         if res.succeeded {
-            self.document = res.value!
-            self.onChange?(self.document)
+            self._document = res.value!
+            self.onChange?(self._document)
         } else {
             println("DocClient: applying patch failed: \(res.error!.localizedDescription)")
         }

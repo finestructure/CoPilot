@@ -147,7 +147,12 @@ enum Command {
 extension Command: Printable {
     
     var description: String {
-        return ".\(self.typeName)"
+        switch self {
+        case .Update(let changes):
+            return ".\(self.typeName) \(changes)"
+        default:
+            return ".\(self.typeName)"
+        }
     }
     
 }
