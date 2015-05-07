@@ -18,6 +18,7 @@ class DocClient: NSObject {
     private var _document: Document
     var document: Document {
         set {
+            println("DocClient.document: \(self._document) -> \(newValue)")
             if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
                 self.send(command)
                 self._document = newValue
@@ -49,7 +50,7 @@ class DocClient: NSObject {
         websocket.onReceive = { msg in
             let cmd = Command(data: msg.data!)
             // TODO: remove
-            println("DocClient: \(cmd)")
+            println("DocClient: received \(cmd)")
             switch cmd {
             case .Doc(let doc):
                 self.initializeDocument(doc)
@@ -82,6 +83,7 @@ class DocClient: NSObject {
         let res = apply(self._document, changes)
         if res.succeeded {
             self._document = res.value!
+            println("DocClient.applyChanges: calling onChange (\(self._document))")
             self.onChange?(self._document)
         } else {
             println("DocClient: applying patch failed: \(res.error!.localizedDescription)")
@@ -90,6 +92,7 @@ class DocClient: NSObject {
     
     
     func send(command: Command) {
+        println("DocClient: sending \(command)")
         self.socket?.send(command.serialize())
     }
     
