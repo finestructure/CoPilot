@@ -59,3 +59,6 @@
 @interface IDEWorkspaceWindowController : NSWindowController
 @property(readonly) IDEEditorArea *editorArea;
 @end
+
+@interface IDEPlaygroundEditor : IDESourceCodeEditor
+@end
