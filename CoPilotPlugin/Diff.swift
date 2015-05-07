@@ -90,10 +90,14 @@ struct Changeset {
     let baseRev: Hash
     let targetRev: Hash
     
-    init(source: Document, target: Document) {
-        self.patches = computePatches(source.text, target.text)
-        self.baseRev = source.hash
-        self.targetRev = target.hash
+    init?(source: Document, target: Document) {
+        if source.hash == target.hash {
+            return nil
+        } else {
+            self.patches = computePatches(source.text, target.text)
+            self.baseRev = source.hash
+            self.targetRev = target.hash
+        }
     }
     
     init(data: NSData) {

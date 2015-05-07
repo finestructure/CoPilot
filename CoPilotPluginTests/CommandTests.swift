@@ -27,7 +27,7 @@ class CommandTests: XCTestCase {
         let doc1 = Document("foo")
         let doc2 = Document("bar")
         let changes = Changeset(source: doc1, target: doc2)
-        let data = Command(update: changes).serialize()
+        let data = Command(update: changes!).serialize()
         expect(data).toNot(beNil())
         let copy = Command(data: data)
         expect(copy.typeName) == "Update"

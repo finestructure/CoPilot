@@ -55,7 +55,7 @@ class ServerTests: XCTestCase {
         let server = startServer()
         let client = createClient()
         
-        server.broadcast(changeSet.serialize())
+        server.broadcast(changeSet!.serialize())
         expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
         let d = client.lastMessage!.data
         expect(d).toNot(beNil())
@@ -71,8 +71,8 @@ class ServerTests: XCTestCase {
         expect(c.patches[0].diffs[2].text) == "erver"
         expect(c.patches[0].diffs[3].operation) == Operation.DiffEqual
         expect(c.patches[0].diffs[3].text) == " Doc"
-        expect(c.baseRev) == changeSet.baseRev
-        expect(c.targetRev) == changeSet.targetRev
+        expect(c.baseRev) == changeSet!.baseRev
+        expect(c.targetRev) == changeSet!.targetRev
     }
     
 }

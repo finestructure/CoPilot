@@ -72,7 +72,7 @@ class DiffTests: XCTestCase {
         let source = Document("The quick brown fox jumps over the lazy dog")
         let newText = "The quick brown cat jumps over the lazy dog"
         let changeSet = Changeset(source: source, target: Document(newText))
-        let res = apply(source, changeSet)
+        let res = apply(source, changeSet!)
         expect(res.succeeded) == true
         expect(res.value!.text) == newText
     }
@@ -83,7 +83,7 @@ class DiffTests: XCTestCase {
         let cat = Document("The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
         let source = Document("The quick brown horse jumps over the lazy dog")
-        let res = apply(source, change)
+        let res = apply(source, change!)
         expect(res.succeeded) == true
         expect(res.value!.text) == "The quick brown leopard jumps over the lazy dog"
     }
@@ -94,7 +94,7 @@ class DiffTests: XCTestCase {
         let cat = Document("The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
         let source = Document("The quick thing likes the lazy dog")
-        let res = apply(source, change)
+        let res = apply(source, change!)
         expect(res.succeeded) == false
         expect(res.value).to(beNil())
     }
@@ -104,7 +104,7 @@ class DiffTests: XCTestCase {
         let clientDoc = Document(contentsOfFile(name: "new_playground", type: "txt"))
         let serverDoc = Document("foo")
         let changes = Changeset(source: serverDoc, target: Document("foobar"))
-        let res = apply(clientDoc, changes)
+        let res = apply(clientDoc, changes!)
         expect(res.succeeded) == false
         expect(res.error).toNot(beNil())
         expect(res.error?.localizedDescription) == "The operation couldn’t be completed. (Diff error 100.)"
