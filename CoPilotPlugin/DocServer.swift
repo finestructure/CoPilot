@@ -23,8 +23,16 @@ class DocServer: NSObject {
     
     init(name: String, service: BonjourService = CoPilotService, textProvider: TextProvider) {
         self.textProvider = textProvider
-        self.server = Server(name: name, service: service)
-        self.server.start()
+        self.server = {
+            let s = Server(name: name, service: service)
+            s.onConnect = { ws in
+                let doc = Document(textProvider())
+                let cmd = Command(initialize: doc)
+                ws.send(cmd.serialize())
+            }
+            s.start()
+            return s
+        }()
         self.timer = nil
         super.init()
         let timer = NSTimer.scheduledTimerWithTimeInterval(PollInterval, target: self, selector: "pollProvider", userInfo: nil, repeats: true)

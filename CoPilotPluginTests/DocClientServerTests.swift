@@ -32,10 +32,9 @@ class DocClientServerTests: XCTestCase {
         self.server.stop()
     }
     
+    
     func test_server() {
-        self.server = DocServer(name: "foo", textProvider: {
-            return randomElement(words)!
-        })
+        self.server = DocServer(name: "foo") { randomElement(words)! }
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
@@ -64,7 +63,7 @@ class DocClientServerTests: XCTestCase {
     }
     
     
-    func test_init_nsNetService() {
+    func test_DocClient_nsNetService() {
         self.server = DocServer(name: "foo", textProvider: {
             return randomElement(words)!
         })
@@ -79,6 +78,20 @@ class DocClientServerTests: XCTestCase {
         }
         client.onChange = client.onInitialize
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
+    }
+    
+    
+    func test_DocClient_applyChanges() {
+        var serverDoc = Document("foo")
+        self.server = DocServer(name: "foo") { serverDoc.text }
+        // we're doing this to not send an intialize to the client2 subscriber
+        let client1 = DocClient(url: TestUrl, document: Document(""))
+        expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
+
+        let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
+        let client2 = DocClient(url: TestUrl, document: client2Doc)
+        serverDoc.text = "foobar"
+        expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
     }
     
 }
