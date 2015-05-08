@@ -78,7 +78,7 @@ extension MainController {
                 NSException(name: "MainController", reason: reason, userInfo: nil).raise()
             }
         }
-        self.docServer?.update(0.5, docProvider: docProvider)
+        self.docServer?.poll(docProvider)
         return
         
         if let doc = self.lastSelectedDoc {
