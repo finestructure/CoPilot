@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FeinstrukturUtils
 
 
 func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
@@ -52,6 +53,8 @@ class MainController: NSWindowController {
         )
         self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
         self.updateUI()
+        // FIXME: hidden while using hacky version
+        self.documentsPopupButton.hidden = true
     }
     
 }
@@ -62,8 +65,20 @@ extension MainController {
     
     @IBAction func publishPressed(sender: AnyObject) {
         // FIXME: test hack
+        let path = "/tmp/server.txt"
         let name = "server.txt @ \(NSHost.currentHost().localizedName!)"
-        self.docServer = DocServer(name: name, service: CoPilotService, textProvider: fileProvider("/tmp/server.txt"))
+        let docProvider = documentProvider(path)
+        self.docServer = DocServer(name: name, document: docProvider())
+        self.docServer?.onUpdate = { doc in
+            let res = try({ error in
+                doc.text.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
+            })
+            if res.failed {
+                let reason = "could not create file: \(res.error!.localizedDescription)"
+                NSException(name: "MainController", reason: reason, userInfo: nil).raise()
+            }
+        }
+        self.docServer?.poll(docProvider)
         return
         
         if let doc = self.lastSelectedDoc {
@@ -90,7 +105,6 @@ extension MainController {
     
     func subscribe(service: NSNetService) {
         println("subscribing to \(service)")
-
         
         let editors = DTXcodeUtils.ideEditors()
         // FIXME: we need to make sure to warn against overwrite here
@@ -98,6 +112,7 @@ extension MainController {
             self.observers.append(
                 observe("NSTextStorageDidProcessEditingNotification", object: ts) { _ in
                     println("#### client updated!")
+                    self.docClient?.document = Document(ts.string)
                 }
             )
             
@@ -112,7 +127,6 @@ extension MainController {
                     ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
                 }
                 client.onChange = client.onInitialize
-                client.documentProvider = { Document(ts.string) }
                 return client
             }()
         }
