@@ -47,7 +47,7 @@ class DocClient: NSObject {
     
     
     func resolve(websocket: WebSocket) {
-        websocket.onReceive = onDoc({ self._document }) { doc in
+        websocket.onReceive = messageHandler({ self._document }) { _, doc in
             self._document = doc
             self.onUpdate?(doc)
         }

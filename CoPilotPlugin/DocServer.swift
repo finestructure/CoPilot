@@ -18,28 +18,25 @@ func updateCommand(#oldDoc: Document, #newDoc: Document) -> Command? {
 }
 
 
-func onDoc(documentProvider: DocumentProvider, update: UpdateHandler) -> MessageHandler {
+typealias MessageDocumentHandler = ((Message, Document) -> Void)
+
+
+func messageHandler(documentProvider: DocumentProvider, update: MessageDocumentHandler) -> MessageHandler {
     return { msg in
         let cmd = Command(data: msg.data!)
         switch cmd {
         case .Doc(let doc):
-            update(doc)
+            update(msg, doc)
         case .Update(let changes):
             let res = apply(documentProvider(), changes)
             if res.succeeded {
-                update(res.value!)
+                update(msg, res.value!)
             } else {
                 println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
             }
         default:
             println("messageHandler: ignoring command: \(cmd)")
         }
-    }
-}
-
-func onMsg(block: MessageHandler) -> MessageHandler {
-    return { msg in
-        block(msg)
     }
 }
 
@@ -74,40 +71,11 @@ class DocServer: NSObject {
                 let cmd = Command(document: self._document)
                 ws.send(cmd.serialize())
                 
-                let m = onDoc({ self._document }, { doc in
+                ws.onReceive = messageHandler({ self._document }, { msg, doc in
                     self._document = doc
+                    self.server.broadcast(msg.data!, exclude: ws)
                     self.onUpdate?(doc)
                 })
-                ws.onReceive = onMsg { msg in
-                    let cmd = Command(data: msg.data!)
-                    switch cmd {
-                    case .Update:
-                        self.server.broadcast(msg.data!, exclude: ws)
-                    default:
-                        break
-                    }
-                    m(msg)
-                }
-                
-//                ws.onReceive = { msg in
-//                    let cmd = Command(data: msg.data!)
-//                    switch cmd {
-//                    case .Doc(let doc):
-//                        self._document = doc
-//                        self.onUpdate?(doc)
-//                    case .Update(let changes):
-//                        let res = apply(self._document, changes)
-//                        if res.succeeded {
-//                            self._document = res.value!
-//                            self.server.broadcast(msg.data!, exclude: ws)
-//                            self.onUpdate?(self.document)
-//                        } else {
-//                            println("applying patch failed: \(res.error!.localizedDescription)")
-//                        }
-//                    default:
-//                        println("ignoring command: \(cmd)")
-//                    }
-//               }
             }
             s.start()
             return s
