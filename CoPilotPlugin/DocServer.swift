@@ -58,7 +58,8 @@ class DocServer: NSObject {
                     case .Update(let changes):
                         let res = apply(self._document, changes)
                         if res.succeeded {
-                            self.document = res.value!
+                            self._document = res.value!
+                            self.server.broadcast(msg.data!, exclude: ws)
                             println("\(sid): applyChanges: set doc to (\(self._document))")
                             println("\(sid): applyChanges: calling onChange (\(self._document))")
                             self.onUpdate?(self.document)
