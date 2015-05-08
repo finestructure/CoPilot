@@ -55,7 +55,7 @@ class DocServer: NSObject {
                     case .Update(let changes):
                         let res = apply(self._document, changes)
                         if res.succeeded {
-                            self._document = res.value!
+                            self.document = res.value!
                             println("\(sid): applyChanges: set doc to (\(self._document))")
                             println("\(sid): applyChanges: calling onChange (\(self._document))")
                         } else {
