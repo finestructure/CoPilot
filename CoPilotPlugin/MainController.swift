@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FeinstrukturUtils
 
 
 func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
@@ -25,6 +26,9 @@ class MainController: NSWindowController {
     var browser: Browser!
     var publishedService: NSNetService?
     var lastSelectedDoc: NSDocument?
+    var docServer: DocServer?
+    var docClient: DocClient?
+    var observers = [NSObjectProtocol]()
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -39,14 +43,18 @@ class MainController: NSWindowController {
         self.browser.onRemove = { _ in
             self.servicesTableView.reloadData()
         }
-        observe("NSTextViewDidChangeSelectionNotification") { _ in
-            if let doc = DTXcodeUtils.currentSourceCodeDocument() {
-                self.lastSelectedDoc = doc
-                self.updateUI()
+        self.observers.append(
+            observe("NSTextViewDidChangeSelectionNotification") { _ in
+                if let doc = DTXcodeUtils.currentSourceCodeDocument() {
+                    self.lastSelectedDoc = doc
+                    self.updateUI()
+                }
             }
-        }
+        )
         self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
         self.updateUI()
+        // FIXME: hidden while using hacky version
+        self.documentsPopupButton.hidden = true
     }
     
 }
@@ -56,6 +64,23 @@ class MainController: NSWindowController {
 extension MainController {
     
     @IBAction func publishPressed(sender: AnyObject) {
+        // FIXME: test hack
+        let path = "/tmp/server.txt"
+        let name = "server.txt @ \(NSHost.currentHost().localizedName!)"
+        let docProvider = documentProvider(path)
+        self.docServer = DocServer(name: name, document: docProvider())
+        self.docServer?.onUpdate = { doc in
+            let res = try({ error in
+                doc.text.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
+            })
+            if res.failed {
+                let reason = "could not create file: \(res.error!.localizedDescription)"
+                NSException(name: "MainController", reason: reason, userInfo: nil).raise()
+            }
+        }
+        self.docServer?.poll(docProvider)
+        return
+        
         if let doc = self.lastSelectedDoc {
             let name = "\(doc.displayName) @ \(NSHost.currentHost().localizedName!)"
             self.publishedService = publish(service: CoPilotService, name: name)
@@ -80,15 +105,31 @@ extension MainController {
     
     func subscribe(service: NSNetService) {
         println("subscribing to \(service)")
-        // let client = DocClient(service: service)
-        // client.onInit = { doc in
-        //    if source doc not empty, show alert before overwriting
-        //    set source text to doc.text
-        // }
-        // client.onChange = { doc in
-        //    check hash in source doc before applying change -> roll this into DocClient?
-        // }
-        // self.docClient = client
+        
+        let editors = DTXcodeUtils.ideEditors()
+        // FIXME: we need to make sure to warn against overwrite here
+        if let ts = DTXcodeUtils.textStorageForEditor(editors[0]) {
+            self.observers.append(
+                observe("NSTextStorageDidProcessEditingNotification", object: ts) { _ in
+                    println("#### client updated!")
+                    self.docClient?.document = Document(ts.string)
+                }
+            )
+            
+            self.docClient = {
+                let doc = Document(ts.string)
+                let client = DocClient(service: service, document: doc)
+                client.onInitialize = { doc in
+                    //    if source doc not empty, show alert before overwriting
+                    //    set source text to doc.text
+                    let range = NSRange(location: 0, length: ts.length)
+                    println("range: \(range)")
+                    ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
+                }
+                client.onChange = client.onInitialize
+                return client
+            }()
+        }
     }
     
 }
@@ -105,10 +146,12 @@ extension MainController {
 
         if let doc = self.lastSelectedDoc {
             self.publishButton.enabled = true
+            self.subscribeButton.enabled = true
             self.documentsPopupButton.enabled = true
             self.documentsPopupButton.selectItemWithTitle(doc.displayName)
         } else {
             self.publishButton.enabled = false
+            self.subscribeButton.enabled = false
             self.documentsPopupButton.enabled = false
             self.documentsPopupButton.selectItem(nil)
         }
@@ -162,6 +205,12 @@ extension MainController: NSWindowDelegate {
         if docs.count > 0 && self.lastSelectedDoc == nil {
             self.lastSelectedDoc = docs[0] as? NSDocument
             self.updateUI()
+        }
+    }
+    
+    func windowWillClose(notification: NSNotification) {
+        for o in self.observers {
+            NSNotificationCenter.defaultCenter().removeObserver(o)
         }
     }
     

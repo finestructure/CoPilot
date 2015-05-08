@@ -49,8 +49,8 @@ class Server: NSObject {
     }
     
     
-    func broadcast(message: AnyObject) {
-        for s in self.sockets {
+    func broadcast(message: AnyObject, exclude: WebSocket? = nil) {
+        for s in self.sockets.filter({ $0 != exclude }) {
             s.send(message)
         }
     }
@@ -104,13 +104,13 @@ extension Server: PSWebSocketServerDelegate {
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: NSError!) {
-        self.sockets = self.sockets.filter { s in s.socket != webSocket }
+        self.sockets = self.sockets.filter { $0.socket != webSocket }
         self.onError?(error)
         NSLog("failed: \(error.localizedDescription)")
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
-        self.sockets = self.sockets.filter { $0 != webSocket }
+        self.sockets = self.sockets.filter { $0.socket != webSocket }
         NSLog("closed: \(code) \(reason) clean: \(wasClean)")
     }
 

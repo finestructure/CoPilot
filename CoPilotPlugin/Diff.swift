@@ -90,10 +90,14 @@ struct Changeset {
     let baseRev: Hash
     let targetRev: Hash
     
-    init(source: Document, target: Document) {
-        self.patches = computePatches(source.text, target.text)
-        self.baseRev = source.hash
-        self.targetRev = target.hash
+    init?(source: Document, target: Document) {
+        if source.hash == target.hash {
+            return nil
+        } else {
+            self.patches = computePatches(source.text, target.text)
+            self.baseRev = source.hash
+            self.targetRev = target.hash
+        }
     }
     
     init(data: NSData) {
@@ -116,11 +120,20 @@ struct Changeset {
 }
 
 
+extension Changeset: Printable {
+    
+    var description: String {
+        return "Changeset (\(self.patches))"
+    }
+    
+}
+
+
 typealias Hash = String
 
 
 struct Document {
-    var text: String
+    let text: String
     var hash: Hash {
         return self.text.md5()!
     }
@@ -138,5 +151,14 @@ struct Document {
         archiver.finishEncoding()
         return data
     }
+}
+
+
+extension Document: Printable {
+    
+    var description: String {
+        return "Document (\(self.text))"
+    }
+    
 }
 

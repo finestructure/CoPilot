@@ -35,3 +35,8 @@ func fileProvider(path: String) -> (Void -> String) {
     }
 }
 
+
+func documentProvider(path: String) -> (Void -> Document) {
+    let fp = fileProvider(path)
+    return { Document(fp()) }
+}
