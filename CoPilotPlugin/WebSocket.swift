@@ -41,12 +41,15 @@ enum Message: Printable {
 }
 
 
+typealias MessageHandler = (Message -> Void)
+
+
 class WebSocket: NSObject {
     let socket: PSWebSocket
     var lastMessage: Message?
     
     var onConnect: (Void -> Void)?
-    var onReceive: (Message -> Void)?
+    var onReceive: MessageHandler?
     
     init(url: NSURL, onConnect: (Void -> Void) = {}) {
         self.onConnect = onConnect
