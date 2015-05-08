@@ -47,26 +47,9 @@ class DocClient: NSObject {
     
     
     func resolve(websocket: WebSocket) {
-        websocket.onReceive = { msg in
-            let cmd = Command(data: msg.data!)
-            println("\(self.clientId): received \(cmd)")
-            switch cmd {
-            case .Doc(let doc):
-                self._document = doc
-                self.onUpdate?(doc)
-            case .Update(let changes):
-                let res = apply(self._document, changes)
-                if res.succeeded {
-                    self._document = res.value!
-                    println("\(self.clientId): applyChanges: set doc to (\(self._document))")
-                    println("\(self.clientId): applyChanges: calling onChange (\(self._document))")
-                    self.onUpdate?(self._document)
-                } else {
-                    println("\(self.clientId): applying patch failed: \(res.error!.localizedDescription)")
-                }
-            default:
-                println("\(self.clientId): ignoring command: \(cmd)")
-            }
+        websocket.onReceive = onDoc({ self._document }) { doc in
+            self._document = doc
+            self.onUpdate?(doc)
         }
         self.socket = websocket
     }

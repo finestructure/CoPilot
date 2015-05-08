@@ -18,6 +18,32 @@ func updateCommand(#oldDoc: Document, #newDoc: Document) -> Command? {
 }
 
 
+func onDoc(documentProvider: DocumentProvider, update: UpdateHandler) -> MessageHandler {
+    return { msg in
+        let cmd = Command(data: msg.data!)
+        switch cmd {
+        case .Doc(let doc):
+            update(doc)
+        case .Update(let changes):
+            let res = apply(documentProvider(), changes)
+            if res.succeeded {
+                update(res.value!)
+            } else {
+                println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+            }
+        default:
+            println("messageHandler: ignoring command: \(cmd)")
+        }
+    }
+}
+
+func onMsg(block: MessageHandler) -> MessageHandler {
+    return { msg in
+        block(msg)
+    }
+}
+
+
 class DocServer: NSObject {
     
     private var server: Server! = nil
@@ -48,28 +74,40 @@ class DocServer: NSObject {
                 let cmd = Command(document: self._document)
                 ws.send(cmd.serialize())
                 
-                ws.onReceive = { msg in
+                let m = onDoc({ self._document }, { doc in
+                    self._document = doc
+                    self.onUpdate?(doc)
+                })
+                ws.onReceive = onMsg { msg in
                     let cmd = Command(data: msg.data!)
-                    let sid = "S\(s.sockets.count + 1)"
-                    println("\(sid): received \(cmd)")
                     switch cmd {
-                    case .Doc(let doc):
-                        break // we don't allow client to override the master
-                    case .Update(let changes):
-                        let res = apply(self._document, changes)
-                        if res.succeeded {
-                            self._document = res.value!
-                            self.server.broadcast(msg.data!, exclude: ws)
-                            println("\(sid): applyChanges: set doc to (\(self._document))")
-                            println("\(sid): applyChanges: calling onChange (\(self._document))")
-                            self.onUpdate?(self.document)
-                        } else {
-                            println("\(sid): applying patch failed: \(res.error!.localizedDescription)")
-                        }
+                    case .Update:
+                        self.server.broadcast(msg.data!, exclude: ws)
                     default:
-                        println("\(sid): ignoring command: \(cmd)")
+                        break
                     }
-               }
+                    m(msg)
+                }
+                
+//                ws.onReceive = { msg in
+//                    let cmd = Command(data: msg.data!)
+//                    switch cmd {
+//                    case .Doc(let doc):
+//                        self._document = doc
+//                        self.onUpdate?(doc)
+//                    case .Update(let changes):
+//                        let res = apply(self._document, changes)
+//                        if res.succeeded {
+//                            self._document = res.value!
+//                            self.server.broadcast(msg.data!, exclude: ws)
+//                            self.onUpdate?(self.document)
+//                        } else {
+//                            println("applying patch failed: \(res.error!.localizedDescription)")
+//                        }
+//                    default:
+//                        println("ignoring command: \(cmd)")
+//                    }
+//               }
             }
             s.start()
             return s
