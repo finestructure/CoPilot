@@ -36,7 +36,7 @@ class DocClientServerTests: XCTestCase {
     func test_server() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(doc, interval: 0.1)
+        self.server.poll(interval: 0.1, docProvider: doc)
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
@@ -52,7 +52,7 @@ class DocClientServerTests: XCTestCase {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
         let doc = documentProvider("/tmp/server.txt")
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(doc, interval: 0.5)
+        self.server.poll(interval: 0.1, docProvider: doc)
         let client = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
         client.onInitialize = { doc in
             println("client doc: \(doc.text)")
@@ -70,7 +70,7 @@ class DocClientServerTests: XCTestCase {
     func test_DocClient_nsNetService() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(doc, interval: 0.1)
+        self.server.poll(interval: 0.1, docProvider: doc)
         var service: NSNetService!
         let browser = Browser(service: CoPilotService) { s in service = s }
         expect(service).toEventuallyNot(beNil(), timeout: 5)
@@ -89,7 +89,7 @@ class DocClientServerTests: XCTestCase {
         var serverDoc = Document("foo")
         let doc = { serverDoc }
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(doc, interval: 0.1)
+        self.server.poll(interval: 0.1, docProvider: doc)
         // we're doing this to not send an intialize to the client2 subscriber
         let client1 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)

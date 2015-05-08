@@ -85,7 +85,7 @@ class DocServer: NSObject {
             }()
     }
     
-    func poll(docProvider: DocumentProvider, interval: NSTimeInterval = 0.5) {
+    func poll(interval: NSTimeInterval = 0.5, docProvider: DocumentProvider) {
         self.docProvider = docProvider
         self.timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "updateDoc", userInfo: nil, repeats: true)
     }
