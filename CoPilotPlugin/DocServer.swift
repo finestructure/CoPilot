@@ -44,6 +44,8 @@ class DocServer: NSObject {
             s.onConnect = { ws in
                 self.clients.append({
                     let client = DocClient(websocket: ws, document: self.document)
+                    client.clientId = "S\(self.clients.count + 1)"
+                    println("\(client.clientId): doc set to \(self.document)")
                     client.send(Command(document: self.document))
                     client.onChange = { doc in
                         println("Server.onChange: \(self.document) -> \(doc)")

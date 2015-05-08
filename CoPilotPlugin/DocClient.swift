@@ -18,7 +18,7 @@ class DocClient: NSObject {
     private var _document: Document
     var document: Document {
         set {
-            println("DocClient.document: \(self._document) -> \(newValue)")
+            println("\(self.clientId): document: \(self._document) -> \(newValue)")
             if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
                 self.send(command)
                 self._document = newValue
@@ -30,6 +30,7 @@ class DocClient: NSObject {
     }
     var onInitialize: ChangeHandler?
     var onChange: ChangeHandler?
+    var clientId: String = "DocClient"
     
     init(service: NSNetService, document: Document) {
         self._document = document
@@ -50,7 +51,7 @@ class DocClient: NSObject {
         websocket.onReceive = { msg in
             let cmd = Command(data: msg.data!)
             // TODO: remove
-            println("DocClient: received \(cmd)")
+            println("\(self.clientId): received \(cmd)")
             switch cmd {
             case .Doc(let doc):
                 self.initializeDocument(doc)
@@ -66,7 +67,7 @@ class DocClient: NSObject {
                 // TODO: handle remote get version event
                 break
             case .Undefined:
-                println("DocClient: ignoring undefined command")
+                println("\(self.clientId): ignoring undefined command")
             }
         }
         self.socket = websocket
@@ -83,16 +84,17 @@ class DocClient: NSObject {
         let res = apply(self._document, changes)
         if res.succeeded {
             self._document = res.value!
-            println("DocClient.applyChanges: calling onChange (\(self._document))")
+            println("\(self.clientId): applyChanges: set doc to (\(self._document))")
+            println("\(self.clientId): applyChanges: calling onChange (\(self._document))")
             self.onChange?(self._document)
         } else {
-            println("DocClient: applying patch failed: \(res.error!.localizedDescription)")
+            println("\(self.clientId): applying patch failed: \(res.error!.localizedDescription)")
         }
     }
     
     
     func send(command: Command) {
-        println("DocClient: sending \(command)")
+        println("\(self.clientId): sending \(command)")
         self.socket?.send(command.serialize())
     }
     

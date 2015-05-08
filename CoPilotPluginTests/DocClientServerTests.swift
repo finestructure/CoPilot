@@ -100,9 +100,11 @@ class DocClientServerTests: XCTestCase {
         self.server = DocServer(name: "server", document: serverDoc)
 
         let client1 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
+        client1.clientId = "C1"
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
+        client2.clientId = "C2"
         expect(client2.document.text).toEventually(equal("foo"), timeout: 5)
 
         self.server.document = Document("foobar")
@@ -111,6 +113,9 @@ class DocClientServerTests: XCTestCase {
         expect(client1.document.text).toEventually(equal("foobar"), timeout: 5)
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
 
+        for c in self.server.clients {
+            println("### \(c.clientId): \(c.document)")
+        }
         client1.document = Document("bar")
         
         expect(self.server.document.text).toEventually(equal("bar"), timeout: 1)
