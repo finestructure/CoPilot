@@ -18,8 +18,8 @@ class DocClient: NSObject {
     private var _document: Document
     var document: Document {
         set {
-            println("\(self.clientId): document: \(self._document) -> \(newValue)")
             if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
+                println("\(self.clientId): document: \(self._document) -> \(newValue)")
                 self.send(command)
                 self._document = newValue
             }

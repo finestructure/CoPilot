@@ -63,7 +63,9 @@ extension MainController {
     @IBAction func publishPressed(sender: AnyObject) {
         // FIXME: test hack
         let name = "server.txt @ \(NSHost.currentHost().localizedName!)"
-        self.docServer = DocServer(name: name, service: CoPilotService, textProvider: fileProvider("/tmp/server.txt"))
+        let docProvider = documentProvider("/tmp/server.txt")
+        self.docServer = DocServer(name: name, document: docProvider())
+        self.docServer?.update(0.5, docProvider: docProvider)
         return
         
         if let doc = self.lastSelectedDoc {
@@ -90,7 +92,6 @@ extension MainController {
     
     func subscribe(service: NSNetService) {
         println("subscribing to \(service)")
-
         
         let editors = DTXcodeUtils.ideEditors()
         // FIXME: we need to make sure to warn against overwrite here
@@ -98,6 +99,7 @@ extension MainController {
             self.observers.append(
                 observe("NSTextStorageDidProcessEditingNotification", object: ts) { _ in
                     println("#### client updated!")
+                    self.docClient?.document = Document(ts.string)
                 }
             )
             

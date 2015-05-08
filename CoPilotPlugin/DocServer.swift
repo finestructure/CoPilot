@@ -24,8 +24,8 @@ class DocServer: NSObject {
     private var _document: Document
     var document: Document {
         set {
-            println("Server.document: \(self._document) -> \(newValue)")
             if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
+                println("Server document changed: \(self._document) -> \(newValue)")
                 self.server.broadcast(command.serialize())
                 self._document = newValue
             }
@@ -34,7 +34,9 @@ class DocServer: NSObject {
             return _document
         }
     }
-    
+    private var timer: NSTimer!
+    private var docProvider: (Void -> Document)!
+
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
         super.init()
@@ -80,7 +82,16 @@ class DocServer: NSObject {
             }()
     }
     
+    func update(interval: NSTimeInterval, docProvider: (Void -> Document)) {
+        self.docProvider = docProvider
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "updateDoc", userInfo: nil, repeats: true)
+    }
     
+    func updateDoc() {
+        self.document = self.docProvider()
+    }
+    
+
     deinit {
         self.stop()
     }
