@@ -62,7 +62,7 @@ class DocClientServerTests: XCTestCase {
                 println("writing file failed")
             }
         }
-        client.onChange = client.onInitialize
+        client.onUpdate = client.onInitialize
         expect(client.document.text).toEventually(equal("quit"), timeout: 600)
     }
     
@@ -80,7 +80,7 @@ class DocClientServerTests: XCTestCase {
         client.onInitialize = { _ in
             changeCount++
         }
-        client.onChange = client.onInitialize
+        client.onUpdate = client.onInitialize
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
     

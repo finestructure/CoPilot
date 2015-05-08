@@ -35,8 +35,8 @@ class DocServer: NSObject {
         }
     }
     private var timer: NSTimer!
-    private var docProvider: (Void -> Document)!
-    var onUpdate: (Document -> Void)?
+    private var docProvider: DocumentProvider!
+    var onUpdate: UpdateHandler?
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
@@ -85,7 +85,7 @@ class DocServer: NSObject {
             }()
     }
     
-    func poll(docProvider: (Void -> Document), interval: NSTimeInterval = 0.5) {
+    func poll(docProvider: DocumentProvider, interval: NSTimeInterval = 0.5) {
         self.docProvider = docProvider
         self.timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "updateDoc", userInfo: nil, repeats: true)
     }

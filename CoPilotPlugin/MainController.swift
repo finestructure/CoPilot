@@ -126,7 +126,7 @@ extension MainController {
                     println("range: \(range)")
                     ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
                 }
-                client.onChange = client.onInitialize
+                client.onUpdate = client.onInitialize
                 return client
             }()
         }

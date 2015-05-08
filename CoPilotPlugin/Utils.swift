@@ -10,6 +10,9 @@ import Foundation
 import FeinstrukturUtils
 
 
+typealias DocumentProvider = (Void -> Document)
+
+
 func fileProvider(path: String) -> (Void -> String) {
     return {
         var result: NSString?
@@ -36,7 +39,7 @@ func fileProvider(path: String) -> (Void -> String) {
 }
 
 
-func documentProvider(path: String) -> (Void -> Document) {
+func documentProvider(path: String) -> DocumentProvider {
     let fp = fileProvider(path)
     return { Document(fp()) }
 }

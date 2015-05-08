@@ -9,7 +9,7 @@
 import Foundation
 
 
-typealias ChangeHandler = (Document -> Void)
+typealias UpdateHandler = (Document -> Void)
 
 
 class DocClient: NSObject {
@@ -28,8 +28,8 @@ class DocClient: NSObject {
             return _document
         }
     }
-    var onInitialize: ChangeHandler?
-    var onChange: ChangeHandler?
+    var onInitialize: UpdateHandler?
+    var onUpdate: UpdateHandler?
     var clientId: String = "DocClient"
     
     init(service: NSNetService, document: Document) {
@@ -86,7 +86,7 @@ class DocClient: NSObject {
             self._document = res.value!
             println("\(self.clientId): applyChanges: set doc to (\(self._document))")
             println("\(self.clientId): applyChanges: calling onChange (\(self._document))")
-            self.onChange?(self._document)
+            self.onUpdate?(self._document)
         } else {
             println("\(self.clientId): applying patch failed: \(res.error!.localizedDescription)")
         }
