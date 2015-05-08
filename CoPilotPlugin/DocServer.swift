@@ -9,39 +9,64 @@
 import Cocoa
 
 
-let PollInterval = 0.5
-
-typealias TextProvider = (Void -> String)
+func updateCommand(#oldDoc: Document, #newDoc: Document) -> Command? {
+    if let changes = Changeset(source: oldDoc, target: newDoc) {
+        return Command(update: changes)
+    } else {
+        return nil
+    }
+}
 
 
 class DocServer: NSObject {
     
-    private let textProvider: TextProvider
     private var server: Server! = nil
-    private var timer: NSTimer! = nil
-    private var lastDoc: Document?
-    private var clients = [DocClient]()
+    private var _document: Document
+    var document: Document {
+        set {
+            println("Server.document: \(self._document) -> \(newValue)")
+            if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
+                self.broadcast(command)
+                self._document = newValue
+            }
+        }
+        get {
+            return _document
+        }
+    }
+    var clients = [DocClient]()
     
-    init(name: String, service: BonjourService = CoPilotService, textProvider: TextProvider) {
-        self.textProvider = textProvider
+    init(name: String, service: BonjourService = CoPilotService, document: Document) {
+        self._document = document
         super.init()
         self.server = {
             let s = Server(name: name, service: service)
             s.onConnect = { ws in
-                let doc = Document(textProvider())
                 self.clients.append({
-                    let client = DocClient(websocket: ws, document: doc)
-                    client.send(Command(document: doc))
+                    let client = DocClient(websocket: ws, document: self.document)
+                    client.send(Command(document: self.document))
+                    client.onChange = { doc in
+                        println("Server.onChange: \(self.document) -> \(doc)")
+                        if let changes = Changeset(source: self.document, target: doc) {
+                            println("       changes: \(changes)")
+                            let res = apply(self.document, changes)
+                            if res.succeeded {
+                                self.document = res.value!
+                                self.broadcast(Command(update: changes), exclude: client)
+                            } else {
+                                println("DocServer: cannot apply client changes: \(res.error!.localizedDescription)")
+                            }
+                        }
+                    }
                     return client
                     }()
                 )
             }
             s.start()
             return s
-        }()
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(PollInterval, target: self, selector: "pollProvider", userInfo: nil, repeats: true)
+            }()
     }
-
+    
     
     deinit {
         self.stop()
@@ -53,32 +78,12 @@ class DocServer: NSObject {
     }
     
     
-    func pollProvider() {
-        let newDoc = Document(self.textProvider())
-        
-        if newDoc.hash == self.lastDoc?.hash {
-            return
-        }
-        
-        let command: Command = {
-            if self.lastDoc == nil {
-                return Command(document: newDoc)
-            } else {
-                let changes = Changeset(source: self.lastDoc!, target: newDoc)
-                return Command(update: changes)
-            }
-            }()
-        
-        self.broadcast(command)
-        self.lastDoc = newDoc
-    }
-    
-    
-    func broadcast(command: Command) {
-        for c in self.clients {
+    func broadcast(command: Command, exclude: DocClient? = nil) {
+        println("Server: broadcasting \(command)")
+        for c in clients.filter({ $0 != exclude }) {
             c.send(command)
         }
     }
-    
+
 }
 

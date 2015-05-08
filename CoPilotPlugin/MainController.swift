@@ -112,7 +112,6 @@ extension MainController {
                     ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
                 }
                 client.onChange = client.onInitialize
-                client.documentProvider = { Document(ts.string) }
                 return client
             }()
         }
