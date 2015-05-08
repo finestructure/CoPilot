@@ -36,6 +36,7 @@ class DocServer: NSObject {
     }
     private var timer: NSTimer!
     private var docProvider: (Void -> Document)!
+    var onUpdate: (Document -> Void)?
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
@@ -60,6 +61,7 @@ class DocServer: NSObject {
                             self.document = res.value!
                             println("\(sid): applyChanges: set doc to (\(self._document))")
                             println("\(sid): applyChanges: calling onChange (\(self._document))")
+                            self.onUpdate?(self.document)
                         } else {
                             println("\(sid): applying patch failed: \(res.error!.localizedDescription)")
                         }

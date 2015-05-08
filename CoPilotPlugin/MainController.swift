@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FeinstrukturUtils
 
 
 func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
@@ -62,9 +63,19 @@ extension MainController {
     
     @IBAction func publishPressed(sender: AnyObject) {
         // FIXME: test hack
+        let path = "/tmp/server.txt"
         let name = "server.txt @ \(NSHost.currentHost().localizedName!)"
-        let docProvider = documentProvider("/tmp/server.txt")
+        let docProvider = documentProvider(path)
         self.docServer = DocServer(name: name, document: docProvider())
+        self.docServer?.onUpdate = { doc in
+            let res = try({ error in
+                doc.text.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
+            })
+            if res.failed {
+                let reason = "could not create file: \(res.error!.localizedDescription)"
+                NSException(name: "MainController", reason: reason, userInfo: nil).raise()
+            }
+        }
         self.docServer?.update(0.5, docProvider: docProvider)
         return
         
