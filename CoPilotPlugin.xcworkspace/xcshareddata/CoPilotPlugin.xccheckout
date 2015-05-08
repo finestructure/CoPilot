@@ -10,6 +10,8 @@
 	<string>CoPilotPlugin</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>3692ABDCB445527429496D19963AFF94CAB1E068</key>
+		<string>github.com:feinstruktur/PocketSocket.git</string>
 		<key>5DECC3D92606A8E639BB23E9F74A619917E98DD9</key>
 		<string>bitbucket.org:sven_schmidt/copilot.git</string>
 		<key>95438028B10BBB846574013D29F154A00556A9D1</key>
@@ -25,6 +27,8 @@
 	<string>CoPilotPlugin.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>3692ABDCB445527429496D19963AFF94CAB1E068</key>
+		<string>../External/PocketSocket</string>
 		<key>5DECC3D92606A8E639BB23E9F74A619917E98DD9</key>
 		<string>..</string>
 		<key>95438028B10BBB846574013D29F154A00556A9D1</key>
@@ -91,6 +95,14 @@
 			<string>95438028B10BBB846574013D29F154A00556A9D1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Nimble</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3692ABDCB445527429496D19963AFF94CAB1E068</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PocketSocket</string>
 		</dict>
 	</array>
 </dict>

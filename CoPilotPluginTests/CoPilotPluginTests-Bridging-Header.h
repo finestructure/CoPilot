@@ -3,3 +3,5 @@
 //
 
 #import "DiffMatchPatch.h"
+#import "PSWebSocket.h"
+#import "PSWebSocketServer.h"

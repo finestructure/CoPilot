@@ -9,11 +9,13 @@
 import Foundation
 
 
+typealias ResolutionHandler = (WebSocket -> Void)
+
 class Resolver: NSObject {
     private let service: NSNetService
-    var onResolve: (NSNetService -> Void)?
+    var onResolve: ResolutionHandler?
     var resolved = false
-    init(service: NSNetService, timeout: NSTimeInterval, onResolve: (NSNetService -> Void) = {_ in}) {
+    init(service: NSNetService, timeout: NSTimeInterval, onResolve: ResolutionHandler = {_ in}) {
         self.service = service
         super.init()
         self.service.delegate = self
@@ -27,7 +29,13 @@ extension Resolver: NSNetServiceDelegate {
     
     func netServiceDidResolveAddress(sender: NSNetService) {
         self.resolved = true
-        self.onResolve?(sender)
+        
+        if let host = sender.hostName {
+            let port = sender.port
+            let url = NSURL(scheme: "ws", host: "\(host):\(port)", path: "/")
+            let socket = WebSocket(url: url!)
+            self.onResolve?(socket)
+        }
     }
     
     func netService(sender: NSNetService, didNotResolve errorDict: [NSObject : AnyObject]) {

@@ -1,6 +1,6 @@
 //
 //  DiffTests.swift
-//  CoPilotPluginTests
+//  CoPilotPlugin
 //
 //  Created by Sven Schmidt on 18/04/2015.
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
@@ -9,6 +9,26 @@
 import Cocoa
 import XCTest
 import Nimble
+import FeinstrukturUtils
+
+
+func pathForResource(#name: String, #type: String) -> String {
+    let bundle = NSBundle(forClass: DiffTests.classForCoder())
+    return bundle.pathForResource(name, ofType: type)!
+}
+
+
+func contentsOfFile(#name: String, #type: String) -> String {
+    var result: NSString?
+    if let error = try({ error in
+        let path = pathForResource(name: name, type: type)
+        result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
+        return
+    }) {
+        fail("failed to load test file: \(error.localizedDescription)")
+    }
+    return result! as String
+}
 
 
 class DiffTests: XCTestCase {
@@ -52,7 +72,7 @@ class DiffTests: XCTestCase {
         let source = Document("The quick brown fox jumps over the lazy dog")
         let newText = "The quick brown cat jumps over the lazy dog"
         let changeSet = Changeset(source: source, target: Document(newText))
-        let res = apply(source, changeSet)
+        let res = apply(source, changeSet!)
         expect(res.succeeded) == true
         expect(res.value!.text) == newText
     }
@@ -63,7 +83,7 @@ class DiffTests: XCTestCase {
         let cat = Document("The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
         let source = Document("The quick brown horse jumps over the lazy dog")
-        let res = apply(source, change)
+        let res = apply(source, change!)
         expect(res.succeeded) == true
         expect(res.value!.text) == "The quick brown leopard jumps over the lazy dog"
     }
@@ -74,9 +94,20 @@ class DiffTests: XCTestCase {
         let cat = Document("The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
         let source = Document("The quick thing likes the lazy dog")
-        let res = apply(source, change)
+        let res = apply(source, change!)
         expect(res.succeeded) == false
         expect(res.value).to(beNil())
+    }
+    
+    
+    func test_apply_error() {
+        let clientDoc = Document(contentsOfFile(name: "new_playground", type: "txt"))
+        let serverDoc = Document("foo")
+        let changes = Changeset(source: serverDoc, target: Document("foobar"))
+        let res = apply(clientDoc, changes!)
+        expect(res.succeeded) == false
+        expect(res.error).toNot(beNil())
+        expect(res.error?.localizedDescription) == "The operation couldn’t be completed. (Diff error 100.)"
     }
     
     

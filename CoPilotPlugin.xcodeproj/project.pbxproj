@@ -14,12 +14,24 @@
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
+		5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* new_playground.txt */; };
+		5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */; };
+		5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
+		5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
+		5A4D7DAB1AF366B1005E0294 /* CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */; };
+		5A66AA141AF91CFC0098BD77 /* DocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A66AA131AF91CFC0098BD77 /* DocServer.swift */; };
+		5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A66AA131AF91CFC0098BD77 /* DocServer.swift */; };
 		5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
 		5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B14251AE674E3006EBB31 /* MainController.swift */; };
 		5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B14261AE674E3006EBB31 /* MainController.xib */; };
 		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
+		5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
+		5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
+		5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
+		5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
+		5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */; };
 		5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
 		5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC8A9731AE541C80097FF8D /* Browser.swift */; };
@@ -28,6 +40,12 @@
 		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
+		5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */; };
+		5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
+		5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
+		5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
+		5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
+		5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
 		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +127,20 @@
 			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
 			remoteInfo = "DiffMatchPatch OSX Tests";
 		};
+		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AB35B5B1AF22DC500AF2F22;
+			remoteInfo = "PocketSocket-OSX";
+		};
+		5AB35B901AF22F4100AF2F22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5AB35B5A1AF22DC500AF2F22;
+			remoteInfo = "PocketSocket-OSX";
+		};
 		5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
@@ -172,6 +204,27 @@
 			remoteGlobalIDString = 5AD1E8301AE2A0A60017CEEE;
 			remoteInfo = "FeinstrukturUtils-OSX";
 		};
+		5AD85FC61AF22C95007A52F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EEE5E30A18B37DD500BAE47A;
+			remoteInfo = PocketSocket;
+		};
+		5AD85FC81AF22C95007A52F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EEE5E36018B37F8700BAE47A;
+			remoteInfo = PSAutobahnClientTests;
+		};
+		5ADA758F1AF24CBC0074D8F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5AB35B5A1AF22DC500AF2F22;
+			remoteInfo = "PocketSocket-OSX";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +237,11 @@
 		5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPluginTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A0983CF1AE39E5B001ADB1F /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A17D91B1AF3CF9100429B79 /* new_playground.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = new_playground.txt; sourceTree = "<group>"; };
+		5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientServerTests.swift; sourceTree = "<group>"; };
+		5A4D7D9C1AF363FB005E0294 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
+		5A66AA131AF91CFC0098BD77 /* DocServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocServer.swift; sourceTree = "<group>"; };
 		5A6B13EB1AE655FF006EBB31 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		5A6B14251AE674E3006EBB31 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
@@ -191,11 +249,17 @@
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
+		5AA1D65F1AFA52AA00FD107E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5AA336EE1AFA06B2000E37B2 /* DocClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClient.swift; sourceTree = "<group>"; };
 		5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonjourTests.swift; sourceTree = "<group>"; };
 		5AC8A9731AE541C80097FF8D /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		5AC8A9761AE542440097FF8D /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
 		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
+		5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
+		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
+		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = CoPilotPluginTests/Server.swift; sourceTree = SOURCE_ROOT; };
+		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */,
 				5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */,
 				5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */,
@@ -216,6 +281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
 				5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */,
 				5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */,
@@ -230,7 +296,10 @@
 			isa = PBXGroup;
 			children = (
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
+				5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */,
 				5A01569D1AE2619700EED621 /* DiffTests.swift */,
+				5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */,
+				5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
 			);
 			path = CoPilotPluginTests;
@@ -241,6 +310,7 @@
 			children = (
 				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
 				5A01569C1AE2619700EED621 /* Info.plist */,
+				5A17D91B1AF3CF9100429B79 /* new_playground.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -248,6 +318,7 @@
 		5A0156A21AE2629200EED621 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */,
 				5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */,
 				5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */,
 				5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */,
@@ -313,8 +384,14 @@
 			children = (
 				5AC8A9761AE542440097FF8D /* Bonjour.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
+				5A4D7D9C1AF363FB005E0294 /* Command.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
+				5AA336EE1AFA06B2000E37B2 /* DocClient.swift */,
+				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
+				5ADA75801AF230CB0074D8F0 /* Server.swift */,
+				5AA1D65F1AFA52AA00FD107E /* Utils.swift */,
+				5ADA75911AF24D220074D8F0 /* WebSocket.swift */,
 				5A6B14241AE65AEB006EBB31 /* UI */,
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
@@ -351,6 +428,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5AD85FC21AF22C95007A52F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AD85FC71AF22C95007A52F9 /* libPocketSocket.a */,
+				5AD85FC91AF22C95007A52F9 /* PSAutobahnClientTests.xctest */,
+				5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +469,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */,
 				5AD1E87E1AE2A3090017CEEE /* PBXTargetDependency */,
 				5AD1E8181AE273A20017CEEE /* PBXTargetDependency */,
 				5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */,
@@ -405,6 +493,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5ADA75901AF24CBC0074D8F0 /* PBXTargetDependency */,
 				5A0983E31AE39EF0001ADB1F /* PBXTargetDependency */,
 				5A0983E11AE39EEC001ADB1F /* PBXTargetDependency */,
 				5A0983DF1AE39EE8001ADB1F /* PBXTargetDependency */,
@@ -457,6 +546,10 @@
 				{
 					ProductGroup = 5A0156A41AE2629C00EED621 /* Products */;
 					ProjectRef = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
+				},
+				{
+					ProductGroup = 5AD85FC21AF22C95007A52F9 /* Products */;
+					ProjectRef = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -517,6 +610,13 @@
 			remoteRef = 5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libPocketSocket-OSX.dylib";
+			remoteRef = 5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -559,6 +659,20 @@
 			remoteRef = 5AD1E8741AE2A2BC0017CEEE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5AD85FC71AF22C95007A52F9 /* libPocketSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPocketSocket.a;
+			remoteRef = 5AD85FC61AF22C95007A52F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5AD85FC91AF22C95007A52F9 /* PSAutobahnClientTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PSAutobahnClientTests.xctest;
+			remoteRef = 5AD85FC81AF22C95007A52F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -566,6 +680,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,12 +733,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A4D7DAB1AF366B1005E0294 /* CommandTests.swift in Sources */,
 				5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */,
 				5AC8A9781AE542440097FF8D /* Bonjour.swift in Sources */,
+				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
+				5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */,
 				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
+				5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */,
+				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
+				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
+				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
+				5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */,
+				5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,9 +758,15 @@
 				5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
+				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
+				5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
+				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
+				5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */,
+				5A66AA141AF91CFC0098BD77 /* DocServer.swift in Sources */,
+				5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +793,11 @@
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5A0983E21AE39EF0001ADB1F /* PBXContainerItemProxy */;
 		};
+		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PocketSocket-OSX";
+			targetProxy = 5AB35B901AF22F4100AF2F22 /* PBXContainerItemProxy */;
+		};
 		5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "DiffMatchPatch-OSX";
@@ -677,6 +812,11 @@
 			isa = PBXTargetDependency;
 			name = "FeinstrukturUtils-OSX";
 			targetProxy = 5AD1E87D1AE2A3090017CEEE /* PBXContainerItemProxy */;
+		};
+		5ADA75901AF24CBC0074D8F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PocketSocket-OSX";
+			targetProxy = 5ADA758F1AF24CBC0074D8F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

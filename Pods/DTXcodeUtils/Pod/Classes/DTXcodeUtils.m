@@ -30,19 +30,28 @@
 
 + (NSArray *)sourceCodeDocuments {
     NSMutableArray *docs = [@[] mutableCopy];
+    for (IDEEditor *editor in [self ideEditors]) {
+        IDESourceCodeDocument *doc = [self sourceCodeDocumentForEditor:editor];
+        if (doc != nil) {
+            [docs addObject:doc];
+        }
+    }
+    return docs;
+}
+
+
++ (NSArray *)ideEditors {
+    NSMutableArray *editors = [@[] mutableCopy];
     for (NSWindow *w in [NSApplication sharedApplication].windows) {
         IDEWorkspaceWindowController *wsController = [self workspaceWindowControllerForController:w.windowController];
         if (wsController != nil) {
             IDEEditorArea *area = wsController.editorArea;
             IDEEditorContext *context = area.lastActiveEditorContext;
             IDEEditor *editor = context.editor;
-            IDESourceCodeDocument *doc = [self sourceCodeDocumentForEditor:editor];
-            if (doc != nil) {
-                [docs addObject:doc];
-            }
+            [editors addObject:editor];
         }
     }
-    return docs;
+    return editors;
 }
 
 
@@ -83,13 +92,19 @@
 }
 
 + (DVTSourceTextView *)currentSourceTextView {
-  if ([[self currentEditor] isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]) {
-    return ((IDESourceCodeEditor *)[self currentEditor]).textView;
-  } else if ([[self currentEditor] isKindOfClass:
-      NSClassFromString(@"IDESourceCodeComparisonEditor")]) {
-    return ((IDESourceCodeComparisonEditor *)[self currentEditor]).keyTextView;
-  }
-  return nil;
+    return [self sourceTextViewForEditor:[self currentEditor]];
+}
+
++ (DVTSourceTextView *)sourceTextViewForEditor:(id)editor {
+    if ([editor isKindOfClass:NSClassFromString(@"IDESourceCodeEditor")]) {
+        return ((IDESourceCodeEditor *)editor).textView;
+    } else if ([[self currentEditor] isKindOfClass:
+                NSClassFromString(@"IDESourceCodeComparisonEditor")]) {
+        return ((IDESourceCodeComparisonEditor *)editor).keyTextView;
+    } else if ([editor isKindOfClass:NSClassFromString(@"IDEPlaygroundEditor")]) {
+        return ((IDEPlaygroundEditor *)editor).textView;
+    }
+    return nil;
 }
 
 + (DVTTextStorage *)currentTextStorage {
@@ -98,6 +113,17 @@
     return (DVTTextStorage *)textView.textStorage;
   }
   return nil;
+}
+
++ (DVTTextStorage *)textStorageForEditor:(id)editor {
+    NSLog(@"editor: %@", editor);
+    NSTextView *textView = [self sourceTextViewForEditor:editor];
+    NSLog(@"textView: %@", textView);
+    if ([textView.textStorage isKindOfClass:NSClassFromString(@"DVTTextStorage")]) {
+        return (DVTTextStorage *)textView.textStorage;
+    }
+    NSLog(@"is nil");
+    return nil;
 }
 
 + (NSScrollView *)currentScrollView {

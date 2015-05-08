@@ -9,6 +9,7 @@
                 <outlet property="documentsPopupButton" destination="Dj4-ek-vET" id="dUB-Uj-ua5"/>
                 <outlet property="publishButton" destination="AYC-wC-K9L" id="G6T-AA-ajC"/>
                 <outlet property="servicesTableView" destination="Phg-hL-5Tp" id="SPX-LG-eCK"/>
+                <outlet property="subscribeButton" destination="7OJ-v5-iP9" id="tbE-C1-j97"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -40,7 +41,7 @@
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7OJ-v5-iP9">
                         <rect key="frame" x="14" y="562" width="103" height="32"/>
-                        <buttonCell key="cell" type="push" title="Subscribe" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ded-qi-7lq">
+                        <buttonCell key="cell" type="push" title="Subscribe" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ded-qi-7lq">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
