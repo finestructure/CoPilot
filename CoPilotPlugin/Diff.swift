@@ -133,7 +133,7 @@ typealias Hash = String
 
 
 struct Document {
-    var text: String
+    let text: String
     var hash: Hash {
         return self.text.md5()!
     }

@@ -53,6 +53,8 @@ class MainController: NSWindowController {
         )
         self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
         self.updateUI()
+        // FIXME: hidden while using hacky version
+        self.documentsPopupButton.hidden = true
     }
     
 }
