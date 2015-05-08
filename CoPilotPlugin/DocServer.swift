@@ -66,17 +66,8 @@ class DocServer: NSObject {
                         } else {
                             println("\(sid): applying patch failed: \(res.error!.localizedDescription)")
                         }
-                    case .Version(let version):
-                        // TODO: handle remote version event
-                        break
-                    case .GetDoc:
-                        // TODO: handle remote get doc event
-                        break
-                    case .GetVersion:
-                        // TODO: handle remote get version event
-                        break
-                    case .Undefined:
-                        println("\(sid): ignoring undefined command")
+                    default:
+                        println("\(sid): ignoring command: \(cmd)")
                     }
                }
             }

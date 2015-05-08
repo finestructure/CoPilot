@@ -54,7 +54,7 @@ class DocClientServerTests: XCTestCase {
         self.server = DocServer(name: "foo", document: doc())
         self.server.poll(interval: 0.1, docProvider: doc)
         let client = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
-        client.onInitialize = { doc in
+        client.onUpdate = { doc in
             println("client doc: \(doc.text)")
             if try({ e in
                 doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding, error: e)
@@ -62,7 +62,6 @@ class DocClientServerTests: XCTestCase {
                 println("writing file failed")
             }
         }
-        client.onUpdate = client.onInitialize
         expect(client.document.text).toEventually(equal("quit"), timeout: 600)
     }
     
@@ -77,10 +76,7 @@ class DocClientServerTests: XCTestCase {
         
         let client = DocClient(service: service, document: Document(""))
         var changeCount = 0
-        client.onInitialize = { _ in
-            changeCount++
-        }
-        client.onUpdate = client.onInitialize
+        client.onUpdate = { _ in changeCount++ }
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
     

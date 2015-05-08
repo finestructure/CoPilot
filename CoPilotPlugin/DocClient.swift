@@ -28,7 +28,6 @@ class DocClient: NSObject {
             return _document
         }
     }
-    var onInitialize: UpdateHandler?
     var onUpdate: UpdateHandler?
     var clientId: String = "DocClient"
     
@@ -50,46 +49,26 @@ class DocClient: NSObject {
     func resolve(websocket: WebSocket) {
         websocket.onReceive = { msg in
             let cmd = Command(data: msg.data!)
-            // TODO: remove
             println("\(self.clientId): received \(cmd)")
             switch cmd {
             case .Doc(let doc):
-                self.initializeDocument(doc)
+                self._document = doc
+                self.onUpdate?(doc)
             case .Update(let changes):
-                self.applyChanges(changes)
-            case .Version(let version):
-                // TODO: handle remote version event
-                break
-            case .GetDoc:
-                // TODO: handle remote get doc event
-                break
-            case .GetVersion:
-                // TODO: handle remote get version event
-                break
-            case .Undefined:
-                println("\(self.clientId): ignoring undefined command")
+                let res = apply(self._document, changes)
+                if res.succeeded {
+                    self._document = res.value!
+                    println("\(self.clientId): applyChanges: set doc to (\(self._document))")
+                    println("\(self.clientId): applyChanges: calling onChange (\(self._document))")
+                    self.onUpdate?(self._document)
+                } else {
+                    println("\(self.clientId): applying patch failed: \(res.error!.localizedDescription)")
+                }
+            default:
+                println("\(self.clientId): ignoring command: \(cmd)")
             }
         }
         self.socket = websocket
-    }
-    
-    
-    func initializeDocument(document: Document) {
-        self._document = document
-        self.onInitialize?(document)
-    }
-    
-    
-    func applyChanges(changes: Changeset) {
-        let res = apply(self._document, changes)
-        if res.succeeded {
-            self._document = res.value!
-            println("\(self.clientId): applyChanges: set doc to (\(self._document))")
-            println("\(self.clientId): applyChanges: calling onChange (\(self._document))")
-            self.onUpdate?(self._document)
-        } else {
-            println("\(self.clientId): applying patch failed: \(res.error!.localizedDescription)")
-        }
     }
     
     

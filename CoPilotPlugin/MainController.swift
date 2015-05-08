@@ -119,14 +119,13 @@ extension MainController {
             self.docClient = {
                 let doc = Document(ts.string)
                 let client = DocClient(service: service, document: doc)
-                client.onInitialize = { doc in
+                client.onUpdate = { doc in
                     //    if source doc not empty, show alert before overwriting
                     //    set source text to doc.text
                     let range = NSRange(location: 0, length: ts.length)
                     println("range: \(range)")
                     ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
                 }
-                client.onUpdate = client.onInitialize
                 return client
             }()
         }
