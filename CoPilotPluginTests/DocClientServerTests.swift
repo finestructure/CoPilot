@@ -113,9 +113,6 @@ class DocClientServerTests: XCTestCase {
         expect(client1.document.text).toEventually(equal("foobar"), timeout: 5)
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
 
-        for c in self.server.clients {
-            println("### \(c.clientId): \(c.document)")
-        }
         client1.document = Document("bar")
         
         expect(self.server.document.text).toEventually(equal("bar"), timeout: 1)

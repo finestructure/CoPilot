@@ -26,7 +26,7 @@ class DocServer: NSObject {
         set {
             println("Server.document: \(self._document) -> \(newValue)")
             if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
-                self.broadcast(command)
+                self.server.broadcast(command.serialize())
                 self._document = newValue
             }
         }
@@ -34,7 +34,6 @@ class DocServer: NSObject {
             return _document
         }
     }
-    var clients = [DocClient]()
     
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
@@ -42,27 +41,39 @@ class DocServer: NSObject {
         self.server = {
             let s = Server(name: name, service: service)
             s.onConnect = { ws in
-                self.clients.append({
-                    let client = DocClient(websocket: ws, document: self.document)
-                    client.clientId = "S\(self.clients.count + 1)"
-                    println("\(client.clientId): doc set to \(self.document)")
-                    client.send(Command(document: self.document))
-                    client.onChange = { doc in
-                        println("Server.onChange: \(self.document) -> \(doc)")
-                        if let changes = Changeset(source: self.document, target: doc) {
-                            println("       changes: \(changes)")
-                            let res = apply(self.document, changes)
-                            if res.succeeded {
-                                self.document = res.value!
-                                self.broadcast(Command(update: changes), exclude: client)
-                            } else {
-                                println("DocServer: cannot apply client changes: \(res.error!.localizedDescription)")
-                            }
+                // initialize client on connect
+                let cmd = Command(document: self._document)
+                ws.send(cmd.serialize())
+                
+                ws.onReceive = { msg in
+                    let cmd = Command(data: msg.data!)
+                    let sid = "S\(s.sockets.count + 1)"
+                    println("\(sid): received \(cmd)")
+                    switch cmd {
+                    case .Doc(let doc):
+                        break // we don't allow client to override the master
+                    case .Update(let changes):
+                        let res = apply(self._document, changes)
+                        if res.succeeded {
+                            self._document = res.value!
+                            println("\(sid): applyChanges: set doc to (\(self._document))")
+                            println("\(sid): applyChanges: calling onChange (\(self._document))")
+                        } else {
+                            println("\(sid): applying patch failed: \(res.error!.localizedDescription)")
                         }
+                    case .Version(let version):
+                        // TODO: handle remote version event
+                        break
+                    case .GetDoc:
+                        // TODO: handle remote get doc event
+                        break
+                    case .GetVersion:
+                        // TODO: handle remote get version event
+                        break
+                    case .Undefined:
+                        println("\(sid): ignoring undefined command")
                     }
-                    return client
-                    }()
-                )
+               }
             }
             s.start()
             return s
@@ -77,14 +88,6 @@ class DocServer: NSObject {
     
     func stop() {
         self.server.stop()
-    }
-    
-    
-    func broadcast(command: Command, exclude: DocClient? = nil) {
-        println("Server: broadcasting \(command)")
-        for c in clients.filter({ $0 != exclude }) {
-            c.send(command)
-        }
     }
 
 }
