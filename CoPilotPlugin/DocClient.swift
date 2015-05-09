@@ -12,7 +12,7 @@ import Foundation
 typealias UpdateHandler = (Document -> Void)
 
 
-class DocClient: NSObject {
+class DocClient {
 
     private var socket: WebSocket?
     private var resolver: Resolver?
@@ -35,14 +35,12 @@ class DocClient: NSObject {
     init(service: NSNetService, document: Document) {
         self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
-        super.init()
         self.resolver!.onResolve = resolve
     }
     
     
     init(websocket: WebSocket, document: Document) {
         self._document = document
-        super.init()
         self.resolve(websocket)
     }
     
