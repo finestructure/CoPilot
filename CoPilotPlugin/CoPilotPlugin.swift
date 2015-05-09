@@ -18,6 +18,13 @@ func publishMenuTitle(doc: NSDocument? = nil) -> String {
 }
 
 
+struct Editor {
+    let controller: NSViewController
+    let document: NSDocument
+    let textStorage: NSTextStorage
+}
+
+
 var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
@@ -48,8 +55,7 @@ class CoPilotPlugin: NSObject {
         )
         observers.append(
             observe("NSTextViewDidChangeSelectionNotification", object: nil) { _ in
-                let doc = DTXcodeUtils.currentSourceCodeDocument()
-                self.publishMenuItem.title = publishMenuTitle(doc: doc)
+                self.publishMenuItem.title = publishMenuTitle(doc: self.currentEditor?.document)
             }
         )
     }
@@ -97,12 +103,18 @@ extension CoPilotPlugin {
     
     var hasDoc: Bool {
         get {
-            // looks weird but return (DTXcodeUtils.currentTextStorage() != nil) causes a linker error
-            if let ts = DTXcodeUtils.currentSourceCodeDocument() {
-                return true
-            } else {
-                return false
-            }
+            return self.currentEditor != nil
+        }
+    }
+
+
+    var currentEditor: Editor? {
+        if  let controller = DTXcodeUtils.currentEditor(),
+            let doc = DTXcodeUtils.currentSourceCodeDocument(),
+            let textStorage = DTXcodeUtils.currentTextStorage() {
+                return Editor(controller: controller, document: doc, textStorage: textStorage)
+        } else {
+            return nil
         }
     }
 
