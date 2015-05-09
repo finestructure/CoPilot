@@ -33,6 +33,8 @@ class CoPilotPlugin: NSObject {
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
     var browseMenuItem: NSMenuItem! = nil
+    var docServer: DocServer?
+    var publishedEditor: Editor?
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -125,8 +127,19 @@ extension CoPilotPlugin {
 extension CoPilotPlugin {
     
     func publish() {
-        let ts = DTXcodeUtils.currentTextStorage()
-        println(ts.string)
+        // TODO: only allow publishing of one editor for now but there's no reason there couldn't be more
+        if self.publishedEditor == nil {
+            let ed = self.currentEditor! // we must have an editor or the menu would be disabled
+            self.publishedEditor = ed
+            let name = "\(ed.document.displayName) @ \(NSHost.currentHost().localizedName!)"
+            let doc = { Document(ed.textStorage.string) }
+            self.docServer = DocServer(name: name, document: doc())
+            self.docServer?.onUpdate = { doc in
+                // TODO: refine this by only replacing the changed text or at least keeping the caret in place
+                self.publishedEditor?.textStorage.replaceAll(doc.text)
+            }
+        }
+
     }
 
     func browse() {

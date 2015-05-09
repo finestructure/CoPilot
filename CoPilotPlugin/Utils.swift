@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import FeinstrukturUtils
 
 
@@ -50,3 +50,14 @@ func documentProvider(path: String) -> DocumentProvider {
     let fp = fileProvider(path)
     return { Document(fp()) }
 }
+
+
+extension NSTextStorage {
+
+    public func replaceAll(text: String) {
+        let range = NSRange(location: 0, length: self.length)
+        self.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: text))
+    }
+
+}
+
