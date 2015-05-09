@@ -14,6 +14,7 @@ var sharedPlugin: CoPilotPlugin?
 class CoPilotPlugin: NSObject {
     var bundle: NSBundle
     var mainController: MainController?
+    var observers = [NSObjectProtocol]()
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -24,13 +25,19 @@ class CoPilotPlugin: NSObject {
 
     init(bundle: NSBundle) {
         self.bundle = bundle
-
         super.init()
-        self.createMenuItems()
+
+        observers.append(
+            observe("NSApplicationDidFinishLaunchingNotification", object: nil) { _ in
+                self.createMenuItems()
+            }
+        )
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        for o in self.observers {
+            NSNotificationCenter.defaultCenter().removeObserver(o)
+        }
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
