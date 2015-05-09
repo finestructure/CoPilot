@@ -32,7 +32,7 @@ func messageHandler(documentProvider: DocumentProvider, update: MessageDocumentH
 }
 
 
-class DocServer: NSObject {
+class DocServer {
     
     private var server: Server! = nil
     private var _document: Document
@@ -47,13 +47,12 @@ class DocServer: NSObject {
             return _document
         }
     }
-    private var timer: NSTimer!
+    private var timer: Timer!
     private var docProvider: DocumentProvider!
     var onUpdate: UpdateHandler?
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
-        super.init()
         self.server = {
             let s = Server(name: name, service: service)
             s.onConnect = { ws in
@@ -74,13 +73,11 @@ class DocServer: NSObject {
     
     func poll(interval: NSTimeInterval = 0.5, docProvider: DocumentProvider) {
         self.docProvider = docProvider
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "updateDoc", userInfo: nil, repeats: true)
+        self.timer = Timer(interval: interval) {
+            self.document = self.docProvider()
+        }
     }
-    
-    func updateDoc() {
-        self.document = self.docProvider()
-    }
-    
+
 
     deinit {
         self.stop()
