@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FeinstrukturUtils
 
 
 typealias MessageDocumentHandler = ((Message, Document) -> Void)
