@@ -9,12 +9,23 @@ import AppKit
 import Cocoa
 
 
+func publishMenuTitle(doc: NSDocument? = nil) -> String {
+    if let title = doc?.displayName {
+        return "CoPilot Publish \(title)"
+    } else {
+        return "CoPilot Publish"
+    }
+}
+
+
 var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
-    var bundle: NSBundle
+    var bundle: NSBundle! = nil
     var mainController: MainController?
     var observers = [NSObjectProtocol]()
+    var publishMenuItem: NSMenuItem! = nil
+    var browseMenuItem: NSMenuItem! = nil
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -24,12 +35,21 @@ class CoPilotPlugin: NSObject {
     }
 
     init(bundle: NSBundle) {
-        self.bundle = bundle
         super.init()
+
+        self.bundle = bundle
+        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"p")
+        self.browseMenuItem = self.menuItem("CoPilot Browse", action:"browse", key:"x")
 
         observers.append(
             observe("NSApplicationDidFinishLaunchingNotification", object: nil) { _ in
-                self.createMenuItems()
+                self.addMenuItems()
+            }
+        )
+        observers.append(
+            observe("NSTextViewDidChangeSelectionNotification", object: nil) { _ in
+                let doc = DTXcodeUtils.currentSourceCodeDocument()
+                self.publishMenuItem.title = publishMenuTitle(doc: doc)
             }
         )
     }
@@ -57,12 +77,12 @@ class CoPilotPlugin: NSObject {
 // MARK: - Helpers
 extension CoPilotPlugin {
     
-    func createMenuItems() {
+    func addMenuItems() {
         var item = NSApp.mainMenu!!.itemWithTitle("Edit")
         if item != nil {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
-            item!.submenu!.addItem(menuItem("CoPilot Publish", action:"publish", key:"p"))
-            item!.submenu!.addItem(menuItem("CoPilot Browse", action:"browse", key:"x"))
+            item!.submenu!.addItem(self.publishMenuItem)
+            item!.submenu!.addItem(self.browseMenuItem)
         }
     }
 
