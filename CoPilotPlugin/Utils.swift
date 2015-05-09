@@ -10,6 +10,16 @@ import Foundation
 import FeinstrukturUtils
 
 
+func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
+    let nc = NSNotificationCenter.defaultCenter()
+    let queue = NSOperationQueue.mainQueue()
+    return nc.addObserverForName(name, object: object, queue: queue, usingBlock: block)
+}
+
+
+typealias DocumentProvider = (Void -> Document)
+
+
 func fileProvider(path: String) -> (Void -> String) {
     return {
         var result: NSString?
@@ -36,7 +46,7 @@ func fileProvider(path: String) -> (Void -> String) {
 }
 
 
-func documentProvider(path: String) -> (Void -> Document) {
+func documentProvider(path: String) -> DocumentProvider {
     let fp = fileProvider(path)
     return { Document(fp()) }
 }

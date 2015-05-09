@@ -10,13 +10,6 @@ import Cocoa
 import FeinstrukturUtils
 
 
-func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
-    let nc = NSNotificationCenter.defaultCenter()
-    let queue = NSOperationQueue.mainQueue()
-    return nc.addObserverForName(name, object: object, queue: queue, usingBlock: block)
-}
-
-
 class MainController: NSWindowController {
 
     @IBOutlet weak var publishButton: NSButton!
@@ -78,7 +71,7 @@ extension MainController {
                 NSException(name: "MainController", reason: reason, userInfo: nil).raise()
             }
         }
-        self.docServer?.poll(docProvider)
+        self.docServer?.poll(docProvider: docProvider)
         return
         
         if let doc = self.lastSelectedDoc {
@@ -119,14 +112,13 @@ extension MainController {
             self.docClient = {
                 let doc = Document(ts.string)
                 let client = DocClient(service: service, document: doc)
-                client.onInitialize = { doc in
+                client.onUpdate = { doc in
                     //    if source doc not empty, show alert before overwriting
                     //    set source text to doc.text
                     let range = NSRange(location: 0, length: ts.length)
                     println("range: \(range)")
                     ts.replaceCharactersInRange(range, withAttributedString: NSAttributedString(string: doc.text))
                 }
-                client.onChange = client.onInitialize
                 return client
             }()
         }
