@@ -9,15 +9,6 @@
 import Cocoa
 
 
-func updateCommand(#oldDoc: Document, #newDoc: Document) -> Command? {
-    if let changes = Changeset(source: oldDoc, target: newDoc) {
-        return Command(update: changes)
-    } else {
-        return nil
-    }
-}
-
-
 typealias MessageDocumentHandler = ((Message, Document) -> Void)
 
 
@@ -47,9 +38,8 @@ class DocServer: NSObject {
     private var _document: Document
     var document: Document {
         set {
-            if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
-                println("Server document changed: \(self._document) -> \(newValue)")
-                self.server.broadcast(command.serialize())
+            if let changes = Changeset(source: self._document, target: newValue) {
+                self.server.broadcast(Command(update: changes).serialize())
                 self._document = newValue
             }
         }

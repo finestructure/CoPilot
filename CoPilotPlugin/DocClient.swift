@@ -13,14 +13,14 @@ typealias UpdateHandler = (Document -> Void)
 
 
 class DocClient: NSObject {
+
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var _document: Document
     var document: Document {
         set {
-            if let command = updateCommand(oldDoc: self._document, newDoc: newValue) {
-                println("\(self.clientId): document: \(self._document) -> \(newValue)")
-                self.send(command)
+            if let changes = Changeset(source: self._document, target: newValue) {
+                self.socket?.send(Command(update: changes).serialize())
                 self._document = newValue
             }
         }
@@ -30,7 +30,8 @@ class DocClient: NSObject {
     }
     var onUpdate: UpdateHandler?
     var clientId: String = "DocClient"
-    
+
+
     init(service: NSNetService, document: Document) {
         self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
@@ -46,18 +47,13 @@ class DocClient: NSObject {
     }
     
     
-    func resolve(websocket: WebSocket) {
+    private func resolve(websocket: WebSocket) {
         websocket.onReceive = messageHandler({ self._document }) { _, doc in
             self._document = doc
             self.onUpdate?(doc)
         }
         self.socket = websocket
     }
-    
-    
-    func send(command: Command) {
-        println("\(self.clientId): sending \(command)")
-        self.socket?.send(command.serialize())
-    }
-    
+
 }
+
