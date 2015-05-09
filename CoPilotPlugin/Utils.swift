@@ -10,6 +10,13 @@ import Foundation
 import FeinstrukturUtils
 
 
+func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -> Void) -> NSObjectProtocol {
+    let nc = NSNotificationCenter.defaultCenter()
+    let queue = NSOperationQueue.mainQueue()
+    return nc.addObserverForName(name, object: object, queue: queue, usingBlock: block)
+}
+
+
 typealias DocumentProvider = (Void -> Document)
 
 
