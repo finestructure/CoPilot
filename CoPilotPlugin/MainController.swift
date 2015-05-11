@@ -22,6 +22,7 @@ class MainController: NSWindowController {
     var docServer: DocServer?
     var docClient: DocClient?
     var observers = [NSObjectProtocol]()
+    var sendThrottle = Throttle(bufferTime: 0.5)
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -104,8 +105,10 @@ extension MainController {
         if let ts = DTXcodeUtils.textStorageForEditor(editors[0]) {
             self.observers.append(
                 observe("NSTextStorageDidProcessEditingNotification", object: ts) { _ in
-                    println("#### client updated!")
-                    self.docClient?.document = Document(ts.string)
+                    self.sendThrottle.execute {
+                        println("#### client updated!")
+                        self.docClient?.document = Document(ts.string)
+                    }
                 }
             )
             
