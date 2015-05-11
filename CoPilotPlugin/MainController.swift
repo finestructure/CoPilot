@@ -16,9 +16,12 @@ class MainController: NSWindowController {
     @IBOutlet weak var subscribeButton: NSButton!
     @IBOutlet weak var documentsPopupButton: NSPopUpButton!
     @IBOutlet weak var servicesTableView: NSTableView!
+    @IBOutlet weak var activeEditorLabel: NSTextField!
     var browser: Browser!
     var publishedService: NSNetService?
     var activeEditor: Editor?
+    var prevActiveEditor: Editor?
+    var subscribedEditor: Editor?
     var docServer: DocServer?
     var docClient: DocClient?
     var observers = [NSObjectProtocol]()
@@ -100,19 +103,21 @@ extension MainController {
     func subscribe(service: NSNetService) {
         println("subscribing to \(service)")
         
-        let editors = DTXcodeUtils.ideEditors()
         // FIXME: we need to make sure to warn against overwrite here
-        if let ts = DTXcodeUtils.textStorageForEditor(editors[0]) {
+        var editor = self.activeEditor ?? self.prevActiveEditor
+        if let ed = editor {
+            self.subscribedEditor = ed
             self.observers.append(
-                observe("NSTextStorageDidProcessEditingNotification", object: ts) { _ in
+                observe("NSTextStorageDidProcessEditingNotification", object: ed.textStorage) { _ in
                     self.sendThrottle.execute {
                         println("#### client updated!")
-                        self.docClient?.document = Document(ts.string)
+                        self.docClient?.document = Document(ed.textStorage.string)
                     }
                 }
             )
             
             self.docClient = {
+                let ts = self.subscribedEditor!.textStorage
                 let doc = Document(ts.string)
                 let client = DocClient(service: service, document: doc)
                 client.onUpdate = { doc in
@@ -136,16 +141,21 @@ extension MainController {
         self.documentsPopupButton.removeAllItems()
         self.documentsPopupButton.addItemsWithTitles(titles)
 
-        if let ed = XcodeUtils.activeEditor {
+        var editor = self.activeEditor ?? self.prevActiveEditor
+        if let ed = editor {
             self.publishButton.enabled = true
             self.subscribeButton.enabled = true
             self.documentsPopupButton.enabled = true
             self.documentsPopupButton.selectItemWithTitle(ed.document.displayName)
+            self.activeEditorLabel.stringValue = ed.document.displayName
+            println("=========== \(ed.document.displayName)")
         } else {
             self.publishButton.enabled = false
             self.subscribeButton.enabled = false
             self.documentsPopupButton.enabled = false
             self.documentsPopupButton.selectItem(nil)
+            self.activeEditorLabel.stringValue = ""
+            println("=========== ### no active editor")
         }
     }
     

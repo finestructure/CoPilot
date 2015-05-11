@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainController" customModule="CoPilotPlugin" customModuleProvider="target">
             <connections>
+                <outlet property="activeEditorLabel" destination="bJQ-jL-UFV" id="9lv-an-gZh"/>
                 <outlet property="documentsPopupButton" destination="Dj4-ek-vET" id="dUB-Uj-ua5"/>
                 <outlet property="publishButton" destination="AYC-wC-K9L" id="G6T-AA-ajC"/>
                 <outlet property="servicesTableView" destination="Phg-hL-5Tp" id="SPX-LG-eCK"/>
@@ -97,8 +98,8 @@
                                                     <rect key="frame" x="1" y="1" width="612" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWn-aF-e2t">
-                                                            <rect key="frame" x="0.0" y="0.0" width="611" height="17"/>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XWn-aF-e2t">
+                                                            <rect key="frame" x="0.0" y="0.0" width="612" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="Har-TW-ajg"/>
                                                             </constraints>
@@ -143,20 +144,35 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bJQ-jL-UFV">
+                        <rect key="frame" x="119" y="572" width="236" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="17N-9Y-4uB"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="nSh-5N-paW">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Dj4-ek-vET" firstAttribute="width" secondItem="bJQ-jL-UFV" secondAttribute="width" id="11S-OH-L6h"/>
                     <constraint firstItem="AYC-wC-K9L" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="6BF-BM-zKR"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="8tO-UU-ALn"/>
+                    <constraint firstItem="bJQ-jL-UFV" firstAttribute="leading" secondItem="7OJ-v5-iP9" secondAttribute="trailing" constant="10" id="BM2-wf-FC2"/>
                     <constraint firstAttribute="bottom" secondItem="3eO-uY-jd7" secondAttribute="bottom" constant="20" id="J0e-uN-7We"/>
                     <constraint firstItem="AYC-wC-K9L" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="UFI-8r-gub"/>
                     <constraint firstItem="7OJ-v5-iP9" firstAttribute="width" secondItem="AYC-wC-K9L" secondAttribute="width" id="VwA-cz-JDy"/>
                     <constraint firstItem="Dj4-ek-vET" firstAttribute="leading" secondItem="AYC-wC-K9L" secondAttribute="trailing" constant="8" id="Yq6-w7-Eaj"/>
                     <constraint firstItem="7OJ-v5-iP9" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="bn4-Tb-AgS"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="top" secondItem="7OJ-v5-iP9" secondAttribute="bottom" constant="20" id="fVO-DO-BsG"/>
+                    <constraint firstItem="bJQ-jL-UFV" firstAttribute="top" secondItem="Dj4-ek-vET" secondAttribute="bottom" constant="13" id="kg8-aY-GHI"/>
                     <constraint firstItem="7OJ-v5-iP9" firstAttribute="height" secondItem="AYC-wC-K9L" secondAttribute="height" id="o1H-zP-vlO"/>
                     <constraint firstAttribute="trailing" secondItem="3eO-uY-jd7" secondAttribute="trailing" constant="20" id="q93-ZY-nrI"/>
                     <constraint firstItem="7OJ-v5-iP9" firstAttribute="top" secondItem="AYC-wC-K9L" secondAttribute="bottom" constant="12" id="sbE-o0-RfQ"/>
                     <constraint firstItem="AYC-wC-K9L" firstAttribute="baseline" secondItem="Dj4-ek-vET" secondAttribute="baseline" id="tcY-T9-bW3"/>
+                    <constraint firstItem="7OJ-v5-iP9" firstAttribute="baseline" secondItem="bJQ-jL-UFV" secondAttribute="baseline" id="u2a-0s-ssv"/>
                 </constraints>
             </view>
             <connections>

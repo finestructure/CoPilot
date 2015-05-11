@@ -110,6 +110,7 @@ extension CoPilotPlugin {
     
     func publish() {
         // TODO: only allow publishing of one editor for now but there's no reason there couldn't be more
+        // TODO: also, we need to send over changes - subscribe to NSTextViewWillChangeNotifyingTextViewNotification on textStorage here
         if self.publishedEditor == nil {
             let ed = XcodeUtils.activeEditor! // we must have an editor or the menu would be disabled
             println("currentEditor: \(ed)")
