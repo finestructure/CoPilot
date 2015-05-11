@@ -18,7 +18,7 @@ class MainController: NSWindowController {
     @IBOutlet weak var servicesTableView: NSTableView!
     var browser: Browser!
     var publishedService: NSNetService?
-    var lastSelectedDoc: NSDocument?
+    var activeEditor: Editor?
     var docServer: DocServer?
     var docClient: DocClient?
     var observers = [NSObjectProtocol]()
@@ -39,8 +39,8 @@ class MainController: NSWindowController {
         }
         self.observers.append(
             observe("NSTextViewDidChangeSelectionNotification") { _ in
-                if let doc = DTXcodeUtils.currentSourceCodeDocument() {
-                    self.lastSelectedDoc = doc
+                if let ed = XcodeUtils.activeEditor {
+                    self.activeEditor = ed
                     self.updateUI()
                 }
             }
@@ -73,12 +73,12 @@ extension MainController {
             }
         }
         self.docServer?.poll(docProvider: docProvider)
-        return
-        
-        if let doc = self.lastSelectedDoc {
-            let name = "\(doc.displayName) @ \(NSHost.currentHost().localizedName!)"
-            self.publishedService = publish(service: CoPilotService, name: name)
-        }
+//        return
+//        
+//        if let doc = self.lastSelectedDoc {
+//            let name = "\(doc.displayName) @ \(NSHost.currentHost().localizedName!)"
+//            self.publishedService = publish(service: CoPilotService, name: name)
+//        }
     }
     
     @IBAction func subscribePressed(sender: AnyObject) {
@@ -136,11 +136,11 @@ extension MainController {
         self.documentsPopupButton.removeAllItems()
         self.documentsPopupButton.addItemsWithTitles(titles)
 
-        if let doc = self.lastSelectedDoc {
+        if let ed = XcodeUtils.activeEditor {
             self.publishButton.enabled = true
             self.subscribeButton.enabled = true
             self.documentsPopupButton.enabled = true
-            self.documentsPopupButton.selectItemWithTitle(doc.displayName)
+            self.documentsPopupButton.selectItemWithTitle(ed.document.displayName)
         } else {
             self.publishButton.enabled = false
             self.subscribeButton.enabled = false
@@ -193,11 +193,7 @@ extension MainController: NSTableViewDelegate {
 extension MainController: NSWindowDelegate {
     
     func windowDidBecomeKey(notification: NSNotification) {
-        let docs = DTXcodeUtils.sourceCodeDocuments()
-        if docs.count > 0 && self.lastSelectedDoc == nil {
-            self.lastSelectedDoc = docs[0] as? NSDocument
-            self.updateUI()
-        }
+        self.updateUI()
     }
     
     func windowWillClose(notification: NSNotification) {

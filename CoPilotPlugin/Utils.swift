@@ -61,3 +61,25 @@ extension NSTextStorage {
 
 }
 
+
+struct Editor {
+    let controller: NSViewController
+    let document: NSDocument
+    let textStorage: NSTextStorage
+}
+
+
+struct XcodeUtils {
+    
+    static var activeEditor: Editor? {
+        if  let controller = DTXcodeUtils.currentEditor(),
+            let doc = DTXcodeUtils.currentSourceCodeDocument(),
+            let textStorage = DTXcodeUtils.currentTextStorage() {
+                return Editor(controller: controller, document: doc, textStorage: textStorage)
+        } else {
+            return nil
+        }
+    }
+    
+}
+

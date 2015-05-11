@@ -18,13 +18,6 @@ func publishMenuTitle(doc: NSDocument? = nil) -> String {
 }
 
 
-struct Editor {
-    let controller: NSViewController
-    let document: NSDocument
-    let textStorage: NSTextStorage
-}
-
-
 var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
@@ -57,7 +50,7 @@ class CoPilotPlugin: NSObject {
         )
         observers.append(
             observe("NSTextViewDidChangeSelectionNotification", object: nil) { _ in
-                self.publishMenuItem.title = publishMenuTitle(doc: self.currentEditor?.document)
+                self.publishMenuItem.title = publishMenuTitle(doc: XcodeUtils.activeEditor?.document)
             }
         )
     }
@@ -105,18 +98,7 @@ extension CoPilotPlugin {
     
     var hasDoc: Bool {
         get {
-            return self.currentEditor != nil
-        }
-    }
-
-
-    var currentEditor: Editor? {
-        if  let controller = DTXcodeUtils.currentEditor(),
-            let doc = DTXcodeUtils.currentSourceCodeDocument(),
-            let textStorage = DTXcodeUtils.currentTextStorage() {
-                return Editor(controller: controller, document: doc, textStorage: textStorage)
-        } else {
-            return nil
+            return XcodeUtils.activeEditor != nil
         }
     }
 
@@ -129,7 +111,8 @@ extension CoPilotPlugin {
     func publish() {
         // TODO: only allow publishing of one editor for now but there's no reason there couldn't be more
         if self.publishedEditor == nil {
-            let ed = self.currentEditor! // we must have an editor or the menu would be disabled
+            let ed = XcodeUtils.activeEditor! // we must have an editor or the menu would be disabled
+            println("currentEditor: \(ed)")
             self.publishedEditor = ed
             let name = "\(ed.document.displayName) @ \(NSHost.currentHost().localizedName!)"
             let doc = { Document(ed.textStorage.string) }
