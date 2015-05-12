@@ -21,7 +21,7 @@ class MainController: NSWindowController {
     var publishedService: NSNetService?
     var activeEditor: Editor?
     var prevActiveEditor: Editor?
-    var subscribedEditor: Editor?
+    var subscribedConnection: ConnectedEditor?
     var docServer: DocServer?
     var docClient: DocClient?
     var observers = [NSObjectProtocol]()
@@ -106,26 +106,7 @@ extension MainController {
         // FIXME: we need to make sure to warn against overwrite here
         var editor = self.activeEditor ?? self.prevActiveEditor
         if let ed = editor {
-            self.subscribedEditor = ed
-            self.observers.append(
-                observe("NSTextStorageDidProcessEditingNotification", object: ed.textStorage) { _ in
-                    self.sendThrottle.execute {
-                        println("#### client updated!")
-                        self.docClient?.document = Document(ed.textStorage.string)
-                    }
-                }
-            )
-            
-            self.docClient = {
-                let ts = self.subscribedEditor!.textStorage
-                let doc = Document(ts.string)
-                let client = DocClient(service: service, document: doc)
-                client.onUpdate = { doc in
-                    // TODO: if source doc not empty, we should show an alert before overwriting
-                    ts.replaceAll(doc.text)
-                }
-                return client
-            }()
+            self.subscribedConnection = connectService(service, ed)
         }
     }
     

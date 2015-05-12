@@ -109,13 +109,13 @@ class DocClientServerTests: XCTestCase {
         client2.clientId = "C2"
         expect(client2.document.text).toEventually(equal("foo"), timeout: 5)
 
-        self.server.document = Document("foobar")
+        self.server.update(Document("foobar"))
         
         expect(self.server.document.text).toEventually(equal("foobar"), timeout: 5)
         expect(client1.document.text).toEventually(equal("foobar"), timeout: 5)
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
 
-        client1.document = Document("bar")
+        client1.update(Document("bar"))
         
         expect(self.server.document.text).toEventually(equal("bar"), timeout: 1)
         expect(client1.document.text).toEventually(equal("bar"), timeout: 1)

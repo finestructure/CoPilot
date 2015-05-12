@@ -69,42 +69,47 @@ struct Editor {
 }
 
 
-struct XcodeUtils {
-    
-    static var activeEditor: Editor? {
-        if  let controller = DTXcodeUtils.currentEditor(),
-            let doc = DTXcodeUtils.currentSourceCodeDocument(),
-            let textStorage = DTXcodeUtils.currentTextStorage() {
-                return Editor(controller: controller, document: doc, textStorage: textStorage)
-        } else {
-            return nil
-        }
-    }
-    
+typealias UpdateHandler = (Document -> Void)
+
+
+protocol DocumentManager {
+    var onUpdate: UpdateHandler? { get set }
+    func update(newDocument: Document)
 }
 
 
 class ConnectedEditor {
     let editor: Editor
-    let server: DocServer
+    var documentManager: DocumentManager
     var observer: NSObjectProtocol! = nil
     var sendThrottle = Throttle(bufferTime: 0.5)
 
-    init(editor: Editor, server: DocServer) {
+    init(editor: Editor, documentManager: DocumentManager) {
         self.editor = editor
-        self.server = server
+        self.documentManager = documentManager
         self.startObserving()
+        self.setOnUpdate()
     }
     
+    // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
     private func startObserving() {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
             self.sendThrottle.execute {
-                println("#### server updated")
-                self.server.document = Document(self.editor.textStorage.string)
+                println("#### doc updated")
+                self.documentManager.update(Document(self.editor.textStorage.string))
             }
         }
     }
     
+    // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
+    private func setOnUpdate() {
+        // TODO: refine this by only replacing the changed text or at least keeping the caret in place
+        self.documentManager.onUpdate = { doc in
+            self.editor.textStorage.replaceAll(doc.text)
+        }
+    }
+    
+
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self.observer)
     }
@@ -115,10 +120,12 @@ func publishEditor(editor: Editor) -> ConnectedEditor {
     let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
     let doc = { Document(editor.textStorage.string) }
     let docServer = DocServer(name: name, document: doc())
-    docServer.onUpdate = { doc in
-        // TODO: refine this by only replacing the changed text or at least keeping the caret in place
-        editor.textStorage.replaceAll(doc.text)
-    }
-    return ConnectedEditor(editor: editor, server: docServer)
+    return ConnectedEditor(editor: editor, documentManager: docServer)
+}
+
+
+func connectService(service: NSNetService, editor: Editor) -> ConnectedEditor {
+    let client = DocClient(service: service, document: Document(editor.textStorage.string))
+    return ConnectedEditor(editor: editor, documentManager: client)
 }
 
