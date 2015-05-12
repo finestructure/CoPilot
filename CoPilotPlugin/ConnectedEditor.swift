@@ -13,9 +13,10 @@ import FeinstrukturUtils
 typealias UpdateHandler = (Document -> Void)
 
 
-protocol DocumentManager {
+protocol ConnectedDocument {
     var onUpdate: UpdateHandler? { get set }
     func update(newDocument: Document)
+    func disconnect()
 }
 
 
@@ -37,13 +38,13 @@ func ==(lhs: Editor, rhs: Editor) -> Bool {
 
 class ConnectedEditor {
     let editor: Editor
-    var documentManager: DocumentManager
+    var document: ConnectedDocument
     var observer: NSObjectProtocol! = nil
     var sendThrottle = Throttle(bufferTime: 0.5)
     
-    init(editor: Editor, documentManager: DocumentManager) {
+    init(editor: Editor, document: ConnectedDocument) {
         self.editor = editor
-        self.documentManager = documentManager
+        self.document = document
         self.startObserving()
         self.setOnUpdate()
     }
@@ -53,7 +54,7 @@ class ConnectedEditor {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
             self.sendThrottle.execute {
                 println("#### doc updated")
-                self.documentManager.update(Document(self.editor.textStorage.string))
+                self.document.update(Document(self.editor.textStorage.string))
             }
         }
     }
@@ -61,7 +62,7 @@ class ConnectedEditor {
     // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
     private func setOnUpdate() {
         // TODO: refine this by only replacing the changed text or at least keeping the caret in place
-        self.documentManager.onUpdate = { doc in
+        self.document.onUpdate = { doc in
             self.editor.textStorage.replaceAll(doc.text)
         }
     }

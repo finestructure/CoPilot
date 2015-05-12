@@ -73,6 +73,10 @@ class WebSocket: NSObject {
     var open: Bool {
         return self.socket.readyState == .Open
     }
+    
+    func close() {
+        self.socket.close()
+    }
 }
 
 extension WebSocket: PSWebSocketDelegate {

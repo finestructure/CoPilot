@@ -9,9 +9,14 @@ import AppKit
 import Cocoa
 
 
-func publishMenuTitle(doc: NSDocument? = nil) -> String {
-    if let title = doc?.displayName {
-        return "CoPilot Publish \(title)"
+func publishMenuTitle(editor: Editor? = nil) -> String {
+    if let editor = editor {
+        let title = editor.document.displayName
+        if ConnectionManager.isPublished(editor) {
+            return "CoPilot Unpublish \(title)"
+        } else {
+            return "CoPilot Publish \(title)"
+        }
     } else {
         return "CoPilot Publish"
     }
@@ -48,7 +53,7 @@ class CoPilotPlugin: NSObject {
         )
         observers.append(
             observe("NSTextViewDidChangeSelectionNotification", object: nil) { _ in
-                self.publishMenuItem.title = publishMenuTitle(doc: XcodeUtils.activeEditor?.document)
+                self.publishMenuItem.title = publishMenuTitle(editor: XcodeUtils.activeEditor)
             }
         )
     }
@@ -65,7 +70,7 @@ class CoPilotPlugin: NSObject {
         
         switch menuItem.action {
         case Selector("publish"):
-            return hasEditor() && !isConnected()
+            return hasEditor()
         case Selector("subscribe"):
             return hasEditor() && !isConnected()
         default:
@@ -105,10 +110,11 @@ extension CoPilotPlugin {
     func publish() {
         if let editor = XcodeUtils.activeEditor {
             if ConnectionManager.isPublished(editor) {
-                println("#### already published")
+                ConnectionManager.unpublish(editor)
             } else {
                 ConnectionManager.publish(editor)
             }
+            self.publishMenuItem.title = publishMenuTitle(editor: editor)
         }
     }
     

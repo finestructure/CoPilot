@@ -34,18 +34,29 @@ class ConnectionManager {
         let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
         let doc = { Document(editor.textStorage.string) }
         let docServer = DocServer(name: name, document: doc())
-        let connectedEditor = ConnectedEditor(editor: editor, documentManager: docServer)
+        let connectedEditor = ConnectedEditor(editor: editor, document: docServer)
         self.published.append(connectedEditor)
         return connectedEditor
     }
     
     
+    static func unpublish(editor: Editor) {
+        let publishedConnection = { editor in
+            self.published.filter({ $0.editor == editor }).first
+        }
+        if let conn = publishedConnection(editor) {
+            conn.document.disconnect()
+            self.published = self.published.filter({ $0.editor != editor })
+        }
+    }
+    
+    
     static func subscribe(service: NSNetService, editor: Editor) -> ConnectedEditor {
         let client = DocClient(service: service, document: Document(editor.textStorage.string))
-        let connectedEditor = ConnectedEditor(editor: editor, documentManager: client)
+        let connectedEditor = ConnectedEditor(editor: editor, document: client)
         self.subscribed.append(connectedEditor)
         return connectedEditor
     }
-
+    
 }
 
