@@ -111,7 +111,7 @@ extension MainController {
                 observe("NSTextStorageDidProcessEditingNotification", object: ed.textStorage) { _ in
                     self.sendThrottle.execute {
                         println("#### client updated!")
-                        self.docClient?.sendUpdate(Document(ed.textStorage.string))
+                        self.docClient?.update(Document(ed.textStorage.string))
                     }
                 }
             )

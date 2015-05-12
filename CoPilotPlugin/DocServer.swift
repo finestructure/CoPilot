@@ -37,20 +37,11 @@ class DocServer {
     
     private var server: Server! = nil
     private var _document: Document
-    var document: Document {
-        set {
-            if let changes = Changeset(source: self._document, target: newValue) {
-                self.server.broadcast(Command(update: changes).serialize())
-                self._document = newValue
-            }
-        }
-        get {
-            return _document
-        }
-    }
+    private var _onUpdate: UpdateHandler?
     private var timer: Timer!
     private var docProvider: DocumentProvider!
-    var onUpdate: UpdateHandler?
+
+    var document: Document { return self._document }
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
@@ -72,10 +63,11 @@ class DocServer {
             }()
     }
     
+    // TODO: do we really need polling? - remove
     func poll(interval: NSTimeInterval = 0.5, docProvider: DocumentProvider) {
         self.docProvider = docProvider
         self.timer = Timer(interval: interval) {
-            self.document = self.docProvider()
+            self.update(self.docProvider())
         }
     }
 
@@ -87,6 +79,25 @@ class DocServer {
     
     func stop() {
         self.server.stop()
+    }
+
+}
+
+
+extension DocServer: DocumentManager {
+
+    var onUpdate: UpdateHandler? {
+        get { return self._onUpdate }
+        set { self._onUpdate = newValue }
+    }
+    
+    func update(newDocument: Document) {
+        if let changes = Changeset(source: self._document, target: newDocument) {
+            if let changes = Changeset(source: self._document, target: newDocument) {
+                self.server.broadcast(Command(update: changes).serialize())
+                self._document = newDocument
+            }
+        }
     }
 
 }

@@ -43,14 +43,14 @@ class DocClient {
 }
 
 
-extension DocClient: RemoteDocument {
+extension DocClient: DocumentManager {
 
     var onUpdate: UpdateHandler? {
         get { return self._onUpdate }
         set { self._onUpdate = newValue }
     }
     
-    func sendUpdate(newDocument: Document) {
+    func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             self.socket?.send(Command(update: changes).serialize())
             self._document = newDocument

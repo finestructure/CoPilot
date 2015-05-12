@@ -72,9 +72,9 @@ struct Editor {
 typealias UpdateHandler = (Document -> Void)
 
 
-protocol RemoteDocument {
+protocol DocumentManager {
     var onUpdate: UpdateHandler? { get set }
-    func sendUpdate(newDocument: Document)
+    func update(newDocument: Document)
 }
 
 
@@ -94,7 +94,7 @@ class ConnectedEditor {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
             self.sendThrottle.execute {
                 println("#### server updated")
-                self.server.document = Document(self.editor.textStorage.string)
+                self.server.update(Document(self.editor.textStorage.string))
             }
         }
     }
