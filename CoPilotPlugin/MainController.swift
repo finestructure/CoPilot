@@ -12,20 +12,12 @@ import FeinstrukturUtils
 
 class MainController: NSWindowController {
 
-    @IBOutlet weak var publishButton: NSButton!
     @IBOutlet weak var subscribeButton: NSButton!
-    @IBOutlet weak var documentsPopupButton: NSPopUpButton!
     @IBOutlet weak var servicesTableView: NSTableView!
-    @IBOutlet weak var activeEditorLabel: NSTextField!
+
     var browser: Browser!
-    var publishedService: NSNetService?
     var activeEditor: Editor?
-    var prevActiveEditor: Editor?
     var subscribedConnection: ConnectedEditor?
-    var docServer: DocServer?
-    var docClient: DocClient?
-    var observers = [NSObjectProtocol]()
-    var sendThrottle = Throttle(bufferTime: 0.5)
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -40,18 +32,8 @@ class MainController: NSWindowController {
         self.browser.onRemove = { _ in
             self.servicesTableView.reloadData()
         }
-        self.observers.append(
-            observe("NSTextViewDidChangeSelectionNotification") { _ in
-                if let ed = XcodeUtils.activeEditor {
-                    self.activeEditor = ed
-                    self.updateUI()
-                }
-            }
-        )
         self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
         self.updateUI()
-        // FIXME: hidden while using hacky version
-        self.documentsPopupButton.hidden = true
     }
     
 }
@@ -60,36 +42,17 @@ class MainController: NSWindowController {
 // MARK: - Actions
 extension MainController {
     
-    @IBAction func publishPressed(sender: AnyObject) {
-        // FIXME: test hack
-        let path = "/tmp/server.txt"
-        let name = "server.txt @ \(NSHost.currentHost().localizedName!)"
-        let docProvider = documentProvider(path)
-        self.docServer = DocServer(name: name, document: docProvider())
-        self.docServer?.onUpdate = { doc in
-            let res = try({ error in
-                doc.text.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
-            })
-            if res.failed {
-                let reason = "could not create file: \(res.error!.localizedDescription)"
-                NSException(name: "MainController", reason: reason, userInfo: nil).raise()
-            }
-        }
-        self.docServer?.poll(docProvider: docProvider)
-//        return
-//        
-//        if let doc = self.lastSelectedDoc {
-//            let name = "\(doc.displayName) @ \(NSHost.currentHost().localizedName!)"
-//            self.publishedService = publish(service: CoPilotService, name: name)
-//        }
-    }
-    
     @IBAction func subscribePressed(sender: AnyObject) {
         let index = self.servicesTableView.selectedRow
         if index != -1 {
             let service = self.browser[index]
             self.subscribe(service)
         }
+    }
+
+    
+    @IBAction func cancelPressed(sender: AnyObject) {
+        self.window?.orderOut(sender)
     }
     
     
@@ -104,10 +67,11 @@ extension MainController {
         println("subscribing to \(service)")
         
         // FIXME: we need to make sure to warn against overwrite here
-        var editor = self.activeEditor ?? self.prevActiveEditor
-        if let ed = editor {
+        if let ed = self.activeEditor {
             self.subscribedConnection = connectService(service, ed)
         }
+
+        self.window?.orderOut(self)
     }
     
 }
@@ -117,25 +81,7 @@ extension MainController {
 extension MainController {
     
     func updateUI() {
-        let docs = DTXcodeUtils.sourceCodeDocuments()
-        let titles = docs.map { $0.displayName!! }
-        self.documentsPopupButton.removeAllItems()
-        self.documentsPopupButton.addItemsWithTitles(titles)
-
-        var editor = self.activeEditor ?? self.prevActiveEditor
-        if let ed = editor {
-            self.publishButton.enabled = true
-            self.subscribeButton.enabled = true
-            self.documentsPopupButton.enabled = true
-            self.documentsPopupButton.selectItemWithTitle(ed.document.displayName)
-            self.activeEditorLabel.stringValue = ed.document.displayName
-        } else {
-            self.publishButton.enabled = false
-            self.subscribeButton.enabled = false
-            self.documentsPopupButton.enabled = false
-            self.documentsPopupButton.selectItem(nil)
-            self.activeEditorLabel.stringValue = ""
-        }
+        self.subscribeButton.enabled = (self.activeEditor != nil) && (self.servicesTableView.selectedRow != -1)
     }
     
 }
@@ -183,12 +129,6 @@ extension MainController: NSWindowDelegate {
     
     func windowDidBecomeKey(notification: NSNotification) {
         self.updateUI()
-    }
-    
-    func windowWillClose(notification: NSNotification) {
-        for o in self.observers {
-            NSNotificationCenter.defaultCenter().removeObserver(o)
-        }
     }
     
 }
