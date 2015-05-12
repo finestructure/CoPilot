@@ -12,10 +12,10 @@ import Cocoa
 struct XcodeUtils {
     
     static var activeEditor: Editor? {
-        if  let controller = DTXcodeUtils.currentEditor(),
+        if  let window = DTXcodeUtils.currentWindow(),
             let doc = DTXcodeUtils.currentSourceCodeDocument(),
             let textStorage = DTXcodeUtils.currentTextStorage() {
-                return Editor(controller: controller, document: doc, textStorage: textStorage)
+                return Editor(window: window, document: doc, textStorage: textStorage)
         } else {
             return nil
         }

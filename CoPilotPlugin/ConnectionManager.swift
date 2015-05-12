@@ -11,8 +11,13 @@ import Foundation
 
 class ConnectionManager {
     
-    static var published = [ConnectedEditor]()
-    static var subscribed = [ConnectedEditor]()
+    private static var published = [ConnectedEditor]()
+    private static var subscribed = [ConnectedEditor]()
+    
+    
+    static func published(filter: (ConnectedEditor -> Bool)) -> ConnectedEditor? {
+        return self.published.filter(filter).first
+    }
     
     
     static func isPublished(editor: Editor) -> Bool {
@@ -41,10 +46,7 @@ class ConnectionManager {
     
     
     static func unpublish(editor: Editor) {
-        let publishedConnection = { editor in
-            self.published.filter({ $0.editor == editor }).first
-        }
-        if let conn = publishedConnection(editor) {
+        if let conn = self.published({ $0.editor == editor }) {
             conn.document.disconnect()
             self.published = self.published.filter({ $0.editor != editor })
         }

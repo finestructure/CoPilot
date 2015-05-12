@@ -21,7 +21,7 @@ protocol ConnectedDocument {
 
 
 struct Editor {
-    let controller: NSViewController
+    let window: NSWindow
     let document: NSDocument
     let textStorage: NSTextStorage
 }
@@ -30,7 +30,7 @@ struct Editor {
 extension Editor: Equatable { }
 
 func ==(lhs: Editor, rhs: Editor) -> Bool {
-    return lhs.controller == rhs.controller
+    return lhs.window == rhs.window
         && lhs.document == rhs.document
         && lhs.textStorage == rhs.textStorage
 }

@@ -56,6 +56,15 @@ class CoPilotPlugin: NSObject {
                 self.publishMenuItem.title = publishMenuTitle(editor: XcodeUtils.activeEditor)
             }
         )
+        observers.append(
+            observe("NSWindowWillCloseNotification", object: nil) { note in
+                if let window = note.object as? NSWindow {
+                    if let conn = ConnectionManager.published({ $0.editor.window == window }) {
+                        ConnectionManager.unpublish(conn.editor)
+                    }
+                }
+            }
+        )
     }
 
     deinit {
