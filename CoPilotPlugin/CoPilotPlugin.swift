@@ -118,10 +118,16 @@ extension CoPilotPlugin {
     }
 
     func browse() {
-        if self.mainController == nil {
-            self.mainController = MainController(windowNibName: "MainController")
+        if let ed = XcodeUtils.activeEditor {
+            if self.mainController == nil {
+                self.mainController = MainController(windowNibName: "MainController")
+            }
+            let sheetWindow = self.mainController!.window!
+            let doc = ed.document
+            doc.windowForSheet!.beginSheet(sheetWindow) { response in
+                println("response: \(response)")
+            }
         }
-        self.mainController?.showWindow(self)
     }
     
 }

@@ -16,7 +16,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="CoPilot" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" frameAutosaveName="CoPilotWindow" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="CoPilot" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CoPilotWindow" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="657" height="643"/>
@@ -155,6 +155,20 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iYV-8A-w4p">
+                        <rect key="frame" x="554" y="595" width="89" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="77" id="bo0-Zh-vAa"/>
+                            <constraint firstAttribute="height" constant="21" id="lU2-jv-FQy"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Dismiss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CxV-me-k3j">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="dismiss:" target="-2" id="ipy-kr-mv2"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Dj4-ek-vET" firstAttribute="width" secondItem="bJQ-jL-UFV" secondAttribute="width" id="11S-OH-L6h"/>
@@ -162,6 +176,8 @@
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="8tO-UU-ALn"/>
                     <constraint firstItem="bJQ-jL-UFV" firstAttribute="leading" secondItem="7OJ-v5-iP9" secondAttribute="trailing" constant="10" id="BM2-wf-FC2"/>
                     <constraint firstAttribute="bottom" secondItem="3eO-uY-jd7" secondAttribute="bottom" constant="20" id="J0e-uN-7We"/>
+                    <constraint firstItem="iYV-8A-w4p" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="J1N-at-rGC"/>
+                    <constraint firstAttribute="trailing" secondItem="iYV-8A-w4p" secondAttribute="trailing" constant="20" id="OxH-ER-NhN"/>
                     <constraint firstItem="AYC-wC-K9L" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="UFI-8r-gub"/>
                     <constraint firstItem="7OJ-v5-iP9" firstAttribute="width" secondItem="AYC-wC-K9L" secondAttribute="width" id="VwA-cz-JDy"/>
                     <constraint firstItem="Dj4-ek-vET" firstAttribute="leading" secondItem="AYC-wC-K9L" secondAttribute="trailing" constant="8" id="Yq6-w7-Eaj"/>

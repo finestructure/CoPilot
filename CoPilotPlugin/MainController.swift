@@ -60,6 +60,10 @@ class MainController: NSWindowController {
 // MARK: - Actions
 extension MainController {
     
+    @IBAction func dismiss(sender: AnyObject) {
+        self.window?.orderOut(sender)
+    }
+    
     @IBAction func publishPressed(sender: AnyObject) {
         // FIXME: test hack
         let path = "/tmp/server.txt"
