@@ -50,6 +50,7 @@
 		5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
 		5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
+		5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */; };
 		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +296,7 @@
 		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = CoPilotPluginTests/Server.swift; sourceTree = SOURCE_ROOT; };
 		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		5AE5A9891AFE11A300480382 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeUtils.swift; sourceTree = "<group>"; };
 		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -420,6 +422,7 @@
 			children = (
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
 				5AA1D65F1AFA52AA00FD107E /* Utils.swift */,
+				5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */,
 				5ACE1BAC1AFDEB0400154511 /* Diff */,
 				5ACE1BAD1AFDEB4E00154511 /* Network */,
 				5ACE1BAE1AFDEBED00154511 /* Model */,
@@ -859,6 +862,7 @@
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
 				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
+				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
 				5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */,
 				5A66AA141AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */,
