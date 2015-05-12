@@ -83,3 +83,42 @@ struct XcodeUtils {
     
 }
 
+
+class ConnectedEditor {
+    let editor: Editor
+    let server: DocServer
+    var observer: NSObjectProtocol! = nil
+    var sendThrottle = Throttle(bufferTime: 0.5)
+
+    init(editor: Editor, server: DocServer) {
+        self.editor = editor
+        self.server = server
+        self.startObserving()
+    }
+    
+    private func startObserving() {
+        self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
+            self.sendThrottle.execute {
+                println("#### server updated")
+                self.server.document = Document(self.editor.textStorage.string)
+            }
+        }
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self.observer)
+    }
+}
+
+
+func publishEditor(editor: Editor) -> ConnectedEditor {
+    let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
+    let doc = { Document(editor.textStorage.string) }
+    let docServer = DocServer(name: name, document: doc())
+    docServer.onUpdate = { doc in
+        // TODO: refine this by only replacing the changed text or at least keeping the caret in place
+        editor.textStorage.replaceAll(doc.text)
+    }
+    return ConnectedEditor(editor: editor, server: docServer)
+}
+

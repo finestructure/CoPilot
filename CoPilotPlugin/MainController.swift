@@ -148,14 +148,12 @@ extension MainController {
             self.documentsPopupButton.enabled = true
             self.documentsPopupButton.selectItemWithTitle(ed.document.displayName)
             self.activeEditorLabel.stringValue = ed.document.displayName
-            println("=========== \(ed.document.displayName)")
         } else {
             self.publishButton.enabled = false
             self.subscribeButton.enabled = false
             self.documentsPopupButton.enabled = false
             self.documentsPopupButton.selectItem(nil)
             self.activeEditorLabel.stringValue = ""
-            println("=========== ### no active editor")
         }
     }
     
