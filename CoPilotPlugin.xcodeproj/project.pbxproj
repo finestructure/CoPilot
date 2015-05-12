@@ -15,6 +15,10 @@
 		5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* new_playground.txt */; };
+		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
+		5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5A3013C01B0297DD003403FA /* CryptoSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5A3013C11B0297DD003403FA /* DiffMatchPatch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */; };
 		5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
 		5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
@@ -108,27 +112,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D5BC0AF128CA8E200B8F5FF;
 			remoteInfo = DiffMatchPatchTest;
-		};
-		5A0983DE1AE39EE8001ADB1F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5AD1E8301AE2A0A60017CEEE;
-			remoteInfo = "FeinstrukturUtils-OSX";
-		};
-		5A0983E01AE39EEC001ADB1F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 754BE45419693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
-		5A0983E21AE39EF0001ADB1F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5AD1E7CD1AE266530017CEEE;
-			remoteInfo = "DiffMatchPatch-OSX";
 		};
 		5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -228,13 +211,6 @@
 			remoteGlobalIDString = EEE5E36018B37F8700BAE47A;
 			remoteInfo = PSAutobahnClientTests;
 		};
-		5ADA758F1AF24CBC0074D8F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5AB35B5A1AF22DC500AF2F22;
-			remoteInfo = "PocketSocket-OSX";
-		};
 		5AE5A9991AFE11A300480382 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
@@ -264,6 +240,22 @@
 			remoteInfo = "Pods-CoPilotPlugin-DTXcodeUtils";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5A3013AD1B029627003403FA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */,
+				5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */,
+				5A3013C01B0297DD003403FA /* CryptoSwift.framework in CopyFiles */,
+				5A3013C11B0297DD003403FA /* DiffMatchPatch.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0F2235F46F0E3D045D99009C /* Pods-CoPilotPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.release.xcconfig"; sourceTree = "<group>"; };
@@ -574,16 +566,13 @@
 				5A9BE17B1AD90862002817C0 /* Resources */,
 				5A0983DA1AE39ECA001ADB1F /* Frameworks */,
 				6A99EF398B3026E826CCE97F /* Copy Pods Resources */,
+				5A3013AD1B029627003403FA /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				5AE5A99E1AFE11AF00480382 /* PBXTargetDependency */,
 				5AE5A9A01AFE11AF00480382 /* PBXTargetDependency */,
-				5ADA75901AF24CBC0074D8F0 /* PBXTargetDependency */,
-				5A0983E31AE39EF0001ADB1F /* PBXTargetDependency */,
-				5A0983E11AE39EEC001ADB1F /* PBXTargetDependency */,
-				5A0983DF1AE39EE8001ADB1F /* PBXTargetDependency */,
 			);
 			name = CoPilotPlugin;
 			productName = CoPilotPlugin;
@@ -893,21 +882,6 @@
 			name = "Nimble-OSX";
 			targetProxy = 5A0156B31AE262F800EED621 /* PBXContainerItemProxy */;
 		};
-		5A0983DF1AE39EE8001ADB1F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "FeinstrukturUtils-OSX";
-			targetProxy = 5A0983DE1AE39EE8001ADB1F /* PBXContainerItemProxy */;
-		};
-		5A0983E11AE39EEC001ADB1F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CryptoSwift;
-			targetProxy = 5A0983E01AE39EEC001ADB1F /* PBXContainerItemProxy */;
-		};
-		5A0983E31AE39EF0001ADB1F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DiffMatchPatch-OSX";
-			targetProxy = 5A0983E21AE39EF0001ADB1F /* PBXContainerItemProxy */;
-		};
 		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "PocketSocket-OSX";
@@ -927,11 +901,6 @@
 			isa = PBXTargetDependency;
 			name = "FeinstrukturUtils-OSX";
 			targetProxy = 5AD1E87D1AE2A3090017CEEE /* PBXContainerItemProxy */;
-		};
-		5ADA75901AF24CBC0074D8F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "PocketSocket-OSX";
-			targetProxy = 5ADA758F1AF24CBC0074D8F0 /* PBXContainerItemProxy */;
 		};
 		5AE5A99E1AFE11AF00480382 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
