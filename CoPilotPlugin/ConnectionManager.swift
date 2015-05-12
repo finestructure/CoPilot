@@ -20,6 +20,16 @@ class ConnectionManager {
     }
     
     
+    static func subscribed(filter: (ConnectedEditor -> Bool)) -> ConnectedEditor? {
+        return self.subscribed.filter(filter).first
+    }
+    
+    
+    static func connected(filter: (ConnectedEditor -> Bool)) -> ConnectedEditor? {
+        return self.published.filter(filter).first ?? self.subscribed.filter(filter).first
+    }
+    
+    
     static func isPublished(editor: Editor) -> Bool {
         return self.published.filter({ $0.editor == editor }).count > 0
     }

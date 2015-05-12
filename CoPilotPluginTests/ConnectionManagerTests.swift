@@ -17,15 +17,52 @@ class ConnectionManagerTests: XCTestCase {
         ConnectionManager.disconnectAll()
     }
     
-    func test_publish_isPublished() {
-        let win = NSWindow()
-        let doc = NSDocument()
-        let ts = NSTextStorage()
-        let ed = Editor(window: win, document: doc, textStorage: ts)
+    
+    func test_connected_published_subscribed() {
+        let pub = createEditor()
+        let sub = createEditor()
+        
+        expect(ConnectionManager.isPublished(pub)) == false
+        expect(ConnectionManager.isPublished(sub)) == false
+        expect(ConnectionManager.isSubscribed(pub)) == false
+        expect(ConnectionManager.isSubscribed(sub)) == false
+        expect(ConnectionManager.isConnected(pub)) == false
+        expect(ConnectionManager.isConnected(sub)) == false
 
-        expect(ConnectionManager.isPublished(ed)) == false
-        ConnectionManager.publish(ed)
-        expect(ConnectionManager.isPublished(ed)) == true
+        ConnectionManager.publish(pub)
+        let service = publish(service: CoPilotService, name: "Test")
+        ConnectionManager.subscribe(service, editor: sub)
+        
+        expect(ConnectionManager.isPublished(pub)) == true
+        expect(ConnectionManager.isPublished(sub)) == false
+        expect(ConnectionManager.isSubscribed(pub)) == false
+        expect(ConnectionManager.isSubscribed(sub)) == true
+        expect(ConnectionManager.isConnected(pub)) == true
+        expect(ConnectionManager.isConnected(sub)) == true
     }
+    
+    
+    func test_filters() {
+        let pub = createEditor()
+        let sub = createEditor()
+        ConnectionManager.publish(pub)
+        let service = publish(service: CoPilotService, name: "Test")
+        ConnectionManager.subscribe(service, editor: sub)
 
+        expect(ConnectionManager.published({ $0.editor == sub })).to(beNil())
+        expect(ConnectionManager.published({ $0.editor == pub })?.editor) == pub
+        expect(ConnectionManager.subscribed({ $0.editor == sub })?.editor) == sub
+        expect(ConnectionManager.subscribed({ $0.editor == pub })).to(beNil())
+        expect(ConnectionManager.connected({ $0.editor == sub })?.editor) == sub
+        expect(ConnectionManager.connected({ $0.editor == pub })?.editor) == pub
+    }
+    
+}
+
+
+func createEditor() -> Editor {
+    let win = NSWindow()
+    let doc = NSDocument()
+    let ts = NSTextStorage()
+    return Editor(window: win, document: doc, textStorage: ts)
 }
