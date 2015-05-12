@@ -69,6 +69,12 @@ struct Editor {
 }
 
 
+typealias UpdateHandler = (Document -> Void)
+
+
+protocol RemoteDocument {
+    var onUpdate: UpdateHandler? { get set }
+    func sendUpdate(newDocument: Document)
 }
 
 

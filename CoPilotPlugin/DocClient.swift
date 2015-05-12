@@ -9,28 +9,15 @@
 import Foundation
 
 
-typealias UpdateHandler = (Document -> Void)
-
-
 class DocClient {
 
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var _document: Document
-    var document: Document {
-        set {
-            if let changes = Changeset(source: self._document, target: newValue) {
-                self.socket?.send(Command(update: changes).serialize())
-                self._document = newValue
-            }
-        }
-        get {
-            return _document
-        }
-    }
-    var onUpdate: UpdateHandler?
+    private var _onUpdate: UpdateHandler?
+    
     var clientId: String = "DocClient"
-
+    var document: Document { return self._document }
 
     init(service: NSNetService, document: Document) {
         self._document = document
@@ -48,10 +35,27 @@ class DocClient {
     private func resolve(websocket: WebSocket) {
         websocket.onReceive = messageHandler({ self._document }) { _, doc in
             self._document = doc
-            self.onUpdate?(doc)
+            self._onUpdate?(doc)
         }
         self.socket = websocket
     }
 
+}
+
+
+extension DocClient: RemoteDocument {
+
+    var onUpdate: UpdateHandler? {
+        get { return self._onUpdate }
+        set { self._onUpdate = newValue }
+    }
+    
+    func sendUpdate(newDocument: Document) {
+        if let changes = Changeset(source: self._document, target: newDocument) {
+            self.socket?.send(Command(update: changes).serialize())
+            self._document = newDocument
+        }
+    }
+    
 }
 
