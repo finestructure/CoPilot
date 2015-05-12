@@ -59,8 +59,8 @@ class CoPilotPlugin: NSObject {
         observers.append(
             observe("NSWindowWillCloseNotification", object: nil) { note in
                 if let window = note.object as? NSWindow {
-                    if let conn = ConnectionManager.published({ $0.editor.window == window }) {
-                        ConnectionManager.unpublish(conn.editor)
+                    if let conn = ConnectionManager.connected({ $0.editor.window == window }) {
+                        ConnectionManager.disconnect(conn.editor)
                     }
                 }
             }
@@ -119,7 +119,7 @@ extension CoPilotPlugin {
     func publish() {
         if let editor = XcodeUtils.activeEditor {
             if ConnectionManager.isPublished(editor) {
-                ConnectionManager.unpublish(editor)
+                ConnectionManager.disconnect(editor)
             } else {
                 ConnectionManager.publish(editor)
             }

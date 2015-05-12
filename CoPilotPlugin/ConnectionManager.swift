@@ -55,8 +55,8 @@ class ConnectionManager {
     }
     
     
-    static func unpublish(editor: Editor) {
-        if let conn = self.published({ $0.editor == editor }) {
+    static func disconnect(editor: Editor) {
+        if let conn = self.connected({ $0.editor == editor }) {
             conn.document.disconnect()
             self.published = self.published.filter({ $0.editor != editor })
         }
