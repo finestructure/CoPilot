@@ -25,7 +25,7 @@ class CoPilotPlugin: NSObject {
     var mainController: MainController?
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
-    var browseMenuItem: NSMenuItem! = nil
+    var subscribeMenuItem: NSMenuItem! = nil
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -39,7 +39,7 @@ class CoPilotPlugin: NSObject {
 
         self.bundle = bundle
         self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"p")
-        self.browseMenuItem = self.menuItem("CoPilot Browse", action:"browse", key:"x")
+        self.subscribeMenuItem = self.menuItem("CoPilot Subscribe", action:"subscribe", key:"x")
 
         observers.append(
             observe("NSApplicationDidFinishLaunchingNotification", object: nil) { _ in
@@ -60,11 +60,14 @@ class CoPilotPlugin: NSObject {
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        let hasEditor = { XcodeUtils.activeEditor != nil }
+        let isConnected = { ConnectionManager.isConnected(XcodeUtils.activeEditor!) }
+        
         switch menuItem.action {
         case Selector("publish"):
-            return (XcodeUtils.activeEditor != nil) && (!ConnectionManager.isPublished(XcodeUtils.activeEditor!))
-        case Selector("browse"):
-            return (XcodeUtils.activeEditor != nil)
+            return hasEditor() && !isConnected()
+        case Selector("subscribe"):
+            return hasEditor() && !isConnected()
         default:
             return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
         }
@@ -81,7 +84,7 @@ extension CoPilotPlugin {
         if item != nil {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
-            item!.submenu!.addItem(self.browseMenuItem)
+            item!.submenu!.addItem(self.subscribeMenuItem)
         }
     }
 
@@ -92,7 +95,7 @@ extension CoPilotPlugin {
         m.target = self
         return m
     }
-
+    
 }
 
 
@@ -110,14 +113,14 @@ extension CoPilotPlugin {
     }
     
 
-    func browse() {
-        if let ed = XcodeUtils.activeEditor {
+    func subscribe() {
+        if let editor = XcodeUtils.activeEditor {
             if self.mainController == nil {
                 self.mainController = MainController(windowNibName: "MainController")
             }
-            self.mainController!.activeEditor = ed
+            self.mainController!.activeEditor = editor
             let sheetWindow = self.mainController!.window!
-            let doc = ed.document
+            let doc = editor.document
             doc.windowForSheet!.beginSheet(sheetWindow) { response in
                 println("response: \(response)")
             }

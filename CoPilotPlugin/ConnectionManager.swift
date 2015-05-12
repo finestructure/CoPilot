@@ -17,6 +17,14 @@ class ConnectionManager {
     static func isPublished(editor: Editor) -> Bool {
         return self.published.filter({ $0.editor == editor }).count > 0
     }
+    
+    static func isSubscribed(editor: Editor) -> Bool {
+        return self.subscribed.filter({ $0.editor == editor }).count > 0
+    }
+    
+    static func isConnected(editor: Editor) -> Bool {
+        return self.isPublished(editor) || self.isSubscribed(editor)
+    }
  
     static func publish(editor: Editor) -> ConnectedEditor {
         let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
