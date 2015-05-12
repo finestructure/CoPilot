@@ -13,15 +13,14 @@ import Nimble
 
 class ConnectionManagerTests: XCTestCase {
 
-    func test_isPublished() {
+    func test_publish_isPublished() {
         let ctr = NSViewController()
         let doc = NSDocument()
         let ts = NSTextStorage()
         let ed = Editor(controller: ctr, document: doc, textStorage: ts)
-        let pub = publishEditor(ed)
-        
+
         expect(ConnectionManager.isPublished(ed)) == false
-        ConnectionManager.published.append(pub)
+        ConnectionManager.publish(ed)
         expect(ConnectionManager.isPublished(ed)) == true
     }
 

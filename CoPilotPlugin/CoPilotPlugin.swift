@@ -26,7 +26,6 @@ class CoPilotPlugin: NSObject {
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
     var browseMenuItem: NSMenuItem! = nil
-    var publishedConnection: ConnectedEditor?
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -63,9 +62,9 @@ class CoPilotPlugin: NSObject {
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case Selector("publish"):
-            return self.hasDoc
+            return (XcodeUtils.activeEditor != nil) && (!ConnectionManager.isPublished(XcodeUtils.activeEditor!))
         case Selector("browse"):
-            return true
+            return (XcodeUtils.activeEditor != nil)
         default:
             return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
         }
@@ -93,13 +92,6 @@ extension CoPilotPlugin {
         m.target = self
         return m
     }
-    
-    
-    var hasDoc: Bool {
-        get {
-            return XcodeUtils.activeEditor != nil
-        }
-    }
 
 }
 
@@ -108,14 +100,15 @@ extension CoPilotPlugin {
 extension CoPilotPlugin {
     
     func publish() {
-        // TODO: only allow publishing of one editor for now but there's no reason there couldn't be more
-        // TODO: also, we need to send over changes - subscribe to NSTextViewWillChangeNotifyingTextViewNotification on textStorage here
-        if self.publishedConnection == nil {
-            let editor = XcodeUtils.activeEditor!
-            self.publishedConnection = publishEditor(editor)
+        if let editor = XcodeUtils.activeEditor {
+            if ConnectionManager.isPublished(editor) {
+                println("#### already published")
+            } else {
+                ConnectionManager.publish(editor)
+            }
         }
-
     }
+    
 
     func browse() {
         if let ed = XcodeUtils.activeEditor {

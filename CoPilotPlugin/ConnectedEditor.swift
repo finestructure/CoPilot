@@ -73,14 +73,6 @@ class ConnectedEditor {
 }
 
 
-func publishEditor(editor: Editor) -> ConnectedEditor {
-    let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
-    let doc = { Document(editor.textStorage.string) }
-    let docServer = DocServer(name: name, document: doc())
-    return ConnectedEditor(editor: editor, documentManager: docServer)
-}
-
-
 func connectService(service: NSNetService, editor: Editor) -> ConnectedEditor {
     let client = DocClient(service: service, document: Document(editor.textStorage.string))
     return ConnectedEditor(editor: editor, documentManager: client)
