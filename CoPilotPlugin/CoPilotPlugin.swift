@@ -9,9 +9,14 @@ import AppKit
 import Cocoa
 
 
-func publishMenuTitle(doc: NSDocument? = nil) -> String {
-    if let title = doc?.displayName {
-        return "CoPilot Publish \(title)"
+func publishMenuTitle(editor: Editor? = nil) -> String {
+    if let editor = editor {
+        let title = editor.document.displayName
+        if ConnectionManager.isPublished(editor) {
+            return "CoPilot Unpublish \(title)"
+        } else {
+            return "CoPilot Publish \(title)"
+        }
     } else {
         return "CoPilot Publish"
     }
@@ -25,8 +30,7 @@ class CoPilotPlugin: NSObject {
     var mainController: MainController?
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
-    var browseMenuItem: NSMenuItem! = nil
-    var publishedConnection: ConnectedEditor?
+    var subscribeMenuItem: NSMenuItem! = nil
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -40,7 +44,7 @@ class CoPilotPlugin: NSObject {
 
         self.bundle = bundle
         self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"p")
-        self.browseMenuItem = self.menuItem("CoPilot Browse", action:"browse", key:"x")
+        self.subscribeMenuItem = self.menuItem("CoPilot Subscribe", action:"subscribe", key:"x")
 
         observers.append(
             observe("NSApplicationDidFinishLaunchingNotification", object: nil) { _ in
@@ -49,7 +53,7 @@ class CoPilotPlugin: NSObject {
         )
         observers.append(
             observe("NSTextViewDidChangeSelectionNotification", object: nil) { _ in
-                self.publishMenuItem.title = publishMenuTitle(doc: XcodeUtils.activeEditor?.document)
+                self.publishMenuItem.title = publishMenuTitle(editor: XcodeUtils.activeEditor)
             }
         )
     }
@@ -61,11 +65,14 @@ class CoPilotPlugin: NSObject {
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        let hasEditor = { XcodeUtils.activeEditor != nil }
+        let isConnected = { ConnectionManager.isConnected(XcodeUtils.activeEditor!) }
+        
         switch menuItem.action {
         case Selector("publish"):
-            return self.hasDoc
-        case Selector("browse"):
-            return true
+            return hasEditor()
+        case Selector("subscribe"):
+            return hasEditor() && !isConnected()
         default:
             return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
         }
@@ -82,7 +89,7 @@ extension CoPilotPlugin {
         if item != nil {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
-            item!.submenu!.addItem(self.browseMenuItem)
+            item!.submenu!.addItem(self.subscribeMenuItem)
         }
     }
 
@@ -94,13 +101,6 @@ extension CoPilotPlugin {
         return m
     }
     
-    
-    var hasDoc: Bool {
-        get {
-            return XcodeUtils.activeEditor != nil
-        }
-    }
-
 }
 
 
@@ -108,23 +108,25 @@ extension CoPilotPlugin {
 extension CoPilotPlugin {
     
     func publish() {
-        // TODO: only allow publishing of one editor for now but there's no reason there couldn't be more
-        // TODO: also, we need to send over changes - subscribe to NSTextViewWillChangeNotifyingTextViewNotification on textStorage here
-        if self.publishedConnection == nil {
-            let editor = XcodeUtils.activeEditor!
-            self.publishedConnection = publishEditor(editor)
+        if let editor = XcodeUtils.activeEditor {
+            if ConnectionManager.isPublished(editor) {
+                ConnectionManager.unpublish(editor)
+            } else {
+                ConnectionManager.publish(editor)
+            }
+            self.publishMenuItem.title = publishMenuTitle(editor: editor)
         }
-
     }
+    
 
-    func browse() {
-        if let ed = XcodeUtils.activeEditor {
+    func subscribe() {
+        if let editor = XcodeUtils.activeEditor {
             if self.mainController == nil {
                 self.mainController = MainController(windowNibName: "MainController")
             }
-            self.mainController!.activeEditor = ed
+            self.mainController!.activeEditor = editor
             let sheetWindow = self.mainController!.window!
-            let doc = ed.document
+            let doc = editor.document
             doc.windowForSheet!.beginSheet(sheetWindow) { response in
                 println("response: \(response)")
             }

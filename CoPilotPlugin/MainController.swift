@@ -17,7 +17,6 @@ class MainController: NSWindowController {
 
     var browser: Browser!
     var activeEditor: Editor?
-    var subscribedConnection: ConnectedEditor?
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -67,8 +66,8 @@ extension MainController {
         println("subscribing to \(service)")
         
         // FIXME: we need to make sure to warn against overwrite here
-        if let ed = self.activeEditor {
-            self.subscribedConnection = connectService(service, ed)
+        if let editor = self.activeEditor {
+            ConnectionManager.subscribe(service, editor: editor)
         }
 
         self.window?.orderOut(self)

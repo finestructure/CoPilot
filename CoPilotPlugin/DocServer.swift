@@ -72,11 +72,6 @@ class DocServer {
     }
 
 
-    deinit {
-        self.stop()
-    }
-    
-    
     func stop() {
         self.server.stop()
     }
@@ -84,12 +79,13 @@ class DocServer {
 }
 
 
-extension DocServer: DocumentManager {
+extension DocServer: ConnectedDocument {
 
     var onUpdate: UpdateHandler? {
         get { return self._onUpdate }
         set { self._onUpdate = newValue }
     }
+    
     
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
@@ -100,5 +96,10 @@ extension DocServer: DocumentManager {
         }
     }
 
+    
+    func disconnect() {
+        self.server.stop()
+    }
+    
 }
 

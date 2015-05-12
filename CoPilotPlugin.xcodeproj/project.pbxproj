@@ -25,6 +25,11 @@
 		5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B14251AE674E3006EBB31 /* MainController.swift */; };
 		5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B14261AE674E3006EBB31 /* MainController.xib */; };
 		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
+		5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
+		5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */; };
+		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
+		5A76F5B31B02377500B67B7F /* ConnectedEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */; };
+		5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 		5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
@@ -278,6 +283,9 @@
 		5A6B13EB1AE655FF006EBB31 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		5A6B14251AE674E3006EBB31 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
+		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
+		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
@@ -334,6 +342,7 @@
 			children = (
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
 				5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */,
+				5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */,
 				5A01569D1AE2619700EED621 /* DiffTests.swift */,
 				5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */,
 				5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */,
@@ -421,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
+				5A76F5A21B02359800B67B7F /* ConnectionManager.swift */,
 				5AA1D65F1AFA52AA00FD107E /* Utils.swift */,
 				5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */,
 				5ACE1BAC1AFDEB0400154511 /* Diff */,
@@ -468,6 +478,7 @@
 			isa = PBXGroup;
 			children = (
 				5A4D7D9C1AF363FB005E0294 /* Command.swift */,
+				5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */,
 				5AA336EE1AFA06B2000E37B2 /* DocClient.swift */,
 				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
 			);
@@ -830,7 +841,9 @@
 				5A4D7DAB1AF366B1005E0294 /* CommandTests.swift in Sources */,
 				5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */,
 				5AC8A9781AE542440097FF8D /* Bonjour.swift in Sources */,
+				5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */,
 				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
+				5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */,
 				5ACE1BAB1AFDEABE00154511 /* Changeset.swift in Sources */,
@@ -839,6 +852,7 @@
 				5ACE1B9D1AFDEA4F00154511 /* Document.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */,
+				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
@@ -853,6 +867,7 @@
 			files = (
 				5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
+				5A76F5B31B02377500B67B7F /* ConnectedEditor.swift in Sources */,
 				5ACE1BAA1AFDEABE00154511 /* Changeset.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
 				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
@@ -864,6 +879,7 @@
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
 				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
 				5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */,
+				5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */,
 				5A66AA141AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */,
 			);
