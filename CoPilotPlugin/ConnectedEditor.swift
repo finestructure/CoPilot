@@ -72,9 +72,3 @@ class ConnectedEditor {
     }
 }
 
-
-func connectService(service: NSNetService, editor: Editor) -> ConnectedEditor {
-    let client = DocClient(service: service, document: Document(editor.textStorage.string))
-    return ConnectedEditor(editor: editor, documentManager: client)
-}
-
