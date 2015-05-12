@@ -6,11 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainController" customModule="CoPilotPlugin" customModuleProvider="target">
             <connections>
-                <outlet property="activeEditorLabel" destination="bJQ-jL-UFV" id="9lv-an-gZh"/>
-                <outlet property="documentsPopupButton" destination="Dj4-ek-vET" id="dUB-Uj-ua5"/>
-                <outlet property="publishButton" destination="AYC-wC-K9L" id="G6T-AA-ajC"/>
                 <outlet property="servicesTableView" destination="Phg-hL-5Tp" id="SPX-LG-eCK"/>
-                <outlet property="subscribeButton" destination="7OJ-v5-iP9" id="tbE-C1-j97"/>
+                <outlet property="subscribeButton" destination="UBk-8f-wYH" id="5Zb-W6-L7e"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -19,57 +16,15 @@
         <window title="CoPilot" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CoPilotWindow" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="657" height="643"/>
+            <rect key="contentRect" x="196" y="240" width="509" height="313"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <value key="minSize" type="size" width="300" height="200"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="-2" width="657" height="643"/>
+                <rect key="frame" x="0.0" y="5" width="509" height="313"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AYC-wC-K9L">
-                        <rect key="frame" x="14" y="595" width="103" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="91" id="MDE-Ne-52c"/>
-                            <constraint firstAttribute="height" constant="21" id="SaQ-E9-CUu"/>
-                        </constraints>
-                        <buttonCell key="cell" type="push" title="Publish" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZFb-X3-ZOx">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="publishPressed:" target="-2" id="Vw6-0t-wsW"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7OJ-v5-iP9">
-                        <rect key="frame" x="14" y="562" width="103" height="32"/>
-                        <buttonCell key="cell" type="push" title="Subscribe" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ded-qi-7lq">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="subscribePressed:" target="-2" id="pu1-sH-4tb"/>
-                        </connections>
-                    </button>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dj4-ek-vET">
-                        <rect key="frame" x="117" y="599" width="237" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="JS2-HA-sTR"/>
-                            <constraint firstAttribute="width" constant="232" id="noQ-AQ-tQN"/>
-                        </constraints>
-                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Iw4-9n-98B" id="ONl-F8-h9e">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="S2G-1n-V9l">
-                                <items>
-                                    <menuItem title="Item 1" state="on" id="Iw4-9n-98B"/>
-                                    <menuItem title="Item 2" id="RCD-LP-9Ka"/>
-                                    <menuItem title="Item 3" id="VbO-Xc-XVa"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                    </popUpButton>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eO-uY-jd7">
-                        <rect key="frame" x="20" y="20" width="617" height="529"/>
+                        <rect key="frame" x="20" y="61" width="469" height="232"/>
                         <clipView key="contentView" id="zn2-MB-vg1">
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,7 +36,7 @@
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="612" minWidth="40" maxWidth="1000" id="zar-Ll-ose">
+                                        <tableColumn width="464" minWidth="40" maxWidth="1000" id="zar-Ll-ose">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -95,10 +50,10 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="MyCell" id="Iqb-BH-tnx">
-                                                    <rect key="frame" x="1" y="1" width="612" height="17"/>
+                                                    <rect key="frame" x="1" y="1" width="464" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XWn-aF-e2t">
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWn-aF-e2t">
                                                             <rect key="frame" x="0.0" y="0.0" width="612" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="Har-TW-ajg"/>
@@ -144,57 +99,50 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bJQ-jL-UFV">
-                        <rect key="frame" x="119" y="572" width="236" height="17"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UBk-8f-wYH">
+                        <rect key="frame" x="392" y="13" width="103" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="17N-9Y-4uB"/>
+                            <constraint firstAttribute="height" constant="21" id="0mj-XK-NWs"/>
+                            <constraint firstAttribute="width" constant="91" id="M8j-f8-ise"/>
                         </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="nSh-5N-paW">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iYV-8A-w4p">
-                        <rect key="frame" x="554" y="595" width="89" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="77" id="bo0-Zh-vAa"/>
-                            <constraint firstAttribute="height" constant="21" id="lU2-jv-FQy"/>
-                        </constraints>
-                        <buttonCell key="cell" type="push" title="Dismiss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CxV-me-k3j">
+                        <buttonCell key="cell" type="push" title="Subscribe" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Nc-tt-UoK">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="dismiss:" target="-2" id="ipy-kr-mv2"/>
+                            <action selector="subscribePressed:" target="-2" id="gg1-ND-4Nk"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CR7-Wp-YsR">
+                        <rect key="frame" x="289" y="13" width="103" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rc4-Ns-GCG">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelPressed:" target="-2" id="sdX-vk-KVd"/>
                         </connections>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Dj4-ek-vET" firstAttribute="width" secondItem="bJQ-jL-UFV" secondAttribute="width" id="11S-OH-L6h"/>
-                    <constraint firstItem="AYC-wC-K9L" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="6BF-BM-zKR"/>
+                    <constraint firstItem="UBk-8f-wYH" firstAttribute="leading" secondItem="CR7-Wp-YsR" secondAttribute="trailing" constant="12" id="2jp-JH-bVh"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="8tO-UU-ALn"/>
-                    <constraint firstItem="bJQ-jL-UFV" firstAttribute="leading" secondItem="7OJ-v5-iP9" secondAttribute="trailing" constant="10" id="BM2-wf-FC2"/>
-                    <constraint firstAttribute="bottom" secondItem="3eO-uY-jd7" secondAttribute="bottom" constant="20" id="J0e-uN-7We"/>
-                    <constraint firstItem="iYV-8A-w4p" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="J1N-at-rGC"/>
-                    <constraint firstAttribute="trailing" secondItem="iYV-8A-w4p" secondAttribute="trailing" constant="20" id="OxH-ER-NhN"/>
-                    <constraint firstItem="AYC-wC-K9L" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="UFI-8r-gub"/>
-                    <constraint firstItem="7OJ-v5-iP9" firstAttribute="width" secondItem="AYC-wC-K9L" secondAttribute="width" id="VwA-cz-JDy"/>
-                    <constraint firstItem="Dj4-ek-vET" firstAttribute="leading" secondItem="AYC-wC-K9L" secondAttribute="trailing" constant="8" id="Yq6-w7-Eaj"/>
-                    <constraint firstItem="7OJ-v5-iP9" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="bn4-Tb-AgS"/>
-                    <constraint firstItem="3eO-uY-jd7" firstAttribute="top" secondItem="7OJ-v5-iP9" secondAttribute="bottom" constant="20" id="fVO-DO-BsG"/>
-                    <constraint firstItem="bJQ-jL-UFV" firstAttribute="top" secondItem="Dj4-ek-vET" secondAttribute="bottom" constant="13" id="kg8-aY-GHI"/>
-                    <constraint firstItem="7OJ-v5-iP9" firstAttribute="height" secondItem="AYC-wC-K9L" secondAttribute="height" id="o1H-zP-vlO"/>
+                    <constraint firstItem="3eO-uY-jd7" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="ItK-yH-t0u"/>
+                    <constraint firstItem="CR7-Wp-YsR" firstAttribute="baseline" secondItem="UBk-8f-wYH" secondAttribute="baseline" id="LmJ-Vy-d6c"/>
+                    <constraint firstAttribute="bottom" secondItem="UBk-8f-wYH" secondAttribute="bottom" constant="20" id="QdG-Iv-yfm"/>
+                    <constraint firstItem="CR7-Wp-YsR" firstAttribute="width" secondItem="UBk-8f-wYH" secondAttribute="width" id="TbD-b2-qXH"/>
+                    <constraint firstAttribute="trailing" secondItem="UBk-8f-wYH" secondAttribute="trailing" constant="20" id="bYM-M3-OTu"/>
+                    <constraint firstItem="CR7-Wp-YsR" firstAttribute="top" secondItem="3eO-uY-jd7" secondAttribute="bottom" constant="20" id="gBb-Mj-dCA"/>
                     <constraint firstAttribute="trailing" secondItem="3eO-uY-jd7" secondAttribute="trailing" constant="20" id="q93-ZY-nrI"/>
-                    <constraint firstItem="7OJ-v5-iP9" firstAttribute="top" secondItem="AYC-wC-K9L" secondAttribute="bottom" constant="12" id="sbE-o0-RfQ"/>
-                    <constraint firstItem="AYC-wC-K9L" firstAttribute="baseline" secondItem="Dj4-ek-vET" secondAttribute="baseline" id="tcY-T9-bW3"/>
-                    <constraint firstItem="7OJ-v5-iP9" firstAttribute="baseline" secondItem="bJQ-jL-UFV" secondAttribute="baseline" id="u2a-0s-ssv"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="380.5" y="396.5"/>
+            <point key="canvasLocation" x="306.5" y="231.5"/>
         </window>
     </objects>
 </document>

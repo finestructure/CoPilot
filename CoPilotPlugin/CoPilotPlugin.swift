@@ -122,6 +122,7 @@ extension CoPilotPlugin {
             if self.mainController == nil {
                 self.mainController = MainController(windowNibName: "MainController")
             }
+            self.mainController!.activeEditor = ed
             let sheetWindow = self.mainController!.window!
             let doc = ed.document
             doc.windowForSheet!.beginSheet(sheetWindow) { response in
