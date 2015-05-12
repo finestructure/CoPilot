@@ -60,5 +60,15 @@ class ConnectionManager {
         return connectedEditor
     }
     
+    
+    static func disconnectAll() {
+        for c in self.published {
+            c.document.disconnect()
+        }
+        for c in self.subscribed {
+            c.document.disconnect()
+        }
+    }
+    
 }
 

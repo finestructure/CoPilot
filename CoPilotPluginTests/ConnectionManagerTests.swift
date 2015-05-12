@@ -13,6 +13,10 @@ import Nimble
 
 class ConnectionManagerTests: XCTestCase {
 
+    override func tearDown() {
+        ConnectionManager.disconnectAll()
+    }
+    
     func test_publish_isPublished() {
         let win = NSWindow()
         let doc = NSDocument()
