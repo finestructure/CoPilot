@@ -57,6 +57,88 @@ class DiffTests: XCTestCase {
         expect(res[0].start2) == 0
         expect(res[0].length1) == 7
         expect(res[0].length2) == 6
+        
+        let p = res[0]
+        expect(p.diffs.count) == 3
+        expect(p[0].operation) == Operation.DiffEqual
+        expect(p[0].text) == "foo"
+        expect(p[1].operation) == Operation.DiffDelete
+        expect(p[1].text) == "2"
+        expect(p[2].operation) == Operation.DiffEqual
+        expect(p[2].text) == "bar"
+    }
+    
+    
+    func test_patches_long() {
+        let a = contentsOfFile(name: "test_a", type: "txt")
+        let b = contentsOfFile(name: "test_b", type: "txt")
+        let patches = computePatches(a, b)
+        expect(patches.count) == 4
+        
+        var p = patches[0]
+        expect(p.start1) == 0
+        expect(p.start2) == 0
+        expect(p.length1) == 108
+        expect(p.length2) == 4
+        
+        expect(p.diffs.count) == 2
+        expect(p[0].operation) == Operation.DiffDelete
+        expect(p[0].text) == "The Way that can be told of is not the eternal Way;\nThe name that can be named is not the eternal name.\n"
+        expect(count(p[0].text)) == 104
+        expect(p[1].operation) == Operation.DiffEqual
+        expect(p[1].text) == "The "
+        expect(count(p[1].text)) == 4
+        
+        p = patches[1]
+        expect(p.start1) == 44
+        expect(p.start2) == 44
+        expect(p.length1) == 17
+        expect(p.length2) == 17
+
+        expect(p.diffs.count) == 4
+        expect(p[0].operation) == Operation.DiffEqual
+        expect(p[0].text) == "th;\nThe "
+        expect(count(p[0].text)) == 8
+        expect(p[1].operation) == Operation.DiffDelete
+        expect(p[1].text) == "N"
+        expect(count(p[1].text)) == 1
+        expect(p[2].operation) == Operation.DiffInsert
+        expect(p[2].text) == "n"
+        expect(count(p[2].text)) == 1
+        expect(p[3].operation) == Operation.DiffEqual
+        expect(p[3].text) == "amed is "
+        expect(count(p[3].text)) == 8
+        
+        p = patches[2]
+        expect(p.start1) == 83
+        expect(p.start2) == 83
+        expect(p.length1) == 8
+        expect(p.length2) == 9
+        
+        expect(p.diffs.count) == 3
+        expect(p[0].operation) == Operation.DiffEqual
+        expect(p[0].text) == "gs.\n"
+        expect(count(p[0].text)) == 4
+        expect(p[1].operation) == Operation.DiffInsert
+        expect(p[1].text) == "\n"
+        expect(count(p[1].text)) == 1
+        expect(p[2].operation) == Operation.DiffEqual
+        expect(p[2].text) == "Ther"
+        expect(count(p[2].text)) == 4
+        
+        p = patches[3]
+        expect(p.start1) == 293
+        expect(p.start2) == 293
+        expect(p.length1) == 4
+        expect(p.length2) == 101
+        
+        expect(p.diffs.count) == 2
+        expect(p[0].operation) == Operation.DiffEqual
+        expect(p[0].text) == "es.\n"
+        expect(count(p[0].text)) == 4
+        expect(p[1].operation) == Operation.DiffInsert
+        expect(p[1].text) == "They both may be called deep and profound.\nDeeper and more profound,\nThe door of all subtleties!\n"
+        expect(count(p[1].text)) == 97
     }
     
     

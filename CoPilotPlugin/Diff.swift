@@ -83,3 +83,28 @@ func apply(source: Document, changeSet: Changeset) -> Result<Document> {
     }
 }
 
+
+extension Patch {
+
+    subscript(index: Int) -> Diff {
+        return self.diffs[index] as! Diff
+    }
+    
+}
+
+
+extension Operation: Printable {
+    
+    public var description: String {
+        switch self {
+        case .DiffDelete:
+            return "Delete"
+        case .DiffInsert:
+            return "Insert"
+        case .DiffEqual:
+            return "Equal"
+        }
+    }
+    
+}
+
