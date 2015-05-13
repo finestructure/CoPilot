@@ -11,7 +11,7 @@ import Cocoa
 
 func publishMenuTitle(editor: Editor? = nil) -> String {
     if let editor = editor {
-        let title = editor.document.displayName
+        let title = editor.document?.displayName
         if ConnectionManager.isPublished(editor) {
             return "CoPilot Unpublish \(title)"
         } else {
@@ -136,7 +136,7 @@ extension CoPilotPlugin {
             self.mainController!.activeEditor = editor
             let sheetWindow = self.mainController!.window!
             let doc = editor.document
-            doc.windowForSheet!.beginSheet(sheetWindow) { response in
+            doc!.windowForSheet!.beginSheet(sheetWindow) { response in
                 println("response: \(response)")
             }
         }

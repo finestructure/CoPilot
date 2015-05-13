@@ -23,8 +23,8 @@ protocol ConnectedDocument {
 struct Editor {
     let editor: NSViewController
     let window: NSWindow
-    var textStorage: NSTextStorage { return XcodeUtils.textStorage(self.editor) }
-    var document: NSDocument { return XcodeUtils.sourceCodeDocument(self.editor) }
+    var textStorage: NSTextStorage? { return XcodeUtils.textStorage(self.editor) }
+    var document: NSDocument? { return XcodeUtils.sourceCodeDocument(self.editor) }
 }
 
 
@@ -54,7 +54,7 @@ class ConnectedEditor {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
             self.sendThrottle.execute {
                 println("#### doc updated")
-                self.document.update(Document(self.editor.textStorage.string))
+                self.document.update(Document(self.editor.textStorage!.string))
             }
         }
     }
@@ -63,8 +63,12 @@ class ConnectedEditor {
     private func setOnUpdate() {
         // TODO: refine this by only replacing the changed text or at least keeping the caret in place
         self.document.onUpdate = { doc in
-            let tv = XcodeUtils.sourceCodeDocument(self.editor.editor)
-            self.editor.textStorage.replaceAll(doc.text)
+            let tv = XcodeUtils.sourceTextView(self.editor.editor)
+            let selected = tv!.selectedRange
+            self.editor.textStorage!.replaceAll(doc.text)
+            if selected.location + selected.length < count(doc.text) {
+                tv!.setSelectedRange(selected)
+            }
         }
     }
     

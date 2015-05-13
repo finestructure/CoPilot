@@ -18,17 +18,17 @@ struct XcodeUtils {
     }
     
     
-    static func textStorage(editor: NSViewController) -> NSTextStorage {
+    static func textStorage(editor: NSViewController) -> NSTextStorage? {
         return NSTextStorage()
     }
     
     
-    static func sourceCodeDocument(editor: NSViewController) -> NSDocument {
+    static func sourceCodeDocument(editor: NSViewController) -> NSDocument? {
         return NSDocument()
     }
     
     
-    static func sourceTextView(editor: NSViewController) -> NSTextView {
+    static func sourceTextView(editor: NSViewController) -> NSTextView? {
         return NSTextView()
     }
     
