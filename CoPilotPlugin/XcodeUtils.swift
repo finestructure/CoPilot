@@ -12,22 +12,27 @@ import Cocoa
 struct XcodeUtils {
     
     static var activeEditor: Editor? {
-        if let editor = DTXcodeUtils.currentEditor(),
+        if  let editor = DTXcodeUtils.currentEditor(),
             let window = DTXcodeUtils.currentWindow() {
-//            let doc = DTXcodeUtils.currentSourceCodeDocument(),
-//            let textStorage = DTXcodeUtils.currentTextStorage() {
                 return Editor(editor: editor, window: window)
         } else {
             return nil
         }
     }
 
+    
     static func textStorage(editor: NSViewController) -> NSTextStorage {
         return DTXcodeUtils.textStorageForEditor(editor)
     }
 
+    
     static func sourceCodeDocument(editor: NSViewController) -> NSDocument {
         return DTXcodeUtils.sourceCodeDocumentForEditor(editor)
+    }
+
+    
+    static func sourceTextView(editor: NSViewController) -> NSTextView {
+        return DTXcodeUtils.sourceTextViewForEditor(editor)
     }
 
 }
