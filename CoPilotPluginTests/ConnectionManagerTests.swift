@@ -61,7 +61,7 @@ class ConnectionManagerTests: XCTestCase {
 
 
 func createEditor() -> Editor {
-    let editor = NSViewController()
+    let controller = NSViewController()
     let win = NSWindow()
-    return Editor(editor: editor, window: win)!
+    return Editor(controller: controller, window: win)!
 }

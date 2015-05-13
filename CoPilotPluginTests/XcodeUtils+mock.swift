@@ -12,23 +12,23 @@ import Cocoa
 struct XcodeUtils {
     
     static var activeEditor: Editor? {
-        let editor = NSViewController()
+        let controller = NSViewController()
         let window = NSWindow()
-        return Editor(editor: editor, window: window)
+        return Editor(controller: controller, window: window)
     }
     
     
-    static func textStorage(editor: NSViewController) -> NSTextStorage? {
+    static func textStorage(controller: NSViewController) -> NSTextStorage? {
         return NSTextStorage()
     }
     
     
-    static func sourceCodeDocument(editor: NSViewController) -> NSDocument? {
+    static func sourceCodeDocument(controller: NSViewController) -> NSDocument? {
         return NSDocument()
     }
     
     
-    static func sourceTextView(editor: NSViewController) -> NSTextView? {
+    static func sourceTextView(controller: NSViewController) -> NSTextView? {
         return NSTextView()
     }
     

@@ -21,17 +21,17 @@ protocol ConnectedDocument {
 
 
 struct Editor {
-    let editor: NSViewController
+    let controller: NSViewController
     let window: NSWindow
     let textStorage: NSTextStorage
     let document: NSDocument
     
-    init?(editor: NSViewController?, window: NSWindow?) {
-        if  let editor = editor,
+    init?(controller: NSViewController?, window: NSWindow?) {
+        if  let controller = controller,
             let window = window,
-            let ts = XcodeUtils.textStorage(editor),
-            let doc = XcodeUtils.sourceCodeDocument(editor) {
-                self.editor = editor
+            let ts = XcodeUtils.textStorage(controller),
+            let doc = XcodeUtils.sourceCodeDocument(controller) {
+                self.controller = controller
                 self.window = window
                 self.textStorage = ts
                 self.document = doc
@@ -45,7 +45,7 @@ struct Editor {
 extension Editor: Equatable { }
 
 func ==(lhs: Editor, rhs: Editor) -> Bool {
-    return lhs.editor == rhs.editor
+    return lhs.controller == rhs.controller
         && lhs.window == rhs.window
 }
 
@@ -77,7 +77,7 @@ class ConnectedEditor {
     private func setOnUpdate() {
         // TODO: refine this by only replacing the changed text or at least keeping the caret in place
         self.document.onUpdate = { doc in
-            if let tv = XcodeUtils.sourceTextView(self.editor.editor) {
+            if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
                 let selected = tv.selectedRange
                 self.editor.textStorage.replaceAll(doc.text)
                 if selected.location + selected.length < count(doc.text) {
