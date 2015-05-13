@@ -71,7 +71,9 @@ class DiffTests: XCTestCase {
     
     func test_patches_long() {
         let a = contentsOfFile(name: "test_a", type: "txt")
+        expect(count(a)) == 400
         let b = contentsOfFile(name: "test_b", type: "txt")
+        expect(count(b)) == 394
         let patches = computePatches(a, b)
         expect(patches.count) == 4
         
@@ -88,6 +90,41 @@ class DiffTests: XCTestCase {
         expect(p[1].operation) == Operation.DiffEqual
         expect(p[1].text) == "The "
         expect(count(p[1].text)) == 4
+        
+        // line starts and ends
+        expect(newPosition(0, patches)) == 0
+        expect(newPosition(52, patches)) == 0
+        expect(newPosition(53, patches)) == 0
+        expect(newPosition(104, patches)) == 0
+        expect(newPosition(105, patches)) == 1
+
+        // line starts and ends
+        expect(newPosition(152, patches)) == 48
+        expect(newPosition(153, patches)) == 49
+
+        // around 'Named' -> 'named' change
+        expect(a[155..<159]) == " Nam"
+        expect(b[51..<55]) == " nam"
+        expect(newPosition(155, patches)) == 51
+        expect(newPosition(156, patches)) == 52
+        expect(newPosition(157, patches)) == 53
+
+        expect(a[186..<190]) == "ngs."
+        expect(b[82..<86]) == "ngs."
+        expect(newPosition(186, patches)) == 82
+        expect(newPosition(187, patches)) == 83
+        expect(newPosition(188, patches)) == 84
+        expect(newPosition(189, patches)) == 85
+
+        expect(a[190..<191]) == "\n"
+        expect(b[86..<88]) == "\n\n"
+        expect(newPosition(190, patches)) == 86
+
+        expect(a[191..<193]) == "Th"
+        expect(b[88..<90]) == "Th"
+        expect(newPosition(191, patches)) == 88
+        expect(newPosition(192, patches)) == 89
+        expect(newPosition(189, patches)) == 86
         
         p = patches[1]
         expect(p.start1) == 44
@@ -196,6 +233,32 @@ class DiffTests: XCTestCase {
     func test_hash() {
         let doc = Document("The quick brown fox jumps over the lazy dog")
         expect(doc.hash) == "9e107d9d372bb6826bd81d3542a419d6".uppercaseString
+    }
+    
+    
+    func test_preserve_position() {
+        let cr = "\n"
+        let line = "0123456789"
+        let a = line + cr + line + cr + line
+        expect(count(a)) == 32
+        let b = line + cr + line + cr + "01234 56789"
+        let patches = computePatches(a, b)
+        expect(patches.count) == 1
+        let p = patches[0]
+        expect(p.start1) == 23
+        expect(p.start2) == 23
+        expect(p.length1) == 8
+        expect(p.length2) == 9
+        expect(newPosition(0, patches)) == 0
+        expect(newPosition(5, patches)) == 5
+        expect(newPosition(10, patches)) == 10
+        expect(newPosition(15, patches)) == 15
+        expect(newPosition(20, patches)) == 20
+        expect(newPosition(25, patches)) == 25
+        expect(newPosition(27, patches)) == 27
+        expect(newPosition(28, patches)) == 29
+        expect(newPosition(30, patches)) == 31
+        expect(newPosition(32, patches)) == 33
     }
     
 }

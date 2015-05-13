@@ -90,6 +90,11 @@ extension Patch {
         return self.diffs[index] as! Diff
     }
     
+    func isInRange1(pos: Int) -> Bool {
+        let uPos = UInt(pos)
+        return self.start1 <= uPos //&& uPos <= self.start1 + self.length1
+    }
+    
 }
 
 
@@ -106,5 +111,19 @@ extension Operation: Printable {
         }
     }
     
+}
+
+
+func newPosition(currentPos: UInt, patches: [Patch]) -> UInt {
+    var x = Int(currentPos)
+    if patches.count > 0 {
+        for p in patches {
+            if p.isInRange1(x) {
+                let delta = Int(p.length2) - Int(p.length1)
+                x = max(x + delta, 0)
+            }
+        }
+    }
+    return UInt(x)
 }
 
