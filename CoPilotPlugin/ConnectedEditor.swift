@@ -63,7 +63,7 @@ class ConnectedEditor {
     private func setOnUpdate() {
         // TODO: refine this by only replacing the changed text or at least keeping the caret in place
         self.document.onUpdate = { doc in
-            let tv = DTXcodeUtils.sourceTextViewForEditor
+            let tv = XcodeUtils.sourceCodeDocument(self.editor.editor)
             self.editor.textStorage.replaceAll(doc.text)
         }
     }
