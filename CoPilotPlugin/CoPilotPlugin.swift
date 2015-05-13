@@ -31,6 +31,7 @@ class CoPilotPlugin: NSObject {
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
     var subscribeMenuItem: NSMenuItem! = nil
+    var menusAdded = false
 
     class func pluginDidLoad(bundle: NSBundle) {
         let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? NSString
@@ -53,6 +54,10 @@ class CoPilotPlugin: NSObject {
         )
         observers.append(
             observe("NSTextViewDidChangeSelectionNotification", object: nil) { _ in
+                if !self.menusAdded {
+                    // sometimes the menu items would not be added, perhaps a race condition with the edit menu not being there yet?
+                    self.addMenuItems()
+                }
                 self.publishMenuItem.title = publishMenuTitle(editor: XcodeUtils.activeEditor)
             }
         )
@@ -99,6 +104,7 @@ extension CoPilotPlugin {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
             item!.submenu!.addItem(self.subscribeMenuItem)
+            self.menusAdded = true
         }
     }
 
