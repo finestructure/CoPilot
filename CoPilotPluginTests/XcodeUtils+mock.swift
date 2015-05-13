@@ -1,8 +1,8 @@
 //
-//  XcodeUtils.swift
+//  XcodeUtils+mock.swift
 //  CoPilotPlugin
 //
-//  Created by Sven Schmidt on 12/05/2015.
+//  Created by Sven Schmidt on 13/05/2015.
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
 //
 
@@ -12,22 +12,24 @@ import Cocoa
 struct XcodeUtils {
     
     static var activeEditor: Editor? {
-        return Editor(controller: DTXcodeUtils.currentEditor(), window: DTXcodeUtils.currentWindow())
+        let controller = NSViewController()
+        let window = NSWindow()
+        return Editor(controller: controller, window: window)
     }
-
+    
     
     static func textStorage(controller: NSViewController) -> NSTextStorage? {
-        return DTXcodeUtils.textStorageForEditor(controller)
+        return NSTextStorage()
     }
-
+    
     
     static func sourceCodeDocument(controller: NSViewController) -> NSDocument? {
-        return DTXcodeUtils.sourceCodeDocumentForEditor(controller)
+        return NSDocument()
     }
-
+    
     
     static func sourceTextView(controller: NSViewController) -> NSTextView? {
-        return DTXcodeUtils.sourceTextViewForEditor(controller)
+        return NSTextView()
     }
-
+    
 }
