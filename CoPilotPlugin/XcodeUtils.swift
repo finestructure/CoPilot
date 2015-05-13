@@ -12,12 +12,7 @@ import Cocoa
 struct XcodeUtils {
     
     static var activeEditor: Editor? {
-        if  let editor = DTXcodeUtils.currentEditor(),
-            let window = DTXcodeUtils.currentWindow() {
-                return Editor(editor: editor, window: window)
-        } else {
-            return nil
-        }
+        return Editor(editor: DTXcodeUtils.currentEditor(), window: DTXcodeUtils.currentWindow())
     }
 
     

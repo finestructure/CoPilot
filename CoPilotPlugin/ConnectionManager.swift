@@ -46,8 +46,8 @@ class ConnectionManager {
  
     
     static func publish(editor: Editor) -> ConnectedEditor {
-        let name = "\(editor.document!.displayName) @ \(NSHost.currentHost().localizedName!)"
-        let doc = { Document(editor.textStorage!.string) }
+        let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
+        let doc = { Document(editor.textStorage.string) }
         let docServer = DocServer(name: name, document: doc())
         let connectedEditor = ConnectedEditor(editor: editor, document: docServer)
         self.published.append(connectedEditor)
@@ -64,7 +64,7 @@ class ConnectionManager {
     
     
     static func subscribe(service: NSNetService, editor: Editor) -> ConnectedEditor {
-        let client = DocClient(service: service, document: Document(editor.textStorage!.string))
+        let client = DocClient(service: service, document: Document(editor.textStorage.string))
         let connectedEditor = ConnectedEditor(editor: editor, document: client)
         self.subscribed.append(connectedEditor)
         return connectedEditor

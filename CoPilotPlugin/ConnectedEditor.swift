@@ -23,8 +23,22 @@ protocol ConnectedDocument {
 struct Editor {
     let editor: NSViewController
     let window: NSWindow
-    var textStorage: NSTextStorage? { return XcodeUtils.textStorage(self.editor) }
-    var document: NSDocument? { return XcodeUtils.sourceCodeDocument(self.editor) }
+    let textStorage: NSTextStorage
+    let document: NSDocument
+    
+    init?(editor: NSViewController?, window: NSWindow?) {
+        if  let editor = editor,
+            let window = window,
+            let ts = XcodeUtils.textStorage(editor),
+            let doc = XcodeUtils.sourceCodeDocument(editor) {
+                self.editor = editor
+                self.window = window
+                self.textStorage = ts
+                self.document = doc
+        } else {
+            return nil
+        }
+    }
 }
 
 
@@ -54,7 +68,7 @@ class ConnectedEditor {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
             self.sendThrottle.execute {
                 println("#### doc updated")
-                self.document.update(Document(self.editor.textStorage!.string))
+                self.document.update(Document(self.editor.textStorage.string))
             }
         }
     }
@@ -63,11 +77,12 @@ class ConnectedEditor {
     private func setOnUpdate() {
         // TODO: refine this by only replacing the changed text or at least keeping the caret in place
         self.document.onUpdate = { doc in
-            let tv = XcodeUtils.sourceTextView(self.editor.editor)
-            let selected = tv!.selectedRange
-            self.editor.textStorage!.replaceAll(doc.text)
-            if selected.location + selected.length < count(doc.text) {
-                tv!.setSelectedRange(selected)
+            if let tv = XcodeUtils.sourceTextView(self.editor.editor) {
+                let selected = tv.selectedRange
+                self.editor.textStorage.replaceAll(doc.text)
+                if selected.location + selected.length < count(doc.text) {
+                    tv.setSelectedRange(selected)
+                }
             }
         }
     }
