@@ -116,13 +116,10 @@
 }
 
 + (DVTTextStorage *)textStorageForEditor:(id)editor {
-    NSLog(@"editor: %@", editor);
     NSTextView *textView = [self sourceTextViewForEditor:editor];
-    NSLog(@"textView: %@", textView);
     if ([textView.textStorage isKindOfClass:NSClassFromString(@"DVTTextStorage")]) {
         return (DVTTextStorage *)textView.textStorage;
     }
-    NSLog(@"is nil");
     return nil;
 }
 
