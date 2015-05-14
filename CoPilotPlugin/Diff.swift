@@ -135,7 +135,7 @@ func adjustPos(position: Position, patch: Patch) -> Position {
         var diffPointer = 0
         for diff in patch {
             let posPointer = Int(x - patch.start1)
-            if diffPointer <= posPointer {
+            if diffPointer < posPointer {
                 x = adjustPos(x, diff)
             }
             if diff.operation == .DiffEqual {
