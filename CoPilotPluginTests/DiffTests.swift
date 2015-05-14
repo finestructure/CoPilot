@@ -91,41 +91,6 @@ class DiffTests: XCTestCase {
         expect(p[1].text) == "The "
         expect(count(p[1].text)) == 4
         
-        // line starts and ends
-        expect(newPosition(0, patches)) == 0
-        expect(newPosition(52, patches)) == 0
-        expect(newPosition(53, patches)) == 0
-        expect(newPosition(104, patches)) == 0
-        expect(newPosition(105, patches)) == 1
-
-        // line starts and ends
-        expect(newPosition(152, patches)) == 48
-        expect(newPosition(153, patches)) == 49
-
-        // around 'Named' -> 'named' change
-        expect(a[155..<159]) == " Nam"
-        expect(b[51..<55]) == " nam"
-        expect(newPosition(155, patches)) == 51
-        expect(newPosition(156, patches)) == 52
-        expect(newPosition(157, patches)) == 53
-
-        expect(a[186..<190]) == "ngs."
-        expect(b[82..<86]) == "ngs."
-        expect(newPosition(186, patches)) == 82
-        expect(newPosition(187, patches)) == 83
-        expect(newPosition(188, patches)) == 84
-        expect(newPosition(189, patches)) == 85
-
-        expect(a[190..<191]) == "\n"
-        expect(b[86..<88]) == "\n\n"
-        expect(newPosition(190, patches)) == 86
-
-        expect(a[191..<193]) == "Th"
-        expect(b[88..<90]) == "Th"
-        expect(newPosition(191, patches)) == 88
-        expect(newPosition(192, patches)) == 89
-        expect(newPosition(189, patches)) == 86
-        
         p = patches[1]
         expect(p.start1) == 44
         expect(p.start2) == 44
@@ -176,6 +141,52 @@ class DiffTests: XCTestCase {
         expect(p[1].operation) == Operation.DiffInsert
         expect(p[1].text) == "They both may be called deep and profound.\nDeeper and more profound,\nThe door of all subtleties!\n"
         expect(count(p[1].text)) == 97
+    }
+    
+    
+    func test_adjustPos() {
+        let a = contentsOfFile(name: "test_a", type: "txt")
+        let b = contentsOfFile(name: "test_b", type: "txt")
+        let patches = computePatches(a, b)
+        expect(patches.count) == 4
+
+        
+        
+        // line starts and ends
+        expect(newPosition(0, patches)) == 0
+        expect(newPosition(52, patches)) == 0
+        expect(newPosition(53, patches)) == 0
+        expect(newPosition(104, patches)) == 0
+        expect(newPosition(105, patches)) == 1
+        
+        // line starts and ends
+        expect(newPosition(152, patches)) == 48
+        expect(newPosition(153, patches)) == 49
+        
+        // around 'Named' -> 'named' change
+        expect(a[155..<159]) == " Nam"
+        expect(b[51..<55]) == " nam"
+        expect(newPosition(155, patches)) == 51
+        expect(newPosition(156, patches)) == 52
+        expect(newPosition(157, patches)) == 53
+        
+        expect(a[186..<190]) == "ngs."
+        expect(b[82..<86]) == "ngs."
+        expect(newPosition(186, patches)) == 82
+        expect(newPosition(187, patches)) == 83
+        expect(newPosition(188, patches)) == 84
+        expect(newPosition(189, patches)) == 85
+        
+        expect(a[190..<191]) == "\n"
+        expect(b[86..<88]) == "\n\n"
+        expect(newPosition(190, patches)) == 86
+        
+        expect(a[191..<193]) == "Th"
+        expect(b[88..<90]) == "Th"
+        expect(newPosition(191, patches)) == 88
+        expect(newPosition(192, patches)) == 89
+        expect(newPosition(189, patches)) == 86
+
     }
     
     

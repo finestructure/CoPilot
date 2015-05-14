@@ -90,9 +90,19 @@ extension Patch {
         return self.diffs[index] as! Diff
     }
     
-    func isInRange1(pos: Int) -> Bool {
-        let uPos = UInt(pos)
-        return self.start1 <= uPos //&& uPos <= self.start1 + self.length1
+}
+
+
+extension Patch: SequenceType {
+    
+    public func generate() -> GeneratorOf<Diff> {
+        var next = 0
+        return GeneratorOf<Diff> {
+            if (next == self.diffs.count) {
+                return nil
+            }
+            return self[next++]
+        }
     }
     
 }
@@ -114,16 +124,41 @@ extension Operation: Printable {
 }
 
 
-func newPosition(currentPos: UInt, patches: [Patch]) -> UInt {
-    var x = Int(currentPos)
-    if patches.count > 0 {
-        for p in patches {
-            if p.isInRange1(x) {
-                let delta = Int(p.length2) - Int(p.length1)
-                x = max(x + delta, 0)
-            }
+typealias Position = UInt
+
+
+func adjustPos(position: Position, patch: Patch) -> Position {
+    if position < patch.start1 {
+        return position
+    } else {
+        var x = position
+        for diff in patch {
+            x = adjustPos(x, diff)
         }
+        return x
     }
-    return UInt(x)
+}
+
+
+func adjustPos(position: Position, diff: Diff) -> Position {
+    let diffSize = count(diff.text)
+
+    switch diff.operation {
+    case .DiffEqual:
+        return position
+    case .DiffDelete:
+        return Position( max(Int(position) - diffSize, 0) )
+    case .DiffInsert:
+        return position + Position(diffSize)
+    }
+}
+
+
+func newPosition(currentPos: Position, patches: [Patch]) -> Position {
+    var x = currentPos
+    for patch in patches {
+        x = adjustPos(x, patch)
+    }
+    return x
 }
 
