@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConnectedController" customModule="CoPilotPlugin" customModuleProvider="target">
             <connections>
+                <outlet property="currentEditorField" destination="Ksc-Ca-HF0" id="27t-dH-MAu"/>
+                <outlet property="statusImageView" destination="56Y-DJ-RRd" id="e5S-H1-HgB"/>
                 <outlet property="tableView" destination="uh6-vT-okB" id="D7H-lb-7aC"/>
                 <outlet property="window" destination="DKg-7q-Quj" id="eK5-9a-M4E"/>
             </connections>
@@ -22,13 +24,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oja-1w-5UT">
-                        <rect key="frame" x="-1" y="-1" width="278" height="380"/>
+                        <rect key="frame" x="-1" y="-1" width="278" height="344"/>
                         <clipView key="contentView" id="jep-Vz-TWp">
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="uh6-vT-okB">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="276" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -84,12 +86,36 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="56Y-DJ-RRd">
+                        <rect key="frame" x="8" y="352" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="LRX-sl-L03"/>
+                            <constraint firstAttribute="height" constant="16" id="d5t-eX-mXq"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusAvailable" id="o6w-jd-hWF"/>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ksc-Ca-HF0">
+                        <rect key="frame" x="30" y="353" width="228" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="Dwp-px-pfq"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="URs-QV-KYa">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Oja-1w-5UT" firstAttribute="top" secondItem="qmD-Ex-vEm" secondAttribute="top" constant="-1" id="FFP-e1-FGI"/>
+                    <constraint firstAttribute="trailing" secondItem="Ksc-Ca-HF0" secondAttribute="trailing" constant="20" id="8Zc-kj-5Rv"/>
+                    <constraint firstItem="Oja-1w-5UT" firstAttribute="top" secondItem="qmD-Ex-vEm" secondAttribute="top" constant="35" id="FFP-e1-FGI"/>
                     <constraint firstItem="Oja-1w-5UT" firstAttribute="leading" secondItem="qmD-Ex-vEm" secondAttribute="leading" constant="-1" id="Fw9-QF-OR3"/>
                     <constraint firstAttribute="trailing" secondItem="Oja-1w-5UT" secondAttribute="trailing" constant="-1" id="K8q-QX-jAM"/>
+                    <constraint firstItem="56Y-DJ-RRd" firstAttribute="top" secondItem="qmD-Ex-vEm" secondAttribute="top" constant="10" id="Ood-Rt-bx4"/>
+                    <constraint firstItem="Ksc-Ca-HF0" firstAttribute="leading" secondItem="56Y-DJ-RRd" secondAttribute="trailing" constant="8" id="Uyi-BF-rTk"/>
+                    <constraint firstItem="56Y-DJ-RRd" firstAttribute="leading" secondItem="qmD-Ex-vEm" secondAttribute="leading" constant="8" id="VJ8-id-bkA"/>
                     <constraint firstAttribute="bottom" secondItem="Oja-1w-5UT" secondAttribute="bottom" constant="-1" id="aRL-d5-ccf"/>
+                    <constraint firstItem="Ksc-Ca-HF0" firstAttribute="top" secondItem="qmD-Ex-vEm" secondAttribute="top" constant="8" id="xrP-a6-lp0"/>
                 </constraints>
             </view>
             <connections>
@@ -98,4 +124,7 @@
             <point key="canvasLocation" x="205" y="230"/>
         </window>
     </objects>
+    <resources>
+        <image name="NSStatusAvailable" width="16" height="16"/>
+    </resources>
 </document>

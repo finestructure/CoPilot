@@ -9,6 +9,10 @@
 import Foundation
 
 
+let DocumentPublishedNotification = "DocumentPublishedNotification"
+let DocumentDisconnectedNotification = "DocumentDisconnectedNotification"
+
+
 class ConnectionManager {
     
     private static var published = [ConnectedEditor]()
@@ -51,6 +55,7 @@ class ConnectionManager {
         let docServer = DocServer(name: name, document: doc())
         let connectedEditor = ConnectedEditor(editor: editor, document: docServer)
         self.published.append(connectedEditor)
+        NSNotificationCenter.defaultCenter().postNotificationName(DocumentPublishedNotification, object: self)
         return connectedEditor
     }
     
@@ -59,6 +64,8 @@ class ConnectionManager {
         if let conn = self.connected({ $0.editor == editor }) {
             conn.document.disconnect()
             self.published = self.published.filter({ $0.editor != editor })
+            self.subscribed = self.subscribed.filter({ $0.editor != editor })
+            NSNotificationCenter.defaultCenter().postNotificationName(DocumentDisconnectedNotification, object: self)
         }
     }
     
