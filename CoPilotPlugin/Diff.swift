@@ -132,8 +132,15 @@ func adjustPos(position: Position, patch: Patch) -> Position {
         return position
     } else {
         var x = position
+        var diffPointer = 0
         for diff in patch {
-            x = adjustPos(x, diff)
+            let posPointer = Int(x - patch.start1)
+            if diffPointer <= posPointer {
+                x = adjustPos(x, diff)
+            }
+            if diff.operation == .DiffEqual {
+                diffPointer += count(diff.text)
+            }
         }
         return x
     }
@@ -142,7 +149,7 @@ func adjustPos(position: Position, patch: Patch) -> Position {
 
 func adjustPos(position: Position, diff: Diff) -> Position {
     let diffSize = count(diff.text)
-
+    
     switch diff.operation {
     case .DiffEqual:
         return position

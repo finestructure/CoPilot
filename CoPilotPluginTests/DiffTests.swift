@@ -149,8 +149,6 @@ class DiffTests: XCTestCase {
         let b = contentsOfFile(name: "test_b", type: "txt")
         let patches = computePatches(a, b)
         expect(patches.count) == 4
-
-        
         
         // line starts and ends
         expect(newPosition(0, patches)) == 0
@@ -185,7 +183,7 @@ class DiffTests: XCTestCase {
         expect(b[88..<90]) == "Th"
         expect(newPosition(191, patches)) == 88
         expect(newPosition(192, patches)) == 89
-        expect(newPosition(189, patches)) == 86
+        expect(newPosition(193, patches)) == 90
 
     }
     
