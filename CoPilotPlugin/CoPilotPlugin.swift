@@ -107,7 +107,7 @@ extension CoPilotPlugin {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
             item!.submenu!.addItem(self.subscribeMenuItem)
-            item!.submenu!.addItem(self.menuItem("CoPilot Show Connected", action:"showConnected", key:"c"))
+            item!.submenu!.addItem(self.menuItem("CoPilot Show Connections", action:"showConnected", key:"c"))
             self.menusAdded = true
         }
     }
@@ -158,7 +158,6 @@ extension CoPilotPlugin {
             self.connectedController = ConnectedController(windowNibName: "ConnectedController")
         }
         self.connectedController?.showWindow(self)
- 
     }
     
 }
