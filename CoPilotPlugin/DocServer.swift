@@ -10,7 +10,7 @@ import Cocoa
 import FeinstrukturUtils
 
 
-typealias MessageDocumentHandler = ((Message, Document) -> Void)
+typealias MessageDocumentHandler = ((Message, Command, Document) -> Void)
 
 
 func messageHandler(documentProvider: DocumentProvider, update: MessageDocumentHandler) -> MessageHandler {
@@ -18,11 +18,11 @@ func messageHandler(documentProvider: DocumentProvider, update: MessageDocumentH
         let cmd = Command(data: msg.data!)
         switch cmd {
         case .Doc(let doc):
-            update(msg, doc)
+            update(msg, cmd, doc)
         case .Update(let changes):
             let res = apply(documentProvider(), changes)
             if res.succeeded {
-                update(msg, res.value!)
+                update(msg, cmd, res.value!)
             } else {
                 println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
             }
@@ -40,6 +40,7 @@ class DocServer {
     private var _onUpdate: UpdateHandler?
     private var timer: Timer!
     private var docProvider: DocumentProvider!
+    private var _connections = [WebSocket: Connection]()
 
     var document: Document { return self._document }
 
@@ -52,10 +53,15 @@ class DocServer {
                 let cmd = Command(document: self._document)
                 ws.send(cmd.serialize())
                 
-                ws.onReceive = messageHandler({ self._document }, { msg, doc in
-                    self._document = doc
-                    self.server.broadcast(msg.data!, exclude: ws)
-                    self.onUpdate?(doc)
+                ws.onReceive = messageHandler({ self._document }, { msg, cmd, doc in
+                    switch cmd {
+                    case .Name(let name):
+                        self._connections[ws] = SimpleConnection(displayName: name)
+                    default: // TODO: this should probably only be on .Update
+                        self._document = doc
+                        self.server.broadcast(msg.data!, exclude: ws)
+                        self.onUpdate?(doc)
+                    }
                 })
             }
             s.start()
@@ -103,11 +109,7 @@ extension DocServer: ConnectedDocument {
     
     
     var connections: [Connection] {
-        var c = [Connection]()
-        for (i, s) in enumerate(self.server.sockets) {
-            c.append(SimpleConnection(displayName: "socket \(i)"))
-        }
-        return c
+        return self._connections.values.array
     }
 
 }

@@ -30,11 +30,15 @@ class DocClient {
         self.resolver = Resolver(service: service, timeout: 5)
         self.resolver!.onResolve = { websocket in
             self.connection = SimpleConnection(displayName: service.name)
-            websocket.onReceive = messageHandler({ self._document }) { _, doc in
+            self.socket = websocket
+            websocket.onConnect = {
+                let cmd = Command(name: self.clientId)
+                self.socket?.send(cmd.serialize())
+            }
+            websocket.onReceive = messageHandler({ self._document }) { _, _, doc in
                 self._document = doc
                 self._onUpdate?(doc)
             }
-            self.socket = websocket
         }
     }
 
