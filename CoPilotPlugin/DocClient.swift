@@ -22,22 +22,13 @@ class DocClient {
     init(service: NSNetService, document: Document) {
         self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
-        self.resolver!.onResolve = resolve
-    }
-    
-    
-    init(websocket: WebSocket, document: Document) {
-        self._document = document
-        self.resolve(websocket)
-    }
-    
-    
-    private func resolve(websocket: WebSocket) {
-        websocket.onReceive = messageHandler({ self._document }) { _, doc in
-            self._document = doc
-            self._onUpdate?(doc)
+        self.resolver!.onResolve = { websocket in
+            websocket.onReceive = messageHandler({ self._document }) { _, doc in
+                self._document = doc
+                self._onUpdate?(doc)
+            }
+            self.socket = websocket
         }
-        self.socket = websocket
     }
 
 }

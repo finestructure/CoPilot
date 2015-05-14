@@ -24,6 +24,16 @@ let words = [
 ]
 
 
+func createClient(# document: Document) -> DocClient {
+    var service: NSNetService?
+    let browser = Browser(service: CoPilotService) { s in
+        service = s
+    }
+    expect(service).toEventuallyNot(beNil(), timeout: 2)
+    return DocClient(service: service!, document: document)
+}
+
+
 class DocClientServerTests: XCTestCase {
 
     var server: DocServer!
@@ -53,7 +63,7 @@ class DocClientServerTests: XCTestCase {
         let doc = documentProvider("/tmp/server.txt")
         self.server = DocServer(name: "foo", document: doc())
         self.server.poll(interval: 0.1, docProvider: doc)
-        let client = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
+        let client = createClient(document: Document(""))
         client.onUpdate = { doc in
             println("client doc: \(doc.text)")
             if try({ e in
@@ -87,11 +97,11 @@ class DocClientServerTests: XCTestCase {
         self.server = DocServer(name: "foo", document: doc())
         self.server.poll(interval: 0.1, docProvider: doc)
         // we're doing this to not send an intialize to the client2 subscriber
-        let client1 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
+        let client1 = createClient(document: Document(""))
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
-        let client2 = DocClient(websocket: WebSocket(url: TestUrl), document: client2Doc)
+        let client2 = createClient(document: client2Doc)
         serverDoc = Document("foobar")
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
     }
@@ -101,11 +111,11 @@ class DocClientServerTests: XCTestCase {
         var serverDoc = Document("foo")
         self.server = DocServer(name: "server", document: serverDoc)
 
-        let client1 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
+        let client1 = createClient(document: Document(""))
         client1.clientId = "C1"
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
-        let client2 = DocClient(websocket: WebSocket(url: TestUrl), document: Document(""))
+        let client2 = createClient(document: Document(""))
         client2.clientId = "C2"
         expect(client2.document.text).toEventually(equal("foo"), timeout: 5)
 
