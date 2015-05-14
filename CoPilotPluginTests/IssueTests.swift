@@ -29,8 +29,21 @@ class IssueTests: XCTestCase {
         
         tv.textStorage?.replaceAll(newDoc.text)
         
-        let newSelection = adjustSelection(selected, newPos, count(newDoc.text))
+        let newSelection = adjustSelection(selected, newPos, newDoc.text)
         tv.setSelectedRange(newSelection)
+    }
+    
+    
+    // https://bitbucket.org/feinstruktur/copilot/issue/8/insertion-point-not-preserved-when-emojis
+    func test_issue_8() {
+        // NSString based subsystems count 🔥 as 2 characters
+        // we need to use (s as NSString).length instead of count(s) to stay in NSString's 'coordinate system'
+        let s = "🔥" as NSString
+        expect(s.length) == 2
+        expect(count("🔥")) == 1
+
+        var patches = computePatches("123", "🔥123")
+        expect(newPosition(3, patches)) == 5 // diff subsytems and NSTextView selections 'see' 🔥 as 2 characters
     }
     
 }

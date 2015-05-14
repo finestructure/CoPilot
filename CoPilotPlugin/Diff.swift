@@ -139,7 +139,7 @@ func adjustPos(position: Position, patch: Patch) -> Position {
                 x = adjustPos(x, diff)
             }
             if diff.operation == .DiffEqual {
-                diffPointer += count(diff.text)
+                diffPointer += (diff.text as NSString).length
             }
         }
         return x
@@ -148,7 +148,7 @@ func adjustPos(position: Position, patch: Patch) -> Position {
 
 
 func adjustPos(position: Position, diff: Diff) -> Position {
-    let diffSize = count(diff.text)
+    let diffSize = (diff.text as NSString).length
     
     switch diff.operation {
     case .DiffEqual:
