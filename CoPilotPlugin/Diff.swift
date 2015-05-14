@@ -93,6 +93,21 @@ extension Patch {
 }
 
 
+extension Patch: SequenceType {
+    
+    public func generate() -> GeneratorOf<Diff> {
+        var next = 0
+        return GeneratorOf<Diff> {
+            if (next == self.diffs.count) {
+                return nil
+            }
+            return self[next++]
+        }
+    }
+    
+}
+
+
 extension Operation: Printable {
     
     public var description: String {
@@ -106,5 +121,51 @@ extension Operation: Printable {
         }
     }
     
+}
+
+
+typealias Position = UInt
+
+
+func adjustPos(position: Position, patch: Patch) -> Position {
+    if position < patch.start1 {
+        return position
+    } else {
+        var x = position
+        var diffPointer = 0
+        for diff in patch {
+            let posPointer = Int(x - patch.start1)
+            if diffPointer < posPointer {
+                x = adjustPos(x, diff)
+            }
+            if diff.operation == .DiffEqual {
+                diffPointer += count(diff.text)
+            }
+        }
+        return x
+    }
+}
+
+
+func adjustPos(position: Position, diff: Diff) -> Position {
+    let diffSize = count(diff.text)
+    
+    switch diff.operation {
+    case .DiffEqual:
+        return position
+    case .DiffDelete:
+        return Position( max(Int(position) - diffSize, 0) )
+    case .DiffInsert:
+        return position + Position(diffSize)
+    }
+}
+
+
+func newPosition(currentPos: Position, patches: [Patch]) -> Position {
+    var x = currentPos
+    for patch in patches {
+        x = adjustPos(x, patch)
+    }
+    return x
 }
 
