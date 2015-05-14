@@ -11,11 +11,12 @@ import Cocoa
 class ConnectedController: NSWindowController {
 
     @IBOutlet weak var tableView: NSTableView!
-    
-    var observers = [NSObjectProtocol]()
     @IBOutlet weak var statusImageView: NSImageView!
     @IBOutlet weak var currentEditorField: NSTextField!
 
+    var observers = [NSObjectProtocol]()
+    var connections = [Connection]()
+    
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -23,7 +24,7 @@ class ConnectedController: NSWindowController {
 
     
     override func awakeFromNib() {
-        self.updateUI()
+        self.update()
 
         let notifications = [
             "NSTextViewDidChangeSelectionNotification",
@@ -34,7 +35,7 @@ class ConnectedController: NSWindowController {
         ]
         for name in notifications {
             observers.append(
-                observe(name, object: nil) { _ in self.updateUI() }
+                observe(name, object: nil) { _ in self.update() }
             )
         }
     }
@@ -51,6 +52,17 @@ class ConnectedController: NSWindowController {
 
 // MARK: - Helpers
 extension ConnectedController {
+    
+    func update() {
+        if let editor = XcodeUtils.activeEditor,
+            let ce = ConnectionManager.connectedEditor(editor) {
+                self.connections = ce.document.connections
+        } else {
+            self.connections = [Connection]()
+        }
+
+        self.updateUI()
+    }
     
     func updateUI() {
         self.tableView.reloadData()
@@ -79,7 +91,7 @@ extension ConnectedController {
 extension ConnectedController: NSTableViewDataSource {
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return 5
+        return self.connections.count
     }
     
 }
@@ -91,7 +103,8 @@ extension ConnectedController: NSTableViewDelegate {
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier("ConnectionCell", owner: self) as? NSTableCellView
 
-        cell?.textField?.stringValue = "item \(row)"
+        let conn = self.connections[row]
+        cell?.textField?.stringValue = conn.displayName
 
         return cell
     }

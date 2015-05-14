@@ -9,10 +9,16 @@
 import Foundation
 
 
+struct SimpleConnection: Connection {
+    let displayName: String
+}
+
+
 class DocClient {
 
     private var socket: WebSocket?
     private var resolver: Resolver?
+    private var connection: Connection?
     private var _document: Document
     private var _onUpdate: UpdateHandler?
     
@@ -23,6 +29,7 @@ class DocClient {
         self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
         self.resolver!.onResolve = { websocket in
+            self.connection = SimpleConnection(displayName: service.name)
             websocket.onReceive = messageHandler({ self._document }) { _, doc in
                 self._document = doc
                 self._onUpdate?(doc)
@@ -52,6 +59,15 @@ extension DocClient: ConnectedDocument {
     
     func disconnect() {
         self.socket?.close()
+    }
+ 
+    
+    var connections: [Connection] {
+        if let c = self.connection {
+            return [c]
+        } else {
+            return [Connection]()
+        }
     }
     
 }

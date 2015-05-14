@@ -99,7 +99,16 @@ extension DocServer: ConnectedDocument {
     
     func disconnect() {
         self.server.stop()
-    }
+    }    
     
+    
+    var connections: [Connection] {
+        var c = [Connection]()
+        for (i, s) in enumerate(self.server.sockets) {
+            c.append(SimpleConnection(displayName: "socket \(i)"))
+        }
+        return c
+    }
+
 }
 

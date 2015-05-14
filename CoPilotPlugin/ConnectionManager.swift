@@ -50,6 +50,11 @@ class ConnectionManager {
     }
  
     
+    static func connectedEditor(editor: Editor) -> ConnectedEditor? {
+        return self.connected({ $0.editor == editor })
+    }
+    
+    
     static func publish(editor: Editor) -> ConnectedEditor {
         let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
         let doc = { Document(editor.textStorage.string) }
