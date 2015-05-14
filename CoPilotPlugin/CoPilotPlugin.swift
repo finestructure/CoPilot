@@ -28,6 +28,7 @@ var sharedPlugin: CoPilotPlugin?
 class CoPilotPlugin: NSObject {
     var bundle: NSBundle! = nil
     var mainController: MainController?
+    var connectedController: ConnectedController?
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
     var subscribeMenuItem: NSMenuItem! = nil
@@ -44,7 +45,7 @@ class CoPilotPlugin: NSObject {
         super.init()
 
         self.bundle = bundle
-        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"p")
+        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"z")
         self.subscribeMenuItem = self.menuItem("CoPilot Subscribe", action:"subscribe", key:"x")
 
         observers.append(
@@ -87,6 +88,8 @@ class CoPilotPlugin: NSObject {
             return hasEditor()
         case Selector("subscribe"):
             return hasEditor() && !isConnected()
+        case Selector("showConnected"):
+            return hasEditor()
         default:
             return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
         }
@@ -104,6 +107,7 @@ extension CoPilotPlugin {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
             item!.submenu!.addItem(self.subscribeMenuItem)
+            item!.submenu!.addItem(self.menuItem("CoPilot Show Connected", action:"showConnected", key:"c"))
             self.menusAdded = true
         }
     }
@@ -146,6 +150,15 @@ extension CoPilotPlugin {
                 println("response: \(response)")
             }
         }
+    }
+    
+    
+    func showConnected() {
+        if self.connectedController == nil {
+            self.connectedController = ConnectedController(windowNibName: "ConnectedController")
+        }
+        self.connectedController?.showWindow(self)
+ 
     }
     
 }
