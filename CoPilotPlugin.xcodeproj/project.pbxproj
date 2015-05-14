@@ -63,6 +63,7 @@
 		5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
 		5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */; };
 		5AF58A231B032D6C00558448 /* XcodeUtils+mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF58A221B032D6C00558448 /* XcodeUtils+mock.swift */; };
+		5AFE91581B04AB0C00E6E5A1 /* IssueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */; };
 		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
 /* End PBXBuildFile section */
 
@@ -331,6 +332,7 @@
 		5AE5A9891AFE11A300480382 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeUtils.swift; sourceTree = "<group>"; };
 		5AF58A221B032D6C00558448 /* XcodeUtils+mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XcodeUtils+mock.swift"; sourceTree = "<group>"; };
+		5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTests.swift; sourceTree = "<group>"; };
 		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBB91E149A9581F9E082031 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilotPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilotPlugin/Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -370,6 +372,7 @@
 				5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */,
 				5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */,
 				5A01569D1AE2619700EED621 /* DiffTests.swift */,
+				5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */,
 				5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */,
 				5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
@@ -890,6 +893,7 @@
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
 				5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */,
+				5AFE91581B04AB0C00E6E5A1 /* IssueTests.swift in Sources */,
 				5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
