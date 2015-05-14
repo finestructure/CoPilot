@@ -10,6 +10,7 @@ import Foundation
 
 
 let DocumentPublishedNotification = "DocumentPublishedNotification"
+let DocumentConnectedNotification = "DocumentConnectedNotification"
 let DocumentDisconnectedNotification = "DocumentDisconnectedNotification"
 
 
@@ -74,6 +75,7 @@ class ConnectionManager {
         let client = DocClient(service: service, document: Document(editor.textStorage.string))
         let connectedEditor = ConnectedEditor(editor: editor, document: client)
         self.subscribed.append(connectedEditor)
+        NSNotificationCenter.defaultCenter().postNotificationName(DocumentConnectedNotification, object: self)
         return connectedEditor
     }
     

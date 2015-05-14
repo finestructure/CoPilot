@@ -29,6 +29,7 @@ class ConnectedController: NSWindowController {
             "NSTextViewDidChangeSelectionNotification",
             "NSWindowWillCloseNotification",
             DocumentPublishedNotification,
+            DocumentConnectedNotification,
             DocumentDisconnectedNotification,
         ]
         for name in notifications {
