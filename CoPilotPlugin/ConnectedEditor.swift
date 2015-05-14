@@ -76,13 +76,20 @@ class ConnectedEditor {
     // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
     private func setOnUpdate() {
         // TODO: refine this by only replacing the changed text or at least keeping the caret in place
-        self.document.onUpdate = { doc in
+        self.document.onUpdate = { newDoc in
             if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
+                // TODO: this is not efficient - we've already computed this patch on the other side but it's difficult to route this through. We need to do this to preserve the insertion point. We could just send the Changeset instead of the Document and do it all here.
+                let patches = computePatches(tv.string, newDoc.text)
                 let selected = tv.selectedRange
-                self.editor.textStorage.replaceAll(doc.text)
-                if selected.location + selected.length < count(doc.text) {
-                    tv.setSelectedRange(selected)
-                }
+                let currentPos = Position(selected.location)
+                let newPos = newPosition(currentPos, patches)
+                
+                self.editor.textStorage.replaceAll(newDoc.text)
+                
+                // adjust the selection length so we don't select past the end
+                let len = max(Int(newPos) + selected.length - count(newDoc.text), 0)
+                let newSelection = NSRange(location: Int(newPos), length: len)
+                tv.setSelectedRange(newSelection)
             }
         }
     }
