@@ -14,6 +14,7 @@ import CryptoSwift
 
 enum ErrorCodes: Int {
     case ApplyFailed = 100
+    case LocalChanges = 200
 }
 
 
@@ -76,10 +77,8 @@ func apply(source: Document, changeSet: Changeset) -> Result<Document> {
             return Result(error)
         }
     } else {
-        // we have local changes
-        // try applying this but it might fail
-        let res = apply(source.text, changeSet.patches)
-        return map(res) { Document($0) }
+        let info = ["NSLocalizedDescriptionKey": "cannot apply patches due to local changes"]
+        return Result(NSError(domain: "Diff", code: ErrorCodes.LocalChanges.rawValue, userInfo: info))
     }
 }
 
