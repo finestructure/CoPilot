@@ -93,3 +93,15 @@ extension DocServer: ConnectedDocument {
 
 }
 
+
+// MARK: Test extensions
+extension DocServer {
+    
+    var test_document: Document {
+        get { return self._document }
+        set { self._document = newValue }
+    }
+    var test_server: Server { return self.server }
+    
+}
+

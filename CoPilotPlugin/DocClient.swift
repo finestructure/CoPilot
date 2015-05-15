@@ -94,3 +94,13 @@ extension DocClient: ConnectedDocument {
     
 }
 
+
+// MARK: Test extensions
+extension DocClient {
+    
+    var test_document: Document {
+        get { return self._document }
+        set { self._document = newValue }
+    }
+
+}
