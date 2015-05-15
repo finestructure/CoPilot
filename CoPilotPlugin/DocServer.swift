@@ -10,29 +10,6 @@ import Cocoa
 import FeinstrukturUtils
 
 
-typealias MessageDocumentHandler = ((Message, Command, Document) -> Void)
-
-
-func messageHandler(documentProvider: DocumentProvider, update: MessageDocumentHandler) -> MessageHandler {
-    return { msg in
-        let cmd = Command(data: msg.data!)
-        switch cmd {
-        case .Doc(let doc):
-            update(msg, cmd, doc)
-        case .Update(let changes):
-            let res = apply(documentProvider(), changes)
-            if res.succeeded {
-                update(msg, cmd, res.value!)
-            } else {
-                println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
-            }
-        default:
-            println("messageHandler: ignoring command: \(cmd)")
-        }
-    }
-}
-
-
 class DocServer {
     
     private var server: Server! = nil
@@ -46,29 +23,42 @@ class DocServer {
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self._document = document
-        self.server = {
-            let s = Server(name: name, service: service)
-            s.onConnect = { ws in
-                // initialize client on connect
-                let cmd = Command(document: self._document)
-                ws.send(cmd.serialize())
-                
-                ws.onReceive = messageHandler({ self._document }, { msg, cmd, doc in
-                    switch cmd {
-                    case .Name(let name):
-                        self._connections[ws] = SimpleConnection(displayName: name)
-                    default: // TODO: this should probably only be on .Update
-                        self._document = doc
-                        self.server.broadcast(msg.data!, exclude: ws)
-                        self.onUpdate?(doc)
-                    }
-                })
-            }
-            s.start()
-            return s
-            }()
+        self.server = Server(name: name, service: service)
+        self.server.onConnect = { ws in
+            // initialize client on connect
+            let cmd = Command(document: self._document)
+            ws.send(cmd.serialize())
+
+            ws.onReceive = self.onReceive(ws)
+        }
+        self.server.start()
     }
-    
+
+
+    func onReceive(websocket: WebSocket) -> MessageHandler {
+        return { msg in
+            let cmd = Command(data: msg.data!)
+            switch cmd {
+            case .Doc(let doc):
+                println("server not accepting .Doc commands")
+            case .Update(let changes):
+                let res = apply(self._document, changes)
+                if res.succeeded {
+                    self._document = res.value!
+                    self.server.broadcast(msg.data!, exclude: websocket)
+                    self.onUpdate?(res.value!)
+                } else {
+                    println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                }
+            case .Name(let name):
+                self._connections[websocket] = SimpleConnection(displayName: name)
+            default:
+                println("messageHandler: ignoring command: \(cmd)")
+            }
+        }
+   }
+
+
     // TODO: do we really need polling? - remove
     func poll(interval: NSTimeInterval = 0.5, docProvider: DocumentProvider) {
         self.docProvider = docProvider

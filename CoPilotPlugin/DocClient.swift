@@ -22,23 +22,41 @@ class DocClient {
     private var _document: Document
     private var _onUpdate: UpdateHandler?
     
-    var clientId: String = "DocClient"
+    var name: String
     var document: Document { return self._document }
 
-    init(service: NSNetService, document: Document) {
+    init(name: String = "DocClient", service: NSNetService, document: Document) {
+        self.name = name
         self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
         self.resolver!.onResolve = { websocket in
             self.connection = SimpleConnection(displayName: service.name)
             self.socket = websocket
             websocket.onConnect = {
-                let cmd = Command(name: self.clientId)
+                let cmd = Command(name: self.name)
                 self.socket?.send(cmd.serialize())
             }
-            websocket.onReceive = messageHandler({ self._document }) { _, _, doc in
-                self._document = doc
-                self._onUpdate?(doc)
+            websocket.onReceive = self.onReceive
+        }
+    }
+
+
+    func onReceive(msg: Message) {
+        let cmd = Command(data: msg.data!)
+        switch cmd {
+        case .Doc(let doc):
+            self._document = doc
+            self._onUpdate?(doc)
+        case .Update(let changes):
+            let res = apply(self._document, changes)
+            if res.succeeded {
+                self._document = res.value!
+                self._onUpdate?(res.value!)
+            } else {
+                println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
             }
+        default:
+            println("messageHandler: ignoring command: \(cmd)")
         }
     }
 

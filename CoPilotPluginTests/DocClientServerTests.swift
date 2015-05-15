@@ -112,11 +112,9 @@ class DocClientServerTests: XCTestCase {
         self.server = DocServer(name: "server", document: serverDoc)
 
         let client1 = createClient(document: Document(""))
-        client1.clientId = "C1"
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2 = createClient(document: Document(""))
-        client2.clientId = "C2"
         expect(client2.document.text).toEventually(equal("foo"), timeout: 5)
 
         self.server.update(Document("foobar"))

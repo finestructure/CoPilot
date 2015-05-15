@@ -77,7 +77,8 @@ class ConnectionManager {
     
     
     static func subscribe(service: NSNetService, editor: Editor) -> ConnectedEditor {
-        let client = DocClient(service: service, document: Document(editor.textStorage.string))
+        let name = NSHost.currentHost().localizedName!
+        let client = DocClient(name: name, service: service, document: Document(editor.textStorage.string))
         let connectedEditor = ConnectedEditor(editor: editor, document: client)
         self.subscribed.append(connectedEditor)
         NSNotificationCenter.defaultCenter().postNotificationName(DocumentConnectedNotification, object: self)
