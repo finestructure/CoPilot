@@ -36,6 +36,8 @@
 		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
 		5A76F5B31B02377500B67B7F /* ConnectedEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */; };
 		5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */; };
+		5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */; };
+		5A7F36D41B04CD28006CFB97 /* ConnectedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */; };
 		5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 		5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
@@ -312,6 +314,8 @@
 		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
 		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
+		5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedController.swift; sourceTree = "<group>"; };
+		5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectedController.xib; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilotPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
@@ -433,6 +437,8 @@
 			children = (
 				5A6B14251AE674E3006EBB31 /* MainController.swift */,
 				5A6B14261AE674E3006EBB31 /* MainController.xib */,
+				5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */,
+				5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -830,6 +836,7 @@
 			files = (
 				5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */,
 				5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */,
+				5A7F36D41B04CD28006CFB97 /* ConnectedController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,6 +920,7 @@
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
 				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
+				5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */,
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
 				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
 				5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */,

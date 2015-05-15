@@ -9,6 +9,11 @@
 import Foundation
 
 
+let DocumentPublishedNotification = "DocumentPublishedNotification"
+let DocumentConnectedNotification = "DocumentConnectedNotification"
+let DocumentDisconnectedNotification = "DocumentDisconnectedNotification"
+
+
 class ConnectionManager {
     
     private static var published = [ConnectedEditor]()
@@ -45,12 +50,18 @@ class ConnectionManager {
     }
  
     
+    static func connectedEditor(editor: Editor) -> ConnectedEditor? {
+        return self.connected({ $0.editor == editor })
+    }
+    
+    
     static func publish(editor: Editor) -> ConnectedEditor {
         let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
         let doc = { Document(editor.textStorage.string) }
         let docServer = DocServer(name: name, document: doc())
         let connectedEditor = ConnectedEditor(editor: editor, document: docServer)
         self.published.append(connectedEditor)
+        NSNotificationCenter.defaultCenter().postNotificationName(DocumentPublishedNotification, object: self)
         return connectedEditor
     }
     
@@ -59,14 +70,18 @@ class ConnectionManager {
         if let conn = self.connected({ $0.editor == editor }) {
             conn.document.disconnect()
             self.published = self.published.filter({ $0.editor != editor })
+            self.subscribed = self.subscribed.filter({ $0.editor != editor })
+            NSNotificationCenter.defaultCenter().postNotificationName(DocumentDisconnectedNotification, object: self)
         }
     }
     
     
     static func subscribe(service: NSNetService, editor: Editor) -> ConnectedEditor {
-        let client = DocClient(service: service, document: Document(editor.textStorage.string))
+        let name = NSHost.currentHost().localizedName!
+        let client = DocClient(name: name, service: service, document: Document(editor.textStorage.string))
         let connectedEditor = ConnectedEditor(editor: editor, document: client)
         self.subscribed.append(connectedEditor)
+        NSNotificationCenter.defaultCenter().postNotificationName(DocumentConnectedNotification, object: self)
         return connectedEditor
     }
     

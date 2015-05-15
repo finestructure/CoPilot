@@ -10,6 +10,11 @@ import Cocoa
 import FeinstrukturUtils
 
 
+protocol Connection {
+    var displayName: String { get }
+}
+
+
 typealias UpdateHandler = (Document -> Void)
 
 
@@ -17,6 +22,7 @@ protocol ConnectedDocument {
     var onUpdate: UpdateHandler? { get set }
     func update(newDocument: Document)
     func disconnect()
+    var connections: [Connection] { get }
 }
 
 

@@ -76,4 +76,14 @@ class CommandTests: XCTestCase {
         expect(copy.version).to(beNil())
     }
 
+    func test_serialize_Name() {
+        let d = Command(name: "foo").serialize()
+        expect(d).toNot(beNil())
+        let copy = Command(data: d)
+        expect(copy.description) == ".Name foo"
+        expect(copy.name) == "foo"
+        expect(copy.document).to(beNil())
+        expect(copy.changes).to(beNil())
+    }
+    
 }

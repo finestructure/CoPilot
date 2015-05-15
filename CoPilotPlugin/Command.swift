@@ -14,9 +14,10 @@ enum Command {
     case Undefined
     case Doc(Document)
     case Update(Changeset)
-    case Version(Hash)
-    case GetDoc
-    case GetVersion
+    case Version(Hash) // unused
+    case GetDoc        // unused
+    case GetVersion    // unused
+    case Name(String)
     
     init(document: Document) {
         self = .Doc(document)
@@ -28,6 +29,10 @@ enum Command {
     
     init(version: Hash) {
         self = .Version(version)
+    }
+    
+    init(name: String) {
+        self = .Name(name)
     }
     
     init(data: NSData) {
@@ -46,6 +51,9 @@ enum Command {
                 case TypeNames.Version.rawValue:
                     let hash = Hash(obj as! NSString)
                     self = .Version(hash)
+                case TypeNames.Name.rawValue:
+                    let name = String(obj as! NSString)
+                    self = .Name(name)
                 default:
                     self = .Undefined
                 }
@@ -77,6 +85,8 @@ enum Command {
             archiver.encodeObject(changes.serialize(), forKey: EncodingKeys.Data.rawValue)
         case .Version(let version):
             archiver.encodeObject(version, forKey: EncodingKeys.Data.rawValue)
+        case .Name(let name):
+            archiver.encodeObject(name, forKey: EncodingKeys.Data.rawValue)
         default: break
         }
         archiver.finishEncoding()
@@ -110,6 +120,15 @@ enum Command {
         }
     }
     
+    var name: String? {
+        switch self {
+        case .Name(let name):
+            return name
+        default:
+            return nil
+        }
+    }
+    
     private enum EncodingKeys: String {
         case TypeName = "typeName"
         case Data = "data"
@@ -122,6 +141,7 @@ enum Command {
         case Version = "Version"
         case GetDoc = "GetDoc"
         case GetVersion = "GetVersion"
+        case Name = "Name"
     }
     
     var typeName: String {
@@ -138,6 +158,8 @@ enum Command {
             return TypeNames.GetDoc.rawValue
         case .GetVersion:
             return TypeNames.GetVersion.rawValue
+        case .Name:
+            return TypeNames.Name.rawValue
         }
     }
     
@@ -150,6 +172,8 @@ extension Command: Printable {
         switch self {
         case .Update(let changes):
             return ".\(self.typeName) \(changes)"
+        case .Name(let name):
+            return ".\(self.typeName) \(name)"
         default:
             return ".\(self.typeName)"
         }

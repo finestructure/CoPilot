@@ -96,14 +96,6 @@ extension MainController: NSTableViewDataSource {
 }
 
 
-extension CGRect {
-    public func withWidth(width: CGFloat) -> CGRect {
-        let size = CGSize(width: width, height: self.size.height)
-        return CGRect(origin: self.origin, size: size)
-    }
-}
-
-
 // MARK: - NSTableViewDelegate
 extension MainController: NSTableViewDelegate {
     
