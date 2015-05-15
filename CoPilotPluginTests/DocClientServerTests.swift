@@ -96,14 +96,34 @@ class DocClientServerTests: XCTestCase {
         let doc = { serverDoc }
         self.server = DocServer(name: "foo", document: doc())
         let t = Timer(interval: 0.1) { self.server.update(doc()) }
-        // we're doing this to not send an intialize to the client2 subscriber
         let client1 = createClient(document: Document(""))
+        // wait for the initial .Doc to set up the client
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
         let client2 = createClient(document: client2Doc)
         serverDoc = Document("foobar")
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
+    }
+    
+    
+    func test_conflicts() {
+        var serverDoc = Document("initial")
+        let doc = { serverDoc }
+        self.server = DocServer(name: "", document: doc())
+        let client = createClient(document: Document(""))
+        // wait for the initial .Doc to set up the client
+        expect(client.document.text).toEventually(equal("initial"), timeout: 5)
+        
+        // simulate a conflict by changing both server and client docs
+        // we do this by changing the underlying client ivar without triggering the .Update messages
+        client.test_document = Document("client")
+        
+        // and then send an update from the server
+        self.server.update(Document("server"))
+        
+        expect(self.server.document.text).toEventually(equal("server"))
+        expect(client.document.text).toEventually(equal("server"))
     }
     
     

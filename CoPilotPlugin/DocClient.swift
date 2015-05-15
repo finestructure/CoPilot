@@ -33,8 +33,7 @@ class DocClient {
             self.connection = SimpleConnection(displayName: service.name)
             self.socket = websocket
             websocket.onConnect = {
-                let cmd = Command(name: self.name)
-                self.socket?.send(cmd.serialize())
+                self.socket?.send(Command(name: self.name))
             }
             websocket.onReceive = self.onReceive
         }
@@ -54,6 +53,8 @@ class DocClient {
                 self._onUpdate?(res.value!)
             } else {
                 println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                // request original document in order to re-sync
+                self.socket?.send(Command.GetDoc)
             }
         default:
             println("messageHandler: ignoring command: \(cmd)")
@@ -73,7 +74,7 @@ extension DocClient: ConnectedDocument {
     
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
-            self.socket?.send(Command(update: changes).serialize())
+            self.socket?.send(Command(update: changes))
             self._document = newDocument
         }
     }

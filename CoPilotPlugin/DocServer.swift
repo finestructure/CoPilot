@@ -10,6 +10,20 @@ import Cocoa
 import FeinstrukturUtils
 
 
+extension WebSocket {
+    func send(command: Command) {
+        self.send(command.serialize())
+    }
+}
+
+
+extension Server {
+    func broadcast(command: Command, exclude: WebSocket? = nil) {
+        self.broadcast(command.serialize(), exclude: exclude)
+    }
+}
+
+
 class DocServer {
     
     private var server: Server! = nil
@@ -24,8 +38,7 @@ class DocServer {
         self.server = Server(name: name, service: service)
         self.server.onConnect = { ws in
             // initialize client on connect
-            let cmd = Command(document: self._document)
-            ws.send(cmd.serialize())
+            ws.send(Command(document: self._document))
 
             ws.onReceive = self.onReceive(ws)
         }
@@ -48,6 +61,8 @@ class DocServer {
                 } else {
                     println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
                 }
+            case .GetDoc:
+                websocket.send(Command(document: self._document))
             case .Name(let name):
                 self._connections[websocket] = SimpleConnection(displayName: name)
             default:
@@ -75,7 +90,7 @@ extension DocServer: ConnectedDocument {
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self.server.broadcast(Command(update: changes).serialize())
+                self.server.broadcast(Command(update: changes))
                 self._document = newDocument
             }
         }
