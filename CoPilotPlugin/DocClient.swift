@@ -16,6 +16,11 @@ struct SimpleConnection: Connection {
 
 class DocClient {
 
+    enum State {
+        case Initial, InSync, InConflict
+    }
+    
+    private var state: State = .Initial
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var connection: Connection?
@@ -44,15 +49,31 @@ class DocClient {
         let cmd = Command(data: msg.data!)
         switch cmd {
         case .Doc(let doc):
-            self._document = doc
-            self._onUpdate?(doc)
+            switch self.state {
+            case .Initial:
+                self._document = doc
+                self._onUpdate?(doc)
+                self.state = .InSync
+            case .InConflict:
+                // compute diff
+                if let changes = Changeset(source: self._document, target: doc) {
+                    self.socket?.send(Command(update: changes))
+                    self._document = doc
+                    self.state = .InSync
+                }
+                // send it
+            case .InSync:
+                break
+            }
         case .Update(let changes):
             let res = apply(self._document, changes)
             if res.succeeded {
                 self._document = res.value!
                 self._onUpdate?(res.value!)
+                self.state = .InSync
             } else {
                 println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                self.state = .InConflict
                 // request original document in order to re-sync
                 self.socket?.send(Command.GetDoc)
             }
