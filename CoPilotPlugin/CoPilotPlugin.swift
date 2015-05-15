@@ -13,9 +13,9 @@ func publishMenuTitle(editor: Editor? = nil) -> String {
     if let editor = editor {
         let title = editor.document.displayName
         if ConnectionManager.isPublished(editor) {
-            return "CoPilot Unpublish \(title)"
+            return "CoPilot Unpublish “\(title)”"
         } else {
-            return "CoPilot Publish \(title)"
+            return "CoPilot Publish “\(title)”"
         }
     } else {
         return "CoPilot Publish"
