@@ -46,7 +46,7 @@ class DocClientServerTests: XCTestCase {
     func test_server() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(interval: 0.1, docProvider: doc)
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
@@ -62,7 +62,7 @@ class DocClientServerTests: XCTestCase {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
         let doc = documentProvider("/tmp/server.txt")
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(interval: 0.1, docProvider: doc)
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
         let client = createClient(document: Document(""))
         client.onUpdate = { doc in
             println("client doc: \(doc.text)")
@@ -79,7 +79,7 @@ class DocClientServerTests: XCTestCase {
     func test_DocClient_nsNetService() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(interval: 0.1, docProvider: doc)
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
         var service: NSNetService!
         let browser = Browser(service: CoPilotService) { s in service = s }
         expect(service).toEventuallyNot(beNil(), timeout: 5)
@@ -95,7 +95,7 @@ class DocClientServerTests: XCTestCase {
         var serverDoc = Document("foo")
         let doc = { serverDoc }
         self.server = DocServer(name: "foo", document: doc())
-        self.server.poll(interval: 0.1, docProvider: doc)
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
         // we're doing this to not send an intialize to the client2 subscriber
         let client1 = createClient(document: Document(""))
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)

@@ -15,8 +15,6 @@ class DocServer {
     private var server: Server! = nil
     private var _document: Document
     private var _onUpdate: UpdateHandler?
-    private var timer: Timer!
-    private var docProvider: DocumentProvider!
     private var _connections = [WebSocket: Connection]()
 
     var document: Document { return self._document }
@@ -57,15 +55,6 @@ class DocServer {
             }
         }
    }
-
-
-    // TODO: do we really need polling? - remove
-    func poll(interval: NSTimeInterval = 0.5, docProvider: DocumentProvider) {
-        self.docProvider = docProvider
-        self.timer = Timer(interval: interval) {
-            self.update(self.docProvider())
-        }
-    }
 
 
     func stop() {
