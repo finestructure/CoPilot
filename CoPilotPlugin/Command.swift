@@ -15,7 +15,7 @@ enum Command {
     case Doc(Document)
     case Update(Changeset)
     case Version(Hash) // unused
-    case GetDoc        // unused
+    case GetDoc
     case GetVersion    // unused
     case Name(String)
     
