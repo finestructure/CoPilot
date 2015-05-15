@@ -211,13 +211,31 @@ class DiffTests: XCTestCase {
     
     
     func test_apply_Document_diverged() {
+        // this test is flawed in the sense that it suggests general merge success where it's only by chance that the patch can be applied to the target
+        // see diverged2 and diverged3 for details
         let fox = Document("The quick brown fox jumps over the lazy dog")
         let cat = Document("The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
-        let source = Document("The quick brown horse jumps over the lazy dog")
-        let res = apply(source, change!)
+        let target = Document("The quick brown horse jumps over the lazy dog")
+        let res = apply(target, change!)
         expect(res.succeeded) == true
-        expect(res.value!.text) == "The quick brown leopard jumps over the lazy dog"
+        expect(res.value?.text) == "The quick brown leopard jumps over the lazy dog"
+    }
+    
+    
+    func test_apply_Document_diverged2() {
+        let change = Changeset(source: Document("initial"), target: Document("server"))
+        let res = apply(Document("client"), change!)
+        expect(res.succeeded) == true
+        expect(res.value?.text) == "clserver"
+    }
+    
+    
+    func test_apply_Document_diverged3() {
+        let change = Changeset(source: Document("foo"), target: Document("server"))
+        let c = Document("client")
+        let res = apply(c, change!)
+        expect(res.succeeded) == false
     }
     
     
