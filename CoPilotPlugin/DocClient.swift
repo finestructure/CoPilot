@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FeinstrukturUtils
 
 
 struct SimpleConnection: Connection {
@@ -14,19 +15,21 @@ struct SimpleConnection: Connection {
 }
 
 
+enum State {
+    case Initial, InSync, InConflict
+}
+
+
 class DocClient {
 
-    enum State {
-        case Initial, InSync, InConflict
-    }
-    
     private var state: State = .Initial
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var connection: Connection?
     private var _document: Document
     private var _onUpdate: UpdateHandler?
-    
+    private var sendThrottle = Throttle(bufferTime: 5)
+
     var name: String
     var document: Document { return self._document }
 
@@ -47,6 +50,7 @@ class DocClient {
 
     func onReceive(msg: Message) {
         let cmd = Command(data: msg.data!)
+        println("#### client cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):
             switch self.state {
@@ -56,10 +60,10 @@ class DocClient {
                 self.state = .InSync
             case .InConflict:
                 // compute diff
+                println("#### .InConflict")
                 if let changes = Changeset(source: self._document, target: doc) {
+                    println("#### changes: \(changes)")
                     self.socket?.send(Command(update: changes))
-                    self._document = doc
-                    self.state = .InSync
                 }
                 // send it
             case .InSync:
@@ -72,11 +76,13 @@ class DocClient {
                 self._onUpdate?(res.value!)
                 self.state = .InSync
             } else {
-                println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                println("#### client: applying patch failed: \(res.error!.localizedDescription)")
                 self.state = .InConflict
                 // request original document in order to re-sync
                 self.socket?.send(Command.GetDoc)
             }
+        case .GetDoc:
+            self.socket?.send(Command(document: self._document))
         default:
             println("messageHandler: ignoring command: \(cmd)")
         }
@@ -95,8 +101,10 @@ extension DocClient: ConnectedDocument {
     
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
-            self.socket?.send(Command(update: changes))
             self._document = newDocument
+            self.sendThrottle.execute {
+                self.socket?.send(Command(update: changes))
+            }
         }
     }
     

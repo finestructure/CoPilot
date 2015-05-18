@@ -26,10 +26,12 @@ extension Server {
 
 class DocServer {
     
+    private var state: State = .Initial
     private var server: Server! = nil
     private var _document: Document
     private var _onUpdate: UpdateHandler?
     private var _connections = [WebSocket: Connection]()
+    private var sendThrottle = Throttle(bufferTime: 5)
 
     var document: Document { return self._document }
 
@@ -49,9 +51,23 @@ class DocServer {
     func onReceive(websocket: WebSocket) -> MessageHandler {
         return { msg in
             let cmd = Command(data: msg.data!)
+            println("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc(let doc):
-                println("server not accepting .Doc commands")
+                switch self.state {
+                case .Initial:
+                    println("server not accepting initial .Doc commands")
+                case .InConflict:
+                    // compute diff
+                    println("#### .InConflict")
+                    if let changes = Changeset(source: self._document, target: doc) {
+                        println("#### changes: \(changes)")
+                        websocket.send(Command(update: changes))
+                    }
+                    // send it
+                case .InSync:
+                    break
+                }
             case .Update(let changes):
                 let res = apply(self._document, changes)
                 if res.succeeded {
@@ -59,7 +75,10 @@ class DocServer {
                     self.server.broadcast(msg.data!, exclude: websocket)
                     self.onUpdate?(res.value!)
                 } else {
-                    println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                    println("#### server: applying patch failed: \(res.error!.localizedDescription)")
+                    self.state = .InConflict
+                    // request full document in order to re-sync
+                    websocket.send(Command.GetDoc)
                 }
             case .GetDoc:
                 websocket.send(Command(document: self._document))
@@ -90,8 +109,10 @@ extension DocServer: ConnectedDocument {
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self.server.broadcast(Command(update: changes))
                 self._document = newDocument
+                self.sendThrottle.execute {
+                    self.server.broadcast(Command(update: changes))
+                }
             }
         }
     }
