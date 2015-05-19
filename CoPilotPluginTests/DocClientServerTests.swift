@@ -46,13 +46,13 @@ class DocClientServerTests: XCTestCase {
     func test_server() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
+        self.server.setBufferTime(0)
         let t = Timer(interval: 0.1) { self.server.update(doc()) }
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
             messages.append(msg)
             let cmd = Command(data: msg.data!)
-            println(cmd)
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
     }

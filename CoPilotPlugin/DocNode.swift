@@ -52,4 +52,9 @@ extension DocNode {
         set { self._document = newValue }
     }
 
+
+    func setBufferTime(bufferTime: NSTimeInterval) {
+        self.sendThrottle = Throttle(bufferTime: bufferTime)
+    }
+
 }
