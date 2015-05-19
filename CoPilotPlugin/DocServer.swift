@@ -24,20 +24,16 @@ extension Server {
 }
 
 
-class DocServer {
+class DocServer: DocNode {
     
-    private var state: State = .Initial
     private var server: Server! = nil
-    private var _document: Document
-    private var _onUpdate: UpdateHandler?
     private var _connections = [WebSocket: Connection]()
-    private var sendThrottle = Throttle(bufferTime: 5)
-
-    var document: Document { return self._document }
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
-        self._document = document
         self.server = Server(name: name, service: service)
+
+        super.init(name: name, document: document)
+
         self.server.onConnect = { ws in
             // initialize client on connect
             ws.send(Command(document: self._document))
@@ -133,10 +129,6 @@ extension DocServer: ConnectedDocument {
 // MARK: Test extensions
 extension DocServer {
     
-    var test_document: Document {
-        get { return self._document }
-        set { self._document = newValue }
-    }
     var test_server: Server { return self.server }
     
 }

@@ -15,28 +15,20 @@ struct SimpleConnection: Connection {
 }
 
 
-enum State {
-    case Initial, InSync, InConflict
-}
 
 
-class DocClient {
+class DocClient: DocNode {
 
-    private var state: State = .Initial
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var connection: Connection?
-    private var _document: Document
-    private var _onUpdate: UpdateHandler?
-    private var sendThrottle = Throttle(bufferTime: 5)
 
-    var name: String
-    var document: Document { return self._document }
 
     init(name: String = "DocClient", service: NSNetService, document: Document) {
-        self.name = name
-        self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
+
+        super.init(name: name, document: document)
+
         self.resolver!.onResolve = { websocket in
             self.connection = SimpleConnection(displayName: service.name)
             self.socket = websocket
@@ -124,13 +116,3 @@ extension DocClient: ConnectedDocument {
     
 }
 
-
-// MARK: Test extensions
-extension DocClient {
-    
-    var test_document: Document {
-        get { return self._document }
-        set { self._document = newValue }
-    }
-
-}
