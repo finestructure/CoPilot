@@ -55,11 +55,12 @@ class DocClient: DocNode {
                 if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                     let mine = self._document.text
                     let res = apply(ancestor, changes.patches)
-                    if let yours = res.value {
-                        if let merged = merge(mine, ancestor, yours) {
-                            println("#### client: merge succeeded")
-                            self.commit(Document(merged))
-                        }
+                    if let yours = res.value,
+                       let merged = merge(mine, ancestor, yours) {
+                        self.commit(Document(merged))
+                    } else {
+                        // request original document in order to re-sync
+                        self.socket?.send(Command.GetDoc)
                     }
                 } else {
                     println("#### client: applying patch failed: \(res.error!.localizedDescription)")
