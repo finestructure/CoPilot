@@ -18,6 +18,7 @@ enum Command {
     case GetDoc
     case GetVersion    // unused
     case Name(String)
+    case Cursor(Selection)
     
     init(document: Document) {
         self = .Doc(document)
@@ -33,6 +34,10 @@ enum Command {
     
     init(name: String) {
         self = .Name(name)
+    }
+
+    init(selection: Selection) {
+        self = .Cursor(selection)
     }
     
     init(data: NSData) {
@@ -54,6 +59,9 @@ enum Command {
                 case TypeNames.Name.rawValue:
                     let name = String(obj as! NSString)
                     self = .Name(name)
+                case TypeNames.Cursor.rawValue:
+                    let selection = Selection(data: obj as! NSData)
+                    self = .Cursor(selection)
                 default:
                     self = .Undefined
                 }
@@ -87,6 +95,8 @@ enum Command {
             archiver.encodeObject(version, forKey: EncodingKeys.Data.rawValue)
         case .Name(let name):
             archiver.encodeObject(name, forKey: EncodingKeys.Data.rawValue)
+        case .Cursor(let selection):
+            archiver.encodeObject(selection.serialize(), forKey: EncodingKeys.Data.rawValue)
         default: break
         }
         archiver.finishEncoding()
@@ -128,7 +138,16 @@ enum Command {
             return nil
         }
     }
-    
+
+    var selection: Selection? {
+        switch self {
+        case .Cursor(let selection):
+            return selection
+        default:
+            return nil
+        }
+    }
+
     private enum EncodingKeys: String {
         case TypeName = "typeName"
         case Data = "data"
@@ -142,6 +161,7 @@ enum Command {
         case GetDoc = "GetDoc"
         case GetVersion = "GetVersion"
         case Name = "Name"
+        case Cursor = "Cursor"
     }
     
     var typeName: String {
@@ -160,6 +180,8 @@ enum Command {
             return TypeNames.GetVersion.rawValue
         case .Name:
             return TypeNames.Name.rawValue
+        case .Cursor:
+            return TypeNames.Cursor.rawValue
         }
     }
     
@@ -174,6 +196,8 @@ extension Command: Printable {
             return ".\(self.typeName) \(changes)"
         case .Name(let name):
             return ".\(self.typeName) \(name)"
+        case .Cursor(let selection):
+            return ".\(self.typeName) \(selection.range.location) \(selection.range.length)"
         default:
             return ".\(self.typeName)"
         }
