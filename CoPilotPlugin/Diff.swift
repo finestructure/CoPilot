@@ -168,3 +168,49 @@ func newPosition(currentPos: Position, patches: [Patch]) -> Position {
     return x
 }
 
+
+func writeTemp(content: String) -> NSURL? {
+    let url = tempUrl()
+    let res = try({ error in
+        content.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: error)
+    })
+    if res.succeeded {
+        return url
+    } else {
+        return nil
+    }
+}
+
+
+func tempUrl() -> NSURL {
+    let id = NSProcessInfo.processInfo().globallyUniqueString
+    let path = NSTemporaryDirectory().stringByAppendingPathComponent(id)
+    return NSURL.fileURLWithPath(path)!
+}
+
+
+func diff3(mine: NSURL, ancestor: NSURL, yours: NSURL) -> String? {
+    let pipe = NSPipe()
+    let file = pipe.fileHandleForReading
+
+    let task = NSTask()
+    task.launchPath = "/usr/bin/diff3"
+    task.arguments = [mine.path!, ancestor.path!, yours.path!, "-m"]
+    task.standardOutput = pipe
+    task.launch()
+
+    let data = file.readDataToEndOfFile()
+    file.closeFile()
+    let output = NSString(data: data, encoding: NSUTF8StringEncoding)
+    return output as String?
+}
+
+
+func merge(mine: String, ancestor: String, yours: String) -> String {
+    let m = writeTemp(mine)!
+    let a = writeTemp(ancestor)!
+    let y = writeTemp(yours)!
+
+    return diff3(m, a, y)!
+}
+

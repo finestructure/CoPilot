@@ -31,8 +31,11 @@ func contentsOfFile(#name: String, #type: String) -> String {
 }
 
 
+
+
 class DiffTests: XCTestCase {
-    
+
+
     func test_computeDiff() {
         let d = computeDiff("foo2bar", "foobar")
         expect(d.count) == 3
@@ -290,5 +293,15 @@ class DiffTests: XCTestCase {
         expect(newPosition(30, patches)) == 31
         expect(newPosition(32, patches)) == 33
     }
-    
+
+
+    func test_merge() {
+        measureBlock {
+            let ancestor = "foo\nbar\nbaz\n"
+            let yours = "foo1\nbar\nbaz\n"
+            let mine = "foo\nbar\nbaz2\n"
+            expect(merge(mine, ancestor, yours)) == "foo1\nbar\nbaz2\n"
+        }
+    }
+
 }

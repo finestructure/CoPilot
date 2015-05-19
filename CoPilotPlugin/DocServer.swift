@@ -88,7 +88,7 @@ class DocServer {
                 println("messageHandler: ignoring command: \(cmd)")
             }
         }
-   }
+    }
 
 
     func stop() {
@@ -99,7 +99,7 @@ class DocServer {
 
 
 extension DocServer: ConnectedDocument {
-
+    
     var onUpdate: UpdateHandler? {
         get { return self._onUpdate }
         set { self._onUpdate = newValue }
