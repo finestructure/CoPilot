@@ -23,7 +23,8 @@ class DocNode {
             self.revisions.setObject(value, forKey: key, cost: value.length)
         }
     }
-    internal var _onUpdate: UpdateHandler?
+    internal var _onDocumentUpdate: DocumentUpdate?
+    internal var _onCursorUpdate: CursorUpdate?
 
     var name: String
     var document: Document { return self._document }
@@ -38,7 +39,19 @@ class DocNode {
     
     internal func commit(document: Document) {
         self._document = document
-        self._onUpdate?(document)
+        self._onDocumentUpdate?(document)
+    }
+
+
+    var onDocumentUpdate: DocumentUpdate? {
+        get { return self._onDocumentUpdate }
+        set { self._onDocumentUpdate = newValue }
+    }
+
+
+    var onCursorUpdate: CursorUpdate? {
+        get { return self._onCursorUpdate }
+        set { self._onCursorUpdate = newValue }
     }
 
 }

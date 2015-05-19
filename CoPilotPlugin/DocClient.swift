@@ -67,6 +67,8 @@ class DocClient: DocNode {
             }
         case .GetDoc:
             self.socket?.send(Command(document: self._document))
+        case .Cursor(let selection):
+            self._onCursorUpdate?(selection)
         default:
             println("messageHandler: ignoring command: \(cmd)")
         }
@@ -84,18 +86,19 @@ class DocClient: DocNode {
 
 extension DocClient: ConnectedDocument {
 
-    var onUpdate: UpdateHandler? {
-        get { return self._onUpdate }
-        set { self._onUpdate = newValue }
-    }
-    
-    
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             self.sendThrottle.execute {
                 self._document = newDocument
                 self.socket?.send(Command(update: changes))
             }
+        }
+    }
+
+
+    func update(selection: Selection) {
+        self.sendThrottle.execute {
+           self.socket?.send(Command(selection: selection))
         }
     }
     
