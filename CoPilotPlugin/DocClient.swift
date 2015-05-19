@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FeinstrukturUtils
 
 
 struct SimpleConnection: Connection {
@@ -14,27 +15,25 @@ struct SimpleConnection: Connection {
 }
 
 
-class DocClient {
+
+
+class DocClient: DocNode {
 
     private var socket: WebSocket?
     private var resolver: Resolver?
     private var connection: Connection?
-    private var _document: Document
-    private var _onUpdate: UpdateHandler?
-    
-    var name: String
-    var document: Document { return self._document }
+
 
     init(name: String = "DocClient", service: NSNetService, document: Document) {
-        self.name = name
-        self._document = document
         self.resolver = Resolver(service: service, timeout: 5)
+
+        super.init(name: name, document: document)
+
         self.resolver!.onResolve = { websocket in
             self.connection = SimpleConnection(displayName: service.name)
             self.socket = websocket
             websocket.onConnect = {
-                let cmd = Command(name: self.name)
-                self.socket?.send(cmd.serialize())
+                self.socket?.send(Command(name: self.name))
             }
             websocket.onReceive = self.onReceive
         }
@@ -43,18 +42,34 @@ class DocClient {
 
     func onReceive(msg: Message) {
         let cmd = Command(data: msg.data!)
+        // println("#### client cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):
-            self._document = doc
-            self._onUpdate?(doc)
+            self.commit(doc)
         case .Update(let changes):
             let res = apply(self._document, changes)
             if res.succeeded {
-                self._document = res.value!
-                self._onUpdate?(res.value!)
+                self.commit(res.value!)
             } else {
-                println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                // attempt merge
+                if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
+                    let mine = self._document.text
+                    let res = apply(ancestor, changes.patches)
+                    if let yours = res.value,
+                       let merged = merge(mine, ancestor, yours) {
+                        self.commit(Document(merged))
+                    } else {
+                        // request original document in order to re-sync
+                        self.socket?.send(Command.GetDoc)
+                    }
+                } else {
+                    println("#### client: applying patch failed: \(res.error!.localizedDescription)")
+                    // request original document in order to re-sync
+                    self.socket?.send(Command.GetDoc)
+                }
             }
+        case .GetDoc:
+            self.socket?.send(Command(document: self._document))
         default:
             println("messageHandler: ignoring command: \(cmd)")
         }
@@ -73,8 +88,10 @@ extension DocClient: ConnectedDocument {
     
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
-            self.socket?.send(Command(update: changes).serialize())
             self._document = newDocument
+            self.sendThrottle.execute {
+                self.socket?.send(Command(update: changes))
+            }
         }
     }
     

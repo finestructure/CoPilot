@@ -14,6 +14,7 @@ import CryptoSwift
 
 enum ErrorCodes: Int {
     case ApplyFailed = 100
+    case LocalChanges = 200
 }
 
 
@@ -76,10 +77,8 @@ func apply(source: Document, changeSet: Changeset) -> Result<Document> {
             return Result(error)
         }
     } else {
-        // we have local changes
-        // try applying this but it might fail
-        let res = apply(source.text, changeSet.patches)
-        return map(res) { Document($0) }
+        let info = ["NSLocalizedDescriptionKey": "cannot apply patches due to local changes"]
+        return Result(NSError(domain: "Diff", code: ErrorCodes.LocalChanges.rawValue, userInfo: info))
     }
 }
 
@@ -167,5 +166,60 @@ func newPosition(currentPos: Position, patches: [Patch]) -> Position {
         x = adjustPos(x, patch)
     }
     return x
+}
+
+
+func writeTemp(content: String) -> NSURL? {
+    let url = tempUrl()
+    let res = try({ error in
+        content.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: error)
+    })
+    if res.succeeded {
+        return url
+    } else {
+        return nil
+    }
+}
+
+
+func tempUrl() -> NSURL {
+    let id = NSProcessInfo.processInfo().globallyUniqueString
+    let path = NSTemporaryDirectory().stringByAppendingPathComponent(id)
+    return NSURL.fileURLWithPath(path)!
+}
+
+
+func diff3(mine: NSURL, ancestor: NSURL, yours: NSURL) -> String? {
+    let pipe = NSPipe()
+    let file = pipe.fileHandleForReading
+
+    let task = NSTask()
+    task.launchPath = "/usr/bin/diff3"
+    task.arguments = [mine.path!, ancestor.path!, yours.path!, "-m"]
+    task.standardOutput = pipe
+    task.launch()
+
+    let data = file.readDataToEndOfFile()
+    file.closeFile()
+    let output = NSString(data: data, encoding: NSUTF8StringEncoding)
+    return output as String?
+}
+
+
+func merge(mine: String, ancestor: String, yours: String) -> String? {
+    let m = writeTemp(mine)!
+    let a = writeTemp(ancestor)!
+    let y = writeTemp(yours)!
+
+    if let res = diff3(m, a, y) {
+        if res.contains("<<<<<<<") && res.contains("=======") && res.contains(">>>>>>>") {
+            // merge conflict
+            return nil
+        } else {
+            return res
+        }
+    } else {
+        return nil
+    }
 }
 

@@ -60,7 +60,6 @@ class ConnectedEditor {
     let editor: Editor
     var document: ConnectedDocument
     var observer: NSObjectProtocol! = nil
-    var sendThrottle = Throttle(bufferTime: 0.5)
     
     init(editor: Editor, document: ConnectedDocument) {
         self.editor = editor
@@ -72,10 +71,8 @@ class ConnectedEditor {
     // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
     private func startObserving() {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
-            self.sendThrottle.execute {
-                println("#### doc updated")
-                self.document.update(Document(self.editor.textStorage.string))
-            }
+            // println("#### doc updated")
+            self.document.update(Document(self.editor.textStorage.string))
         }
     }
     

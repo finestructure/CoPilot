@@ -33,6 +33,7 @@ func contentsOfFile(#name: String, #type: String) -> String {
 
 class DiffTests: XCTestCase {
     
+
     func test_computeDiff() {
         let d = computeDiff("foo2bar", "foobar")
         expect(d.count) == 3
@@ -211,13 +212,30 @@ class DiffTests: XCTestCase {
     
     
     func test_apply_Document_diverged() {
+        // regression test: we cannot reliable apply the fox -> cat patch to the target
         let fox = Document("The quick brown fox jumps over the lazy dog")
         let cat = Document("The quick brown leopard jumps over the lazy dog")
         let change = Changeset(source: fox, target: cat)
-        let source = Document("The quick brown horse jumps over the lazy dog")
-        let res = apply(source, change!)
-        expect(res.succeeded) == true
-        expect(res.value!.text) == "The quick brown leopard jumps over the lazy dog"
+        let target = Document("The quick brown horse jumps over the lazy dog")
+        let res = apply(target, change!)
+        expect(res.succeeded) == false
+    }
+    
+    
+    func test_apply_Document_diverged2() {
+        // regression test: we cannot reliable apply the patch to the target
+        let change = Changeset(source: Document("initial"), target: Document("server"))
+        let res = apply(Document("client"), change!)
+        expect(res.succeeded) == false
+    }
+    
+    
+    func test_apply_Document_diverged3() {
+        // regression test: we cannot reliable apply the patch to the target
+        let change = Changeset(source: Document("foo"), target: Document("server"))
+        let c = Document("client")
+        let res = apply(c, change!)
+        expect(res.succeeded) == false
     }
     
     
@@ -239,7 +257,7 @@ class DiffTests: XCTestCase {
         let res = apply(clientDoc, changes!)
         expect(res.succeeded) == false
         expect(res.error).toNot(beNil())
-        expect(res.error?.localizedDescription) == "The operation couldn’t be completed. (Diff error 100.)"
+        expect(res.error?.localizedDescription) == "The operation couldn’t be completed. (Diff error 200.)"
     }
     
     
@@ -273,5 +291,21 @@ class DiffTests: XCTestCase {
         expect(newPosition(30, patches)) == 31
         expect(newPosition(32, patches)) == 33
     }
-    
+
+
+    func test_merge() {
+        let ancestor = "foo\nbar\nbaz\n"
+        let yours = "foo1\nbar\nbaz\n"
+        let mine = "foo\nbar\nbaz2\n"
+        expect(merge(mine, ancestor, yours)) == "foo1\nbar\nbaz2\n"
+    }
+
+
+    func test_merge_failure() {
+        let ancestor = "foo"
+        let yours = "bar"
+        let mine = "baz"
+        expect(merge(mine, ancestor, yours)).to(beNil())
+    }
+
 }

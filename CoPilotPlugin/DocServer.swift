@@ -10,24 +10,33 @@ import Cocoa
 import FeinstrukturUtils
 
 
-class DocServer {
+extension WebSocket {
+    func send(command: Command) {
+        self.send(command.serialize())
+    }
+}
+
+
+extension Server {
+    func broadcast(command: Command, exclude: WebSocket? = nil) {
+        self.broadcast(command.serialize(), exclude: exclude)
+    }
+}
+
+
+class DocServer: DocNode {
     
     private var server: Server! = nil
-    private var _document: Document
-    private var _onUpdate: UpdateHandler?
-    private var timer: Timer!
-    private var docProvider: DocumentProvider!
     private var _connections = [WebSocket: Connection]()
 
-    var document: Document { return self._document }
-
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
-        self._document = document
         self.server = Server(name: name, service: service)
+
+        super.init(name: name, document: document)
+
         self.server.onConnect = { ws in
             // initialize client on connect
-            let cmd = Command(document: self._document)
-            ws.send(cmd.serialize())
+            ws.send(Command(document: self._document))
 
             ws.onReceive = self.onReceive(ws)
         }
@@ -38,32 +47,37 @@ class DocServer {
     func onReceive(websocket: WebSocket) -> MessageHandler {
         return { msg in
             let cmd = Command(data: msg.data!)
+            // println("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc(let doc):
                 println("server not accepting .Doc commands")
             case .Update(let changes):
                 let res = apply(self._document, changes)
                 if res.succeeded {
-                    self._document = res.value!
+                    self.commit(res.value!)
                     self.server.broadcast(msg.data!, exclude: websocket)
-                    self.onUpdate?(res.value!)
                 } else {
-                    println("messageHandler: applying patch failed: \(res.error!.localizedDescription)")
+                    if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
+                        let mine = self._document.text
+                        let res = apply(ancestor, changes.patches)
+                        if let yours = res.value {
+                            if let merged = merge(mine, ancestor, yours) {
+                                self.commit(Document(merged))
+                            }
+                        }
+                    } else { // instead of sending an override we could also request the rev from the other side's cache
+                        println("#### server: applying patch failed: \(res.error!.localizedDescription)")
+                        // send Doc to resync - server wins
+                        websocket.send(Command(document: self._document))
+                    }
                 }
+            case .GetDoc:
+                websocket.send(Command(document: self._document))
             case .Name(let name):
                 self._connections[websocket] = SimpleConnection(displayName: name)
             default:
                 println("messageHandler: ignoring command: \(cmd)")
             }
-        }
-   }
-
-
-    // TODO: do we really need polling? - remove
-    func poll(interval: NSTimeInterval = 0.5, docProvider: DocumentProvider) {
-        self.docProvider = docProvider
-        self.timer = Timer(interval: interval) {
-            self.update(self.docProvider())
         }
     }
 
@@ -76,7 +90,7 @@ class DocServer {
 
 
 extension DocServer: ConnectedDocument {
-
+    
     var onUpdate: UpdateHandler? {
         get { return self._onUpdate }
         set { self._onUpdate = newValue }
@@ -86,8 +100,10 @@ extension DocServer: ConnectedDocument {
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self.server.broadcast(Command(update: changes).serialize())
                 self._document = newDocument
+                self.sendThrottle.execute {
+                    self.server.broadcast(Command(update: changes))
+                }
             }
         }
     }
@@ -102,5 +118,13 @@ extension DocServer: ConnectedDocument {
         return self._connections.values.array
     }
 
+}
+
+
+// MARK: Test extensions
+extension DocServer {
+    
+    var test_server: Server { return self.server }
+    
 }
 
