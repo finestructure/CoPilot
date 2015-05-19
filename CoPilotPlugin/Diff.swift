@@ -206,11 +206,20 @@ func diff3(mine: NSURL, ancestor: NSURL, yours: NSURL) -> String? {
 }
 
 
-func merge(mine: String, ancestor: String, yours: String) -> String {
+func merge(mine: String, ancestor: String, yours: String) -> String? {
     let m = writeTemp(mine)!
     let a = writeTemp(ancestor)!
     let y = writeTemp(yours)!
 
-    return diff3(m, a, y)!
+    if let res = diff3(m, a, y) {
+        if res.contains("<<<<<<<") && res.contains("=======") && res.contains(">>>>>>>") {
+            // merge conflict
+            return nil
+        } else {
+            return res
+        }
+    } else {
+        return nil
+    }
 }
 

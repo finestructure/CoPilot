@@ -45,33 +45,27 @@ class DocClient: DocNode {
         println("#### client cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):
-            switch self.state {
-            case .Initial:
-                self._document = doc
-                self._onUpdate?(doc)
-                self.state = .InSync
-            case .InConflict:
-                // compute diff
-                println("#### .InConflict")
-                if let changes = Changeset(source: self._document, target: doc) {
-                    println("#### changes: \(changes)")
-                    self.socket?.send(Command(update: changes))
-                }
-                // send it
-            case .InSync:
-                break
-            }
+            self.commit(doc)
         case .Update(let changes):
             let res = apply(self._document, changes)
             if res.succeeded {
-                self._document = res.value!
-                self._onUpdate?(res.value!)
-                self.state = .InSync
+                self.commit(res.value!)
             } else {
-                println("#### client: applying patch failed: \(res.error!.localizedDescription)")
-                self.state = .InConflict
-                // request original document in order to re-sync
-                self.socket?.send(Command.GetDoc)
+                // attempt merge
+                if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
+                    let mine = self._document.text
+                    let res = apply(ancestor, changes.patches)
+                    if let yours = res.value {
+                        if let merged = merge(mine, ancestor, yours) {
+                            println("#### client: merge succeeded")
+                            self.commit(Document(merged))
+                        }
+                    }
+                } else {
+                    println("#### client: applying patch failed: \(res.error!.localizedDescription)")
+                    // request original document in order to re-sync
+                    self.socket?.send(Command.GetDoc)
+                }
             }
         case .GetDoc:
             self.socket?.send(Command(document: self._document))

@@ -50,31 +50,27 @@ class DocServer: DocNode {
             println("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc(let doc):
-                switch self.state {
-                case .Initial:
-                    println("server not accepting initial .Doc commands")
-                case .InConflict:
-                    // compute diff
-                    println("#### .InConflict")
-                    if let changes = Changeset(source: self._document, target: doc) {
-                        println("#### changes: \(changes)")
-                        websocket.send(Command(update: changes))
-                    }
-                    // send it
-                case .InSync:
-                    break
-                }
+                println("server not accepting .Doc commands")
             case .Update(let changes):
                 let res = apply(self._document, changes)
                 if res.succeeded {
-                    self._document = res.value!
+                    self.commit(res.value!)
                     self.server.broadcast(msg.data!, exclude: websocket)
-                    self.onUpdate?(res.value!)
                 } else {
-                    println("#### server: applying patch failed: \(res.error!.localizedDescription)")
-                    self.state = .InConflict
-                    // request full document in order to re-sync
-                    websocket.send(Command.GetDoc)
+                    if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
+                        let mine = self._document.text
+                        let res = apply(ancestor, changes.patches)
+                        if let yours = res.value {
+                            if let merged = merge(mine, ancestor, yours) {
+                                println("#### server: merge succeeded")
+                                self.commit(Document(merged))
+                            }
+                        }
+                    } else { // instead of sending an override we could also request the rev from the other side's cache
+                        println("#### server: applying patch failed: \(res.error!.localizedDescription)")
+                        // send Doc to resync - server wins
+                        websocket.send(Command(document: self._document))
+                    }
                 }
             case .GetDoc:
                 websocket.send(Command(document: self._document))

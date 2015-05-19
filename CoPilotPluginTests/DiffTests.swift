@@ -31,10 +31,8 @@ func contentsOfFile(#name: String, #type: String) -> String {
 }
 
 
-
-
 class DiffTests: XCTestCase {
-
+    
 
     func test_computeDiff() {
         let d = computeDiff("foo2bar", "foobar")
@@ -296,12 +294,18 @@ class DiffTests: XCTestCase {
 
 
     func test_merge() {
-        measureBlock {
-            let ancestor = "foo\nbar\nbaz\n"
-            let yours = "foo1\nbar\nbaz\n"
-            let mine = "foo\nbar\nbaz2\n"
-            expect(merge(mine, ancestor, yours)) == "foo1\nbar\nbaz2\n"
-        }
+        let ancestor = "foo\nbar\nbaz\n"
+        let yours = "foo1\nbar\nbaz\n"
+        let mine = "foo\nbar\nbaz2\n"
+        expect(merge(mine, ancestor, yours)) == "foo1\nbar\nbaz2\n"
+    }
+
+
+    func test_merge_failure() {
+        let ancestor = "foo"
+        let yours = "bar"
+        let mine = "baz"
+        expect(merge(mine, ancestor, yours)).to(beNil())
     }
 
 }

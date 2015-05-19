@@ -10,23 +10,35 @@ import Foundation
 import FeinstrukturUtils
 
 
-enum State {
-    case Initial, InSync, InConflict
-}
+let CacheLimit = 10_000_000 // characters
 
 
 class DocNode {
-    internal var state: State = .Initial
-    internal var sendThrottle = Throttle(bufferTime: 5)
-    internal var _document: Document
+    internal var sendThrottle = Throttle(bufferTime: 0.5)
+    internal let revisions = NSCache()
+    internal var _document: Document {
+        willSet {
+            let key = self._document.hash
+            let value = self._document.text as NSString
+            self.revisions.setObject(value, forKey: key, cost: value.length)
+        }
+    }
     internal var _onUpdate: UpdateHandler?
 
     var name: String
     var document: Document { return self._document }
 
+
     init(name: String, document: Document) {
         self.name = name
         self._document = document
+        self.revisions.totalCostLimit = CacheLimit
+    }
+
+    
+    internal func commit(document: Document) {
+        self._document = document
+        self._onUpdate?(document)
     }
 
 }
