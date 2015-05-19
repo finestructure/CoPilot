@@ -47,7 +47,7 @@ class DocServer: DocNode {
     func onReceive(websocket: WebSocket) -> MessageHandler {
         return { msg in
             let cmd = Command(data: msg.data!)
-            println("#### server cmd: \(cmd)")
+            // println("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc(let doc):
                 println("server not accepting .Doc commands")
@@ -62,7 +62,6 @@ class DocServer: DocNode {
                         let res = apply(ancestor, changes.patches)
                         if let yours = res.value {
                             if let merged = merge(mine, ancestor, yours) {
-                                println("#### server: merge succeeded")
                                 self.commit(Document(merged))
                             }
                         }

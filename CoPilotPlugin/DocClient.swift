@@ -42,7 +42,7 @@ class DocClient: DocNode {
 
     func onReceive(msg: Message) {
         let cmd = Command(data: msg.data!)
-        println("#### client cmd: \(cmd)")
+        // println("#### client cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):
             self.commit(doc)

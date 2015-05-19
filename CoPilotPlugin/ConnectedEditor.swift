@@ -71,7 +71,7 @@ class ConnectedEditor {
     // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
     private func startObserving() {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
-            println("#### doc updated")
+            // println("#### doc updated")
             self.document.update(Document(self.editor.textStorage.string))
         }
     }
