@@ -68,7 +68,7 @@ class ConnectedEditor {
         self.setOnUpdate()
     }
     
-    // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
+
     private func startObserving() {
         self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
             // println("#### doc updated")
@@ -76,9 +76,9 @@ class ConnectedEditor {
         }
     }
     
-    // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
+
     private func setOnUpdate() {
-        // TODO: refine this by only replacing the changed text or at least keeping the caret in place
+        // TODO: refine this by only replacing the changed text
         self.document.onUpdate = { newDoc in
             if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
                 // TODO: this is not efficient - we've already computed this patch on the other side but it's difficult to route this through. We need to do this to preserve the insertion point. We could just send the Changeset instead of the Document and do it all here.
