@@ -72,3 +72,17 @@ extension String {
     }
 }
 
+
+extension NSTextView {
+
+    func rectForRange(range: NSRange) -> NSRect? {
+        if let l = self.layoutManager {
+            let rect = l.boundingRectForGlyphRange(range, inTextContainer: self.textContainer!)
+            return NSOffsetRect(rect, self.textContainerOrigin.x, self.textContainerOrigin.y)
+        } else {
+            return nil
+        }
+    }
+
+}
+
