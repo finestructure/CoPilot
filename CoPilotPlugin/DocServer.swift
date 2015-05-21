@@ -60,10 +60,12 @@ class DocServer: DocNode {
                     if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                         let mine = self._document.text
                         let res = apply(ancestor, changes.patches)
-                        if let yours = res.value {
-                            if let merged = merge(mine, ancestor, yours) {
-                                self.commit(Document(merged))
-                            }
+                        if let yours = res.value,
+                           let merged = merge(mine, ancestor, yours) {
+                            self.commit(Document(merged))
+                        } else {
+                            // send Doc to resync - server wins
+                            websocket.send(Command(document: self._document))
                         }
                     } else { // instead of sending an override we could also request the rev from the other side's cache
                         println("#### server: applying patch failed: \(res.error!.localizedDescription)")

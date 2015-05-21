@@ -107,7 +107,7 @@ class DocClientServerTests: XCTestCase {
     }
     
     
-    func test_conflicts() {
+    func test_conflict_server_update() {
         var serverDoc = Document("initial")
         let doc = { serverDoc }
         self.server = DocServer(name: "", document: doc())
@@ -127,6 +127,26 @@ class DocClientServerTests: XCTestCase {
     }
     
     
+    func test_conflict_client_update() {
+        var serverDoc = Document("initial")
+        let doc = { serverDoc }
+        self.server = DocServer(name: "", document: doc())
+        let client = createClient(document: Document(""))
+        // wait for the initial .Doc to set up the client
+        expect(client.document.text).toEventually(equal("initial"), timeout: 5)
+
+        // simulate a conflict by changing both server and client docs
+        // we do this by changing the underlying client ivar without triggering the .Update messages
+        self.server.test_document = Document("server")
+
+        // and then send an update from the server
+        client.update(Document("client"))
+
+        expect(self.server.document.text).toEventually(equal("server"))
+        expect(client.document.text).toEventually(equal("server"))
+    }
+
+
     func test_sync_back() {
         var serverDoc = Document("foo")
         self.server = DocServer(name: "server", document: serverDoc)
