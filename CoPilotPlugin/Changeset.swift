@@ -48,7 +48,7 @@ struct Changeset {
 extension Changeset: Printable {
 
     var description: String {
-        return "Changeset (\(self.patches))"
+        return "Changeset (\(self.baseRev) \(self.patches))"
     }
 
 }
