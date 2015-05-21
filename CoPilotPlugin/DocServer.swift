@@ -35,9 +35,7 @@ class DocServer: DocNode {
         super.init(name: name, document: document)
 
         self.server.onConnect = { ws in
-            // initialize client on connect
-            ws.send(Command(document: self._document))
-
+            self.resetClient(ws)
             ws.onReceive = self.onReceive(ws)
         }
         self.server.start()
@@ -64,13 +62,10 @@ class DocServer: DocNode {
                            let merged = merge(mine, ancestor, yours) {
                             self.commit(Document(merged))
                         } else {
-                            // send Doc to resync - server wins
-                            websocket.send(Command(document: self._document))
+                            self.resetClient(websocket)
                         }
                     } else { // instead of sending an override we could also request the rev from the other side's cache
-                        println("#### server: applying patch failed: \(res.error!.localizedDescription)")
-                        // send Doc to resync - server wins
-                        websocket.send(Command(document: self._document))
+                        self.resetClient(websocket)
                     }
                 }
             case .GetDoc:
@@ -81,6 +76,13 @@ class DocServer: DocNode {
                 println("messageHandler: ignoring command: \(cmd)")
             }
         }
+    }
+
+
+    func resetClient(websocket: WebSocket) {
+        // send Doc to force resync - server wins
+        println("#### resetting client")
+        websocket.send(Command(document: self._document))
     }
 
 
