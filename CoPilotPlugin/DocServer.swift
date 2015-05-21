@@ -50,6 +50,7 @@ class DocServer: DocNode {
             case .Doc(let doc):
                 println("server not accepting .Doc commands")
             case .Update(let changes):
+                // println("#### update:\n    doc:     \(self._document.hash)\n    baseRev: \(changes.baseRev)")
                 let res = apply(self._document, changes)
                 if res.succeeded {
                     self.commit(res.value!)
@@ -104,8 +105,8 @@ extension DocServer: ConnectedDocument {
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self._document = newDocument
                 self.sendThrottle.execute {
+                    self._document = newDocument
                     self.server.broadcast(Command(update: changes))
                 }
             }

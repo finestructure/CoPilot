@@ -92,8 +92,8 @@ extension DocClient: ConnectedDocument {
     
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
-            self._document = newDocument
             self.sendThrottle.execute {
+                self._document = newDocument
                 self.socket?.send(Command(update: changes))
             }
         }

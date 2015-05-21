@@ -39,7 +39,7 @@ class DocClientServerTests: XCTestCase {
     var server: DocServer!
     
     override func tearDown() {
-        self.server.stop()
+        self.server?.stop()
     }
     
     
@@ -168,7 +168,6 @@ class DocClientServerTests: XCTestCase {
         expect(self.server.document.text).toEventually(equal("bar"), timeout: 1)
         expect(client1.document.text).toEventually(equal("bar"), timeout: 1)
         expect(client2.document.text).toEventually(equal("bar"), timeout: 1)
-
     }
     
 }
