@@ -64,7 +64,7 @@ class DocClientServerTests: XCTestCase {
         self.server = DocServer(name: "foo", document: doc())
         let t = Timer(interval: 0.1) { self.server.update(doc()) }
         let client = createClient(document: Document(""))
-        client.onUpdate = { doc in
+        client.onDocumentUpdate = { doc in
             println("client doc: \(doc.text)")
             if try({ e in
                 doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding, error: e)
@@ -86,7 +86,7 @@ class DocClientServerTests: XCTestCase {
         
         let client = DocClient(service: service, document: Document(""))
         var changeCount = 0
-        client.onUpdate = { _ in changeCount++ }
+        client.onDocumentUpdate = { _ in changeCount++ }
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
     
