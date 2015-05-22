@@ -64,7 +64,7 @@ class ConnectedEditor {
     let editor: Editor
     var document: ConnectedDocument
     var observers = [NSObjectProtocol]()
-    var cursor: Cursor?
+    var cursors = [NSUUID: Cursor]()
 
     init(editor: Editor, document: ConnectedDocument) {
         self.editor = editor
@@ -113,11 +113,10 @@ class ConnectedEditor {
 
         self.document.onCursorUpdate = { selection in
             if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
-
-                if self.cursor == nil {
-                    self.cursor = Cursor(color: NSColor.redColor(), textView: tv)
+                if self.cursors[selection.id] == nil {
+                    self.cursors[selection.id] = Cursor(color: NSColor.redColor(), textView: tv)
                 }
-                self.cursor?.selection = selection
+                self.cursors[selection.id]?.selection = selection
             }
         }
     }
