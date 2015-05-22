@@ -7,27 +7,51 @@
 //
 
 import Cocoa
+import FeinstrukturUtils
+
+
+let Duration: NSTimeInterval = 0.6
 
 
 class Cursor: NSObject {
 
     let view = NSView()
-    let anim = NSViewAnimation()
+    var anim = NSViewAnimation(duration: Duration/2, animationCurve: .EaseInOut)
     let textView: NSTextView
+    var timer: Timer! = nil
+    var effect = NSViewAnimationFadeInEffect
 
     var selection: Selection = Selection(position: 0, length: 0) {
         didSet {
             if let rect = self.textView.rectForRange(selection.range) {
-                self.view.frame = rect.withPadding(x: 1, y: 1)
+                self.view.frame = rect.withPadding(x: 0.5, y: 1)
             }
         }
     }
+
 
     init(color: NSColor, textView: NSTextView) {
         self.textView = textView
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = color.CGColor
         self.textView.addSubview(self.view)
+
+        super.init()
+
+        self.timer = Timer(interval: Duration) {
+            self.blink()
+        }
+        self.anim.animationBlockingMode = .Nonblocking
+    }
+
+
+    func blink() {
+        var animInfo: [String: AnyObject] = [
+            NSViewAnimationTargetKey: self.view,
+            NSViewAnimationEffectKey: (self.view.hidden ? NSViewAnimationFadeInEffect : NSViewAnimationFadeOutEffect)
+        ]
+        self.anim.viewAnimations = [animInfo]
+        self.anim.startAnimation()
     }
 
 }

@@ -112,14 +112,6 @@ class ConnectedEditor {
 
         self.document.onCursorUpdate = { selection in
             if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
-//                var d: [String: AnyObject] = [
-//                    NSViewAnimationTargetKey: self.view,
-//                    NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect
-//                ]
-//                self.anim = NSViewAnimation(viewAnimations: [d])
-//                self.anim.duration = 1
-//                self.anim.animationCurve = .EaseIn
-//                self.anim.startAnimation()
 
                 if self.cursor == nil {
                     self.cursor = Cursor(color: NSColor.redColor(), textView: tv)
