@@ -6,15 +6,26 @@
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import FeinstrukturUtils
 
 
 let CacheLimit = 10_000_000 // characters
 
 
+let Colors = [
+    NSColor.blueColor(),
+    NSColor.brownColor(),
+    NSColor.greenColor(),
+    NSColor.redColor(),
+    NSColor.magentaColor(),
+    NSColor.purpleColor(),
+]
+
+
 class DocNode {
-    internal var sendThrottle = Throttle(bufferTime: 0.5)
+    internal var docThrottle = Throttle(bufferTime: 0.5)
+    internal var selThrottle = Throttle(bufferTime: 0.5)
     internal let revisions = NSCache()
     internal var _document: Document {
         willSet {
@@ -23,9 +34,12 @@ class DocNode {
             self.revisions.setObject(value, forKey: key, cost: value.length)
         }
     }
-    internal var _onUpdate: UpdateHandler?
+    internal var _onDocumentUpdate: DocumentUpdate?
+    internal var _onCursorUpdate: CursorUpdate?
 
+    var id = NSUUID()
     var name: String
+    var selectionColor = randomElement(Colors)!
     var document: Document { return self._document }
 
 
@@ -38,7 +52,19 @@ class DocNode {
     
     internal func commit(document: Document) {
         self._document = document
-        self._onUpdate?(document)
+        self._onDocumentUpdate?(document)
+    }
+
+
+    var onDocumentUpdate: DocumentUpdate? {
+        get { return self._onDocumentUpdate }
+        set { self._onDocumentUpdate = newValue }
+    }
+
+
+    var onCursorUpdate: CursorUpdate? {
+        get { return self._onCursorUpdate }
+        set { self._onCursorUpdate = newValue }
     }
 
 }
@@ -54,7 +80,8 @@ extension DocNode {
 
 
     func setBufferTime(bufferTime: NSTimeInterval) {
-        self.sendThrottle = Throttle(bufferTime: bufferTime)
+        self.docThrottle = Throttle(bufferTime: bufferTime)
+        self.selThrottle = Throttle(bufferTime: bufferTime)
     }
 
 }

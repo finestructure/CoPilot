@@ -73,6 +73,9 @@ class DocServer: DocNode {
                 websocket.send(Command(document: self._document))
             case .Name(let name):
                 self._connections[websocket] = SimpleConnection(displayName: name)
+            case .Cursor(let selection):
+                self._onCursorUpdate?(selection)
+                self.server.broadcast(msg.data!, exclude: websocket)
             default:
                 println("messageHandler: ignoring command: \(cmd)")
             }
@@ -96,16 +99,10 @@ class DocServer: DocNode {
 
 extension DocServer: ConnectedDocument {
     
-    var onUpdate: UpdateHandler? {
-        get { return self._onUpdate }
-        set { self._onUpdate = newValue }
-    }
-    
-    
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self.sendThrottle.execute {
+                self.docThrottle.execute {
                     self._document = newDocument
                     self.server.broadcast(Command(update: changes))
                 }
@@ -113,7 +110,14 @@ extension DocServer: ConnectedDocument {
         }
     }
 
-    
+
+    func update(selection: Selection) {
+        self.selThrottle.execute {
+            self.server.broadcast(Command(selection: selection))
+        }
+    }
+
+
     func disconnect() {
         self.server.stop()
     }    

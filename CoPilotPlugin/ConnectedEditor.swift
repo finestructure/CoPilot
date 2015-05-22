@@ -15,12 +15,17 @@ protocol Connection {
 }
 
 
-typealias UpdateHandler = (Document -> Void)
+typealias DocumentUpdate = (Document -> Void)
+typealias CursorUpdate = (Selection -> Void)
 
 
 protocol ConnectedDocument {
-    var onUpdate: UpdateHandler? { get set }
+    var id: NSUUID { get }
+    var selectionColor: NSColor { get }
+    var onDocumentUpdate: DocumentUpdate? { get set }
+    var onCursorUpdate: CursorUpdate? { get set }
     func update(newDocument: Document)
+    func update(selection: Selection)
     func disconnect()
     var connections: [Connection] { get }
 }
@@ -59,8 +64,9 @@ func ==(lhs: Editor, rhs: Editor) -> Bool {
 class ConnectedEditor {
     let editor: Editor
     var document: ConnectedDocument
-    var observer: NSObjectProtocol! = nil
-    
+    var observers = [NSObjectProtocol]()
+    var cursors = [NSUUID: Cursor]()
+
     init(editor: Editor, document: ConnectedDocument) {
         self.editor = editor
         self.document = document
@@ -68,18 +74,29 @@ class ConnectedEditor {
         self.setOnUpdate()
     }
     
-    // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
+
     private func startObserving() {
-        self.observer = observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
-            // println("#### doc updated")
-            self.document.update(Document(self.editor.textStorage.string))
+        self.observers.append(
+            observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
+                println("#### doc updated")
+                self.document.update(Document(self.editor.textStorage.string))
+            }
+        )
+        if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
+            self.observers.append(
+                observe("NSTextViewDidChangeSelectionNotification", object: tv) { _ in
+                    let curserPos = Selection(tv.selectedRange, id: self.document.id, color: self.document.selectionColor)
+                    self.document.update(curserPos)
+                }
+            )
         }
+
     }
     
-    // NB: inlining this crashes the compiler (Version 6.3.1 (6D1002))
+
     private func setOnUpdate() {
-        // TODO: refine this by only replacing the changed text or at least keeping the caret in place
-        self.document.onUpdate = { newDoc in
+        // TODO: refine this by only replacing the changed text
+        self.document.onDocumentUpdate = { newDoc in
             if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
                 // TODO: this is not efficient - we've already computed this patch on the other side but it's difficult to route this through. We need to do this to preserve the insertion point. We could just send the Changeset instead of the Document and do it all here.
                 let patches = computePatches(tv.string, newDoc.text)
@@ -94,11 +111,22 @@ class ConnectedEditor {
                 tv.setSelectedRange(newSelection)
             }
         }
+
+        self.document.onCursorUpdate = { selection in
+            if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
+                if self.cursors[selection.id] == nil {
+                    self.cursors[selection.id] = Cursor(color: selection.color, textView: tv)
+                }
+                self.cursors[selection.id]?.selection = selection
+            }
+        }
     }
     
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self.observer)
+        for o in self.observers {
+            NSNotificationCenter.defaultCenter().removeObserver(o)
+        }
     }
 }
 

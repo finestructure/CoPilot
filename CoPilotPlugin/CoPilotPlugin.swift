@@ -45,7 +45,7 @@ class CoPilotPlugin: NSObject {
         super.init()
 
         self.bundle = bundle
-        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"")
+        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"a")
         self.subscribeMenuItem = self.menuItem("CoPilot Subscribe", action:"subscribe", key:"z")
 
         observers.append(
