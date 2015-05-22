@@ -20,6 +20,7 @@ typealias CursorUpdate = (Selection -> Void)
 
 
 protocol ConnectedDocument {
+    var id: NSUUID { get }
     var onDocumentUpdate: DocumentUpdate? { get set }
     var onCursorUpdate: CursorUpdate? { get set }
     func update(newDocument: Document)
@@ -83,7 +84,7 @@ class ConnectedEditor {
         if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
             self.observers.append(
                 observe("NSTextViewDidChangeSelectionNotification", object: tv) { _ in
-                    let curserPos = Selection(tv.selectedRange)
+                    let curserPos = Selection(tv.selectedRange, id: self.document.id)
                     self.document.update(curserPos)
                 }
             )

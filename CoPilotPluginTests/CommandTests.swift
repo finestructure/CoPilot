@@ -88,12 +88,14 @@ class CommandTests: XCTestCase {
 
     func test_serialize_Cursor() {
         let r = NSRange(location: 1, length: 37)
-        let d = Command(selection: Selection(r)).serialize()
+        let id = NSUUID()
+        let d = Command(selection: Selection(r, id: id)).serialize()
         expect(d).toNot(beNil())
         let copy = Command(data: d)
         expect(copy.description) == ".Cursor 1 37"
         expect(copy.selection?.range.location) == 1
         expect(copy.selection?.range.length) == 37
+        expect(copy.selection?.id.UUIDString) == id.UUIDString
         expect(copy.name).to(beNil())
         expect(copy.document).to(beNil())
         expect(copy.changes).to(beNil())

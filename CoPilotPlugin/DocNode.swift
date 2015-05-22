@@ -27,6 +27,7 @@ class DocNode {
     internal var _onDocumentUpdate: DocumentUpdate?
     internal var _onCursorUpdate: CursorUpdate?
 
+    var id = NSUUID()
     var name: String
     var document: Document { return self._document }
 

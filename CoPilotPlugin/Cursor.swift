@@ -21,9 +21,10 @@ class Cursor: NSObject {
     var timer: Timer! = nil
     var effect = NSViewAnimationFadeInEffect
 
-    var selection: Selection = Selection(position: 0, length: 0) {
+    var selection: Selection? {
         didSet {
-            if let rect = self.textView.rectForRange(selection.range) {
+            if let sel = self.selection,
+               let rect = self.textView.rectForRange(sel.range) {
                 self.view.frame = rect.withPadding(x: 0.5, y: 1)
             }
         }
