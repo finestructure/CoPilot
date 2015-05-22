@@ -75,6 +75,7 @@ class DocServer: DocNode {
                 self._connections[websocket] = SimpleConnection(displayName: name)
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
+                self.server.broadcast(msg.data!, exclude: websocket)
             default:
                 println("messageHandler: ignoring command: \(cmd)")
             }
