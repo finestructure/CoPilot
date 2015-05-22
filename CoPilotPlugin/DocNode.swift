@@ -14,7 +14,8 @@ let CacheLimit = 10_000_000 // characters
 
 
 class DocNode {
-    internal var sendThrottle = Throttle(bufferTime: 0.5)
+    internal var docThrottle = Throttle(bufferTime: 0.5)
+    internal var selThrottle = Throttle(bufferTime: 0.5)
     internal let revisions = NSCache()
     internal var _document: Document {
         willSet {
@@ -67,7 +68,8 @@ extension DocNode {
 
 
     func setBufferTime(bufferTime: NSTimeInterval) {
-        self.sendThrottle = Throttle(bufferTime: bufferTime)
+        self.docThrottle = Throttle(bufferTime: bufferTime)
+        self.selThrottle = Throttle(bufferTime: bufferTime)
     }
 
 }

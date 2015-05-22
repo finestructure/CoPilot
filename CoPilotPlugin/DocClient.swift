@@ -88,7 +88,7 @@ extension DocClient: ConnectedDocument {
 
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
-            self.sendThrottle.execute {
+            self.docThrottle.execute {
                 self._document = newDocument
                 self.socket?.send(Command(update: changes))
             }
@@ -97,7 +97,7 @@ extension DocClient: ConnectedDocument {
 
 
     func update(selection: Selection) {
-        self.sendThrottle.execute {
+        self.selThrottle.execute {
            self.socket?.send(Command(selection: selection))
         }
     }

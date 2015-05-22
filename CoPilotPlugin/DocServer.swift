@@ -101,7 +101,7 @@ extension DocServer: ConnectedDocument {
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self.sendThrottle.execute {
+                self.docThrottle.execute {
                     self._document = newDocument
                     self.server.broadcast(Command(update: changes))
                 }
@@ -111,7 +111,7 @@ extension DocServer: ConnectedDocument {
 
 
     func update(selection: Selection) {
-        self.sendThrottle.execute {
+        self.selThrottle.execute {
             self.server.broadcast(Command(selection: selection))
         }
     }
