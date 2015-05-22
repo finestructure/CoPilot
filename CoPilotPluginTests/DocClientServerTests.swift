@@ -92,17 +92,14 @@ class DocClientServerTests: XCTestCase {
     
     
     func test_DocClient_applyChanges() {
-        var serverDoc = Document("foo")
-        let doc = { serverDoc }
-        self.server = DocServer(name: "foo", document: doc())
-        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        self.server = DocServer(name: "foo", document: Document("foo"))
         let client1 = createClient(document: Document(""))
         // wait for the initial .Doc to set up the client
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
         let client2 = createClient(document: client2Doc)
-        serverDoc = Document("foobar")
+        self.server.update(Document("foobar"))
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
     }
     
