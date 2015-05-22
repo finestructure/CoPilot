@@ -35,9 +35,7 @@ class DocServer: DocNode {
         super.init(name: name, document: document)
 
         self.server.onConnect = { ws in
-            // initialize client on connect
-            ws.send(Command(document: self._document))
-
+            self.resetClient(ws)
             ws.onReceive = self.onReceive(ws)
         }
         self.server.start()
@@ -52,6 +50,7 @@ class DocServer: DocNode {
             case .Doc(let doc):
                 println("server not accepting .Doc commands")
             case .Update(let changes):
+                // println("#### update:\n    doc:     \(self._document.hash)\n    baseRev: \(changes.baseRev)")
                 let res = apply(self._document, changes)
                 if res.succeeded {
                     self.commit(res.value!)
@@ -60,15 +59,14 @@ class DocServer: DocNode {
                     if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                         let mine = self._document.text
                         let res = apply(ancestor, changes.patches)
-                        if let yours = res.value {
-                            if let merged = merge(mine, ancestor, yours) {
-                                self.commit(Document(merged))
-                            }
+                        if let yours = res.value,
+                           let merged = merge(mine, ancestor, yours) {
+                            self.commit(Document(merged))
+                        } else {
+                            self.resetClient(websocket)
                         }
                     } else { // instead of sending an override we could also request the rev from the other side's cache
-                        println("#### server: applying patch failed: \(res.error!.localizedDescription)")
-                        // send Doc to resync - server wins
-                        websocket.send(Command(document: self._document))
+                        self.resetClient(websocket)
                     }
                 }
             case .GetDoc:
@@ -79,6 +77,13 @@ class DocServer: DocNode {
                 println("messageHandler: ignoring command: \(cmd)")
             }
         }
+    }
+
+
+    func resetClient(websocket: WebSocket) {
+        // send Doc to force resync - server wins
+        println("#### resetting client")
+        websocket.send(Command(document: self._document))
     }
 
 
@@ -100,8 +105,8 @@ extension DocServer: ConnectedDocument {
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
-                self._document = newDocument
                 self.sendThrottle.execute {
+                    self._document = newDocument
                     self.server.broadcast(Command(update: changes))
                 }
             }

@@ -37,7 +37,7 @@ struct Document {
 extension Document: Printable {
 
     var description: String {
-        return "Document (\(self.text))"
+        return "Document (\(self.hash) \(self.text))"
     }
 
 }

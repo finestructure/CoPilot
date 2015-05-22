@@ -59,13 +59,10 @@ class DocClient: DocNode {
                        let merged = merge(mine, ancestor, yours) {
                         self.commit(Document(merged))
                     } else {
-                        // request original document in order to re-sync
-                        self.socket?.send(Command.GetDoc)
+                        self.requestReset()
                     }
                 } else {
-                    println("#### client: applying patch failed: \(res.error!.localizedDescription)")
-                    // request original document in order to re-sync
-                    self.socket?.send(Command.GetDoc)
+                    self.requestReset()
                 }
             }
         case .GetDoc:
@@ -73,6 +70,13 @@ class DocClient: DocNode {
         default:
             println("messageHandler: ignoring command: \(cmd)")
         }
+    }
+
+
+    func requestReset() {
+        // request original document in order to re-sync
+        println("#### client: requesting reset")
+        self.socket?.send(Command.GetDoc)
     }
 
 }
@@ -88,8 +92,8 @@ extension DocClient: ConnectedDocument {
     
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {
-            self._document = newDocument
             self.sendThrottle.execute {
+                self._document = newDocument
                 self.socket?.send(Command(update: changes))
             }
         }
