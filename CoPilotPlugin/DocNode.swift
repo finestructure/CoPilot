@@ -6,11 +6,21 @@
 //  Copyright (c) 2015 feinstruktur. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import FeinstrukturUtils
 
 
 let CacheLimit = 10_000_000 // characters
+
+
+let Colors = [
+    NSColor.blueColor(),
+    NSColor.brownColor(),
+    NSColor.greenColor(),
+    NSColor.redColor(),
+    NSColor.magentaColor(),
+    NSColor.purpleColor(),
+]
 
 
 class DocNode {
@@ -29,6 +39,7 @@ class DocNode {
 
     var id = NSUUID()
     var name: String
+    var selectionColor = randomElement(Colors)!
     var document: Document { return self._document }
 
 
