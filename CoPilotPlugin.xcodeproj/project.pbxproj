@@ -62,6 +62,8 @@
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */; };
+		5AD8E5F91B0FBD8B000F7D6E /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */; };
+		5AD8E6051B0FC112000F7D6E /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */; };
 		5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
@@ -337,6 +339,7 @@
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
 		5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
+		5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cursor.swift; sourceTree = "<group>"; };
 		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = CoPilotPluginTests/Server.swift; sourceTree = SOURCE_ROOT; };
 		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		5AE5A9891AFE11A300480382 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
@@ -445,6 +448,7 @@
 				5A6B14261AE674E3006EBB31 /* MainController.xib */,
 				5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */,
 				5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */,
+				5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -898,6 +902,7 @@
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */,
 				5ACE1BAB1AFDEABE00154511 /* Changeset.swift in Sources */,
+				5AD8E6051B0FC112000F7D6E /* Cursor.swift in Sources */,
 				5AF58A231B032D6C00558448 /* XcodeUtils+mock.swift in Sources */,
 				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
@@ -921,6 +926,7 @@
 			files = (
 				5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */,
+				5AD8E5F91B0FBD8B000F7D6E /* Cursor.swift in Sources */,
 				5A76F5B31B02377500B67B7F /* ConnectedEditor.swift in Sources */,
 				5ACE1BAA1AFDEABE00154511 /* Changeset.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,

@@ -63,8 +63,8 @@ class ConnectedEditor {
     let editor: Editor
     var document: ConnectedDocument
     var observers = [NSObjectProtocol]()
-    var view = NSView()
-    
+    var cursor: Cursor?
+
     init(editor: Editor, document: ConnectedDocument) {
         self.editor = editor
         self.document = document
@@ -111,13 +111,20 @@ class ConnectedEditor {
         }
 
         self.document.onCursorUpdate = { selection in
-            if let tv = XcodeUtils.sourceTextView(self.editor.controller),
-               let rect = tv.rectForRange(selection.range) {
-                println("remote cursor rect: \(rect)")
-                self.view.frame = rect.withPadding(x: 2, y: 0)
-                self.view.wantsLayer = true
-                self.view.layer?.backgroundColor = NSColor.redColor().CGColor
-                tv.addSubview(self.view)
+            if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
+//                var d: [String: AnyObject] = [
+//                    NSViewAnimationTargetKey: self.view,
+//                    NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect
+//                ]
+//                self.anim = NSViewAnimation(viewAnimations: [d])
+//                self.anim.duration = 1
+//                self.anim.animationCurve = .EaseIn
+//                self.anim.startAnimation()
+
+                if self.cursor == nil {
+                    self.cursor = Cursor(color: NSColor.redColor(), textView: tv)
+                }
+                self.cursor?.selection = selection
             }
         }
     }

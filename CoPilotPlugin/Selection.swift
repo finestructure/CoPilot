@@ -16,6 +16,10 @@ struct Selection {
         self.range = range
     }
 
+    init(position: Int, length: Int) {
+        self.init(NSRange(location: position, length: length))
+    }
+
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
         let value = decoder.decodeObjectForKey("range") as! NSValue
