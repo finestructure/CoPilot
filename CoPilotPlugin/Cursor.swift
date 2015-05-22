@@ -25,24 +25,23 @@ class Cursor: NSObject {
         didSet {
             if let sel = self.selection,
                let rect = self.textView.rectForRange(sel.range) {
-                self.view.frame = rect.withPadding(x: 0.5, y: 1)
+                self.view.frame = rect.withPadding(x: 0.5, y: 0.5)
             }
         }
     }
 
 
-    init(color: NSColor, textView: NSTextView) {
+    init(color: NSColor, textView: NSTextView, blink: Bool = false) {
         self.textView = textView
         self.view.wantsLayer = true
-        self.view.layer?.backgroundColor = color.CGColor
+        self.view.layer?.backgroundColor = NSColor(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: 0.5).CGColor
         self.textView.addSubview(self.view)
 
         super.init()
 
-        self.timer = Timer(interval: Duration) {
-            self.blink()
+        if blink {
+            self.timer = Timer(interval: Duration) { self.blink() }
         }
-        self.anim.animationBlockingMode = .Nonblocking
     }
 
 
@@ -52,6 +51,7 @@ class Cursor: NSObject {
             NSViewAnimationEffectKey: (self.view.hidden ? NSViewAnimationFadeInEffect : NSViewAnimationFadeOutEffect)
         ]
         self.anim.viewAnimations = [animInfo]
+        self.anim.animationBlockingMode = .Nonblocking
         self.anim.startAnimation()
     }
 

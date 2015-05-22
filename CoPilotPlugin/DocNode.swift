@@ -25,7 +25,7 @@ let Colors = [
 
 class DocNode {
     internal var docThrottle = Throttle(bufferTime: 0.5)
-    internal var selThrottle = Throttle(bufferTime: 1)
+    internal var selThrottle = Throttle(bufferTime: 0.5)
     internal let revisions = NSCache()
     internal var _document: Document {
         willSet {
