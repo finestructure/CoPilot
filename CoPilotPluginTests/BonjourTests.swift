@@ -19,13 +19,13 @@ class BonjourTests: XCTestCase {
         let service = publish(service: CoPilotService, name: "Test")
         expect(service).toNot(beNil())
         
-        var found: NSNetService!
+        var found: NSNetService?
         let b = Browser(service: CoPilotService) { service in
             found = service
         }
 
         expect(found).toEventuallyNot(beNil(), timeout: 5)
-        expect(found.type) == "_copilot._tcp."
+        expect(found?.type) == "_copilot._tcp."
     }
 
     
@@ -58,12 +58,12 @@ class BonjourTests: XCTestCase {
     func test_resolve() {
         let publishedService = publish(service: CoPilotService, name: "Test")
         
-        var resolver: Resolver!
+        var resolver: Resolver?
         let b = Browser(service: CoPilotService) { service in
             resolver = Resolver(service: service, timeout: 1)
         }
         expect(resolver).toEventuallyNot(beNil(), timeout: 5)
-        expect(resolver.resolved).toEventually(beTrue())
+        expect(resolver?.resolved).toEventually(beTrue())
     }
 
 }
