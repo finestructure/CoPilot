@@ -25,6 +25,11 @@ struct Changeset {
         }
     }
 
+}
+
+
+extension Changeset: Serializable {
+
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
         self.patches = decoder.decodeObjectForKey("patches") as! [Patch]
@@ -32,6 +37,7 @@ struct Changeset {
         self.targetRev = decoder.decodeObjectForKey("targetRev") as! Hash
     }
 
+    
     func serialize() -> NSData {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)

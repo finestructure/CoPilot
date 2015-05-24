@@ -13,17 +13,29 @@ typealias Hash = String
 
 
 struct Document {
+
     let text: String
+
     var hash: Hash {
         return self.text.md5()!
     }
+
+
     init(_ text: String) {
         self.text = text
     }
+
+}
+
+
+extension Document: Serializable {
+
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
         self.text = decoder.decodeObjectForKey("text") as! String
     }
+
+
     func serialize() -> NSData {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -31,6 +43,7 @@ struct Document {
         archiver.finishEncoding()
         return data
     }
+
 }
 
 

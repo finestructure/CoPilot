@@ -40,69 +40,6 @@ enum Command {
         self = .Cursor(selection)
     }
     
-    init(data: NSData) {
-        let decoder = NSKeyedUnarchiver(forReadingWithData: data)
-        // try to decode the type key
-        if let type = decoder.decodeObjectForKey(EncodingKeys.TypeName.rawValue) as? String {
-            // try to decode the data kay
-            if let obj: AnyObject = decoder.decodeObjectForKey(EncodingKeys.Data.rawValue) {
-                switch type {
-                case TypeNames.Doc.rawValue:
-                    let doc = Document(data: obj as! NSData)
-                    self = .Doc(doc)
-                case TypeNames.Update.rawValue:
-                    let changes = Changeset(data: obj as! NSData)
-                    self = .Update(changes)
-                case TypeNames.Version.rawValue:
-                    let hash = Hash(obj as! NSString)
-                    self = .Version(hash)
-                case TypeNames.Name.rawValue:
-                    let name = String(obj as! NSString)
-                    self = .Name(name)
-                case TypeNames.Cursor.rawValue:
-                    let selection = Selection(data: obj as! NSData)
-                    self = .Cursor(selection)
-                default:
-                    self = .Undefined
-                }
-            } else {
-                // commands without associated data (could not decode the value for the data key)
-                switch type {
-                case TypeNames.GetDoc.rawValue:
-                    self = .GetDoc
-                case TypeNames.GetVersion.rawValue:
-                    self = .GetVersion
-                default:
-                    self = .Undefined
-               }
-            }
-        } else {
-            // could not decode the value for the type key
-            self = .Undefined
-        }
-    }
-    
-    func serialize() -> NSData {
-        let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-        archiver.encodeObject(self.typeName, forKey: EncodingKeys.TypeName.rawValue)
-        switch self {
-        case .Doc(let doc):
-            archiver.encodeObject(doc.serialize(), forKey: EncodingKeys.Data.rawValue)
-        case .Update(let changes):
-            archiver.encodeObject(changes.serialize(), forKey: EncodingKeys.Data.rawValue)
-        case .Version(let version):
-            archiver.encodeObject(version, forKey: EncodingKeys.Data.rawValue)
-        case .Name(let name):
-            archiver.encodeObject(name, forKey: EncodingKeys.Data.rawValue)
-        case .Cursor(let selection):
-            archiver.encodeObject(selection.serialize(), forKey: EncodingKeys.Data.rawValue)
-        default: break
-        }
-        archiver.finishEncoding()
-        return data
-    }
-    
     var document: Document? {
         switch self {
         case .Doc(let doc):
@@ -185,6 +122,74 @@ enum Command {
         }
     }
     
+}
+
+
+extension Command: Serializable {
+
+    init(data: NSData) {
+        let decoder = NSKeyedUnarchiver(forReadingWithData: data)
+        // try to decode the type key
+        if let type = decoder.decodeObjectForKey(EncodingKeys.TypeName.rawValue) as? String {
+            // try to decode the data kay
+            if let obj: AnyObject = decoder.decodeObjectForKey(EncodingKeys.Data.rawValue) {
+                switch type {
+                case TypeNames.Doc.rawValue:
+                    let doc = Document(data: obj as! NSData)
+                    self = .Doc(doc)
+                case TypeNames.Update.rawValue:
+                    let changes = Changeset(data: obj as! NSData)
+                    self = .Update(changes)
+                case TypeNames.Version.rawValue:
+                    let hash = Hash(obj as! NSString)
+                    self = .Version(hash)
+                case TypeNames.Name.rawValue:
+                    let name = String(obj as! NSString)
+                    self = .Name(name)
+                case TypeNames.Cursor.rawValue:
+                    let selection = Selection(data: obj as! NSData)
+                    self = .Cursor(selection)
+                default:
+                    self = .Undefined
+                }
+            } else {
+                // commands without associated data (could not decode the value for the data key)
+                switch type {
+                case TypeNames.GetDoc.rawValue:
+                    self = .GetDoc
+                case TypeNames.GetVersion.rawValue:
+                    self = .GetVersion
+                default:
+                    self = .Undefined
+                }
+            }
+        } else {
+            // could not decode the value for the type key
+            self = .Undefined
+        }
+    }
+
+    func serialize() -> NSData {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+        archiver.encodeObject(self.typeName, forKey: EncodingKeys.TypeName.rawValue)
+        switch self {
+        case .Doc(let doc):
+            archiver.encodeObject(doc.serialize(), forKey: EncodingKeys.Data.rawValue)
+        case .Update(let changes):
+            archiver.encodeObject(changes.serialize(), forKey: EncodingKeys.Data.rawValue)
+        case .Version(let version):
+            archiver.encodeObject(version, forKey: EncodingKeys.Data.rawValue)
+        case .Name(let name):
+            archiver.encodeObject(name, forKey: EncodingKeys.Data.rawValue)
+        case .Cursor(let selection):
+            archiver.encodeObject(selection.serialize(), forKey: EncodingKeys.Data.rawValue)
+        default: break
+        }
+        archiver.finishEncoding()
+        return data
+    }
+
 }
 
 

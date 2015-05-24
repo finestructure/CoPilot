@@ -10,6 +10,7 @@ import Cocoa
 
 
 struct Selection {
+    
     let range: NSRange
     let id: NSUUID
     let color: NSColor
@@ -20,6 +21,11 @@ struct Selection {
         self.color = color
     }
 
+}
+
+
+extension Selection: Serializable {
+
     init(data: NSData) {
         let decoder = NSKeyedUnarchiver(forReadingWithData: data)
         let value = decoder.decodeObjectForKey("range") as! NSValue
@@ -27,6 +33,7 @@ struct Selection {
         self.id = decoder.decodeObjectForKey("id") as! NSUUID
         self.color = decoder.decodeObjectForKey("color") as! NSColor
     }
+
 
     func serialize() -> NSData {
         let data = NSMutableData()
