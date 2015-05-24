@@ -9,7 +9,7 @@
 	url = git@github.com:feinstruktur/CryptoSwift.git
 [submodule "External/FeinstrukturUtils"]
 	path = External/FeinstrukturUtils
-	url = git@bitbucket.org:feinstruktur/feinstrukturutils.git
+	url = git@github.com:feinstruktur/FeinstrukturUtils.git
 [submodule "External/PocketSocket"]
 	path = External/PocketSocket
 	url = git@github.com:feinstruktur/PocketSocket.git
