@@ -57,8 +57,10 @@ extension MainController {
     
     func rowDoubleClicked(sender: AnyObject) {
         let index = self.servicesTableView.clickedRow
-        let service = self.browser[index]
-        self.subscribe(service)
+        if 0 <= index && index < self.browser.count {
+            let service = self.browser[index]
+            self.subscribe(service)
+        }
     }
     
     
