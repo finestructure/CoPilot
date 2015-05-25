@@ -80,6 +80,7 @@ class ConnectionManager {
         let name = NSHost.currentHost().localizedName!
         let client = DocClient(name: name, service: service, document: Document(editor.textStorage.string))
         let connectedEditor = ConnectedEditor(editor: editor, document: client)
+        connectedEditor.enableDisconnectionAlert()
         self.subscribed.append(connectedEditor)
         NSNotificationCenter.defaultCenter().postNotificationName(DocumentConnectedNotification, object: self)
         return connectedEditor
