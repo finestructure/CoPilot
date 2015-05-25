@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5A9BE17C1AD90862002817C0"
-               BuildableName = "CoPilotPlugin.xcplugin"
+               BuildableName = "CoPilot.xcplugin"
                BlueprintName = "CoPilotPlugin"
                ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
             </BuildableReference>
@@ -74,7 +74,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A9BE17C1AD90862002817C0"
-            BuildableName = "CoPilotPlugin.xcplugin"
+            BuildableName = "CoPilot.xcplugin"
             BlueprintName = "CoPilotPlugin"
             ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
          </BuildableReference>
