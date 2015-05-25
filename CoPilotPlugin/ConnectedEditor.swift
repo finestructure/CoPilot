@@ -134,7 +134,8 @@ class ConnectedEditor {
 func adjustSelection(selection: NSRange, newPosition: Position, newString: String) -> NSRange {
     let newLength = (newString as NSString).length
     let pos = min(Int(newPosition), newLength)
-    let newSelection = NSRange(location: pos, length: selection.length)
+    let length = min(selection.length, newLength - pos)
+    let newSelection = NSRange(location: pos, length: length)
     return newSelection
 }
 
