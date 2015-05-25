@@ -46,6 +46,8 @@
 		5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
 		5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
 		5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
+		5AA3C0E61B1394D800CC9B4F /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3C0E51B1394D800CC9B4F /* Server.swift */; };
+		5AA3C0E71B1394D800CC9B4F /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3C0E51B1394D800CC9B4F /* Server.swift */; };
 		5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5AB3A85C1B0BBBAB0068EE3A /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */; };
 		5AB3A85D1B0BBBAB0068EE3A /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */; };
@@ -66,8 +68,6 @@
 		5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */; };
 		5AD8E5F91B0FBD8B000F7D6E /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */; };
 		5AD8E6051B0FC112000F7D6E /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */; };
-		5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
-		5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75801AF230CB0074D8F0 /* Server.swift */; };
 		5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
 		5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA75911AF24D220074D8F0 /* WebSocket.swift */; };
@@ -331,6 +331,7 @@
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
 		5AA1D65F1AFA52AA00FD107E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5AA336EE1AFA06B2000E37B2 /* DocClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClient.swift; sourceTree = "<group>"; };
+		5AA3C0E51B1394D800CC9B4F /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		5ABAACF01B11016900703634 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonjourTests.swift; sourceTree = "<group>"; };
@@ -343,7 +344,6 @@
 		5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
 		5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cursor.swift; sourceTree = "<group>"; };
-		5ADA75801AF230CB0074D8F0 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Server.swift; path = CoPilotPluginTests/Server.swift; sourceTree = SOURCE_ROOT; };
 		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		5AE5A9891AFE11A300480382 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeUtils.swift; sourceTree = "<group>"; };
@@ -519,7 +519,7 @@
 				5AC8A9761AE542440097FF8D /* Bonjour.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
-				5ADA75801AF230CB0074D8F0 /* Server.swift */,
+				5AA3C0E51B1394D800CC9B4F /* Server.swift */,
 				5ADA75911AF24D220074D8F0 /* WebSocket.swift */,
 			);
 			name = Network;
@@ -531,8 +531,8 @@
 				5A4D7D9C1AF363FB005E0294 /* Command.swift */,
 				5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */,
 				5AA336EE1AFA06B2000E37B2 /* DocClient.swift */,
-				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
 				5A63776F1B0B4B4B005C2637 /* DocNode.swift */,
+				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
 				5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */,
 				5ABAACF01B11016900703634 /* Protocols.swift */,
 			);
@@ -903,6 +903,7 @@
 				5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */,
 				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
 				5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */,
+				5AA3C0E71B1394D800CC9B4F /* Server.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */,
 				5ABAACF21B11016900703634 /* Protocols.swift in Sources */,
@@ -913,7 +914,6 @@
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				5ACE1B9D1AFDEA4F00154511 /* Document.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
-				5ADA75811AF230CB0074D8F0 /* Server.swift in Sources */,
 				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
@@ -938,6 +938,7 @@
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
 				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
 				5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */,
+				5AA3C0E61B1394D800CC9B4F /* Server.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
@@ -945,7 +946,6 @@
 				5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */,
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
 				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
-				5ADA758D1AF24C8C0074D8F0 /* Server.swift in Sources */,
 				5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */,
 				5AB3A85C1B0BBBAB0068EE3A /* Selection.swift in Sources */,
 				5A6377701B0B4B4B005C2637 /* DocNode.swift in Sources */,
