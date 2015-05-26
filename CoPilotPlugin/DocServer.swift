@@ -37,7 +37,10 @@ class DocServer: DocNode {
         self.server.onConnect = { ws in
             self.resetClient(ws)
             ws.onReceive = self.onReceive(ws)
-            ws.onDisconnect = self.onDisconnect
+            ws.onDisconnect = { error in
+                self._connections.removeValueForKey(ws)
+                self.onDisconnect?(error)
+            }
         }
         self.server.start()
     }

@@ -55,8 +55,8 @@ extension ConnectedController {
     
     func update() {
         if let editor = XcodeUtils.activeEditor,
-            let ce = ConnectionManager.connectedEditor(editor) {
-                self.connections = ce.document.connections
+           let ce = ConnectionManager.connectedEditor(editor) {
+            self.connections = ce.document.connections
         } else {
             self.connections = [Connection]()
         }
