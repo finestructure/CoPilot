@@ -11,7 +11,7 @@ import FeinstrukturUtils
 
 
 let CacheLimit = 10_000_000 // characters
-
+let BufferTime: NSTimeInterval = 0.5
 
 let Colors = [
     NSColor.blueColor(),
@@ -24,8 +24,8 @@ let Colors = [
 
 
 class DocNode {
-    internal var docThrottle = Throttle(bufferTime: 0.5)
-    internal var selThrottle = Throttle(bufferTime: 0.5)
+    internal var docThrottle = Throttle(bufferTime: BufferTime)
+    internal var selThrottle = Throttle(bufferTime: BufferTime)
     internal let revisions = NSCache()
     internal var _document: Document {
         willSet {
