@@ -9,6 +9,9 @@
 import Foundation
 
 
+let WebSocketDisconnectedNotification = "WebSocketDisconnectedNotification"
+
+
 enum Message: Printable {
     case Text(String)
     case Data(NSData)
@@ -106,11 +109,13 @@ extension WebSocket: PSWebSocketDelegate {
     
 
     func webSocket(webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
+        NSNotificationCenter.defaultCenter().postNotificationName(WebSocketDisconnectedNotification, object: self)
         self.onDisconnect?(nil)
     }
     
 
     func webSocket(webSocket: PSWebSocket!, didFailWithError error: NSError!) {
+        NSNotificationCenter.defaultCenter().postNotificationName(WebSocketDisconnectedNotification, object: self)
         self.onDisconnect?(error)
     }
 
