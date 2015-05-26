@@ -36,6 +36,7 @@ class DocNode {
     }
     internal var _onDocumentUpdate: DocumentUpdate?
     internal var _onCursorUpdate: CursorUpdate?
+    internal var _onDisconnect: (NSError? -> Void)?
 
     var id = NSUUID()
     var name: String
@@ -65,6 +66,12 @@ class DocNode {
     var onCursorUpdate: CursorUpdate? {
         get { return self._onCursorUpdate }
         set { self._onCursorUpdate = newValue }
+    }
+
+
+    var onDisconnect: (NSError? -> Void)? {
+        get { return self._onDisconnect }
+        set { self._onDisconnect = newValue }
     }
 
 }

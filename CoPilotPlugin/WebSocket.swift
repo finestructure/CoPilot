@@ -9,6 +9,9 @@
 import Foundation
 
 
+let WebSocketDisconnectedNotification = "WebSocketDisconnectedNotification"
+
+
 enum Message: Printable {
     case Text(String)
     case Data(NSData)
@@ -49,8 +52,10 @@ class WebSocket: NSObject {
     var lastMessage: Message?
     
     var onConnect: (Void -> Void)?
+    var onDisconnect: (NSError? -> Void)?
     var onReceive: MessageHandler?
-    
+
+
     init(url: NSURL, onConnect: (Void -> Void) = {}) {
         self.onConnect = onConnect
         let req = NSURLRequest(URL: url)
@@ -59,24 +64,29 @@ class WebSocket: NSObject {
         self.socket.delegate = self
         self.socket.open()
     }
-    
+
+
     init(socket: PSWebSocket) {
         self.socket = socket
         super.init()
         self.socket.delegate = self
     }
-    
+
+
     func send(message: AnyObject) {
         self.socket.send(message)
     }
-    
+
+
     var open: Bool {
         return self.socket.readyState == .Open
     }
-    
+
+
     func close() {
         self.socket.close()
     }
+
 }
 
 extension WebSocket: PSWebSocketDelegate {
@@ -85,6 +95,7 @@ extension WebSocket: PSWebSocketDelegate {
         self.onConnect?()
     }
     
+
     func webSocket(webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
         if let s = message as? String {
             self.lastMessage = Message(s)
@@ -96,9 +107,16 @@ extension WebSocket: PSWebSocketDelegate {
         }
     }
     
+
     func webSocket(webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
+        NSNotificationCenter.defaultCenter().postNotificationName(WebSocketDisconnectedNotification, object: self)
+        self.onDisconnect?(nil)
     }
     
+
     func webSocket(webSocket: PSWebSocket!, didFailWithError error: NSError!) {
+        NSNotificationCenter.defaultCenter().postNotificationName(WebSocketDisconnectedNotification, object: self)
+        self.onDisconnect?(error)
     }
+
 }

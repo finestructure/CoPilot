@@ -24,6 +24,7 @@ protocol ConnectedDocument {
     var selectionColor: NSColor { get }
     var onDocumentUpdate: DocumentUpdate? { get set }
     var onCursorUpdate: CursorUpdate? { get set }
+    var onDisconnect: (NSError? -> Void)? { get set }
     func update(newDocument: Document)
     func update(selection: Selection)
     func disconnect()
@@ -121,7 +122,25 @@ class ConnectedEditor {
             }
         }
     }
-    
+
+
+    func enableDisconnectionAlert() {
+        self.document.onDisconnect = { error in
+            if let window = self.editor.document.windowForSheet {
+                var alert: NSAlert?
+                if let error = error {
+                    alert = NSAlert(error: error)
+                } else {
+                    alert = NSAlert()
+                    alert?.messageText = "Disconnected"
+                    alert?.addButtonWithTitle("Ah well.")
+                    alert?.informativeText = "The connection has been dropped at the other end. Not really sure why but the upshot is there won't be any updates coming through anymore. Try reconnecting!"
+                }
+                alert?.beginSheetModalForWindow(window) { _ in }
+            }
+        }
+    }
+
     
     deinit {
         for o in self.observers {

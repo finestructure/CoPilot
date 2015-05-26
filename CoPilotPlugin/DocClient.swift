@@ -36,6 +36,11 @@ class DocClient: DocNode {
                 self.socket?.send(Command(name: self.name))
             }
             websocket.onReceive = self.onReceive
+            websocket.onDisconnect = { error in
+                // println("### client.onDisconnect")
+                self.connection = nil
+                self.onDisconnect?(error)
+            }
         }
     }
 

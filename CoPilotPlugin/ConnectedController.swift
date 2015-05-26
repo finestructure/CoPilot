@@ -32,6 +32,7 @@ class ConnectedController: NSWindowController {
             DocumentPublishedNotification,
             DocumentConnectedNotification,
             DocumentDisconnectedNotification,
+            WebSocketDisconnectedNotification,
         ]
         for name in notifications {
             observers.append(
@@ -55,12 +56,13 @@ extension ConnectedController {
     
     func update() {
         if let editor = XcodeUtils.activeEditor,
-            let ce = ConnectionManager.connectedEditor(editor) {
-                self.connections = ce.document.connections
+           let ce = ConnectionManager.connectedEditor(editor) {
+            // println("\t### active editor: \(editor.document.displayName)")
+            // println("\t### doc: \(ce.document.id)")
+            self.connections = ce.document.connections
         } else {
             self.connections = [Connection]()
         }
-
         self.updateUI()
     }
     
