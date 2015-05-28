@@ -56,13 +56,18 @@ class WebSocket: NSObject {
     var onReceive: MessageHandler?
 
 
-    init(url: NSURL, onConnect: (Void -> Void) = {}) {
+    convenience init(url: NSURL, onConnect: (Void -> Void)) {
+        self.init(url: url)
         self.onConnect = onConnect
+        self.socket.open()
+    }
+
+
+    init(url: NSURL) {
         let req = NSURLRequest(URL: url)
         self.socket = PSWebSocket.clientSocketWithRequest(req)
         super.init()
         self.socket.delegate = self
-        self.socket.open()
     }
 
 
@@ -78,8 +83,13 @@ class WebSocket: NSObject {
     }
 
 
-    var open: Bool {
+    var isOpen: Bool {
         return self.socket.readyState == .Open
+    }
+
+
+    func open() {
+        self.socket.open()
     }
 
 
