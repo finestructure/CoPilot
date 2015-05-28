@@ -42,6 +42,7 @@ class DocClient: DocNode {
                 self.onDisconnect?(error)
             }
         }
+        self.resolver?.resolve(5)
     }
 
 

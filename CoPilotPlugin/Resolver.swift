@@ -11,17 +11,33 @@ import Foundation
 
 typealias ResolutionHandler = (WebSocket -> Void)
 
+
 class Resolver: NSObject {
+
     private let service: NSNetService
     var onResolve: ResolutionHandler?
     var resolved = false
-    init(service: NSNetService, timeout: NSTimeInterval, onResolve: ResolutionHandler = {_ in}) {
+
+    init(service: NSNetService, timeout: NSTimeInterval) {
+        self.service = service
+        super.init()
+        self.service.delegate = self
+    }
+
+    
+    init(service: NSNetService, timeout: NSTimeInterval, onResolve: ResolutionHandler) {
         self.service = service
         super.init()
         self.service.delegate = self
         self.onResolve = onResolve
+        self.resolve(timeout)
+    }
+
+
+    func resolve(timeout: NSTimeInterval) {
         self.service.resolveWithTimeout(timeout)
     }
+
 }
 
 
