@@ -143,10 +143,11 @@ extension CoPilotPlugin {
             if self.mainController == nil {
                 self.mainController = MainController(windowNibName: "MainController")
             }
-            self.mainController!.activeEditor = editor
-            if let sheetWindow = self.mainController!.window {
+            self.mainController?.activeEditor = editor
+            if let sheetWindow = self.mainController?.window {
                 let doc = editor.document
-                doc.windowForSheet!.beginSheet(sheetWindow) { response in
+                self.mainController?.windowForSheet = doc.windowForSheet
+                doc.windowForSheet?.beginSheet(sheetWindow) { response in
                     println("response: \(response)")
                 }
             }

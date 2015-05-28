@@ -17,6 +17,8 @@ class MainController: NSWindowController {
 
     var browser: Browser!
     var activeEditor: Editor?
+    var windowForSheet: NSWindow?
+    var urlController: UrlController?
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -55,6 +57,17 @@ extension MainController {
     }
     
     
+    @IBAction func subscribeViaUrlClicked(sender: AnyObject) {
+        self.window?.orderOut(sender)
+        if self.urlController == nil {
+            self.urlController = UrlController(windowNibName: "UrlController")
+        }
+        if let sheetWindow = self.urlController?.window {
+            self.windowForSheet?.beginSheet(sheetWindow) { _ in }
+        }
+    }
+
+
     func rowDoubleClicked(sender: AnyObject) {
         let index = self.servicesTableView.clickedRow
         if 0 <= index && index < self.browser.count {

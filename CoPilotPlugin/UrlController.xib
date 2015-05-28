@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="UrlController" customModule="CoPilot" customModuleProvider="target">
+            <connections>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="91"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <value key="minSize" type="size" width="200" height="91"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="5" width="480" height="91"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ymB-ts-F7X">
+                        <rect key="frame" x="20" y="49" width="440" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="UCV-97-Ik0"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Xob-lk-5dS">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rXA-SS-927">
+                        <rect key="frame" x="363" y="13" width="103" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="6c0-2I-CtR"/>
+                            <constraint firstAttribute="width" constant="91" id="nSs-HS-Sxg"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Subscribe" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LiD-lN-cH1">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d9y-S2-25R">
+                        <rect key="frame" x="260" y="13" width="103" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="pez-km-J0H"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ql5-5Y-U2C">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ymB-ts-F7X" secondAttribute="trailing" constant="20" id="6sQ-zB-qO2"/>
+                    <constraint firstItem="rXA-SS-927" firstAttribute="leading" secondItem="d9y-S2-25R" secondAttribute="trailing" constant="12" id="W9J-9a-KjK"/>
+                    <constraint firstAttribute="trailing" secondItem="rXA-SS-927" secondAttribute="trailing" constant="20" id="akD-i9-ksW"/>
+                    <constraint firstItem="d9y-S2-25R" firstAttribute="width" secondItem="rXA-SS-927" secondAttribute="width" id="c3g-X5-6uS"/>
+                    <constraint firstItem="d9y-S2-25R" firstAttribute="top" secondItem="ymB-ts-F7X" secondAttribute="bottom" constant="8" id="eo7-AC-LxK"/>
+                    <constraint firstItem="ymB-ts-F7X" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="jTG-uq-0dB"/>
+                    <constraint firstItem="ymB-ts-F7X" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="jxu-Ou-WCh"/>
+                    <constraint firstItem="rXA-SS-927" firstAttribute="top" secondItem="ymB-ts-F7X" secondAttribute="bottom" constant="8" id="wcC-0z-Oin"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-116" y="131.5"/>
+        </window>
+    </objects>
+</document>

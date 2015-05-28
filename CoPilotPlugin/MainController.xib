@@ -18,7 +18,7 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="509" height="313"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
-            <value key="minSize" type="size" width="300" height="200"/>
+            <value key="minSize" type="size" width="360" height="200"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="5" width="509" height="313"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -119,9 +119,20 @@ Gw
                             <action selector="cancelPressed:" target="-2" id="sdX-vk-KVd"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fbQ-Sr-y1G">
+                        <rect key="frame" x="14" y="13" width="117" height="32"/>
+                        <buttonCell key="cell" type="push" title="Enter URL…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XXX-14-BvH">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="subscribeViaUrlClicked:" target="-2" id="kDl-0J-3NA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="UBk-8f-wYH" firstAttribute="leading" secondItem="CR7-Wp-YsR" secondAttribute="trailing" constant="12" id="2jp-JH-bVh"/>
+                    <constraint firstItem="fbQ-Sr-y1G" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="41e-8a-CxS"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="8tO-UU-ALn"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="ItK-yH-t0u"/>
                     <constraint firstItem="CR7-Wp-YsR" firstAttribute="baseline" secondItem="UBk-8f-wYH" secondAttribute="baseline" id="LmJ-Vy-d6c"/>
@@ -130,6 +141,7 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="UBk-8f-wYH" secondAttribute="trailing" constant="20" id="bYM-M3-OTu"/>
                     <constraint firstItem="CR7-Wp-YsR" firstAttribute="top" secondItem="3eO-uY-jd7" secondAttribute="bottom" constant="20" id="gBb-Mj-dCA"/>
                     <constraint firstAttribute="trailing" secondItem="3eO-uY-jd7" secondAttribute="trailing" constant="20" id="q93-ZY-nrI"/>
+                    <constraint firstItem="fbQ-Sr-y1G" firstAttribute="baseline" secondItem="CR7-Wp-YsR" secondAttribute="baseline" id="uo4-5G-9CV"/>
                 </constraints>
             </view>
             <connections>
