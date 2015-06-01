@@ -60,7 +60,7 @@ class BonjourTests: XCTestCase {
         
         var resolver: Resolver?
         let b = Browser(service: CoPilotService) { service in
-            resolver = Resolver(service: service, timeout: 1)
+            resolver = Resolver(service: service, timeout: 1) { _ in }
         }
         expect(resolver).toEventuallyNot(beNil(), timeout: 5)
         expect(resolver?.resolved).toEventually(beTrue())

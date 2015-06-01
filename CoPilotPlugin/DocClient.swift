@@ -32,15 +32,32 @@ class DocClient: DocNode {
         self.resolver!.onResolve = { websocket in
             self.connection = SimpleConnection(displayName: service.name)
             self.socket = websocket
-            websocket.onConnect = {
-                self.socket?.send(Command(name: self.name))
-            }
-            websocket.onReceive = self.onReceive
-            websocket.onDisconnect = { error in
-                // println("### client.onDisconnect")
-                self.connection = nil
-                self.onDisconnect?(error)
-            }
+            self.configureSocket()
+            self.socket?.open()
+        }
+        self.resolver?.resolve(5)
+    }
+
+
+    init(name: String = "DocClient", url: NSURL, document: Document) {
+        super.init(name: name, document: document)
+
+        self.connection = SimpleConnection(displayName: url.absoluteString ?? "Unknown remote document")
+        self.socket = WebSocket(url: url)
+        self.configureSocket()
+        self.socket?.open()
+    }
+
+
+    func configureSocket() {
+        self.socket?.onConnect = {
+            self.socket?.send(Command(name: self.name))
+        }
+        self.socket?.onReceive = self.onReceive
+        self.socket?.onDisconnect = { error in
+            // println("### client.onDisconnect")
+            self.connection = nil
+            self.onDisconnect?(error)
         }
     }
 

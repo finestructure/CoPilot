@@ -79,14 +79,26 @@ class ConnectionManager {
     static func subscribe(service: NSNetService, editor: Editor) -> ConnectedEditor {
         let name = NSHost.currentHost().localizedName!
         let client = DocClient(name: name, service: service, document: Document(editor.textStorage.string))
-        let connectedEditor = ConnectedEditor(editor: editor, document: client)
+        return subscribe(editor, docClient: client)
+    }
+    
+    
+    static func subscribe(url: NSURL, editor: Editor) -> ConnectedEditor {
+        let name = NSHost.currentHost().localizedName!
+        let client = DocClient(name: name, url: url, document: Document(editor.textStorage.string))
+        return subscribe(editor, docClient: client)
+    }
+
+
+    static func subscribe(editor: Editor, docClient: DocClient) -> ConnectedEditor {
+        let connectedEditor = ConnectedEditor(editor: editor, document: docClient)
         connectedEditor.enableDisconnectionAlert()
         self.subscribed.append(connectedEditor)
         NSNotificationCenter.defaultCenter().postNotificationName(DocumentConnectedNotification, object: self)
         return connectedEditor
     }
-    
-    
+
+
     static func disconnectAll() {
         for c in self.published {
             c.document.disconnect()

@@ -79,7 +79,6 @@ class ConnectedEditor {
     private func startObserving() {
         self.observers.append(
             observe("NSTextStorageDidProcessEditingNotification", object: editor.textStorage) { _ in
-                println("#### doc updated")
                 self.document.update(Document(self.editor.textStorage.string))
             }
         )

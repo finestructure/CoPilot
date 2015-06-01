@@ -65,6 +65,8 @@
 		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
+		5AD6D3611B17516300A3985E /* UrlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6D35F1B17516300A3985E /* UrlController.swift */; };
+		5AD6D3621B17516300A3985E /* UrlController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6D3601B17516300A3985E /* UrlController.xib */; };
 		5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */; };
 		5AD8E5F91B0FBD8B000F7D6E /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */; };
 		5AD8E6051B0FC112000F7D6E /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */; };
@@ -341,6 +343,8 @@
 		5ACE1BA91AFDEABE00154511 /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
 		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
+		5AD6D35F1B17516300A3985E /* UrlController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlController.swift; sourceTree = "<group>"; };
+		5AD6D3601B17516300A3985E /* UrlController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UrlController.xib; sourceTree = "<group>"; };
 		5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTests.swift; sourceTree = "<group>"; };
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
 		5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cursor.swift; sourceTree = "<group>"; };
@@ -452,6 +456,8 @@
 				5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */,
 				5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */,
 				5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */,
+				5AD6D35F1B17516300A3985E /* UrlController.swift */,
+				5AD6D3601B17516300A3985E /* UrlController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -851,6 +857,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */,
+				5AD6D3621B17516300A3985E /* UrlController.xib in Resources */,
 				5A9BE1831AD90862002817C0 /* CoPilotPlugin.xcscheme in Resources */,
 				5A7F36D41B04CD28006CFB97 /* ConnectedController.xib in Resources */,
 			);
@@ -947,6 +954,7 @@
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
 				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
 				5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */,
+				5AD6D3611B17516300A3985E /* UrlController.swift in Sources */,
 				5AB3A85C1B0BBBAB0068EE3A /* Selection.swift in Sources */,
 				5A6377701B0B4B4B005C2637 /* DocNode.swift in Sources */,
 				5A66AA141AF91CFC0098BD77 /* DocServer.swift in Sources */,

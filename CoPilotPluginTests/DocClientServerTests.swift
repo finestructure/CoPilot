@@ -89,7 +89,20 @@ class DocClientServerTests: XCTestCase {
         client.onDocumentUpdate = { _ in changeCount++ }
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
-    
+
+
+    func test_DocClient_url() {
+        let doc = { Document(randomElement(words)!) }
+        self.server = DocServer(name: "foo", document: doc())
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+
+        let client = DocClient(url: url, document: Document(""))
+        var changeCount = 0
+        client.onDocumentUpdate = { _ in changeCount++ }
+        expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
+    }
+
     
     func test_DocClient_applyChanges() {
         self.server = DocServer(name: "foo", document: Document("foo"))

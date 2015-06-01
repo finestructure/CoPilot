@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MainController" customModule="CoPilotPlugin" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MainController" customModule="CoPilot" customModuleProvider="target">
             <connections>
                 <outlet property="servicesTableView" destination="Phg-hL-5Tp" id="SPX-LG-eCK"/>
                 <outlet property="subscribeButton" destination="UBk-8f-wYH" id="5Zb-W6-L7e"/>
@@ -17,8 +17,8 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="509" height="313"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-            <value key="minSize" type="size" width="300" height="200"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <value key="minSize" type="size" width="360" height="200"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="5" width="509" height="313"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -29,7 +29,7 @@
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="lmC-tg-TQu" viewBased="YES" id="Phg-hL-5Tp">
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="Phg-hL-5Tp">
                                     <rect key="frame" x="0.0" y="0.0" width="467" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -91,10 +91,6 @@
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <tableHeaderView key="headerView" id="lmC-tg-TQu">
-                            <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </tableHeaderView>
                     </scrollView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UBk-8f-wYH">
                         <rect key="frame" x="392" y="13" width="103" height="32"/>
@@ -123,9 +119,20 @@ Gw
                             <action selector="cancelPressed:" target="-2" id="sdX-vk-KVd"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fbQ-Sr-y1G">
+                        <rect key="frame" x="14" y="13" width="117" height="32"/>
+                        <buttonCell key="cell" type="push" title="Enter URL…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XXX-14-BvH">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="subscribeViaUrlClicked:" target="-2" id="kDl-0J-3NA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="UBk-8f-wYH" firstAttribute="leading" secondItem="CR7-Wp-YsR" secondAttribute="trailing" constant="12" id="2jp-JH-bVh"/>
+                    <constraint firstItem="fbQ-Sr-y1G" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="41e-8a-CxS"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="8tO-UU-ALn"/>
                     <constraint firstItem="3eO-uY-jd7" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="ItK-yH-t0u"/>
                     <constraint firstItem="CR7-Wp-YsR" firstAttribute="baseline" secondItem="UBk-8f-wYH" secondAttribute="baseline" id="LmJ-Vy-d6c"/>
@@ -134,6 +141,7 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="UBk-8f-wYH" secondAttribute="trailing" constant="20" id="bYM-M3-OTu"/>
                     <constraint firstItem="CR7-Wp-YsR" firstAttribute="top" secondItem="3eO-uY-jd7" secondAttribute="bottom" constant="20" id="gBb-Mj-dCA"/>
                     <constraint firstAttribute="trailing" secondItem="3eO-uY-jd7" secondAttribute="trailing" constant="20" id="q93-ZY-nrI"/>
+                    <constraint firstItem="fbQ-Sr-y1G" firstAttribute="baseline" secondItem="CR7-Wp-YsR" secondAttribute="baseline" id="uo4-5G-9CV"/>
                 </constraints>
             </view>
             <connections>
