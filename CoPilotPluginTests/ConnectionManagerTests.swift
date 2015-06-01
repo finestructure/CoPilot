@@ -56,7 +56,16 @@ class ConnectionManagerTests: XCTestCase {
         expect(ConnectionManager.connected({ $0.editor == sub })?.editor) == sub
         expect(ConnectionManager.connected({ $0.editor == pub })?.editor) == pub
     }
-    
+
+
+    func test_subscribe_url() {
+        let ed = createEditor()
+        let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+        startServer()
+        ConnectionManager.subscribe(url, editor: ed)
+        expect(ConnectionManager.isSubscribed(ed)) == true
+    }
+
 }
 
 

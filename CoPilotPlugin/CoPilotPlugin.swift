@@ -148,6 +148,8 @@ extension CoPilotPlugin {
                 windowForSheet?.beginSheet(sheetWindow) { response in
                     if response == MainController.SheetReturnCode.Url.rawValue {
                         if let sheetWindow = self.urlController.window {
+                            self.urlController.activeEditor = editor
+                            self.urlController.windowForSheet = windowForSheet
                             windowForSheet?.beginSheet(sheetWindow) { _ in }
                         }
                     }

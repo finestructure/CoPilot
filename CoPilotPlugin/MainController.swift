@@ -17,7 +17,7 @@ class MainController: NSWindowController {
         case Subscribe
         case Url
     }
-    
+
     @IBOutlet weak var subscribeButton: NSButton!
     @IBOutlet weak var servicesTableView: NSTableView!
 
