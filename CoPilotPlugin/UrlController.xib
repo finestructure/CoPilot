@@ -11,18 +11,19 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="91"/>
+            <rect key="contentRect" x="196" y="240" width="400" height="90"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
-            <value key="minSize" type="size" width="200" height="91"/>
+            <value key="minSize" type="size" width="200" height="90"/>
+            <value key="maxSize" type="size" width="400" height="90"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="5" width="480" height="91"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ymB-ts-F7X">
-                        <rect key="frame" x="20" y="49" width="440" height="22"/>
+                        <rect key="frame" x="20" y="48" width="360" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="UCV-97-Ik0"/>
                         </constraints>
@@ -33,7 +34,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rXA-SS-927">
-                        <rect key="frame" x="363" y="13" width="103" height="32"/>
+                        <rect key="frame" x="283" y="12" width="103" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="6c0-2I-CtR"/>
                             <constraint firstAttribute="width" constant="91" id="nSs-HS-Sxg"/>
@@ -44,7 +45,7 @@
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d9y-S2-25R">
-                        <rect key="frame" x="260" y="13" width="103" height="32"/>
+                        <rect key="frame" x="180" y="12" width="103" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="pez-km-J0H"/>
                         </constraints>

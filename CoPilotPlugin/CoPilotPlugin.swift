@@ -27,8 +27,9 @@ var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
     var bundle: NSBundle! = nil
-    var mainController: MainController?
-    var connectedController: ConnectedController?
+    lazy var mainController = MainController(windowNibName: "MainController")
+    lazy var connectedController = ConnectedController(windowNibName: "ConnectedController")
+    lazy var urlController = UrlController(windowNibName: "UrlController")
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
     var subscribeMenuItem: NSMenuItem! = nil
@@ -140,15 +141,16 @@ extension CoPilotPlugin {
 
     func subscribe() {
         if let editor = XcodeUtils.activeEditor {
-            if self.mainController == nil {
-                self.mainController = MainController(windowNibName: "MainController")
-            }
-            self.mainController?.activeEditor = editor
-            if let sheetWindow = self.mainController?.window {
-                let doc = editor.document
-                self.mainController?.windowForSheet = doc.windowForSheet
-                doc.windowForSheet?.beginSheet(sheetWindow) { response in
-                    println("response: \(response)")
+            self.mainController.activeEditor = editor
+            if let sheetWindow = self.mainController.window {
+                let windowForSheet = editor.document.windowForSheet
+                self.mainController.windowForSheet = windowForSheet
+                windowForSheet?.beginSheet(sheetWindow) { response in
+                    if response == MainController.SheetReturnCode.Url.rawValue {
+                        if let sheetWindow = self.urlController.window {
+                            windowForSheet?.beginSheet(sheetWindow) { _ in }
+                        }
+                    }
                 }
             }
         }
@@ -156,10 +158,7 @@ extension CoPilotPlugin {
     
     
     func showConnected() {
-        if self.connectedController == nil {
-            self.connectedController = ConnectedController(windowNibName: "ConnectedController")
-        }
-        self.connectedController?.showWindow(self)
+        self.connectedController.showWindow(self)
     }
     
 }

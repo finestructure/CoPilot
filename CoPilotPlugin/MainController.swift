@@ -12,14 +12,19 @@ import FeinstrukturUtils
 
 class MainController: NSWindowController {
 
+    enum SheetReturnCode: Int {
+        case Cancel
+        case Subscribe
+        case Url
+    }
+    
     @IBOutlet weak var subscribeButton: NSButton!
     @IBOutlet weak var servicesTableView: NSTableView!
 
     var browser: Browser!
     var activeEditor: Editor?
     var windowForSheet: NSWindow?
-    var urlController: UrlController?
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
     }
@@ -49,22 +54,17 @@ extension MainController {
             let service = self.browser[index]
             self.subscribe(service)
         }
+        self.windowForSheet?.endSheet(self.window!, returnCode: SheetReturnCode.Subscribe.rawValue)
     }
 
     
     @IBAction func cancelPressed(sender: AnyObject) {
-        self.window?.orderOut(sender)
+        self.windowForSheet?.endSheet(self.window!, returnCode: SheetReturnCode.Cancel.rawValue)
     }
     
     
     @IBAction func subscribeViaUrlClicked(sender: AnyObject) {
-        self.window?.orderOut(sender)
-        if self.urlController == nil {
-            self.urlController = UrlController(windowNibName: "UrlController")
-        }
-        if let sheetWindow = self.urlController?.window {
-            self.windowForSheet?.beginSheet(sheetWindow) { _ in }
-        }
+        self.windowForSheet?.endSheet(self.window!, returnCode: SheetReturnCode.Url.rawValue)
     }
 
 
@@ -79,13 +79,10 @@ extension MainController {
     
     func subscribe(service: NSNetService) {
         println("subscribing to \(service)")
-        
         // FIXME: we need to make sure to warn against overwrite here
         if let editor = self.activeEditor {
             ConnectionManager.subscribe(service, editor: editor)
         }
-
-        self.window?.orderOut(self)
     }
     
 }
@@ -136,6 +133,6 @@ extension MainController: NSWindowDelegate {
     func windowDidBecomeKey(notification: NSNotification) {
         self.updateUI()
     }
-    
+
 }
 
