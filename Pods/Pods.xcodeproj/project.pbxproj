@@ -7,262 +7,279 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		006400AD313128A7C8FD21FD /* DTXcodeUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A284EBDB3DD213DD1EBD053C /* DTXcodeUtils.h */; };
-		194E19E9E2ECE3FC33A7F0A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419E0A0F0BB05A1F2C8D51D1 /* Cocoa.framework */; };
-		80774A19C35C6AD1103CB5CF /* Pods-CoPilotPlugin-DTXcodeUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E20EF6AD1A6011B38A3EFC /* Pods-CoPilotPlugin-DTXcodeUtils-dummy.m */; };
-		9728C6428D9F47F1F2F1D862 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419E0A0F0BB05A1F2C8D51D1 /* Cocoa.framework */; };
-		A2720DB472CA6D4AD900F92F /* DTXcodeHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = A0BF0CA5CA1C1462EB36F04F /* DTXcodeHeaders.h */; };
-		B01EB3DF078E4D77109ED216 /* DTXcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA6695AEE9576B9A73D5F3 /* DTXcodeUtils.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C76D850D6AD4617076AFCE10 /* Pods-CoPilotPlugin-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7311E7FEB4D2CEAE0AB13E11 /* Pods-CoPilotPlugin-dummy.m */; };
+		2539686E293DAA82F23C3ABA /* Pods-CoPilot-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B58172D8CB231213017B0A0 /* Pods-CoPilot-dummy.m */; };
+		30B1C732AAABCFAD58CD1215 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414D78E37FD8D5B41144F6BC /* Cocoa.framework */; };
+		5803F31BD016315B48C270B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414D78E37FD8D5B41144F6BC /* Cocoa.framework */; };
+		80912B74ED0190B9A7BDA636 /* DTXcodeHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAA9AD7671C32E8D4A29C18 /* DTXcodeHeaders.h */; };
+		8DCDB0FFDC95F0FF6C0A7695 /* DTXcodeUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 70A9F0323548691625C15FFE /* DTXcodeUtils.h */; };
+		B9D6404B239DD3D6D869029F /* Pods-CoPilot-DTXcodeUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC725AD546D85AD84964F08F /* Pods-CoPilot-DTXcodeUtils-dummy.m */; };
+		E62D39EE4E0212B029E2AAA9 /* DTXcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4BE3D1E5D54347B89ECBA /* DTXcodeUtils.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4CBA953D3657ECF831393C99 /* PBXContainerItemProxy */ = {
+		3EC96F47E26B4887B4082F86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 066BB093C1C966652268F9C1 /* Project object */;
+			containerPortal = 298B48842FD25BE79266E99D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 070683E6AB0543A06120299F;
-			remoteInfo = "Pods-CoPilotPlugin-DTXcodeUtils";
+			remoteGlobalIDString = 073A382771B86D4A913B1632;
+			remoteInfo = "Pods-CoPilot-DTXcodeUtils";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2D99B2FD869C4C24E2944B7E /* Pods-CoPilotPlugin-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CoPilotPlugin-acknowledgements.markdown"; sourceTree = "<group>"; };
-		419E0A0F0BB05A1F2C8D51D1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		6441C44FDDB25E60EE9F8E59 /* Pods-CoPilotPlugin-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CoPilotPlugin-resources.sh"; sourceTree = "<group>"; };
-		68E20EF6AD1A6011B38A3EFC /* Pods-CoPilotPlugin-DTXcodeUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CoPilotPlugin-DTXcodeUtils-dummy.m"; sourceTree = "<group>"; };
-		6AB3CD0D84125BD7AD0C0DD4 /* Pods-CoPilotPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilotPlugin.release.xcconfig"; sourceTree = "<group>"; };
-		6EDA6695AEE9576B9A73D5F3 /* DTXcodeUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DTXcodeUtils.m; path = Pod/Classes/DTXcodeUtils.m; sourceTree = "<group>"; };
-		70F81CB5BBA5938926B26973 /* Pods-CoPilotPlugin-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CoPilotPlugin-acknowledgements.plist"; sourceTree = "<group>"; };
-		7311E7FEB4D2CEAE0AB13E11 /* Pods-CoPilotPlugin-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CoPilotPlugin-dummy.m"; sourceTree = "<group>"; };
-		7F67B657496702332148CE76 /* Pods-CoPilotPlugin-DTXcodeUtils.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilotPlugin-DTXcodeUtils.xcconfig"; sourceTree = "<group>"; };
-		8C2D5208A785087E36EDD2C8 /* Pods-CoPilotPlugin-DTXcodeUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CoPilotPlugin-DTXcodeUtils-prefix.pch"; sourceTree = "<group>"; };
-		8F1ADE73FC46CD9CC36A90E2 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		908351F52686D3C728241F81 /* Pods-CoPilotPlugin-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CoPilotPlugin-environment.h"; sourceTree = "<group>"; };
-		963D8280EB16004B80648D52 /* libPods-CoPilotPlugin-DTXcodeUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin-DTXcodeUtils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0BF0CA5CA1C1462EB36F04F /* DTXcodeHeaders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DTXcodeHeaders.h; path = Pod/XcodeHeaders/DTXcodeHeaders.h; sourceTree = "<group>"; };
-		A284EBDB3DD213DD1EBD053C /* DTXcodeUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DTXcodeUtils.h; path = Pod/Classes/DTXcodeUtils.h; sourceTree = "<group>"; };
-		B3287F58FF4FB30D6B521828 /* Pods-CoPilotPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilotPlugin.debug.xcconfig"; sourceTree = "<group>"; };
-		B4AF701E58EA09353A0CB34B /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBBA9201C0360BE9E9ED5BB4 /* Pods-CoPilotPlugin-DTXcodeUtils-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilotPlugin-DTXcodeUtils-Private.xcconfig"; sourceTree = "<group>"; };
+		280CA882DBEDB4662CD5BFE7 /* Pods-CoPilot-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CoPilot-resources.sh"; sourceTree = "<group>"; };
+		2BC4BE3D1E5D54347B89ECBA /* DTXcodeUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DTXcodeUtils.m; path = Pod/Classes/DTXcodeUtils.m; sourceTree = "<group>"; };
+		35BCB5B42984083FF6538746 /* Pods-CoPilot-DTXcodeUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CoPilot-DTXcodeUtils-prefix.pch"; sourceTree = "<group>"; };
+		414D78E37FD8D5B41144F6BC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		510961BA3A44A32A87202BB0 /* Pods-CoPilot-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CoPilot-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5AF1CB90B59F4F8C29B0D09B /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5B3ECD3725BE55931716985D /* Pods-CoPilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilot.release.xcconfig"; sourceTree = "<group>"; };
+		69B0CC23C1F62DBD53A050E5 /* Pods-CoPilot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilot.debug.xcconfig"; sourceTree = "<group>"; };
+		70A9F0323548691625C15FFE /* DTXcodeUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DTXcodeUtils.h; path = Pod/Classes/DTXcodeUtils.h; sourceTree = "<group>"; };
+		7B58172D8CB231213017B0A0 /* Pods-CoPilot-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CoPilot-dummy.m"; sourceTree = "<group>"; };
+		95527F7860781916CE26524C /* Pods-CoPilot-DTXcodeUtils.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilot-DTXcodeUtils.xcconfig"; sourceTree = "<group>"; };
+		9BAA9AD7671C32E8D4A29C18 /* DTXcodeHeaders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DTXcodeHeaders.h; path = Pod/XcodeHeaders/DTXcodeHeaders.h; sourceTree = "<group>"; };
+		D2A5DC9EA911359ADA2358CE /* libPods-CoPilot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D859BB5963DF5D6F1723EBDB /* libPods-CoPilot-DTXcodeUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilot-DTXcodeUtils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC725AD546D85AD84964F08F /* Pods-CoPilot-DTXcodeUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CoPilot-DTXcodeUtils-dummy.m"; sourceTree = "<group>"; };
+		EE072B201F6D38DD1AB2DB29 /* Pods-CoPilot-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CoPilot-acknowledgements.plist"; sourceTree = "<group>"; };
+		F5B24B11138CF34EE379DD1B /* Pods-CoPilot-DTXcodeUtils-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoPilot-DTXcodeUtils-Private.xcconfig"; sourceTree = "<group>"; };
+		F7E1C6DBA897BF1DBA4C7976 /* Pods-CoPilot-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CoPilot-environment.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5F4B6B5C364962746B260F8D /* Frameworks */ = {
+		15098248CEB910667AD0E1BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				194E19E9E2ECE3FC33A7F0A1 /* Cocoa.framework in Frameworks */,
+				30B1C732AAABCFAD58CD1215 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6AB4B91E403C781ACF74D51 /* Frameworks */ = {
+		35F89C7D5B58BDA25A831A83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9728C6428D9F47F1F2F1D862 /* Cocoa.framework in Frameworks */,
+				5803F31BD016315B48C270B0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		28296FA3FC89663EAEB104EB /* Targets Support Files */ = {
+		0BED737701DFB70EB6A04A69 /* Pods-CoPilot */ = {
 			isa = PBXGroup;
 			children = (
-				D9F17D0FBAC6B8BC29A46872 /* Pods-CoPilotPlugin */,
+				510961BA3A44A32A87202BB0 /* Pods-CoPilot-acknowledgements.markdown */,
+				EE072B201F6D38DD1AB2DB29 /* Pods-CoPilot-acknowledgements.plist */,
+				7B58172D8CB231213017B0A0 /* Pods-CoPilot-dummy.m */,
+				F7E1C6DBA897BF1DBA4C7976 /* Pods-CoPilot-environment.h */,
+				280CA882DBEDB4662CD5BFE7 /* Pods-CoPilot-resources.sh */,
+				69B0CC23C1F62DBD53A050E5 /* Pods-CoPilot.debug.xcconfig */,
+				5B3ECD3725BE55931716985D /* Pods-CoPilot.release.xcconfig */,
 			);
-			name = "Targets Support Files";
+			name = "Pods-CoPilot";
+			path = "Target Support Files/Pods-CoPilot";
 			sourceTree = "<group>";
 		};
-		2F8350778AAF9855C8226661 = {
+		366720B551B1295A2056FA7D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F1ADE73FC46CD9CC36A90E2 /* Podfile */,
-				F2B50C46AFF6B54CF0C287C2 /* Frameworks */,
-				4DBA7C50D62C957E36FC57DB /* Pods */,
-				43B73B177C0DCDC32E644C72 /* Products */,
-				28296FA3FC89663EAEB104EB /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		43B73B177C0DCDC32E644C72 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B4AF701E58EA09353A0CB34B /* libPods-CoPilotPlugin.a */,
-				963D8280EB16004B80648D52 /* libPods-CoPilotPlugin-DTXcodeUtils.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		48AB85706930E9BADE6EC41D /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				7F67B657496702332148CE76 /* Pods-CoPilotPlugin-DTXcodeUtils.xcconfig */,
-				EBBA9201C0360BE9E9ED5BB4 /* Pods-CoPilotPlugin-DTXcodeUtils-Private.xcconfig */,
-				68E20EF6AD1A6011B38A3EFC /* Pods-CoPilotPlugin-DTXcodeUtils-dummy.m */,
-				8C2D5208A785087E36EDD2C8 /* Pods-CoPilotPlugin-DTXcodeUtils-prefix.pch */,
+				95527F7860781916CE26524C /* Pods-CoPilot-DTXcodeUtils.xcconfig */,
+				F5B24B11138CF34EE379DD1B /* Pods-CoPilot-DTXcodeUtils-Private.xcconfig */,
+				DC725AD546D85AD84964F08F /* Pods-CoPilot-DTXcodeUtils-dummy.m */,
+				35BCB5B42984083FF6538746 /* Pods-CoPilot-DTXcodeUtils-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/Pods-CoPilotPlugin-DTXcodeUtils";
+			path = "../Target Support Files/Pods-CoPilot-DTXcodeUtils";
 			sourceTree = "<group>";
 		};
-		4DBA7C50D62C957E36FC57DB /* Pods */ = {
+		83158F8402358D79DD3B5F8C /* DTXcodeUtils */ = {
 			isa = PBXGroup;
 			children = (
-				E6E01619B0284AA01F4283C7 /* DTXcodeUtils */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		BC430A38F5028BA7CA0296FC /* OS X */ = {
-			isa = PBXGroup;
-			children = (
-				419E0A0F0BB05A1F2C8D51D1 /* Cocoa.framework */,
-			);
-			name = "OS X";
-			sourceTree = "<group>";
-		};
-		D9F17D0FBAC6B8BC29A46872 /* Pods-CoPilotPlugin */ = {
-			isa = PBXGroup;
-			children = (
-				2D99B2FD869C4C24E2944B7E /* Pods-CoPilotPlugin-acknowledgements.markdown */,
-				70F81CB5BBA5938926B26973 /* Pods-CoPilotPlugin-acknowledgements.plist */,
-				7311E7FEB4D2CEAE0AB13E11 /* Pods-CoPilotPlugin-dummy.m */,
-				908351F52686D3C728241F81 /* Pods-CoPilotPlugin-environment.h */,
-				6441C44FDDB25E60EE9F8E59 /* Pods-CoPilotPlugin-resources.sh */,
-				B3287F58FF4FB30D6B521828 /* Pods-CoPilotPlugin.debug.xcconfig */,
-				6AB3CD0D84125BD7AD0C0DD4 /* Pods-CoPilotPlugin.release.xcconfig */,
-			);
-			name = "Pods-CoPilotPlugin";
-			path = "Target Support Files/Pods-CoPilotPlugin";
-			sourceTree = "<group>";
-		};
-		E6E01619B0284AA01F4283C7 /* DTXcodeUtils */ = {
-			isa = PBXGroup;
-			children = (
-				A0BF0CA5CA1C1462EB36F04F /* DTXcodeHeaders.h */,
-				A284EBDB3DD213DD1EBD053C /* DTXcodeUtils.h */,
-				6EDA6695AEE9576B9A73D5F3 /* DTXcodeUtils.m */,
-				48AB85706930E9BADE6EC41D /* Support Files */,
+				9BAA9AD7671C32E8D4A29C18 /* DTXcodeHeaders.h */,
+				70A9F0323548691625C15FFE /* DTXcodeUtils.h */,
+				2BC4BE3D1E5D54347B89ECBA /* DTXcodeUtils.m */,
+				366720B551B1295A2056FA7D /* Support Files */,
 			);
 			path = DTXcodeUtils;
 			sourceTree = "<group>";
 		};
-		F2B50C46AFF6B54CF0C287C2 /* Frameworks */ = {
+		B7019CDBAEF791BB35C665DA /* OS X */ = {
 			isa = PBXGroup;
 			children = (
-				BC430A38F5028BA7CA0296FC /* OS X */,
+				414D78E37FD8D5B41144F6BC /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		B89B86D0F76777212D49348B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				83158F8402358D79DD3B5F8C /* DTXcodeUtils */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C6B3A1ED42C9AF5E48CF0178 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2A5DC9EA911359ADA2358CE /* libPods-CoPilot.a */,
+				D859BB5963DF5D6F1723EBDB /* libPods-CoPilot-DTXcodeUtils.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0C03D4C45CB6EC1E4088BA6 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BED737701DFB70EB6A04A69 /* Pods-CoPilot */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		F275E69361E31697D367E326 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7019CDBAEF791BB35C665DA /* OS X */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB721C851BBD0027C1A4CFE1 = {
+			isa = PBXGroup;
+			children = (
+				5AF1CB90B59F4F8C29B0D09B /* Podfile */,
+				F275E69361E31697D367E326 /* Frameworks */,
+				B89B86D0F76777212D49348B /* Pods */,
+				C6B3A1ED42C9AF5E48CF0178 /* Products */,
+				D0C03D4C45CB6EC1E4088BA6 /* Targets Support Files */,
+			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E20A22A11773A8934B6CE1D0 /* Headers */ = {
+		504529C40A83E72602EC8EF8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2720DB472CA6D4AD900F92F /* DTXcodeHeaders.h in Headers */,
-				006400AD313128A7C8FD21FD /* DTXcodeUtils.h in Headers */,
+				80912B74ED0190B9A7BDA636 /* DTXcodeHeaders.h in Headers */,
+				8DCDB0FFDC95F0FF6C0A7695 /* DTXcodeUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		070683E6AB0543A06120299F /* Pods-CoPilotPlugin-DTXcodeUtils */ = {
+		073A382771B86D4A913B1632 /* Pods-CoPilot-DTXcodeUtils */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 88BEA7E3FB065DA7B51F16F8 /* Build configuration list for PBXNativeTarget "Pods-CoPilotPlugin-DTXcodeUtils" */;
+			buildConfigurationList = 3CDFEC818E845CFD7619F676 /* Build configuration list for PBXNativeTarget "Pods-CoPilot-DTXcodeUtils" */;
 			buildPhases = (
-				6EBCAE44D20FD59972406C12 /* Sources */,
-				E6AB4B91E403C781ACF74D51 /* Frameworks */,
-				E20A22A11773A8934B6CE1D0 /* Headers */,
+				261437E2E8E679A973782A9A /* Sources */,
+				35F89C7D5B58BDA25A831A83 /* Frameworks */,
+				504529C40A83E72602EC8EF8 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-CoPilotPlugin-DTXcodeUtils";
-			productName = "Pods-CoPilotPlugin-DTXcodeUtils";
-			productReference = 963D8280EB16004B80648D52 /* libPods-CoPilotPlugin-DTXcodeUtils.a */;
+			name = "Pods-CoPilot-DTXcodeUtils";
+			productName = "Pods-CoPilot-DTXcodeUtils";
+			productReference = D859BB5963DF5D6F1723EBDB /* libPods-CoPilot-DTXcodeUtils.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		450BC294520F23BD66C27D79 /* Pods-CoPilotPlugin */ = {
+		2EF7C82149B5ED2DCBD75C51 /* Pods-CoPilot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C7ED78FC61B417B4D0AA161 /* Build configuration list for PBXNativeTarget "Pods-CoPilotPlugin" */;
+			buildConfigurationList = 0636CB0B847B248E4E74C938 /* Build configuration list for PBXNativeTarget "Pods-CoPilot" */;
 			buildPhases = (
-				4C40BA1934F61D4526D53B1F /* Sources */,
-				5F4B6B5C364962746B260F8D /* Frameworks */,
+				CFC61568EF7688FDC97E517E /* Sources */,
+				15098248CEB910667AD0E1BA /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7C2B4EF4BCDDF0B152BD66AB /* PBXTargetDependency */,
+				ED118DAD163EBAB85158BDE6 /* PBXTargetDependency */,
 			);
-			name = "Pods-CoPilotPlugin";
-			productName = "Pods-CoPilotPlugin";
-			productReference = B4AF701E58EA09353A0CB34B /* libPods-CoPilotPlugin.a */;
+			name = "Pods-CoPilot";
+			productName = "Pods-CoPilot";
+			productReference = D2A5DC9EA911359ADA2358CE /* libPods-CoPilot.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		066BB093C1C966652268F9C1 /* Project object */ = {
+		298B48842FD25BE79266E99D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = 00C4DD4EE6215201B70B5E7B /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = F091E094D3DE103A8946A8AC /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 2F8350778AAF9855C8226661;
-			productRefGroup = 43B73B177C0DCDC32E644C72 /* Products */;
+			mainGroup = FB721C851BBD0027C1A4CFE1;
+			productRefGroup = C6B3A1ED42C9AF5E48CF0178 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				450BC294520F23BD66C27D79 /* Pods-CoPilotPlugin */,
-				070683E6AB0543A06120299F /* Pods-CoPilotPlugin-DTXcodeUtils */,
+				2EF7C82149B5ED2DCBD75C51 /* Pods-CoPilot */,
+				073A382771B86D4A913B1632 /* Pods-CoPilot-DTXcodeUtils */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4C40BA1934F61D4526D53B1F /* Sources */ = {
+		261437E2E8E679A973782A9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C76D850D6AD4617076AFCE10 /* Pods-CoPilotPlugin-dummy.m in Sources */,
+				E62D39EE4E0212B029E2AAA9 /* DTXcodeUtils.m in Sources */,
+				B9D6404B239DD3D6D869029F /* Pods-CoPilot-DTXcodeUtils-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6EBCAE44D20FD59972406C12 /* Sources */ = {
+		CFC61568EF7688FDC97E517E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B01EB3DF078E4D77109ED216 /* DTXcodeUtils.m in Sources */,
-				80774A19C35C6AD1103CB5CF /* Pods-CoPilotPlugin-DTXcodeUtils-dummy.m in Sources */,
+				2539686E293DAA82F23C3ABA /* Pods-CoPilot-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7C2B4EF4BCDDF0B152BD66AB /* PBXTargetDependency */ = {
+		ED118DAD163EBAB85158BDE6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-CoPilotPlugin-DTXcodeUtils";
-			target = 070683E6AB0543A06120299F /* Pods-CoPilotPlugin-DTXcodeUtils */;
-			targetProxy = 4CBA953D3657ECF831393C99 /* PBXContainerItemProxy */;
+			name = "Pods-CoPilot-DTXcodeUtils";
+			target = 073A382771B86D4A913B1632 /* Pods-CoPilot-DTXcodeUtils */;
+			targetProxy = 3EC96F47E26B4887B4082F86 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		15539B46F50778E574E4C191 /* Release */ = {
+		2FBDAD2DF7A0E47309804821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5B24B11138CF34EE379DD1B /* Pods-CoPilot-DTXcodeUtils-Private.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-CoPilot-DTXcodeUtils/Pods-CoPilot-DTXcodeUtils-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		46E256936119F1C662930563 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -296,7 +313,42 @@
 			};
 			name = Release;
 		};
-		3CE7A6009CCCA077F0AC7D19 /* Debug */ = {
+		60B54388595B140442622C6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69B0CC23C1F62DBD53A050E5 /* Pods-CoPilot.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		732E443FD6F9C2692FAEE030 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B3ECD3725BE55931716985D /* Pods-CoPilot.release.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AB1DB150AB2E923D34C82D5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -335,30 +387,13 @@
 			};
 			name = Debug;
 		};
-		444A8AC9777FD453EEE5F8DB /* Debug */ = {
+		D579B9BBA9C33A374E089D0A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3287F58FF4FB30D6B521828 /* Pods-CoPilotPlugin.debug.xcconfig */;
+			baseConfigurationReference = F5B24B11138CF34EE379DD1B /* Pods-CoPilot-DTXcodeUtils-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		8007BE5175A46BF6D3401BA7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBBA9201C0360BE9E9ED5BB4 /* Pods-CoPilotPlugin-DTXcodeUtils-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-CoPilotPlugin-DTXcodeUtils/Pods-CoPilotPlugin-DTXcodeUtils-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-CoPilot-DTXcodeUtils/Pods-CoPilot-DTXcodeUtils-prefix.pch";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -367,73 +402,38 @@
 				SDKROOT = macosx;
 			};
 			name = Debug;
-		};
-		9C50122DBADC18AEA18FEC48 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBBA9201C0360BE9E9ED5BB4 /* Pods-CoPilotPlugin-DTXcodeUtils-Private.xcconfig */;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-CoPilotPlugin-DTXcodeUtils/Pods-CoPilotPlugin-DTXcodeUtils-prefix.pch";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		EDEF57BEBFABF11A6AF2F503 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AB3CD0D84125BD7AD0C0DD4 /* Pods-CoPilotPlugin.release.xcconfig */;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00C4DD4EE6215201B70B5E7B /* Build configuration list for PBXProject "Pods" */ = {
+		0636CB0B847B248E4E74C938 /* Build configuration list for PBXNativeTarget "Pods-CoPilot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3CE7A6009CCCA077F0AC7D19 /* Debug */,
-				15539B46F50778E574E4C191 /* Release */,
+				60B54388595B140442622C6A /* Debug */,
+				732E443FD6F9C2692FAEE030 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C7ED78FC61B417B4D0AA161 /* Build configuration list for PBXNativeTarget "Pods-CoPilotPlugin" */ = {
+		3CDFEC818E845CFD7619F676 /* Build configuration list for PBXNativeTarget "Pods-CoPilot-DTXcodeUtils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				444A8AC9777FD453EEE5F8DB /* Debug */,
-				EDEF57BEBFABF11A6AF2F503 /* Release */,
+				D579B9BBA9C33A374E089D0A /* Debug */,
+				2FBDAD2DF7A0E47309804821 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		88BEA7E3FB065DA7B51F16F8 /* Build configuration list for PBXNativeTarget "Pods-CoPilotPlugin-DTXcodeUtils" */ = {
+		F091E094D3DE103A8946A8AC /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8007BE5175A46BF6D3401BA7 /* Debug */,
-				9C50122DBADC18AEA18FEC48 /* Release */,
+				AB1DB150AB2E923D34C82D5B /* Debug */,
+				46E256936119F1C662930563 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 066BB093C1C966652268F9C1 /* Project object */;
+	rootObject = 298B48842FD25BE79266E99D /* Project object */;
 }

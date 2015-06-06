@@ -147,7 +147,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="306.5" y="231.5"/>
+            <point key="canvasLocation" x="321.5" y="229.5"/>
         </window>
     </objects>
 </document>
