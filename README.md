@@ -4,7 +4,7 @@ CoPilot is an Xcode plugin that allows collaborative editing over the network.
 
 [CoPilot Homepage](http://feinstruktur.com/copilot)
 
-![Image of CoPilot](https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/screenshot.png)
+![Image of CoPilot](https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/screenshot-readme.png)
 
 ## Build Instructions
 
