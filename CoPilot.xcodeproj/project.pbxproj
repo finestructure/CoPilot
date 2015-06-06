@@ -307,9 +307,9 @@
 		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
 		5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = External/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "External/aerogear-diffmatchpatch/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
-		5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPluginTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A0156C51AE2644800EED621 /* CoPilotTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A0983CF1AE39E5B001ADB1F /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
-		5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A0983E41AE39F68001ADB1F /* CoPilot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilot-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A17D91B1AF3CF9100429B79 /* new_playground.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = new_playground.txt; sourceTree = "<group>"; };
 		5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientServerTests.swift; sourceTree = "<group>"; };
 		5A4D7D9C1AF363FB005E0294 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
@@ -328,7 +328,6 @@
 		5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectedController.xib; sourceTree = "<group>"; };
 		5A9BE17D1AD90862002817C0 /* CoPilot.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilot.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9BE1811AD90862002817C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoPilotPlugin.xcscheme; path = CoPilotPlugin.xcodeproj/xcshareddata/xcschemes/CoPilotPlugin.xcscheme; sourceTree = SOURCE_ROOT; };
 		5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoPilotPlugin.swift; sourceTree = "<group>"; };
 		5AA1D65F1AFA52AA00FD107E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5AA336EE1AFA06B2000E37B2 /* DocClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClient.swift; sourceTree = "<group>"; };
@@ -384,7 +383,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A01569A1AE2619700EED621 /* CoPilotPluginTests */ = {
+		5A01569A1AE2619700EED621 /* CoPilotTests */ = {
 			isa = PBXGroup;
 			children = (
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
@@ -397,13 +396,13 @@
 				5A01569B1AE2619700EED621 /* Supporting Files */,
 				5AF58A221B032D6C00558448 /* XcodeUtils+mock.swift */,
 			);
-			path = CoPilotPluginTests;
+			path = CoPilotTests;
 			sourceTree = "<group>";
 		};
 		5A01569B1AE2619700EED621 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5A0156C51AE2644800EED621 /* CoPilotPluginTests-Bridging-Header.h */,
+				5A0156C51AE2644800EED621 /* CoPilotTests-Bridging-Header.h */,
 				5A01569C1AE2619700EED621 /* Info.plist */,
 				5A17D91B1AF3CF9100429B79 /* new_playground.txt */,
 				5A6A69951B034E7A00F718C5 /* test_a.txt */,
@@ -464,8 +463,8 @@
 		5A9BE1751AD90862002817C0 = {
 			isa = PBXGroup;
 			children = (
-				5A9BE17F1AD90862002817C0 /* CoPilotPlugin */,
-				5A01569A1AE2619700EED621 /* CoPilotPluginTests */,
+				5A9BE17F1AD90862002817C0 /* CoPilot */,
+				5A01569A1AE2619700EED621 /* CoPilotTests */,
 				5A9BE17E1AD90862002817C0 /* Products */,
 				5A0156A21AE2629200EED621 /* External */,
 				D933B4F85EA6979C452E7313 /* Pods */,
@@ -482,7 +481,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5A9BE17F1AD90862002817C0 /* CoPilotPlugin */ = {
+		5A9BE17F1AD90862002817C0 /* CoPilot */ = {
 			isa = PBXGroup;
 			children = (
 				5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */,
@@ -495,15 +494,14 @@
 				5A6B14241AE65AEB006EBB31 /* UI */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
 			);
-			path = CoPilotPlugin;
+			path = CoPilot;
 			sourceTree = "<group>";
 		};
 		5A9BE1801AD90862002817C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5A0983E41AE39F68001ADB1F /* CoPilotPlugin-Bridging-Header.h */,
+				5A0983E41AE39F68001ADB1F /* CoPilot-Bridging-Header.h */,
 				5A9BE1811AD90862002817C0 /* Info.plist */,
-				5A9BE1821AD90862002817C0 /* CoPilotPlugin.xcscheme */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1040,12 +1038,12 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/External/**",
 				);
-				INFOPLIST_FILE = CoPilotPluginTests/Info.plist;
+				INFOPLIST_FILE = CoPilotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = CoPilotTests;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotPluginTests/CoPilotPluginTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotTests/CoPilotTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1065,12 +1063,12 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/External/**",
 				);
-				INFOPLIST_FILE = CoPilotPluginTests/Info.plist;
+				INFOPLIST_FILE = CoPilotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = CoPilotTests;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotPluginTests/CoPilotPluginTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotTests/CoPilotTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1169,13 +1167,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/External/**",
 				);
-				INFOPLIST_FILE = CoPilotPlugin/Info.plist;
+				INFOPLIST_FILE = CoPilot/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = CoPilot;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotPlugin/CoPilotPlugin-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoPilot/CoPilot-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -1195,13 +1193,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/External/**",
 				);
-				INFOPLIST_FILE = CoPilotPlugin/Info.plist;
+				INFOPLIST_FILE = CoPilot/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = CoPilot;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotPlugin/CoPilotPlugin-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoPilot/CoPilot-Bridging-Header.h";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;
