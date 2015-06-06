@@ -40,6 +40,8 @@
 		5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */; };
 		5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */; };
 		5A7F36D41B04CD28006CFB97 /* ConnectedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */; };
+		5A98A2F51B2308AA0064B2A1 /* libPods-CoPilot-DTXcodeUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0130601B23040400DACEDC /* libPods-CoPilot-DTXcodeUtils.a */; };
+		5A98A2F61B2308B00064B2A1 /* libPods-CoPilot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A01305E1B23040400DACEDC /* libPods-CoPilot.a */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 		5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
 		5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
@@ -75,8 +77,6 @@
 		5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */; };
 		5AF58A231B032D6C00558448 /* XcodeUtils+mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF58A221B032D6C00558448 /* XcodeUtils+mock.swift */; };
 		5AFE91581B04AB0C00E6E5A1 /* IssueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */; };
-		AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */; };
-		BB05223E57C5FCDD85569C73 /* libPods-CoPilot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F040EAE56020BA61F430F460 /* libPods-CoPilot.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +177,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
 			remoteInfo = "DiffMatchPatch OSX Tests";
+		};
+		5A98A2F71B2308C10064B2A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EF7C82149B5ED2DCBD75C51;
+			remoteInfo = "Pods-CoPilot";
+		};
+		5A98A2F91B2308C60064B2A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 073A382771B86D4A913B1632;
+			remoteInfo = "Pods-CoPilot-DTXcodeUtils";
 		};
 		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -361,12 +375,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A98A2F61B2308B00064B2A1 /* libPods-CoPilot.a in Frameworks */,
+				5A98A2F51B2308AA0064B2A1 /* libPods-CoPilot-DTXcodeUtils.a in Frameworks */,
 				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
 				5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */,
 				5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */,
-				AB2112FFB96F38B5E16D22B5 /* libPods-CoPilotPlugin.a in Frameworks */,
-				BB05223E57C5FCDD85569C73 /* libPods-CoPilot.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +642,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				5A98A2FA1B2308C60064B2A1 /* PBXTargetDependency */,
+				5A98A2F81B2308C10064B2A1 /* PBXTargetDependency */,
 				5A6A69941B03428200F718C5 /* PBXTargetDependency */,
 				5A6A69921B03427D00F718C5 /* PBXTargetDependency */,
 				5A6A69901B03425100F718C5 /* PBXTargetDependency */,
@@ -975,6 +991,16 @@
 			isa = PBXTargetDependency;
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5A6A69931B03428200F718C5 /* PBXContainerItemProxy */;
+		};
+		5A98A2F81B2308C10064B2A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-CoPilot";
+			targetProxy = 5A98A2F71B2308C10064B2A1 /* PBXContainerItemProxy */;
+		};
+		5A98A2FA1B2308C60064B2A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-CoPilot-DTXcodeUtils";
+			targetProxy = 5A98A2F91B2308C60064B2A1 /* PBXContainerItemProxy */;
 		};
 		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
