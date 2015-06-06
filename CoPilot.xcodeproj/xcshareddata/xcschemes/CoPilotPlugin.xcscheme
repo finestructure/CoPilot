@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5A9BE17C1AD90862002817C0"
                BuildableName = "CoPilot.xcplugin"
-               BlueprintName = "CoPilotPlugin"
-               ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
+               BlueprintName = "CoPilot"
+               ReferencedContainer = "container:CoPilot.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5A0156981AE2619700EED621"
-               BuildableName = "CoPilotPluginTests.xctest"
-               BlueprintName = "CoPilotPluginTests"
-               ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
+               BuildableName = "CoPilotTests.xctest"
+               BlueprintName = "CoPilotTests"
+               ReferencedContainer = "container:CoPilot.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5A0156981AE2619700EED621"
-               BuildableName = "CoPilotPluginTests.xctest"
-               BlueprintName = "CoPilotPluginTests"
-               ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
+               BuildableName = "CoPilotTests.xctest"
+               BlueprintName = "CoPilotTests"
+               ReferencedContainer = "container:CoPilot.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -75,8 +75,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A9BE17C1AD90862002817C0"
             BuildableName = "CoPilot.xcplugin"
-            BlueprintName = "CoPilotPlugin"
-            ReferencedContainer = "container:CoPilotPlugin.xcodeproj">
+            BlueprintName = "CoPilot"
+            ReferencedContainer = "container:CoPilot.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
