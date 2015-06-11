@@ -7,7 +7,7 @@ FNAME=dl.zip
 mkdir -p "${PLUGINS_DIR}"
 cd "${PLUGINS_DIR}"
 curl -L $DOWNLOAD_URI -o $FNAME
-unzip $FNAME
+unzip -o $FNAME
 rm -rf $FNAME
 
 # the 1 is not a typo!
