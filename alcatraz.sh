@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DIR=$(dirname "$0")
-cd $DIR
+cd "$DIR"
 
 export LANG=en_US.UTF-8
 
