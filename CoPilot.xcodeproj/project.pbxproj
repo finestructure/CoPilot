@@ -40,8 +40,6 @@
 		5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */; };
 		5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F36D11B04CD28006CFB97 /* ConnectedController.swift */; };
 		5A7F36D41B04CD28006CFB97 /* ConnectedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F36D21B04CD28006CFB97 /* ConnectedController.xib */; };
-		5A98A2F51B2308AA0064B2A1 /* libPods-CoPilot-DTXcodeUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0130601B23040400DACEDC /* libPods-CoPilot-DTXcodeUtils.a */; };
-		5A98A2F61B2308B00064B2A1 /* libPods-CoPilot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A01305E1B23040400DACEDC /* libPods-CoPilot.a */; };
 		5A9BE1851AD90862002817C0 /* CoPilotPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BE1841AD90862002817C0 /* CoPilotPlugin.swift */; };
 		5AA1D6601AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
 		5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1D65F1AFA52AA00FD107E /* Utils.swift */; };
@@ -80,20 +78,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5A01305D1B23040400DACEDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 30FBC282803D88BB25CFA53A;
-			remoteInfo = "Pods-CoPilot";
-		};
-		5A01305F1B23040400DACEDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4774C5415476EB67F8EB0D3B;
-			remoteInfo = "Pods-CoPilot-DTXcodeUtils";
-		};
 		5A0156AA1AE2629C00EED621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
@@ -177,20 +161,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
 			remoteInfo = "DiffMatchPatch OSX Tests";
-		};
-		5A98A2F71B2308C10064B2A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2EF7C82149B5ED2DCBD75C51;
-			remoteInfo = "Pods-CoPilot";
-		};
-		5A98A2F91B2308C60064B2A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 073A382771B86D4A913B1632;
-			remoteInfo = "Pods-CoPilot-DTXcodeUtils";
 		};
 		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -302,7 +272,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		51E7E4C054212C030859D715 /* Pods-CoPilot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilot/Pods-CoPilot.debug.xcconfig"; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
@@ -348,14 +317,9 @@
 		5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSocket.xcodeproj; path = External/PocketSocket/PocketSocket.xcodeproj; sourceTree = "<group>"; };
 		5AD8E5F81B0FBD8B000F7D6E /* Cursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cursor.swift; sourceTree = "<group>"; };
 		5ADA75911AF24D220074D8F0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
-		5AE5A9891AFE11A300480382 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeUtils.swift; sourceTree = "<group>"; };
 		5AF58A221B032D6C00558448 /* XcodeUtils+mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XcodeUtils+mock.swift"; sourceTree = "<group>"; };
 		5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTests.swift; sourceTree = "<group>"; };
-		694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilotPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FBB91E149A9581F9E082031 /* Pods-CoPilot */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "Pods-CoPilot"; path = "Pods/Target Support Files/Pods-CoPilot"; sourceTree = "<group>"; };
-		9339E82819851D0052984485 /* Pods-CoPilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoPilot.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoPilot/Pods-CoPilot.release.xcconfig"; sourceTree = "<group>"; };
-		F040EAE56020BA61F430F460 /* libPods-CoPilot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoPilot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,8 +339,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A98A2F61B2308B00064B2A1 /* libPods-CoPilot.a in Frameworks */,
-				5A98A2F51B2308AA0064B2A1 /* libPods-CoPilot-DTXcodeUtils.a in Frameworks */,
 				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
 				5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */,
@@ -418,7 +380,6 @@
 		5A0156A21AE2629200EED621 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				5AE5A9891AFE11A300480382 /* Pods.xcodeproj */,
 				5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */,
 				5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */,
 				5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */,
@@ -471,7 +432,6 @@
 				5A01569A1AE2619700EED621 /* CoPilotTests */,
 				5A9BE17E1AD90862002817C0 /* Products */,
 				5A0156A21AE2629200EED621 /* External */,
-				D933B4F85EA6979C452E7313 /* Pods */,
 				BD2F004D9881D13D7864FD9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -575,32 +535,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5AE5A98A1AFE11A300480382 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5A01305E1B23040400DACEDC /* libPods-CoPilot.a */,
-				5A0130601B23040400DACEDC /* libPods-CoPilot-DTXcodeUtils.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				694D74A3438641705B10DC91 /* libPods-CoPilotPlugin.a */,
-				F040EAE56020BA61F430F460 /* libPods-CoPilot.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D933B4F85EA6979C452E7313 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7FBB91E149A9581F9E082031 /* Pods-CoPilot */,
-				51E7E4C054212C030859D715 /* Pods-CoPilot.debug.xcconfig */,
-				9339E82819851D0052984485 /* Pods-CoPilot.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -632,18 +571,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A9BE1881AD90862002817C0 /* Build configuration list for PBXNativeTarget "CoPilot" */;
 			buildPhases = (
-				E47B13D07D9C77AA3FE67339 /* Check Pods Manifest.lock */,
 				5A9BE17A1AD90862002817C0 /* Sources */,
 				5A9BE17B1AD90862002817C0 /* Resources */,
 				5A0983DA1AE39ECA001ADB1F /* Frameworks */,
-				6A99EF398B3026E826CCE97F /* Copy Pods Resources */,
 				5A3013AD1B029627003403FA /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5A98A2FA1B2308C60064B2A1 /* PBXTargetDependency */,
-				5A98A2F81B2308C10064B2A1 /* PBXTargetDependency */,
 				5A6A69941B03428200F718C5 /* PBXTargetDependency */,
 				5A6A69921B03427D00F718C5 /* PBXTargetDependency */,
 				5A6A69901B03425100F718C5 /* PBXTargetDependency */,
@@ -702,10 +637,6 @@
 					ProductGroup = 5AD85FC21AF22C95007A52F9 /* Products */;
 					ProjectRef = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
 				},
-				{
-					ProductGroup = 5AE5A98A1AFE11A300480382 /* Products */;
-					ProjectRef = 5AE5A9891AFE11A300480382 /* Pods.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -716,20 +647,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5A01305E1B23040400DACEDC /* libPods-CoPilot.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libPods-CoPilot.a";
-			remoteRef = 5A01305D1B23040400DACEDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5A0130601B23040400DACEDC /* libPods-CoPilot-DTXcodeUtils.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libPods-CoPilot-DTXcodeUtils.a";
-			remoteRef = 5A01305F1B23040400DACEDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		5A0156AB1AE2629C00EED621 /* Nimble.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -867,39 +784,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		6A99EF398B3026E826CCE97F /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoPilot/Pods-CoPilot-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E47B13D07D9C77AA3FE67339 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		5A0156951AE2619700EED621 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -991,16 +875,6 @@
 			isa = PBXTargetDependency;
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5A6A69931B03428200F718C5 /* PBXContainerItemProxy */;
-		};
-		5A98A2F81B2308C10064B2A1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-CoPilot";
-			targetProxy = 5A98A2F71B2308C10064B2A1 /* PBXContainerItemProxy */;
-		};
-		5A98A2FA1B2308C60064B2A1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-CoPilot-DTXcodeUtils";
-			targetProxy = 5A98A2F91B2308C60064B2A1 /* PBXContainerItemProxy */;
 		};
 		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1161,7 +1035,6 @@
 		};
 		5A9BE1891AD90862002817C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51E7E4C054212C030859D715 /* Pods-CoPilot.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1187,7 +1060,6 @@
 		};
 		5A9BE18A1AD90862002817C0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9339E82819851D0052984485 /* Pods-CoPilot.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
