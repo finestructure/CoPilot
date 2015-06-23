@@ -27,13 +27,13 @@ class IssueTests: XCTestCase {
         let a = "123"
         let newDoc = Document("0123")
         tv.string = a
-        expect(count(tv.string!)) == 3
+        expect((tv.string!).count) == 3
         tv.setSelectedRange(NSRange(location: 3, length: 0))
         
-        let patches = computePatches(tv.string, newDoc.text)
+        let patches = computePatches(tv.string, b: newDoc.text)
         let selected = tv.selectedRange
         let currentPos = Position(selected.location)
-        let newPos = newPosition(currentPos, patches)
+        let newPos = newPosition(currentPos, patches: patches)
         
         tv.textStorage?.replaceAll(newDoc.text)
         
@@ -48,9 +48,9 @@ class IssueTests: XCTestCase {
         // we need to use (s as NSString).length instead of count(s) to stay in NSString's 'coordinate system'
         let s = "🔥" as NSString
         expect(s.length) == 2
-        expect(count("🔥")) == 1
+        expect("🔥".characters.count) == 1
 
-        var patches = computePatches("123", "🔥123")
+        var patches = computePatches("123", b: "🔥123")
         expect(newPosition(3, patches)) == 5 // diff subsytems and NSTextView selections 'see' 🔥 as 2 characters
     }
 

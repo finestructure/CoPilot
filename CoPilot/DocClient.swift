@@ -92,14 +92,14 @@ class DocClient: DocNode {
         case .Cursor(let selection):
             self._onCursorUpdate?(selection)
         default:
-            println("messageHandler: ignoring command: \(cmd)")
+            print("messageHandler: ignoring command: \(cmd)")
         }
     }
 
 
     func requestReset() {
         // request original document in order to re-sync
-        println("#### client: requesting reset")
+        print("#### client: requesting reset")
         self.socket?.send(Command.GetDoc)
     }
 

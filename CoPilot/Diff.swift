@@ -93,9 +93,9 @@ extension Patch {
 
 extension Patch: SequenceType {
     
-    public func generate() -> GeneratorOf<Diff> {
+    public func generate() -> AnyGenerator<Diff> {
         var next = 0
-        return GeneratorOf<Diff> {
+        return AnyGenerator<Diff> {
             if (next == self.diffs.count) {
                 return nil
             }
@@ -106,7 +106,7 @@ extension Patch: SequenceType {
 }
 
 
-extension Operation: Printable {
+extension Operation: CustomStringConvertible {
     
     public var description: String {
         switch self {
@@ -134,7 +134,7 @@ func adjustPos(position: Position, patch: Patch) -> Position {
         for diff in patch {
             let posPointer = Int(x - patch.start1)
             if diffPointer < posPointer {
-                x = adjustPos(x, diff)
+                x = adjustPos(x, diff: diff)
             }
             if diff.operation == .DiffEqual {
                 diffPointer += (diff.text as NSString).length
@@ -162,7 +162,7 @@ func adjustPos(position: Position, diff: Diff) -> Position {
 func newPosition(currentPos: Position, patches: [Patch]) -> Position {
     var x = currentPos
     for patch in patches {
-        x = adjustPos(x, patch)
+        x = adjustPos(x, patch: patch)
     }
     return x
 }
@@ -210,7 +210,7 @@ func merge(mine: String, ancestor: String, yours: String) -> String? {
     let a = writeTemp(ancestor)!
     let y = writeTemp(yours)!
 
-    if let res = diff3(m, a, y) {
+    if let res = diff3(m, ancestor: a, yours: y) {
         if res.contains("<<<<<<<") && res.contains("=======") && res.contains(">>>>>>>") {
             // merge conflict
             return nil

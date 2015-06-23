@@ -193,7 +193,7 @@ extension Command: Serializable {
 }
 
 
-extension Command: Printable {
+extension Command: CustomStringConvertible {
     
     var description: String {
         switch self {

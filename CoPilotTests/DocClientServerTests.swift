@@ -24,7 +24,7 @@ let words = [
 ]
 
 
-func createClient(# document: Document) -> DocClient {
+func createClient(document  document: Document) -> DocClient {
     var service: NSNetService?
     let browser = Browser(service: CoPilotService) { s in
         service = s

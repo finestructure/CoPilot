@@ -46,7 +46,7 @@ class Cursor: NSObject {
 
 
     func blink() {
-        var animInfo: [String: AnyObject] = [
+        let animInfo: [String: AnyObject] = [
             NSViewAnimationTargetKey: self.view,
             NSViewAnimationEffectKey: (self.view.hidden ? NSViewAnimationFadeInEffect : NSViewAnimationFadeOutEffect)
         ]

@@ -23,13 +23,13 @@ typealias DocumentProvider = (Void -> Document)
 func fileProvider(path: String) -> (Void -> String) {
     return {
         var result: NSString?
-        if let error = try({ error in
+        if let error = `try`({ error in
             result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
             return
         }) {
             if error.code == 260 { // does not exist
                 result = ""
-                let res = try({ error in
+                let res = `try`({ error in
                     result?.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
                 })
                 if res.failed {

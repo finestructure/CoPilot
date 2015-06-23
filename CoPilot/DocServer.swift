@@ -53,7 +53,7 @@ class DocServer: DocNode {
             // println("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc(let doc):
-                println("server not accepting .Doc commands")
+                print("server not accepting .Doc commands")
             case .Update(let changes):
                 // println("#### update:\n    doc:     \(self._document.hash)\n    baseRev: \(changes.baseRev)")
                 let res = apply(self._document, changes)
@@ -82,7 +82,7 @@ class DocServer: DocNode {
                 self._onCursorUpdate?(selection)
                 self.server.broadcast(msg.data!, exclude: websocket)
             default:
-                println("messageHandler: ignoring command: \(cmd)")
+                print("messageHandler: ignoring command: \(cmd)")
             }
         }
     }
@@ -90,7 +90,7 @@ class DocServer: DocNode {
 
     func resetClient(websocket: WebSocket) {
         // send Doc to force resync - server wins
-        println("#### resetting client")
+        print("#### resetting client")
         websocket.send(Command(document: self._document))
     }
 

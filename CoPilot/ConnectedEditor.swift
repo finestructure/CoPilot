@@ -99,10 +99,10 @@ class ConnectedEditor {
         self.document.onDocumentUpdate = { newDoc in
             if let tv = XcodeUtils.sourceTextView(self.editor.controller) {
                 // TODO: this is not efficient - we've already computed this patch on the other side but it's difficult to route this through. We need to do this to preserve the insertion point. We could just send the Changeset instead of the Document and do it all here.
-                let patches = computePatches(tv.string, newDoc.text)
+                let patches = computePatches(tv.string, b: newDoc.text)
                 let selected = tv.selectedRange
                 let currentPos = Position(selected.location)
-                let newPos = newPosition(currentPos, patches)
+                let newPos = newPosition(currentPos, patches: patches)
                 
                 self.editor.textStorage.replaceAll(newDoc.text)
                 

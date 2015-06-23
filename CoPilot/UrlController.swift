@@ -26,7 +26,7 @@ class UrlController: NSWindowController {
         self.subscribeButton.enabled = false
         self.portField.stringValue = ":\(CoPilotService.port)"
         self.observer = observe(NSControlTextDidChangeNotification, object: self.hostField) { _ in
-            self.subscribeButton.enabled = (count(self.hostField.stringValue) > 0)
+            self.subscribeButton.enabled = (self.hostField.stringValue.characters.count > 0)
         }
     }
 
@@ -41,11 +41,11 @@ class UrlController: NSWindowController {
     @IBAction func subscribePressed(sender: AnyObject) {
         if let url = NSURL(string: "ws://\(self.hostField.stringValue):\(CoPilotService.port)"),
            let editor = self.activeEditor {
-            println("subscribing to \(url)")
+            print("subscribing to \(url)")
             ConnectionManager.subscribe(url, editor: editor)
         } else {
             if let window = self.windowForSheet {
-                var alert = NSAlert()
+                let alert = NSAlert()
                 alert.messageText = "Invalid URL"
                 alert.addButtonWithTitle("Cheers!")
                 alert.informativeText = "That ain't working. You need to check that URL, NSURL.init? isn't happy with it."

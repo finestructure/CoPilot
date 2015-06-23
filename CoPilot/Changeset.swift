@@ -19,7 +19,7 @@ struct Changeset {
         if source.hash == target.hash {
             return nil
         } else {
-            self.patches = computePatches(source.text, target.text)
+            self.patches = computePatches(source.text, b: target.text)
             self.baseRev = source.hash
             self.targetRev = target.hash
         }
@@ -51,7 +51,7 @@ extension Changeset: Serializable {
 }
 
 
-extension Changeset: Printable {
+extension Changeset: CustomStringConvertible {
 
     var description: String {
         return "Changeset (\(self.baseRev) \(self.patches))"

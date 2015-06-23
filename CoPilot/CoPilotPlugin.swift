@@ -60,7 +60,7 @@ class CoPilotPlugin: NSObject {
                     // sometimes the menu items would not be added, perhaps a race condition with the edit menu not being there yet?
                     self.addMenuItems()
                 }
-                self.publishMenuItem.title = publishMenuTitle(editor: XcodeUtils.activeEditor)
+                self.publishMenuItem.title = publishMenuTitle(XcodeUtils.activeEditor)
             }
         )
         observers.append(
@@ -103,7 +103,7 @@ class CoPilotPlugin: NSObject {
 extension CoPilotPlugin {
     
     func addMenuItems() {
-        var item = NSApp.mainMenu!!.itemWithTitle("Edit")
+        let item = NSApp.mainMenu!.itemWithTitle("Edit")
         if item != nil {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
@@ -116,7 +116,7 @@ extension CoPilotPlugin {
     
     func menuItem(title: String, action: Selector, key: String) -> NSMenuItem {
         let m = NSMenuItem(title: title, action: action, keyEquivalent: key)
-        m.keyEquivalentModifierMask = Int((NSEventModifierFlags.ControlKeyMask | NSEventModifierFlags.CommandKeyMask).rawValue)
+        m.keyEquivalentModifierMask = Int(([NSEventModifierFlags.ControlKeyMask, NSEventModifierFlags.CommandKeyMask]).rawValue)
         m.target = self
         return m
     }
@@ -134,7 +134,7 @@ extension CoPilotPlugin {
             } else {
                 ConnectionManager.publish(editor)
             }
-            self.publishMenuItem.title = publishMenuTitle(editor: editor)
+            self.publishMenuItem.title = publishMenuTitle(editor)
         }
     }
     

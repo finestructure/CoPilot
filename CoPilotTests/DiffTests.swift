@@ -12,15 +12,15 @@ import Nimble
 import FeinstrukturUtils
 
 
-func pathForResource(#name: String, #type: String) -> String {
+func pathForResource(name name: String, type: String) -> String {
     let bundle = NSBundle(forClass: DiffTests.classForCoder())
     return bundle.pathForResource(name, ofType: type)!
 }
 
 
-func contentsOfFile(#name: String, #type: String) -> String {
+func contentsOfFile(name name: String, type: String) -> String {
     var result: NSString?
-    if let error = try({ error in
+    if let error = `try`({ error in
         let path = pathForResource(name: name, type: type)
         result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
         return
@@ -35,7 +35,7 @@ class DiffTests: XCTestCase {
     
 
     func test_computeDiff() {
-        let d = computeDiff("foo2bar", "foobar")
+        let d = computeDiff("foo2bar", b: "foobar")
         expect(d.count) == 3
         expect(d[0].operation) == Operation.DiffEqual
         expect(d[0].text) == "foo"
@@ -47,7 +47,7 @@ class DiffTests: XCTestCase {
     
     
     func test_patches() {
-        let res = computePatches("foo2bar", "foobar")
+        let res = computePatches("foo2bar", b: "foobar")
         expect(res.count) == 1
         let lines = res[0].description.componentsSeparatedByString("\n")
         expect(lines[0]) == "@@ -1,7 +1,6 @@"
@@ -72,10 +72,10 @@ class DiffTests: XCTestCase {
     
     func test_patches_long() {
         let a = contentsOfFile(name: "test_a", type: "txt")
-        expect(count(a)) == 400
+        expect(a.count) == 400
         let b = contentsOfFile(name: "test_b", type: "txt")
-        expect(count(b)) == 394
-        let patches = computePatches(a, b)
+        expect(b.count) == 394
+        let patches = computePatches(a, b: b)
         expect(patches.count) == 4
         
         var p = patches[0]
@@ -87,10 +87,10 @@ class DiffTests: XCTestCase {
         expect(p.diffs.count) == 2
         expect(p[0].operation) == Operation.DiffDelete
         expect(p[0].text) == "The Way that can be told of is not the eternal Way;\nThe name that can be named is not the eternal name.\n"
-        expect(count(p[0].text)) == 104
+        expect((p[0].text).count) == 104
         expect(p[1].operation) == Operation.DiffEqual
         expect(p[1].text) == "The "
-        expect(count(p[1].text)) == 4
+        expect((p[1].text).count) == 4
         
         p = patches[1]
         expect(p.start1) == 44
@@ -101,16 +101,16 @@ class DiffTests: XCTestCase {
         expect(p.diffs.count) == 4
         expect(p[0].operation) == Operation.DiffEqual
         expect(p[0].text) == "th;\nThe "
-        expect(count(p[0].text)) == 8
+        expect((p[0].text).count) == 8
         expect(p[1].operation) == Operation.DiffDelete
         expect(p[1].text) == "N"
-        expect(count(p[1].text)) == 1
+        expect((p[1].text).count) == 1
         expect(p[2].operation) == Operation.DiffInsert
         expect(p[2].text) == "n"
-        expect(count(p[2].text)) == 1
+        expect((p[2].text).count) == 1
         expect(p[3].operation) == Operation.DiffEqual
         expect(p[3].text) == "amed is "
-        expect(count(p[3].text)) == 8
+        expect((p[3].text).count) == 8
         
         p = patches[2]
         expect(p.start1) == 83
@@ -121,13 +121,13 @@ class DiffTests: XCTestCase {
         expect(p.diffs.count) == 3
         expect(p[0].operation) == Operation.DiffEqual
         expect(p[0].text) == "gs.\n"
-        expect(count(p[0].text)) == 4
+        expect((p[0].text).count) == 4
         expect(p[1].operation) == Operation.DiffInsert
         expect(p[1].text) == "\n"
-        expect(count(p[1].text)) == 1
+        expect((p[1].text).count) == 1
         expect(p[2].operation) == Operation.DiffEqual
         expect(p[2].text) == "Ther"
-        expect(count(p[2].text)) == 4
+        expect((p[2].text).count) == 4
         
         p = patches[3]
         expect(p.start1) == 293
@@ -138,17 +138,17 @@ class DiffTests: XCTestCase {
         expect(p.diffs.count) == 2
         expect(p[0].operation) == Operation.DiffEqual
         expect(p[0].text) == "es.\n"
-        expect(count(p[0].text)) == 4
+        expect((p[0].text).count) == 4
         expect(p[1].operation) == Operation.DiffInsert
         expect(p[1].text) == "They both may be called deep and profound.\nDeeper and more profound,\nThe door of all subtleties!\n"
-        expect(count(p[1].text)) == 97
+        expect((p[1].text).count) == 97
     }
     
     
     func test_adjustPos() {
         let a = contentsOfFile(name: "test_a", type: "txt")
         let b = contentsOfFile(name: "test_b", type: "txt")
-        let patches = computePatches(a, b)
+        let patches = computePatches(a, b: b)
         expect(patches.count) == 4
         
         // line starts and ends
@@ -194,7 +194,7 @@ class DiffTests: XCTestCase {
     
     
     func test_apply_String() {
-        let p = computePatches("foo2bar", "foobar")
+        let p = computePatches("foo2bar", b: "foobar")
         let res = apply("foo2bar", p)
         expect(res.succeeded) == true
         expect(res.value!) == "foobar"
@@ -273,9 +273,9 @@ class DiffTests: XCTestCase {
         let cr = "\n"
         let line = "0123456789"
         let a = line + cr + line + cr + line
-        expect(count(a)) == 32
+        expect(a.count) == 32
         let b = line + cr + line + cr + "01234 56789"
-        let patches = computePatches(a, b)
+        let patches = computePatches(a, b: b)
         expect(patches.count) == 1
         let p = patches[0]
         expect(p.start1) == 23
