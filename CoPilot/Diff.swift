@@ -9,7 +9,6 @@
 import Foundation
 
 import FeinstrukturUtils
-import CryptoSwift
 
 
 enum ErrorCodes: Int {
