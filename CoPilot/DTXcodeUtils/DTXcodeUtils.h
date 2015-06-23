@@ -1,3 +1,5 @@
+#import <AppKit/AppKit.h>
+
 @class DVTSourceTextView;
 @class DVTTextStorage;
 @class IDEEditor;

@@ -1,4 +1,4 @@
-
+#import <AppKit/AppKit.h>
 
 @interface DVTTextStorage : NSTextStorage
 /** Whether to syntax highlight the current editor */
