@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0756ED741B393B0A007E065C /* DTXcodeUtils.m */; };
 		5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* DiffTests.swift */; };
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
 		5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
@@ -272,6 +273,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0756ED721B393B0A007E065C /* DTXcodeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeHeaders.h; sourceTree = "<group>"; };
+		0756ED731B393B0A007E065C /* DTXcodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeUtils.h; sourceTree = "<group>"; };
+		0756ED741B393B0A007E065C /* DTXcodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTXcodeUtils.m; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
@@ -349,6 +353,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0756ED711B393B0A007E065C /* DTXcodeUtils */ = {
+			isa = PBXGroup;
+			children = (
+				0756ED721B393B0A007E065C /* DTXcodeHeaders.h */,
+				0756ED731B393B0A007E065C /* DTXcodeUtils.h */,
+				0756ED741B393B0A007E065C /* DTXcodeUtils.m */,
+			);
+			path = DTXcodeUtils;
+			sourceTree = "<group>";
+		};
 		5A01569A1AE2619700EED621 /* CoPilotTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +470,7 @@
 				5ACE1BAD1AFDEB4E00154511 /* Network */,
 				5ACE1BAE1AFDEBED00154511 /* Model */,
 				5A6B14241AE65AEB006EBB31 /* UI */,
+				0756ED711B393B0A007E065C /* DTXcodeUtils */,
 				5A9BE1801AD90862002817C0 /* Supporting Files */,
 			);
 			path = CoPilot;
@@ -835,6 +850,7 @@
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* Bonjour.swift in Sources */,
+				0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */,
 				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */,
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
