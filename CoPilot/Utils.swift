@@ -22,11 +22,9 @@ typealias DocumentProvider = (Void -> Document)
 
 func fileProvider(path: String) -> (Void -> String) {
     return {
-        var result: NSString?
-        if let error = `try`({ error in
-            result = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
-            return
-        }) {
+        do {
+            return try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+        } catch {
             if error.code == 260 { // does not exist
                 result = ""
                 let res = `try`({ error in
@@ -34,14 +32,15 @@ func fileProvider(path: String) -> (Void -> String) {
                 })
                 if res.failed {
                     let reason = "could not create file: \(res.error!.localizedDescription)"
+                    // FIXME: rethrow?
                     NSException(name: "fileProvider", reason: reason, userInfo: nil).raise()
                 }
             } else {
                 let reason = "failed to load test file: \(error.localizedDescription)"
+                // FIXME: rethrow?
                 NSException(name: "fileProvider", reason: reason, userInfo: nil).raise()
             }
         }
-        return result! as String
     }
 }
 

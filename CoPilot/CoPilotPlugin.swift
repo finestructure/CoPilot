@@ -27,9 +27,9 @@ var sharedPlugin: CoPilotPlugin?
 
 class CoPilotPlugin: NSObject {
     var bundle: NSBundle! = nil
-    lazy var mainController = MainController(windowNibName: "MainController")
-    lazy var connectedController = ConnectedController(windowNibName: "ConnectedController")
-    lazy var urlController = UrlController(windowNibName: "UrlController")
+    lazy var mainController: MainController = MainController(windowNibName: "MainController")
+    lazy var connectedController: ConnectedController = ConnectedController(windowNibName: "ConnectedController")
+    lazy var urlController: UrlController = UrlController(windowNibName: "UrlController")
     var observers = [NSObjectProtocol]()
     var publishMenuItem: NSMenuItem! = nil
     var subscribeMenuItem: NSMenuItem! = nil

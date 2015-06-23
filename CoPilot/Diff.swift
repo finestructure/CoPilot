@@ -53,7 +53,7 @@ func apply(source: String, patches: [Patch]) -> Result<String> {
         assert(res.count == 2, "results array must have two entries: (text, results)")
         if let target = res[0] as? String {
             let results = res[1] as! NSArray
-            let success = reduce(results, true) { (res, elem) in res && (elem as! NSNumber).boolValue }
+            let success = results.reduce(true) { (res, elem) in res && (elem as! NSNumber).boolValue }
             if success {
                 return Result(target)
             }
@@ -67,9 +67,9 @@ func apply(source: String, patches: [Patch]) -> Result<String> {
 func apply(source: Document, changeSet: Changeset) -> Result<Document> {
     if source.hash == changeSet.baseRev {
         // this should apply cleanly
-        switch apply(source.text, changeSet.patches) {
+        switch apply(source.text, patches: changeSet.patches) {
         case .Success(let value):
-            let target = Document(value.unbox)
+            let target = Document(value)
             assert(target.hash == changeSet.targetRev)
             return Result(target)
         case .Failure(let error):
@@ -169,13 +169,11 @@ func newPosition(currentPos: Position, patches: [Patch]) -> Position {
 
 
 func writeTemp(content: String) -> NSURL? {
-    let url = tempUrl()
-    let res = try({ error in
-        content.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: error)
-    })
-    if res.succeeded {
+    do {
+        let url = tempUrl()
+        try content.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding)
         return url
-    } else {
+    } catch {
         return nil
     }
 }
@@ -184,7 +182,7 @@ func writeTemp(content: String) -> NSURL? {
 func tempUrl() -> NSURL {
     let id = NSProcessInfo.processInfo().globallyUniqueString
     let path = NSTemporaryDirectory().stringByAppendingPathComponent(id)
-    return NSURL.fileURLWithPath(path)!
+    return NSURL(fileURLWithPath: path)
 }
 
 

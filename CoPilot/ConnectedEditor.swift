@@ -107,7 +107,7 @@ class ConnectedEditor {
                 self.editor.textStorage.replaceAll(newDoc.text)
                 
                 // adjust the selection length so we don't select past the end
-                let newSelection = adjustSelection(selected, newPos, newDoc.text)
+                let newSelection = adjustSelection(selected, newPosition: newPos, newString: newDoc.text)
                 tv.setSelectedRange(newSelection)
             }
         }

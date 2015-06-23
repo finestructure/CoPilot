@@ -56,16 +56,16 @@ class DocServer: DocNode {
                 print("server not accepting .Doc commands")
             case .Update(let changes):
                 // println("#### update:\n    doc:     \(self._document.hash)\n    baseRev: \(changes.baseRev)")
-                let res = apply(self._document, changes)
+                let res = apply(self._document, changeSet: changes)
                 if res.succeeded {
                     self.commit(res.value!)
                     self.server.broadcast(msg.data!, exclude: websocket)
                 } else {
                     if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                         let mine = self._document.text
-                        let res = apply(ancestor, changes.patches)
+                        let res = apply(ancestor, patches: changes.patches)
                         if let yours = res.value,
-                           let merged = merge(mine, ancestor, yours) {
+                           let merged = merge(mine, ancestor: ancestor, yours: yours) {
                             self.commit(Document(merged))
                         } else {
                             self.resetClient(websocket)
