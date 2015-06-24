@@ -3,6 +3,8 @@
 //
 
 #import <AppKit/AppKit.h>
+#import <CommonCrypto/CommonCrypto.h>
+
 #import "DiffMatchPatch.h"
 #import "DTXcodeHeaders.h"
 #import "DTXcodeUtils.h"

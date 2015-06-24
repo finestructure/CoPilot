@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0756ED741B393B0A007E065C /* DTXcodeUtils.m */; };
+		078536791B3A965900C61FCD /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078536781B3A965900C61FCD /* String+ext.swift */; };
+		0785367A1B3A965900C61FCD /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078536781B3A965900C61FCD /* String+ext.swift */; };
 		5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* DiffTests.swift */; };
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
 		5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
@@ -251,6 +253,7 @@
 		0756ED721B393B0A007E065C /* DTXcodeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeHeaders.h; sourceTree = "<group>"; };
 		0756ED731B393B0A007E065C /* DTXcodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeUtils.h; sourceTree = "<group>"; };
 		0756ED741B393B0A007E065C /* DTXcodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTXcodeUtils.m; sourceTree = "<group>"; };
+		078536781B3A965900C61FCD /* String+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
@@ -462,6 +465,7 @@
 				5ACE1BA91AFDEABE00154511 /* Changeset.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5ACE1B9B1AFDEA4F00154511 /* Document.swift */,
+				078536781B3A965900C61FCD /* String+ext.swift */,
 			);
 			name = Diff;
 			sourceTree = "<group>";
@@ -774,6 +778,7 @@
 				5ACE1B9D1AFDEA4F00154511 /* Document.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
+				0785367A1B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
@@ -793,6 +798,7 @@
 				5AD8E5F91B0FBD8B000F7D6E /* Cursor.swift in Sources */,
 				5ABAACF11B11016900703634 /* Protocols.swift in Sources */,
 				5A76F5B31B02377500B67B7F /* ConnectedEditor.swift in Sources */,
+				078536791B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ACE1BAA1AFDEABE00154511 /* Changeset.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
 				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,

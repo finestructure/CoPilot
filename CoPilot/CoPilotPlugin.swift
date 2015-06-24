@@ -116,7 +116,7 @@ extension CoPilotPlugin {
     
     func menuItem(title: String, action: Selector, key: String) -> NSMenuItem {
         let m = NSMenuItem(title: title, action: action, keyEquivalent: key)
-        m.keyEquivalentModifierMask = Int(([NSEventModifierFlags.ControlKeyMask, NSEventModifierFlags.CommandKeyMask]).rawValue)
+        m.keyEquivalentModifierMask = Int(NSEventModifierFlags.ControlKeyMask.rawValue | NSEventModifierFlags.CommandKeyMask.rawValue)
         m.target = self
         return m
     }

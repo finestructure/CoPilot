@@ -20,33 +20,14 @@ func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -
 typealias DocumentProvider = (Void -> Document)
 
 
-func fileProvider(path: String) -> (Void -> String) {
-    return {
+func documentProvider(path: String) -> DocumentProvider {
+    let fp: (Void -> String) = {
         do {
             return try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
         } catch {
-            if error.code == 260 { // does not exist
-                result = ""
-                let res = `try`({ error in
-                    result?.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: error)
-                })
-                if res.failed {
-                    let reason = "could not create file: \(res.error!.localizedDescription)"
-                    // FIXME: rethrow?
-                    NSException(name: "fileProvider", reason: reason, userInfo: nil).raise()
-                }
-            } else {
-                let reason = "failed to load test file: \(error.localizedDescription)"
-                // FIXME: rethrow?
-                NSException(name: "fileProvider", reason: reason, userInfo: nil).raise()
-            }
+            return ""
         }
     }
-}
-
-
-func documentProvider(path: String) -> DocumentProvider {
-    let fp = fileProvider(path)
     return { Document(fp()) }
 }
 

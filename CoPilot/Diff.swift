@@ -95,7 +95,7 @@ extension Patch: SequenceType {
     
     public func generate() -> AnyGenerator<Diff> {
         var next = 0
-        return AnyGenerator<Diff> {
+        return anyGenerator {
             if (next == self.diffs.count) {
                 return nil
             }
