@@ -27,7 +27,7 @@ class IssueTests: XCTestCase {
         let a = "123"
         let newDoc = Document("0123")
         tv.string = a
-        expect((tv.string!).count) == 3
+        expect(tv.string!.characters.count) == 3
         tv.setSelectedRange(NSRange(location: 3, length: 0))
         
         let patches = computePatches(tv.string, b: newDoc.text)
@@ -37,7 +37,7 @@ class IssueTests: XCTestCase {
         
         tv.textStorage?.replaceAll(newDoc.text)
         
-        let newSelection = adjustSelection(selected, newPos, newDoc.text)
+        let newSelection = adjustSelection(selected, newPosition: newPos, newString: newDoc.text)
         tv.setSelectedRange(newSelection)
     }
     
@@ -51,7 +51,7 @@ class IssueTests: XCTestCase {
         expect("🔥".characters.count) == 1
 
         var patches = computePatches("123", b: "🔥123")
-        expect(newPosition(3, patches)) == 5 // diff subsytems and NSTextView selections 'see' 🔥 as 2 characters
+        expect(newPosition(3, patches: patches)) == 5 // diff subsytems and NSTextView selections 'see' 🔥 as 2 characters
     }
 
 

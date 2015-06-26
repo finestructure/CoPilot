@@ -52,7 +52,7 @@ class DocServer: DocNode {
             let cmd = Command(data: msg.data!)
             // println("#### server cmd: \(cmd)")
             switch cmd {
-            case .Doc(let doc):
+            case .Doc:
                 print("server not accepting .Doc commands")
             case .Update(let changes):
                 // println("#### update:\n    doc:     \(self._document.hash)\n    baseRev: \(changes.baseRev)")
@@ -105,7 +105,7 @@ class DocServer: DocNode {
 extension DocServer: ConnectedDocument {
     
     func update(newDocument: Document) {
-        if let changes = Changeset(source: self._document, target: newDocument) {
+        if let _ = Changeset(source: self._document, target: newDocument) {
             if let changes = Changeset(source: self._document, target: newDocument) {
                 self.docThrottle.execute {
                     self._document = newDocument

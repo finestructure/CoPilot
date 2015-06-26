@@ -26,7 +26,7 @@ let words = [
 
 func createClient(document  document: Document) -> DocClient {
     var service: NSNetService?
-    let browser = Browser(service: CoPilotService) { s in
+    _ = Browser(service: CoPilotService) { s in
         service = s
     }
     expect(service).toEventuallyNot(beNil(), timeout: 2)
@@ -47,12 +47,12 @@ class DocClientServerTests: XCTestCase {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
         self.server.setBufferTime(0)
-        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        _ = Timer(interval: 0.1) { self.server.update(doc()) }
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
             messages.append(msg)
-            let cmd = Command(data: msg.data!)
+            _ = Command(data: msg.data!)
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
     }
@@ -62,15 +62,11 @@ class DocClientServerTests: XCTestCase {
         // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
         let doc = documentProvider("/tmp/server.txt")
         self.server = DocServer(name: "foo", document: doc())
-        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        _ = Timer(interval: 0.1) { self.server.update(doc()) }
         let client = createClient(document: Document(""))
         client.onDocumentUpdate = { doc in
-            println("client doc: \(doc.text)")
-            if try({ e in
-                doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding, error: e)
-            }).failed {
-                println("writing file failed")
-            }
+            print("client doc: \(doc.text)")
+            try! doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding)
         }
         expect(client.document.text).toEventually(equal("quit"), timeout: 600)
     }
@@ -79,9 +75,9 @@ class DocClientServerTests: XCTestCase {
     func test_DocClient_nsNetService() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        _ = Timer(interval: 0.1) { self.server.update(doc()) }
         var service: NSNetService!
-        let browser = Browser(service: CoPilotService) { s in service = s }
+        _ = Browser(service: CoPilotService) { s in service = s }
         expect(service).toEventuallyNot(beNil(), timeout: 5)
         
         let client = DocClient(service: service, document: Document(""))
@@ -94,7 +90,7 @@ class DocClientServerTests: XCTestCase {
     func test_DocClient_url() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        _ = Timer(interval: 0.1) { self.server.update(doc()) }
         let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
 
         let client = DocClient(url: url, document: Document(""))
@@ -118,7 +114,7 @@ class DocClientServerTests: XCTestCase {
     
     
     func test_conflict_server_update() {
-        var serverDoc = Document("initial")
+        let serverDoc = Document("initial")
         let doc = { serverDoc }
         self.server = DocServer(name: "", document: doc())
         let client = createClient(document: Document(""))
@@ -138,7 +134,7 @@ class DocClientServerTests: XCTestCase {
     
     
     func test_conflict_client_update() {
-        var serverDoc = Document("initial")
+        let serverDoc = Document("initial")
         let doc = { serverDoc }
         self.server = DocServer(name: "", document: doc())
         let client = createClient(document: Document(""))

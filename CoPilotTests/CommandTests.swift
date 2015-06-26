@@ -32,7 +32,7 @@ class CommandTests: XCTestCase {
         let copy = Command(data: data)
         expect(copy.typeName) == "Update"
         expect(copy.changes).toNot(beNil())
-        let res = apply(doc1, copy.changes!)
+        let res = apply(doc1, changeSet: copy.changes!)
         expect(res.succeeded) == true
         expect(res.value!.text) == "bar"
     }
