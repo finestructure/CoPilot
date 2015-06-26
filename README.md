@@ -23,4 +23,3 @@ Astute readers will recognise a striking similariry to Alcatraz' way of installi
 - `git clone git@github.com:feinstruktur/CoPilot.git`
 - `cd CoPilot`
 - `git submodule update --init --recursive`
-- `pod install`
