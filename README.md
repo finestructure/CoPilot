@@ -12,9 +12,11 @@ CoPilot has been tested on Xcode 6.3.2. It should run on 6.4 and other versions 
 
 ## Availability
 
-CoPilot can now be installed via [Alcatraz](http://alcatraz.io)
-
-![Image of Alcatraz installer](http://static1.squarespace.com/static/54c75522e4b025e1ccf5b88f/t/5572d50ae4b071237c345fb8/1433589005225/?format=1500w)
+CoPilot can now be installed via by running the following command in the terminal:
+```
+curl -fsSL https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/install.sh | sh
+```
+Astute readers will recognise this a striking similariry to Alcatraz' way of installing :) Alcatraz integration will hopefull follow soon, pending the merge of [this pull request](https://github.com/supermarin/Alcatraz/pull/295).
 
 ## Build Instructions
 
