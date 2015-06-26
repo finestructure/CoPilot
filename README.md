@@ -16,7 +16,7 @@ CoPilot can now be installed via by running the following command in the termina
 ```
 curl -fsSL https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/install.sh | sh
 ```
-Astute readers will recognise this a striking similariry to Alcatraz' way of installing :) Alcatraz integration will hopefull follow soon, pending the merge of [this pull request](https://github.com/supermarin/Alcatraz/pull/295).
+Astute readers will recognise a striking similariry to Alcatraz' way of installing :) Alcatraz integration will hopefull follow soon, pending the merge of [this pull request](https://github.com/supermarin/Alcatraz/pull/295).
 
 ## Build Instructions
 
