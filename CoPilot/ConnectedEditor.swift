@@ -19,12 +19,16 @@ typealias DocumentUpdate = (Document -> Void)
 typealias CursorUpdate = (Selection -> Void)
 
 
-protocol ConnectedDocument {
-    var id: NSUUID { get }
-    var selectionColor: NSColor { get }
+protocol DocumentUpdating {
     var onDocumentUpdate: DocumentUpdate? { get set }
     var onCursorUpdate: CursorUpdate? { get set }
     var onDisconnect: (NSError? -> Void)? { get set }
+}
+
+
+protocol ConnectedDocument: DocumentUpdating {
+    var id: NSUUID { get }
+    var selectionColor: NSColor { get }
     func update(newDocument: Document)
     func update(selection: Selection)
     func disconnect()
