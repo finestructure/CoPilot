@@ -54,7 +54,7 @@ extension Resolver: NSNetServiceDelegate {
         }
     }
     
-    func netService(sender: NSNetService, didNotResolve errorDict: [NSObject : AnyObject]) {
+    func netService(sender: NSNetService, didNotResolve errorDict: [String: NSNumber]) {
         self.resolved = false
     }
     

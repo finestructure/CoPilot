@@ -9,7 +9,6 @@
 import Foundation
 
 import FeinstrukturUtils
-import CryptoSwift
 
 
 enum ErrorCodes: Int {
@@ -54,7 +53,7 @@ func apply(source: String, patches: [Patch]) -> Result<String> {
         assert(res.count == 2, "results array must have two entries: (text, results)")
         if let target = res[0] as? String {
             let results = res[1] as! NSArray
-            let success = reduce(results, true) { (res, elem) in res && (elem as! NSNumber).boolValue }
+            let success = results.reduce(true) { (res, elem) in res && (elem as! NSNumber).boolValue }
             if success {
                 return Result(target)
             }
@@ -68,9 +67,9 @@ func apply(source: String, patches: [Patch]) -> Result<String> {
 func apply(source: Document, changeSet: Changeset) -> Result<Document> {
     if source.hash == changeSet.baseRev {
         // this should apply cleanly
-        switch apply(source.text, changeSet.patches) {
+        switch apply(source.text, patches: changeSet.patches) {
         case .Success(let value):
-            let target = Document(value.unbox)
+            let target = Document(value)
             assert(target.hash == changeSet.targetRev)
             return Result(target)
         case .Failure(let error):
@@ -94,9 +93,9 @@ extension Patch {
 
 extension Patch: SequenceType {
     
-    public func generate() -> GeneratorOf<Diff> {
+    public func generate() -> AnyGenerator<Diff> {
         var next = 0
-        return GeneratorOf<Diff> {
+        return anyGenerator {
             if (next == self.diffs.count) {
                 return nil
             }
@@ -107,7 +106,7 @@ extension Patch: SequenceType {
 }
 
 
-extension Operation: Printable {
+extension Operation: CustomStringConvertible {
     
     public var description: String {
         switch self {
@@ -135,7 +134,7 @@ func adjustPos(position: Position, patch: Patch) -> Position {
         for diff in patch {
             let posPointer = Int(x - patch.start1)
             if diffPointer < posPointer {
-                x = adjustPos(x, diff)
+                x = adjustPos(x, diff: diff)
             }
             if diff.operation == .DiffEqual {
                 diffPointer += (diff.text as NSString).length
@@ -163,20 +162,18 @@ func adjustPos(position: Position, diff: Diff) -> Position {
 func newPosition(currentPos: Position, patches: [Patch]) -> Position {
     var x = currentPos
     for patch in patches {
-        x = adjustPos(x, patch)
+        x = adjustPos(x, patch: patch)
     }
     return x
 }
 
 
 func writeTemp(content: String) -> NSURL? {
-    let url = tempUrl()
-    let res = try({ error in
-        content.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: error)
-    })
-    if res.succeeded {
+    do {
+        let url = tempUrl()
+        try content.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding)
         return url
-    } else {
+    } catch {
         return nil
     }
 }
@@ -185,7 +182,7 @@ func writeTemp(content: String) -> NSURL? {
 func tempUrl() -> NSURL {
     let id = NSProcessInfo.processInfo().globallyUniqueString
     let path = NSTemporaryDirectory().stringByAppendingPathComponent(id)
-    return NSURL.fileURLWithPath(path)!
+    return NSURL(fileURLWithPath: path)
 }
 
 
@@ -211,7 +208,7 @@ func merge(mine: String, ancestor: String, yours: String) -> String? {
     let a = writeTemp(ancestor)!
     let y = writeTemp(yours)!
 
-    if let res = diff3(m, a, y) {
+    if let res = diff3(m, ancestor: a, yours: y) {
         if res.contains("<<<<<<<") && res.contains("=======") && res.contains(">>>>>>>") {
             // merge conflict
             return nil

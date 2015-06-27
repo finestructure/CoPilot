@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0756ED741B393B0A007E065C /* DTXcodeUtils.m */; };
+		078536791B3A965900C61FCD /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078536781B3A965900C61FCD /* String+ext.swift */; };
+		0785367A1B3A965900C61FCD /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078536781B3A965900C61FCD /* String+ext.swift */; };
 		5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* DiffTests.swift */; };
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
 		5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
-		5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* new_playground.txt */; };
-		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
+		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5A3013C01B0297DD003403FA /* CryptoSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A3013C11B0297DD003403FA /* DiffMatchPatch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */; };
 		5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
@@ -63,7 +63,6 @@
 		5ACE1BAA1AFDEABE00154511 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE1BA91AFDEABE00154511 /* Changeset.swift */; };
 		5ACE1BAB1AFDEABE00154511 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE1BA91AFDEABE00154511 /* Changeset.swift */; };
 		5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
-		5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */; };
 		5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5AD6D3611B17516300A3985E /* UrlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6D35F1B17516300A3985E /* UrlController.swift */; };
 		5AD6D3621B17516300A3985E /* UrlController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6D3601B17516300A3985E /* UrlController.xib */; };
@@ -79,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		077C790B1B39424F008B7678 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0761CDE61B33F6F000AD487F;
+			remoteInfo = "FeinstrukturUtilsTests-OSX";
+		};
 		5A0156AA1AE2629C00EED621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
@@ -135,13 +141,6 @@
 			remoteGlobalIDString = 5AD1E8301AE2A0A60017CEEE;
 			remoteInfo = "FeinstrukturUtils-OSX";
 		};
-		5A6A698F1B03425100F718C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 754BE45419693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
 		5A6A69911B03427D00F718C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
@@ -190,27 +189,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5AD1E7CD1AE266530017CEEE;
 			remoteInfo = "DiffMatchPatch-OSX";
-		};
-		5AD1E80A1AE271C10017CEEE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE45519693E190098E6F3;
-			remoteInfo = CryptoSwift;
-		};
-		5AD1E80C1AE271C10017CEEE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE46019693E190098E6F3;
-			remoteInfo = CryptoSwiftTests;
-		};
-		5AD1E8171AE273A20017CEEE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 754BE45419693E190098E6F3;
-			remoteInfo = CryptoSwift;
 		};
 		5AD1E8271AE29FE80017CEEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -265,7 +243,6 @@
 			files = (
 				5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */,
 				5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */,
-				5A3013C01B0297DD003403FA /* CryptoSwift.framework in CopyFiles */,
 				5A3013C11B0297DD003403FA /* DiffMatchPatch.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +253,7 @@
 		0756ED721B393B0A007E065C /* DTXcodeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeHeaders.h; sourceTree = "<group>"; };
 		0756ED731B393B0A007E065C /* DTXcodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeUtils.h; sourceTree = "<group>"; };
 		0756ED741B393B0A007E065C /* DTXcodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTXcodeUtils.m; sourceTree = "<group>"; };
+		078536781B3A965900C61FCD /* String+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
@@ -313,7 +291,6 @@
 		5AC8A9761AE542440097FF8D /* Bonjour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bonjour.swift; sourceTree = "<group>"; };
 		5ACE1B9B1AFDEA4F00154511 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		5ACE1BA91AFDEABE00154511 /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
-		5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = External/CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FeinstrukturUtils.xcodeproj; path = External/FeinstrukturUtils/FeinstrukturUtils.xcodeproj; sourceTree = "<group>"; };
 		5AD6D35F1B17516300A3985E /* UrlController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlController.swift; sourceTree = "<group>"; };
 		5AD6D3601B17516300A3985E /* UrlController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UrlController.xib; sourceTree = "<group>"; };
@@ -333,7 +310,6 @@
 			files = (
 				5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */,
-				5AD1E8131AE271DA0017CEEE /* CryptoSwift.framework in Frameworks */,
 				5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */,
 				5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */,
 			);
@@ -345,7 +321,6 @@
 			files = (
 				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
-				5A0983DC1AE39ED7001ADB1F /* CryptoSwift.framework in Frameworks */,
 				5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,7 +371,6 @@
 			children = (
 				5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */,
 				5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */,
-				5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */,
 				5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */,
 				5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */,
 			);
@@ -491,6 +465,7 @@
 				5ACE1BA91AFDEABE00154511 /* Changeset.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5ACE1B9B1AFDEA4F00154511 /* Document.swift */,
+				078536781B3A965900C61FCD /* String+ext.swift */,
 			);
 			name = Diff;
 			sourceTree = "<group>";
@@ -521,21 +496,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		5AD1E8061AE271C10017CEEE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */,
-				5AD1E80D1AE271C10017CEEE /* CryptoSwiftTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5AD1E8221AE29FE80017CEEE /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				5AD1E8281AE29FE80017CEEE /* FeinstrukturUtils.framework */,
 				5AD1E82A1AE29FE80017CEEE /* FeinstrukturUtilsTests.xctest */,
 				5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */,
+				077C790C1B39424F008B7678 /* FeinstrukturUtilsTests-OSX.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -573,7 +540,6 @@
 			dependencies = (
 				5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */,
 				5AD1E87E1AE2A3090017CEEE /* PBXTargetDependency */,
-				5AD1E8181AE273A20017CEEE /* PBXTargetDependency */,
 				5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */,
 				5A0156B41AE262F800EED621 /* PBXTargetDependency */,
 			);
@@ -596,7 +562,6 @@
 			dependencies = (
 				5A6A69941B03428200F718C5 /* PBXTargetDependency */,
 				5A6A69921B03427D00F718C5 /* PBXTargetDependency */,
-				5A6A69901B03425100F718C5 /* PBXTargetDependency */,
 				5A6A69831B03423F00F718C5 /* PBXTargetDependency */,
 			);
 			name = CoPilot;
@@ -610,7 +575,8 @@
 		5A9BE1761AD90862002817C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = feinstruktur;
 				TargetAttributes = {
 					5A0156981AE2619700EED621 = {
@@ -632,10 +598,6 @@
 			productRefGroup = 5A9BE17E1AD90862002817C0 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 5AD1E8061AE271C10017CEEE /* Products */;
-					ProjectRef = 5AD1E8051AE271C10017CEEE /* CryptoSwift.xcodeproj */;
-				},
 				{
 					ProductGroup = 5A0156BA1AE263F500EED621 /* Products */;
 					ProjectRef = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
@@ -662,6 +624,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		077C790C1B39424F008B7678 /* FeinstrukturUtilsTests-OSX.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FeinstrukturUtilsTests-OSX.xctest";
+			remoteRef = 077C790B1B39424F008B7678 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5A0156AB1AE2629C00EED621 /* Nimble.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -723,20 +692,6 @@
 			fileType = wrapper.framework;
 			path = DiffMatchPatch.framework;
 			remoteRef = 5AD1E7F81AE26ABD0017CEEE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5AD1E80B1AE271C10017CEEE /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 5AD1E80A1AE271C10017CEEE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5AD1E80D1AE271C10017CEEE /* CryptoSwiftTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CryptoSwiftTests.xctest;
-			remoteRef = 5AD1E80C1AE271C10017CEEE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5AD1E8281AE29FE80017CEEE /* FeinstrukturUtils.framework */ = {
@@ -823,6 +778,7 @@
 				5ACE1B9D1AFDEA4F00154511 /* Document.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
+				0785367A1B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
 				5AD85FBB1AF2263E007A52F9 /* ServerTests.swift in Sources */,
@@ -842,6 +798,7 @@
 				5AD8E5F91B0FBD8B000F7D6E /* Cursor.swift in Sources */,
 				5ABAACF11B11016900703634 /* Protocols.swift in Sources */,
 				5A76F5B31B02377500B67B7F /* ConnectedEditor.swift in Sources */,
+				078536791B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ACE1BAA1AFDEABE00154511 /* Changeset.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
 				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
@@ -877,11 +834,6 @@
 			name = "FeinstrukturUtils-OSX";
 			targetProxy = 5A6A69821B03423F00F718C5 /* PBXContainerItemProxy */;
 		};
-		5A6A69901B03425100F718C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CryptoSwift;
-			targetProxy = 5A6A698F1B03425100F718C5 /* PBXContainerItemProxy */;
-		};
 		5A6A69921B03427D00F718C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "PocketSocket-OSX";
@@ -901,11 +853,6 @@
 			isa = PBXTargetDependency;
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5AD1E7FE1AE26B1F0017CEEE /* PBXContainerItemProxy */;
-		};
-		5AD1E8181AE273A20017CEEE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CryptoSwift;
-			targetProxy = 5AD1E8171AE273A20017CEEE /* PBXContainerItemProxy */;
 		};
 		5AD1E87E1AE2A3090017CEEE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -937,6 +884,7 @@
 				INFOPLIST_FILE = CoPilotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilotTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotTests/CoPilotTests-Bridging-Header.h";
@@ -962,6 +910,7 @@
 				INFOPLIST_FILE = CoPilotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilotTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotTests/CoPilotTests-Bridging-Header.h";
@@ -987,6 +936,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1066,6 +1016,7 @@
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilot;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilot/CoPilot-Bridging-Header.h";
@@ -1091,6 +1042,7 @@
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilot;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilot/CoPilot-Bridging-Header.h";

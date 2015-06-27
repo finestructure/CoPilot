@@ -12,7 +12,7 @@ import Foundation
 let WebSocketDisconnectedNotification = "WebSocketDisconnectedNotification"
 
 
-enum Message: Printable {
+enum Message: CustomStringConvertible {
     case Text(String)
     case Data(NSData)
     init(_ string: String) { self = .Text(string) }

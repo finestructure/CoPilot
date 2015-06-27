@@ -56,6 +56,10 @@ class DocNode {
         self._onDocumentUpdate?(document)
     }
 
+}
+
+
+extension DocNode: DocumentUpdating {
 
     var onDocumentUpdate: DocumentUpdate? {
         get { return self._onDocumentUpdate }

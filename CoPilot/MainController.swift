@@ -78,7 +78,7 @@ extension MainController {
     
     
     func subscribe(service: NSNetService) {
-        println("subscribing to \(service)")
+        print("subscribing to \(service)")
         // FIXME: we need to make sure to warn against overwrite here
         if let editor = self.activeEditor {
             ConnectionManager.subscribe(service, editor: editor)

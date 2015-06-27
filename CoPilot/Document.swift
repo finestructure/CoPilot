@@ -47,7 +47,7 @@ extension Document: Serializable {
 }
 
 
-extension Document: Printable {
+extension Document: CustomStringConvertible {
 
     var description: String {
         return "Document (\(self.hash) \(self.text))"
