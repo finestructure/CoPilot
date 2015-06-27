@@ -10,7 +10,6 @@ import Cocoa
 import XCTest
 import Nimble
 import FeinstrukturUtils
-@testable import CoPilot
 
 
 let words = [
