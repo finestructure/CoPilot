@@ -90,7 +90,7 @@ class DocServer: DocNode {
 
     func resetClient(websocket: WebSocket) {
         // send Doc to force resync - server wins
-        print("#### resetting client")
+        // print("#### resetting client")
         websocket.send(Command(document: self._document))
     }
 

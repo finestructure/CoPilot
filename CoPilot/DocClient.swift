@@ -99,7 +99,7 @@ class DocClient: DocNode {
 
     func requestReset() {
         // request original document in order to re-sync
-        print("#### client: requesting reset")
+        // print("#### client: requesting reset")
         self.socket?.send(Command.GetDoc)
     }
 
