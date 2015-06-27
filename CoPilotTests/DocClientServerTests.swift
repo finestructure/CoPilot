@@ -58,20 +58,6 @@ class DocClientServerTests: XCTestCase {
     }
     
     
-    func _test_sync_files() {
-        // manual test, open test files (path is print below) in editor and type to sync changes. Type 'quit' in master doc to quit test.
-        let doc = documentProvider("/tmp/server.txt")
-        self.server = DocServer(name: "foo", document: doc())
-        _ = Timer(interval: 0.1) { self.server.update(doc()) }
-        let client = createClient(document: Document(""))
-        client.onDocumentUpdate = { doc in
-            print("client doc: \(doc.text)")
-            try! doc.text.writeToFile("/tmp/client.txt", atomically: true, encoding: NSUTF8StringEncoding)
-        }
-        expect(client.document.text).toEventually(equal("quit"), timeout: 600)
-    }
-    
-    
     func test_DocClient_nsNetService() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
