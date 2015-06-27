@@ -53,8 +53,8 @@ extension MainController {
         if index != -1 {
             let service = self.browser[index]
             self.subscribe(service)
+            self.windowForSheet?.endSheet(self.window!, returnCode: SheetReturnCode.Subscribe.rawValue)
         }
-        self.windowForSheet?.endSheet(self.window!, returnCode: SheetReturnCode.Subscribe.rawValue)
     }
 
     
@@ -73,6 +73,7 @@ extension MainController {
         if 0 <= index && index < self.browser.count {
             let service = self.browser[index]
             self.subscribe(service)
+            self.windowForSheet?.endSheet(self.window!, returnCode: SheetReturnCode.Subscribe.rawValue)
         }
     }
     
