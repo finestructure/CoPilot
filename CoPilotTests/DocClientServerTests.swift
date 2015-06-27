@@ -26,9 +26,10 @@ let words = [
 
 func createClient(document  document: Document) -> DocClient {
     var service: NSNetService?
-    _ = Browser(service: CoPilotService) { s in
+    let b = Browser(service: CoPilotService) { s in
         service = s
     }
+    expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
     expect(service).toEventuallyNot(beNil(), timeout: 2)
     return DocClient(service: service!, document: document)
 }
@@ -47,7 +48,8 @@ class DocClientServerTests: XCTestCase {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
         self.server.setBufferTime(0)
-        _ = Timer(interval: 0.1) { self.server.update(doc()) }
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        expect(t).toNot(beNil()) // just to silence the warning, using _ will make the test fail
         let c = createClient()
         var messages = [Message]()
         c.onReceive = { msg in
@@ -56,14 +58,16 @@ class DocClientServerTests: XCTestCase {
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
     }
-    
+
     
     func test_DocClient_nsNetService() {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
-        _ = Timer(interval: 0.1) { self.server.update(doc()) }
+        let t = Timer(interval: 0.1) { self.server.update(doc()) }
+        expect(t).toNot(beNil()) // just to silence the warning, using _ will make the test fail
         var service: NSNetService!
-        _ = Browser(service: CoPilotService) { s in service = s }
+        let b = Browser(service: CoPilotService) { s in service = s }
+        expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
         expect(service).toEventuallyNot(beNil(), timeout: 5)
         
         let client = DocClient(service: service, document: Document(""))
