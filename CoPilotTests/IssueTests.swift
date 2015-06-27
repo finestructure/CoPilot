@@ -50,14 +50,14 @@ class IssueTests: XCTestCase {
         expect(s.length) == 2
         expect("🔥".characters.count) == 1
 
-        var patches = computePatches("123", b: "🔥123")
+        let patches = computePatches("123", b: "🔥123")
         expect(newPosition(3, patches: patches)) == 5 // diff subsytems and NSTextView selections 'see' 🔥 as 2 characters
     }
 
 
     // https://bitbucket.org/feinstruktur/copilot/issue/14/client-changes-get-nuked-by-server-always
     func test_issue_14() {
-        var serverDoc = Document("foo")
+        let serverDoc = Document("foo")
         self.server = DocServer(name: "server", document: serverDoc)
 
         let client1 = createClient(document: Document(""))

@@ -22,6 +22,8 @@ class ServerTests: XCTestCase {
         let socket = WebSocket(url: TestUrl) {
             open = true
         }
+        expect(socket).toNot(beNil()) // just to silence the warning, using _ will make the test fail
+
         expect(open).toEventually(beTrue(), timeout: 5)
         expect(server.sockets.count) == 1
     }
@@ -30,7 +32,6 @@ class ServerTests: XCTestCase {
     func test_broadcast() {
         let server = startServer()
         let client = createClient()
-        var received: String?
         server.broadcast("hello")
         expect(client.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
     }
@@ -39,7 +40,6 @@ class ServerTests: XCTestCase {
     func test_send() {
         let server = startServer()
         let client = createClient()
-        var received: String?
         client.send("foo")
         expect(server.sockets.count).toEventually(equal(1), timeout: 5)
         expect(server.sockets[0].lastMessage?.string).toEventually(equal("foo"), timeout: 5)
@@ -49,7 +49,6 @@ class ServerTests: XCTestCase {
     func test_sendChanges() {
         let initialServerDoc = Document("Some Document")
         let finalServerDoc = Document("Server Document")
-        let clientDoc = Document("Some Document")
         let changeSet = Changeset(source: initialServerDoc, target: finalServerDoc)
         
         let server = startServer()

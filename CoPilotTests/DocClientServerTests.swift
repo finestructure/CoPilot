@@ -144,7 +144,7 @@ class DocClientServerTests: XCTestCase {
 
 
     func test_sync_back() {
-        var serverDoc = Document("foo")
+        let serverDoc = Document("foo")
         self.server = DocServer(name: "server", document: serverDoc)
 
         let client1 = createClient(document: Document(""))
