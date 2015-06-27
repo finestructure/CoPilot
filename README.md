@@ -8,7 +8,7 @@ CoPilot is an Xcode plugin that allows collaborative editing over the network.
 
 ## Compatibility
 
-CoPilot has been tested on Xcode 6.3.2. It should run on 6.4 and other versions of Xcode.
+CoPilot has been tested on Xcode 6.3.2, 6.4, and 7beta. It should also run on other versions of Xcode.
 
 ## Availability
 
