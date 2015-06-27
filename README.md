@@ -23,3 +23,5 @@ Astute readers will recognise a striking similariry to Alcatraz' way of installi
 - `git clone git@github.com:feinstruktur/CoPilot.git`
 - `cd CoPilot`
 - `git submodule update --init --recursive`
+
+NB: master has been updated to Swift-2.0!
