@@ -12,4 +12,4 @@ unzip -o $FNAME
 rm -rf $FNAME
 
 # the 1 is not a typo!
-echo "CoPilot successfully installed!!1!🍻   Please restart your Xcode."
+echo "CoPilot ${VERSION} successfully installed!!1!🍻   Please restart your Xcode."
