@@ -17,7 +17,7 @@
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
 		5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* new_playground.txt */; };
-		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
+		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A3013C11B0297DD003403FA /* DiffMatchPatch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */; };
@@ -576,7 +576,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = feinstruktur;
 				TargetAttributes = {
 					5A0156981AE2619700EED621 = {
@@ -884,6 +884,7 @@
 				INFOPLIST_FILE = CoPilotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilotTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotTests/CoPilotTests-Bridging-Header.h";
@@ -909,6 +910,7 @@
 				INFOPLIST_FILE = CoPilotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilotTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilotTests/CoPilotTests-Bridging-Header.h";
@@ -934,6 +936,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1013,6 +1016,7 @@
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilot;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilot/CoPilot-Bridging-Header.h";
@@ -1038,6 +1042,7 @@
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.feinstruktur.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoPilot;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CoPilot/CoPilot-Bridging-Header.h";
