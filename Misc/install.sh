@@ -1,6 +1,7 @@
 #!/bin/sh
 
-DOWNLOAD_URI=https://github.com/feinstruktur/CoPilot/releases/download/0.11/CoPilot.xcplugin-0.11.zip
+VERSION=0.12
+DOWNLOAD_URI=https://github.com/feinstruktur/CoPilot/releases/download/${VERSION}/CoPilot.xcplugin-${VERSION}.zip
 PLUGINS_DIR="${HOME}/Library/Application Support/Developer/Shared/Xcode/Plug-ins"
 FNAME=dl.zip
 
