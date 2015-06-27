@@ -135,10 +135,3 @@ extension DocServer: ConnectedDocument {
 }
 
 
-// MARK: Test extensions
-extension DocServer {
-    
-    var test_server: Server { return self.server }
-    
-}
-

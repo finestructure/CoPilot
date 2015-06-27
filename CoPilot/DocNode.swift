@@ -81,18 +81,3 @@ extension DocNode: DocumentUpdating {
 }
 
 
-// MARK: Test extensions
-extension DocNode {
-
-    var test_document: Document {
-        get { return self._document }
-        set { self._document = newValue }
-    }
-
-
-    func setBufferTime(bufferTime: NSTimeInterval) {
-        self.docThrottle = Throttle(bufferTime: bufferTime)
-        self.selThrottle = Throttle(bufferTime: bufferTime)
-    }
-
-}

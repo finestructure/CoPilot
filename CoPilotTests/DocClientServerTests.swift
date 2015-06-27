@@ -10,6 +10,7 @@ import Cocoa
 import XCTest
 import Nimble
 import FeinstrukturUtils
+@testable import CoPilot
 
 
 let words = [
@@ -22,6 +23,16 @@ let words = [
     "arbitrary",
     "words",
 ]
+
+
+extension DocNode {
+
+    func setBufferTime(bufferTime: NSTimeInterval) {
+        self.docThrottle = Throttle(bufferTime: bufferTime)
+        self.selThrottle = Throttle(bufferTime: bufferTime)
+    }
+    
+}
 
 
 func createClient(document  document: Document) -> DocClient {
@@ -113,7 +124,7 @@ class DocClientServerTests: XCTestCase {
         
         // simulate a conflict by changing both server and client docs
         // we do this by changing the underlying client ivar without triggering the .Update messages
-        client.test_document = Document("client")
+        client._document = Document("client")
         
         // and then send an update from the server
         self.server.update(Document("server"))
@@ -133,7 +144,7 @@ class DocClientServerTests: XCTestCase {
 
         // simulate a conflict by changing both server and client docs
         // we do this by changing the underlying client ivar without triggering the .Update messages
-        self.server.test_document = Document("server")
+        self.server._document = Document("server")
 
         // and then send an update from the server
         client.update(Document("client"))
