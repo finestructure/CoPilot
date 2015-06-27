@@ -262,9 +262,9 @@ class DiffTests: XCTestCase {
     
     func test_hash() {
         let doc = Document("The quick brown fox jumps over the lazy dog")
-        expect(doc.hash) == "9e107d9d372bb6826bd81d3542a419d6".uppercaseString
-        expect(Document("foo\n").hash) == "D3B07384D113EDEC49EAA6238AD5FF00"
-        expect(Document("foo\nbar").hash) == "A76999788386641A3EC798554F1FE7E6"
+        expect(doc.hash) == "9e107d9d372bb6826bd81d3542a419d6"
+        expect(Document("foo\n").hash) == "d3b07384d113edec49eaa6238ad5ff00"
+        expect(Document("foo\nbar").hash) == "a76999788386641a3ec798554f1fe7e6"
     }
     
     
