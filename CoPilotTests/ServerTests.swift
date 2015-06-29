@@ -88,7 +88,7 @@ func startServer() -> Server {
         started = true
     }
     s.start()
-    expect(started).toEventually(beTrue(), timeout: 5)
+    expect(started).toEventually(beTrue(), timeout: 10)
     return s
 }
 
