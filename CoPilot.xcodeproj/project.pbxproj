@@ -556,6 +556,7 @@
 				5A9BE17B1AD90862002817C0 /* Resources */,
 				5A0983DA1AE39ECA001ADB1F /* Frameworks */,
 				5A3013AD1B029627003403FA /* CopyFiles */,
+				07282BD91B4185C400BD1AED /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -753,6 +754,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07282BD91B4185C400BD1AED /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/swift;
+			shellScript = "import Cocoa\n\nvar prodDir: String {\n    get { return NSProcessInfo().environment[\"BUILT_PRODUCTS_DIR\"]! }\n}\n\nvar projectDir: String {\n    get { return NSProcessInfo().environment[\"PROJECT_DIR\"]! }\n}\n\nvar prodName: String {\n    get { return NSProcessInfo().environment[\"PRODUCT_NAME\"]! }\n}\n\nfunc run(command: String, args: [String]) -> String? {\n    let pipe = NSPipe()\n    let file = pipe.fileHandleForReading\n    \n    let task = NSTask()\n    task.launchPath = command\n    task.currentDirectoryPath = projectDir\n    task.arguments = args\n    task.standardOutput = pipe\n    task.launch()\n    \n    let data = file.readDataToEndOfFile()\n    file.closeFile()\n    let output = NSString(data: data, encoding: NSUTF8StringEncoding)\n    return output as String?\n}\n\n\nif let output = run(\"/usr/bin/git\", args: [\"describe\"]) {\n    \n    let newLine = NSCharacterSet.newlineCharacterSet()\n    let version = output.stringByTrimmingCharactersInSet(newLine)\n    let short = version.componentsSeparatedByString(\"-\")[0]\n    let path = \"\\(prodDir)/\\(prodName).xcplugin/Contents/Info.plist\"\n    \n    if let plist = NSMutableDictionary(contentsOfFile: path) {\n        plist.setValue(version, forKey: \"CFBundleVersion\")\n        plist.setValue(short, forKey: \"CFBundleShortVersionString\")\n        plist.writeToFile(path, atomically: true)\n        print(\"Updated '\\(path)':\")\n        print(\"CFBundleVersion:            \\(version)\")\n        print(\"CFBundleShortVersionString: \\(short)\")\n    } else {\n        print(\"Failed to read Info.plist from \\(path)\")\n    }\n    \n} else {\n    print(\"Failed to obtain version from 'git describe'\")\n    exit(-1)\n}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5A0156951AE2619700EED621 /* Sources */ = {
