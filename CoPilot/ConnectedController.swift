@@ -59,7 +59,7 @@ extension ConnectedController {
            let ce = ConnectionManager.connectedEditor(editor) {
             // println("\t### active editor: \(editor.document.displayName)")
             // println("\t### doc: \(ce.document.id)")
-            self.connections = ce.document.connections
+            self.connections = ce.connectedDocument.connections
         } else {
             self.connections = [Connection]()
         }
