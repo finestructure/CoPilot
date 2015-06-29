@@ -10,25 +10,6 @@ import Cocoa
 import FeinstrukturUtils
 
 
-
-
-protocol DocumentUpdating {
-    var onDocumentUpdate: DocumentUpdate? { get set }
-    var onCursorUpdate: CursorUpdate? { get set }
-    var onDisconnect: (NSError? -> Void)? { get set }
-}
-
-
-protocol ConnectedDocument: DocumentUpdating {
-    var id: NSUUID { get }
-    var selectionColor: NSColor { get }
-    func update(newDocument: Document)
-    func update(selection: Selection)
-    func disconnect()
-    var connections: [DisplayName] { get }
-}
-
-
 struct Editor {
     let controller: NSViewController
     let window: NSWindow
