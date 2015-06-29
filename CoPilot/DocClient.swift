@@ -99,7 +99,7 @@ class DocClient: DocNode {
 }
 
 
-extension DocClient: ConnectedDocument {
+extension DocClient: DocumentConnectable {
 
     func update(newDocument: Document) {
         if let changes = Changeset(source: self._document, target: newDocument) {

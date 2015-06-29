@@ -102,7 +102,7 @@ class DocServer: DocNode {
 }
 
 
-extension DocServer: ConnectedDocument {
+extension DocServer: DocumentConnectable {
     
     func update(newDocument: Document) {
         if let _ = Changeset(source: self._document, target: newDocument) {

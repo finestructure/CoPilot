@@ -42,11 +42,11 @@ func ==(lhs: Editor, rhs: Editor) -> Bool {
 
 class ConnectedEditor {
     let editor: Editor
-    var connectedDocument: ConnectedDocument
+    var connectedDocument: DocumentConnectable
     var observers = [NSObjectProtocol]()
     var cursors = [NSUUID: Cursor]()
 
-    init(editor: Editor, connectedDocument: ConnectedDocument) {
+    init(editor: Editor, connectedDocument: DocumentConnectable) {
         self.editor = editor
         self.connectedDocument = connectedDocument
         self.startObserving()

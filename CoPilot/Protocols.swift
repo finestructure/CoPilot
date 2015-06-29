@@ -18,14 +18,14 @@ protocol Serializable {
 }
 
 
-protocol DocumentUpdating {
+protocol UpdateHandling {
     var onDocumentUpdate: DocumentUpdate? { get set }
     var onCursorUpdate: CursorUpdate? { get set }
     var onDisconnect: (NSError? -> Void)? { get set }
 }
 
 
-protocol ConnectedDocument: DocumentUpdating {
+protocol DocumentConnectable: UpdateHandling {
     var id: NSUUID { get }
     var selectionColor: NSColor { get }
     func update(newDocument: Document)
