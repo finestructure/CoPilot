@@ -10,6 +10,8 @@
 		0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0756ED741B393B0A007E065C /* DTXcodeUtils.m */; };
 		078536791B3A965900C61FCD /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078536781B3A965900C61FCD /* String+ext.swift */; };
 		0785367A1B3A965900C61FCD /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078536781B3A965900C61FCD /* String+ext.swift */; };
+		07B4D09C1B419D5F002F37AD /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4D09B1B419D5F002F37AD /* Typealiases.swift */; };
+		07B4D0A81B41A2D0002F37AD /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4D09B1B419D5F002F37AD /* Typealiases.swift */; };
 		5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* DiffTests.swift */; };
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
 		5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
@@ -254,6 +256,7 @@
 		0756ED731B393B0A007E065C /* DTXcodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTXcodeUtils.h; sourceTree = "<group>"; };
 		0756ED741B393B0A007E065C /* DTXcodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTXcodeUtils.m; sourceTree = "<group>"; };
 		078536781B3A965900C61FCD /* String+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
+		07B4D09B1B419D5F002F37AD /* Typealiases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		5A0156991AE2619700EED621 /* CoPilotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoPilotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01569C1AE2619700EED621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A01569D1AE2619700EED621 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
@@ -441,6 +444,7 @@
 				5AA1D65F1AFA52AA00FD107E /* Utils.swift */,
 				5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */,
 				5ABAACF01B11016900703634 /* Protocols.swift */,
+				07B4D09B1B419D5F002F37AD /* Typealiases.swift */,
 				5ACE1BAC1AFDEB0400154511 /* Diff */,
 				5ACE1BAD1AFDEB4E00154511 /* Network */,
 				5ACE1BAE1AFDEBED00154511 /* Model */,
@@ -792,6 +796,7 @@
 				5AF58A231B032D6C00558448 /* XcodeUtils+mock.swift in Sources */,
 				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
+				07B4D0A81B41A2D0002F37AD /* Typealiases.swift in Sources */,
 				5ACE1B9D1AFDEA4F00154511 /* Document.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
@@ -818,6 +823,7 @@
 				078536791B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ACE1BAA1AFDEABE00154511 /* Changeset.swift in Sources */,
 				5AC8A9741AE541C80097FF8D /* Browser.swift in Sources */,
+				07B4D09C1B419D5F002F37AD /* Typealiases.swift in Sources */,
 				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
 				5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */,
 				5AA3C0E61B1394D800CC9B4F /* Server.swift in Sources */,

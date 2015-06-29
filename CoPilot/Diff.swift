@@ -122,9 +122,6 @@ extension Operation: CustomStringConvertible {
 }
 
 
-typealias Position = UInt
-
-
 func adjustPos(position: Position, patch: Patch) -> Position {
     if position < patch.start1 {
         return position

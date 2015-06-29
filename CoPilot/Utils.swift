@@ -17,7 +17,6 @@ func observe(name: String?, object: AnyObject? = nil, block: (NSNotification!) -
 }
 
 
-typealias DocumentProvider = (Void -> Document)
 
 
 func documentProvider(path: String) -> DocumentProvider {

@@ -9,7 +9,6 @@
 import Foundation
 
 
-typealias Hash = String
 
 
 struct Document {

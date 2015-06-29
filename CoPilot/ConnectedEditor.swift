@@ -10,10 +10,6 @@ import Cocoa
 import FeinstrukturUtils
 
 
-typealias DisplayName = String
-
-typealias DocumentUpdate = (Document -> Void)
-typealias CursorUpdate = (Selection -> Void)
 
 
 protocol DocumentUpdating {

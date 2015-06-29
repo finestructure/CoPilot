@@ -9,7 +9,6 @@
 import Foundation
 
 
-typealias ResolutionHandler = (WebSocket -> Void)
 
 
 class Resolver: NSObject {

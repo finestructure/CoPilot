@@ -44,9 +44,6 @@ enum Message: CustomStringConvertible {
 }
 
 
-typealias MessageHandler = (Message -> Void)
-
-
 class WebSocket: NSObject {
     let socket: PSWebSocket
     var lastMessage: Message?
