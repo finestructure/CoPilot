@@ -10,10 +10,7 @@ import Cocoa
 import FeinstrukturUtils
 
 
-protocol Connection {
-    var displayName: String { get }
-}
-
+typealias DisplayName = String
 
 typealias DocumentUpdate = (Document -> Void)
 typealias CursorUpdate = (Selection -> Void)
@@ -32,7 +29,7 @@ protocol ConnectedDocument: DocumentUpdating {
     func update(newDocument: Document)
     func update(selection: Selection)
     func disconnect()
-    var connections: [Connection] { get }
+    var connections: [DisplayName] { get }
 }
 
 

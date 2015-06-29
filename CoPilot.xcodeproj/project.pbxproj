@@ -440,6 +440,7 @@
 				5A76F5A21B02359800B67B7F /* ConnectionManager.swift */,
 				5AA1D65F1AFA52AA00FD107E /* Utils.swift */,
 				5AEDE5461B01F706005F87F3 /* XcodeUtils.swift */,
+				5ABAACF01B11016900703634 /* Protocols.swift */,
 				5ACE1BAC1AFDEB0400154511 /* Diff */,
 				5ACE1BAD1AFDEB4E00154511 /* Network */,
 				5ACE1BAE1AFDEBED00154511 /* Model */,
@@ -491,7 +492,6 @@
 				5A63776F1B0B4B4B005C2637 /* DocNode.swift */,
 				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
 				5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */,
-				5ABAACF01B11016900703634 /* Protocols.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

@@ -15,7 +15,7 @@ class ConnectedController: NSWindowController {
     @IBOutlet weak var currentEditorField: NSTextField!
 
     var observers = [NSObjectProtocol]()
-    var connections = [Connection]()
+    var connections = [DisplayName]()
     
     
     override func windowDidLoad() {
@@ -61,7 +61,7 @@ extension ConnectedController {
             // println("\t### doc: \(ce.document.id)")
             self.connections = ce.connectedDocument.connections
         } else {
-            self.connections = [Connection]()
+            self.connections = [DisplayName]()
         }
         self.updateUI()
     }
@@ -106,7 +106,7 @@ extension ConnectedController: NSTableViewDelegate {
         let cell = tableView.makeViewWithIdentifier("ConnectionCell", owner: self) as? NSTableCellView
 
         let conn = self.connections[row]
-        cell?.textField?.stringValue = conn.displayName
+        cell?.textField?.stringValue = conn
 
         return cell
     }

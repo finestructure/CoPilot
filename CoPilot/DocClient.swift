@@ -10,18 +10,11 @@ import Foundation
 import FeinstrukturUtils
 
 
-struct SimpleConnection: Connection {
-    let displayName: String
-}
-
-
-
-
 class DocClient: DocNode {
 
     private var socket: WebSocket?
     private var resolver: Resolver?
-    private var connection: Connection?
+    private var connection: DisplayName?
 
 
     init(name: String = "DocClient", service: NSNetService, document: Document) {
@@ -30,7 +23,7 @@ class DocClient: DocNode {
         super.init(name: name, document: document)
 
         self.resolver!.onResolve = { websocket in
-            self.connection = SimpleConnection(displayName: service.name)
+            self.connection = service.name
             self.socket = websocket
             self.configureSocket()
             self.socket?.open()
@@ -42,7 +35,7 @@ class DocClient: DocNode {
     init(name: String = "DocClient", url: NSURL, document: Document) {
         super.init(name: name, document: document)
 
-        self.connection = SimpleConnection(displayName: url.absoluteString ?? "Unknown remote document")
+        self.connection = url.absoluteString ?? "Unknown remote document"
         self.socket = WebSocket(url: url)
         self.configureSocket()
         self.socket?.open()
@@ -130,11 +123,11 @@ extension DocClient: ConnectedDocument {
     }
  
     
-    var connections: [Connection] {
+    var connections: [DisplayName] {
         if let c = self.connection {
             return [c]
         } else {
-            return [Connection]()
+            return [DisplayName]()
         }
     }
     
