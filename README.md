@@ -1,6 +1,4 @@
--------
 [![Twitter: @_sa_s](https://img.shields.io/badge/contact-%40__sa__s-blue.svg)](https://twitter.com/_sa_s) [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]()
--------
 
 # CoPilot
 
