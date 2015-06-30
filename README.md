@@ -6,7 +6,7 @@ CoPilot is an Xcode plugin that allows collaborative editing over the network.
 
 [CoPilot Homepage](http://feinstruktur.com/copilot)
 
-![Image of CoPilot](https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/screenshot-readme.png)
+[![CoPilot Video](https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/screenshot-readme.png)](https://vimeo.com/feinstruktur/copilot)
 
 ## Compatibility
 
@@ -26,4 +26,3 @@ Astute readers will recognise a striking similariry to Alcatraz' way of installi
 - `cd CoPilot`
 - `git submodule update --init --recursive`
 
-NB: master has been updated to Swift-2.0!
