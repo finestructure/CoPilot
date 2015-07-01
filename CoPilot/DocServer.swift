@@ -27,7 +27,7 @@ extension Server {
 class DocServer: DocNode {
     
     private var server: Server! = nil
-    private var _connections = [WebSocket: Connection]()
+    private var _connections = [WebSocket: DisplayName]()
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self.server = Server(name: name, service: service)
@@ -77,7 +77,7 @@ class DocServer: DocNode {
             case .GetDoc:
                 websocket.send(Command(document: self._document))
             case .Name(let name):
-                self._connections[websocket] = SimpleConnection(displayName: name)
+                self._connections[websocket] = name
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
                 self.server.broadcast(msg.data!, exclude: websocket)
@@ -102,7 +102,7 @@ class DocServer: DocNode {
 }
 
 
-extension DocServer: ConnectedDocument {
+extension DocServer: DocumentConnectable {
     
     func update(newDocument: Document) {
         if let _ = Changeset(source: self._document, target: newDocument) {
@@ -128,7 +128,7 @@ extension DocServer: ConnectedDocument {
     }    
     
     
-    var connections: [Connection] {
+    var connections: [DisplayName] {
         return self._connections.values.array
     }
 

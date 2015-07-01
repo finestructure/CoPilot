@@ -59,7 +59,7 @@ class ConnectionManager {
         let name = "\(editor.document.displayName) @ \(NSHost.currentHost().localizedName!)"
         let doc = { Document(editor.textStorage.string) }
         let docServer = DocServer(name: name, document: doc())
-        let connectedEditor = ConnectedEditor(editor: editor, document: docServer)
+        let connectedEditor = ConnectedEditor(editor: editor, connectedDocument: docServer)
         self.published.append(connectedEditor)
         NSNotificationCenter.defaultCenter().postNotificationName(DocumentPublishedNotification, object: self)
         return connectedEditor
@@ -68,7 +68,7 @@ class ConnectionManager {
     
     static func disconnect(editor: Editor) {
         if let conn = self.connected({ $0.editor == editor }) {
-            conn.document.disconnect()
+            conn.connectedDocument.disconnect()
             self.published = self.published.filter({ $0.editor != editor })
             self.subscribed = self.subscribed.filter({ $0.editor != editor })
             NSNotificationCenter.defaultCenter().postNotificationName(DocumentDisconnectedNotification, object: self)
@@ -91,7 +91,7 @@ class ConnectionManager {
 
 
     static func subscribe(editor: Editor, docClient: DocClient) -> ConnectedEditor {
-        let connectedEditor = ConnectedEditor(editor: editor, document: docClient)
+        let connectedEditor = ConnectedEditor(editor: editor, connectedDocument: docClient)
         connectedEditor.enableDisconnectionAlert()
         self.subscribed.append(connectedEditor)
         NSNotificationCenter.defaultCenter().postNotificationName(DocumentConnectedNotification, object: self)
@@ -101,10 +101,10 @@ class ConnectionManager {
 
     static func disconnectAll() {
         for c in self.published {
-            c.document.disconnect()
+            c.connectedDocument.disconnect()
         }
         for c in self.subscribed {
-            c.document.disconnect()
+            c.connectedDocument.disconnect()
         }
     }
     
