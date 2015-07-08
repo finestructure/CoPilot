@@ -92,9 +92,11 @@ class IssueTests: XCTestCase {
     func test_issue_36() {
         let server_txt = contentsOfFile(name: "issue_36_server", type: "txt")
         let client_txt = contentsOfFile(name: "issue_36_client", type: "txt")
-        expect(server_txt.characters.count) == 276
-        expect(client_txt.characters.count) == 86
-        let patches = computePatches(server_txt, b: client_txt)
+        let patches = computePatches(client_txt, b: server_txt)
+        expect(client_txt[15..<22]) == "var str"
+        expect(client_txt[15..<17]) == "va"
+        expect(client_txt[17..<19]) == "r "
+        expect(client_txt[19..<21]) == "st"
         expect(newPosition(15, patches: patches)) == 15
         expect(newPosition(16, patches: patches)) == 16
     }
