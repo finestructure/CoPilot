@@ -1,0 +1,8 @@
+
+import UIKit
+
+var str = "Hello, foo"
+let x = 5
+let y = 2
+let z = 4
+let asd = "sdfsd"

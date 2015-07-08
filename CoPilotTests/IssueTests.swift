@@ -87,4 +87,16 @@ class IssueTests: XCTestCase {
     }
 
     
+    // Crashes on subscribe (Xcode7/OSX 10.11)
+    // https://github.com/feinstruktur/CoPilot/issues/36
+    func test_issue_36() {
+        let server_txt = contentsOfFile(name: "issue_36_server", type: "txt")
+        let client_txt = contentsOfFile(name: "issue_36_client", type: "txt")
+        expect(server_txt.characters.count) == 276
+        expect(client_txt.characters.count) == 86
+        let patches = computePatches(server_txt, b: client_txt)
+        expect(newPosition(15, patches: patches)) == 15
+        expect(newPosition(16, patches: patches)) == 16
+    }
+    
 }

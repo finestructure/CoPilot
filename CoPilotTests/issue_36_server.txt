@@ -1,0 +1,25 @@
+
+import UIKit
+
+enum MyError : ErrorType {
+case Error1
+}
+
+func doStuff(value: Int) throws -> String {
+if value == 1 {
+return "1"
+}
+throw MyError.Error1
+}
+
+func something() -> Int? {
+return nil
+}
+
+do {
+guard let x = something() else {
+throw MyError.Error1
+}
+print("in here")
+
+}
