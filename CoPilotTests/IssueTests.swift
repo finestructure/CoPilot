@@ -21,7 +21,8 @@ class IssueTests: XCTestCase {
     }
 
 
-    // https://bitbucket.org/feinstruktur/copilot/issue/7/crash-when-cursor-at-end-and-receiving-an
+    // Crash when cursor at end and receiving an insertion
+    // https://github.com/feinstruktur/CoPilot/issues/7
     func test_issue_7() {
         let tv = NSTextView()
         let a = "123"
@@ -42,7 +43,8 @@ class IssueTests: XCTestCase {
     }
     
     
-    // https://bitbucket.org/feinstruktur/copilot/issue/8/insertion-point-not-preserved-when-emojis
+    // Insertion point not preserved when emojis appear
+    // https://github.com/feinstruktur/CoPilot/issues/8
     func test_issue_8() {
         // NSString based subsystems count 🔥 as 2 characters
         // we need to use (s as NSString).length instead of count(s) to stay in NSString's 'coordinate system'
@@ -55,7 +57,8 @@ class IssueTests: XCTestCase {
     }
 
 
-    // https://bitbucket.org/feinstruktur/copilot/issue/14/client-changes-get-nuked-by-server-always
+    // Client changes get nuked by server, always
+    // https://github.com/feinstruktur/CoPilot/issues/14
     func test_issue_14() {
         let serverDoc = Document("foo")
         self.server = DocServer(name: "server", document: serverDoc)
