@@ -42,6 +42,7 @@ extension NSTextStorage {
 
 
 extension String {
+
     subscript (r: Range<Int>) -> String {
         get {
             let startIndex = advance(self.startIndex, r.startIndex)
@@ -49,6 +50,13 @@ extension String {
             return self[Range(start: startIndex, end: endIndex)]
         }
     }
+
+    subscript (idx: Int) -> String {
+        get {
+            return self[idx..<idx+1]
+        }
+    }
+
 }
 
 

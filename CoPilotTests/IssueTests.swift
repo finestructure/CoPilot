@@ -96,12 +96,21 @@ class IssueTests: XCTestCase {
         let server_txt = contentsOfFile(name: "issue_36_server", type: "txt")
         let client_txt = contentsOfFile(name: "issue_36_client", type: "txt")
         let patches = computePatches(client_txt, b: server_txt)
-        expect(client_txt[15..<22]) == "var str"
-        expect(client_txt[15..<17]) == "va"
-        expect(client_txt[17..<19]) == "r "
-        expect(client_txt[19..<21]) == "st"
-        expect(newPosition(15, patches: patches)) == 15
-        expect(newPosition(16, patches: patches)) == 16
+        expect(server_txt.characters.count) == 276
+        expect(client_txt.characters.count) == 86
+
+        for idx: Position in 0..<86 {
+            switch idx {
+            case 0..<15:
+                expect(newPosition(idx, patches: patches)) == idx
+            case 15..<54:
+                expect(newPosition(idx, patches: patches)) == 244
+            case 54..<86:
+                expect(newPosition(idx, patches: patches)) == 244 + (idx - 54)
+            default:
+                fail("unhandled index range")
+            }
+        }
     }
     
 }

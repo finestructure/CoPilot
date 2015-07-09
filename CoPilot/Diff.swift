@@ -123,26 +123,24 @@ extension Operation: CustomStringConvertible {
 
 
 func adjustPos(position: Position, patch: Patch) -> Position {
-    if position < patch.start1 {
+    if patch.start1 > position {
         return position
     } else {
         var posInPatch = position - patch.start1
         var diffPointer: Position = 0
         for diff in patch {
-            if posInPatch <= diffPointer {
-                return patch.start1 + posInPatch
-            } else {
-                let diffSize = Position((diff.text as NSString).length)
+            let diffSize = Position((diff.text as NSString).length)
 
-                switch diff.operation {
-                case .DiffEqual:
-                    diffPointer += diffSize
-                case .DiffDelete:
-                    posInPatch -= Position( min(diffSize, posInPatch) )
-                case .DiffInsert:
-                    posInPatch += Position(diffSize)
+            switch diff.operation {
+            case .DiffEqual:
+                diffPointer += diffSize
+                if diffPointer > posInPatch {
+                    return patch.start1 + posInPatch
                 }
-
+            case .DiffDelete:
+                posInPatch -= Position(min(diffSize, posInPatch))
+            case .DiffInsert:
+                posInPatch += diffSize
             }
         }
         return patch.start1 + posInPatch
