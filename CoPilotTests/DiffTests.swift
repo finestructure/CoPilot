@@ -149,46 +149,75 @@ class DiffTests: XCTestCase {
         let b = contentsOfFile(name: "test_b", type: "txt")
         let patches = computePatches(a, b: b)
         expect(patches.count) == 4
-        
-        // line starts and ends
-        expect(newPosition(0, patches: patches)) == 0
-        expect(newPosition(52, patches: patches)) == 0
-        expect(newPosition(53, patches: patches)) == 0
-        expect(newPosition(104, patches: patches)) == 0
-        expect(newPosition(105, patches: patches)) == 1
-        
-        // line starts and ends
-        expect(newPosition(152, patches: patches)) == 48
-        expect(newPosition(153, patches: patches)) == 49
-        
-        // around 'Named' -> 'named' change
-        expect(a[155..<159]) == " Nam"
-        expect(b[51..<55]) == " nam"
-        expect(newPosition(155, patches: patches)) == 51
-        expect(newPosition(156, patches: patches)) == 52
-        expect(newPosition(157, patches: patches)) == 52
-        // TODO: expectation adjusted - works well enough in practise, see [345d494] for details
-        //        expect(newPosition(157, patches)) == 53
-        
-        expect(a[186..<190]) == "ngs."
-        expect(b[82..<86]) == "ngs."
-        expect(newPosition(186, patches: patches)) == 82
-        expect(newPosition(187, patches: patches)) == 83
-        expect(newPosition(188, patches: patches)) == 84
-        expect(newPosition(189, patches: patches)) == 85
-        
-        expect(a[190..<191]) == "\n"
-        expect(b[86..<88]) == "\n\n"
-        expect(newPosition(190, patches: patches)) == 86
-        
-        expect(a[191..<193]) == "Th"
-        expect(b[88..<90]) == "Th"
-        expect(newPosition(191, patches: patches)) == 87
-        // TODO: expectation adjusted - works well enough in practise, see [345d494] for details
-        //        expect(newPosition(191, patches)) == 88
-        expect(newPosition(192, patches: patches)) == 89
-        expect(newPosition(193, patches: patches)) == 90
+        let c = apply(a, patches: patches).value!
+        expect(c) == b
 
+        // patches = b - a
+        // c + patches = b
+
+        // assume we start with string a and a cursor position in a
+        // this test ensures cursor pos is maintained reasonably when patches are applied to a,
+        // transforming it into b
+
+        // line starts and ends
+        expect(a[50..<52]) == ";\n"
+        expect(b[104..<108]) == "ere "
+
+        let lines = a.split("\n").map { $0 + "\n" }
+        let counts = lines.map { UInt($0.characters.count) }
+
+        let startOfLine3 = counts[0] + counts[1]
+        expect(startOfLine3) == 104
+
+        for pos: Position in 0..<startOfLine3 {
+            expect(newPosition(pos, patches: patches)) == 0
+        }
+
+        let startOfLine4 = startOfLine3 + counts[2]
+        expect(startOfLine4) == 152
+
+        // The following line is unchanged and the cursor should stay positioned on that line
+        // (of course the global index is offset by the removed lines above, totalling 104 characters)
+        // line: "The Nameless is the origin of Heaven and Earth;\n"
+
+        for pos: Position in startOfLine3..<startOfLine4 {
+            expect(newPosition(pos, patches: patches)) == pos - startOfLine3
+        }
+
+        let startOfLine5 = startOfLine4 + counts[3]
+        expect(startOfLine5) == 191
+
+        // In the next line only the 'N' is changed to 'n'. Therefore all positions should remain intact.
+        // before: "The Named is the mother of all things.\n"
+        // after:  "The named is the mother of all things.\n"
+
+        for pos: Position in startOfLine4..<startOfLine5 {
+            expect(newPosition(pos, patches: patches)) == pos - startOfLine3
+        }
+
+        // After line 4 there's an additional newline being inserted
+        // We expect a position at length of lines 3 and 4 (1-based count) + 1 for the CR
+        expect(newPosition(startOfLine5, patches: patches)) == counts[2] + counts[3] + 1
+
+        // From here on everything is unchanged until line 11, with the insertion of "The both may..."
+        let countInUnchangedBlock = lines[4..<11].reduce(0) { $0 + UInt($1.characters.count) }
+        expect(countInUnchangedBlock) == 209
+
+        for pos: Position in 0..<countInUnchangedBlock {
+            expect(newPosition(pos + startOfLine5, patches: patches)) == pos + (counts[2] + counts[3] + 1)
+        }
+
+        // Check that size all agree
+
+        let end = startOfLine5 + countInUnchangedBlock
+        let fileSize = UInt(a.characters.count)
+        let lineCounts = lines.reduce(0) { $0 + UInt($1.characters.count) }
+        expect(end) == fileSize
+        expect(lineCounts) == end
+
+        // Finally, when we're at the end of file 'a', the insertion will push the cursor to the position of end of file 'b'
+
+        expect(newPosition(end, patches: patches)) == UInt(b.characters.count)
     }
     
     
@@ -270,27 +299,25 @@ class DiffTests: XCTestCase {
     
     func test_preserve_position() {
         let cr = "\n"
-        let line = "0123456789"
-        let a = line + cr + line + cr + line
-        expect(a.characters.count) == 32
-        let b = line + cr + line + cr + "01234 56789"
+        let line = "012345678"
+        let a = line + cr + line
+        let b = line + cr + "01234 5678"
+        expect(a.characters.count) == 19
+        expect(b.characters.count) == 20
         let patches = computePatches(a, b: b)
-        expect(patches.count) == 1
-        let p = patches[0]
-        expect(p.start1) == 23
-        expect(p.start2) == 23
-        expect(p.length1) == 8
-        expect(p.length2) == 9
         expect(newPosition(0, patches: patches)) == 0
         expect(newPosition(5, patches: patches)) == 5
         expect(newPosition(10, patches: patches)) == 10
-        expect(newPosition(15, patches: patches)) == 15
-        expect(newPosition(20, patches: patches)) == 20
-        expect(newPosition(25, patches: patches)) == 25
-        expect(newPosition(27, patches: patches)) == 27
-        expect(newPosition(28, patches: patches)) == 29
-        expect(newPosition(30, patches: patches)) == 31
-        expect(newPosition(32, patches: patches)) == 33
+        expect(newPosition(11, patches: patches)) == 11
+        expect(newPosition(12, patches: patches)) == 12
+        expect(newPosition(13, patches: patches)) == 13
+        expect(newPosition(14, patches: patches)) == 14
+        expect(newPosition(15, patches: patches)) == 16
+        expect(newPosition(16, patches: patches)) == 17
+        expect(newPosition(17, patches: patches)) == 18
+        expect(newPosition(18, patches: patches)) == 19
+        expect(newPosition(19, patches: patches)) == 20
+        expect(newPosition(20, patches: patches)) == 21
     }
 
 
