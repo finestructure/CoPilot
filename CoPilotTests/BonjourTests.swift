@@ -36,15 +36,18 @@ class BonjourTests: XCTestCase {
         
         var found = false
         let b = Browser(service: CoPilotService) { service in
-            found = true
+            if service.name.hasPrefix("Test") {
+                found = true
+            }
         }
         expect(found).toEventually(beTrue(), timeout: 5)
-        expect(b.count) == 1
-        
+        let initial = b.count
+        expect(initial) > 0
+
         found = false
         services.append( publish(service: CoPilotService, name: "Test2") )
         expect(found).toEventually(beTrue(), timeout: 5)
-        expect(b.count) == 2
+        expect(b.count) == initial + 1
         
         var removed = false
         b.onRemove = { service in
@@ -52,7 +55,7 @@ class BonjourTests: XCTestCase {
         }
         services.removeAtIndex(0)
         expect(removed).toEventually(beTrue(), timeout: 5)
-        expect(b.count) == 1
+        expect(b.count) == initial
     }
     
     
