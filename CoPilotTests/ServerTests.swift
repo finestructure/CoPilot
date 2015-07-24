@@ -11,9 +11,6 @@ import XCTest
 import Nimble
 
 
-let TestUrl = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
-
-
 class ServerTests: XCTestCase {
 
     func test_server() {
@@ -77,27 +74,3 @@ class ServerTests: XCTestCase {
 }
 
 
-// MARK: - Helpers
-
-
-func startServer() -> Server {
-    let s = Server(name: "foo", service: CoPilotService)
-    var started = false
-    s.onPublished = { ns in
-        expect(ns).toNot(beNil())
-        started = true
-    }
-    s.start()
-    expect(started).toEventually(beTrue(), timeout: 10)
-    return s
-}
-
-
-func createClient() -> WebSocket {
-    var open = false
-    let socket = WebSocket(url: TestUrl) {
-        open = true
-    }
-    expect(open).toEventually(beTrue(), timeout: 5)
-    return socket
-}
