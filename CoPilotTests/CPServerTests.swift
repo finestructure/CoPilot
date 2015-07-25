@@ -14,9 +14,9 @@ let GoPublishUrl = NSURL(string: "ws://localhost:12345/doc/1/publish")!
 let GoSubscribeUrl = NSURL(string: "ws://localhost:12345/doc/1/subscribe")!
 
 
-class CPIceTests: XCTestCase {
+class CPServerTests: XCTestCase {
 
-    func test_goserver() {
+    func test_cpserver() {
         let s = connectWebsocket(GoPublishUrl)
         expect(s).toNot(beNil())
         let c = connectWebsocket(GoSubscribeUrl)
