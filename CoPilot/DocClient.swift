@@ -56,7 +56,12 @@ class DocClient: DocNode {
 
 
     func onReceive(msg: Message) {
-        let cmd = Command(data: msg.data!)
+        guard let data = msg.data else {
+            print("message does not contain data")
+            return
+        }
+
+        let cmd = Command(data: data)
         // println("#### client cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):

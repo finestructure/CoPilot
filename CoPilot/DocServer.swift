@@ -49,7 +49,12 @@ class DocServer: DocNode {
 
     func onReceive(websocket: WebSocket) -> MessageHandler {
         return { msg in
-            let cmd = Command(data: msg.data!)
+            guard let data = msg.data else {
+                print("message does not contain data")
+                return
+            }
+
+            let cmd = Command(data: data)
             // println("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc:
