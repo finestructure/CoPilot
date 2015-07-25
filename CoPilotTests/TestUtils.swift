@@ -27,6 +27,11 @@ func startServer() -> Server {
 
 
 func createClient(url: NSURL = TestUrl) -> WebSocket {
+    return connectWebsocket(url)
+}
+
+
+func connectWebsocket(url: NSURL) -> WebSocket {
     var open = false
     let socket = WebSocket(url: url) {
         open = true

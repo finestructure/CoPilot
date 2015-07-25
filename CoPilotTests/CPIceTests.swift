@@ -17,9 +17,9 @@ let GoSubscribeUrl = NSURL(string: "ws://localhost:12345/doc/1/subscribe")!
 class CPIceTests: XCTestCase {
 
     func test_goserver() {
-        let s = createClient(GoPublishUrl)
+        let s = connectWebsocket(GoPublishUrl)
         expect(s).toNot(beNil())
-        let c = createClient(GoSubscribeUrl)
+        let c = connectWebsocket(GoSubscribeUrl)
         expect(c).toNot(beNil())
         var message: Message?
         c.onReceive = { msg in
