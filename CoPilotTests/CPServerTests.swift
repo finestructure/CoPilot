@@ -10,22 +10,17 @@ import XCTest
 import Nimble
 
 
-func publishUrl(docId: String) -> NSURL {
-    return NSURL(string: "ws://localhost:12345/doc/\(docId)/publish")!
-}
-
-
-func subscribeUrl(docId: String) -> NSURL {
-    return NSURL(string: "ws://localhost:12345/doc/\(docId)/subscribe")!
+func docUrl(docId: String) -> NSURL {
+    return NSURL(string: "ws://localhost:12345/doc/\(docId)")!
 }
 
 
 class CPServerTests: XCTestCase {
 
     func test_cpserver() {
-        let s = connectWebsocket(publishUrl("1"))
+        let s = connectWebsocket(docUrl("1"))
         expect(s).toNot(beNil())
-        let c = connectWebsocket(subscribeUrl("1"))
+        let c = connectWebsocket(docUrl("1"))
         expect(c).toNot(beNil())
         var message: Message?
         c.onReceive = { msg in
@@ -45,9 +40,9 @@ class CPServerTests: XCTestCase {
 
 
     func test_birectional() {
-        let s = connectWebsocket(publishUrl("1"))
+        let s = connectWebsocket(docUrl("1"))
         expect(s).toNot(beNil())
-        let c = connectWebsocket(subscribeUrl("1"))
+        let c = connectWebsocket(docUrl("1"))
         expect(c).toNot(beNil())
         var message: Message?
         c.onReceive = { msg in
@@ -75,9 +70,9 @@ class CPServerTests: XCTestCase {
 
 
     func test_two_subscribers() {
-        let s = connectWebsocket(publishUrl("2"))
-        let c1 = connectWebsocket(subscribeUrl("2"))
-        let c2 = connectWebsocket(subscribeUrl("2"))
+        let s = connectWebsocket(docUrl("2"))
+        let c1 = connectWebsocket(docUrl("2"))
+        let c2 = connectWebsocket(docUrl("2"))
 
         var sMsg = [Message]()
         s.onReceive = { msg in

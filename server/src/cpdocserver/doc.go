@@ -1,10 +1,7 @@
 package main
 
 import (
-	"net/http"
   "fmt"
-  
-  "github.com/gorilla/mux"
 )
 
 type doc struct {
@@ -18,27 +15,22 @@ type doc struct {
 var docs = make(map[string]*doc)
 
 
-func publish(w http.ResponseWriter, r *http.Request) {
-  id := mux.Vars(r)["id"]
-
-  _, exists := docs[id]
-  if exists {
-    // deny replulishing of existing id
-    w.WriteHeader(404)
-    return
+func GetDoc(id string) *doc { 
+  if _, exists := docs[id]; !exists {
+    fmt.Println("New:", id)
+    d := &doc{
+    	broadcast:   make(chan []byte, maxMessageSize),
+    	register:    make(chan *client),
+    	unregister:  make(chan *client),
+    	clients:     make(map[*client]bool),
+    }
+    docs[id] = d
   }
-
-  fmt.Println("New:", id)
-  d := &doc{
-  	broadcast:   make(chan []byte, maxMessageSize),
-  	register:    make(chan *client),
-  	unregister:  make(chan *client),
-  	clients:     make(map[*client]bool),
-  }
-
+  d := docs[id]
+  
   go d.run()
-
-  docs[id] = d
+  
+  return d
 }
 
 

@@ -11,8 +11,7 @@ import (
 func main() {
   router := mux.NewRouter()
 
-  router.NewRoute().Path("/doc/{id}/publish").HandlerFunc(publish)
-  router.NewRoute().Path("/doc/{id}/subscribe").HandlerFunc(subscribe)
+  router.NewRoute().Path("/doc/{id}").HandlerFunc(Connect)
 
   http.Handle("/", router)
   log.Fatal(http.ListenAndServe(":12345", nil))

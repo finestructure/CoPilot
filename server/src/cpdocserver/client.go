@@ -27,9 +27,9 @@ var upgrader = websocket.Upgrader{
 	WriteBufferSize: maxMessageSize,
 }
 
-func subscribe(w http.ResponseWriter, r *http.Request) {
+func Connect(w http.ResponseWriter, r *http.Request) {
   id := mux.Vars(r)["id"]
-  d := docs[id]
+  d := GetDoc(id)
   
   if d == nil {
     w.WriteHeader(404)
