@@ -39,7 +39,38 @@ class CPServerTests: XCTestCase {
         }
         s.send(Command(name: "server"))
         expect(message).toEventuallyNot(beNil())
-        print("message: \(message)")
+        expect(Command(data: message!.data!).name) == "server"
+    }
+
+
+
+    func test_birectional() {
+        let s = connectWebsocket(publishUrl("1"))
+        expect(s).toNot(beNil())
+        let c = connectWebsocket(subscribeUrl("1"))
+        expect(c).toNot(beNil())
+        var message: Message?
+        c.onReceive = { msg in
+            message = msg
+        }
+        var response: Message?
+        s.onReceive = { msg in
+            response = msg
+        }
+        c.onDisconnect = { error in
+            fail("error: \(error)")
+        }
+        s.onDisconnect = { error in
+            fail("error: \(error)")
+        }
+
+        s.send(Command(name: "ping"))
+        expect(message).toEventuallyNot(beNil())
+        expect(Command(data: message!.data!).name) == "ping"
+
+        c.send(Command(name: "pong"))
+        expect(response).toEventuallyNot(beNil())
+        expect(Command(data: response!.data!).name) == "pong"
     }
 
 
