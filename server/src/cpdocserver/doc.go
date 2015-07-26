@@ -5,6 +5,7 @@ import (
 )
 
 type doc struct {
+  id string
 	clients map[*client]bool
 	broadcast chan []byte
 	register chan *client
@@ -19,6 +20,7 @@ func GetDoc(id string) *doc {
   if _, exists := docs[id]; !exists {
     fmt.Println("New:", id)
     d := &doc{
+      id:          id,
     	broadcast:   make(chan []byte, maxMessageSize),
     	register:    make(chan *client),
     	unregister:  make(chan *client),
@@ -47,6 +49,9 @@ func (d *doc) run() {
 				delete(d.clients, c)
 				close(c.send)
 			}
+      if len(d.clients) == 0 {
+        delete(docs, d.id)
+      }
 			break
 
 		case m := <- d.broadcast:
