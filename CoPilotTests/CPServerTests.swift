@@ -38,7 +38,6 @@ class CPServerTests: XCTestCase {
     }
 
 
-
     func test_birectional() {
         let s = connectWebsocket(docUrl("1"))
         expect(s).toNot(beNil())
@@ -120,6 +119,34 @@ class CPServerTests: XCTestCase {
         // make sure the first command does not get echoed back to "s", only the second one should appear
         expect(messages.count).toEventually(beGreaterThan(0))
         expect(Command(data: messages[0].data!).name) == "2"
+    }
+
+
+    func test_document_separation() {
+        let a1 = connectWebsocket(docUrl("a"))
+        let a2 = connectWebsocket(docUrl("a"))
+        let b1 = connectWebsocket(docUrl("b"))
+        let b2 = connectWebsocket(docUrl("b"))
+
+        var a1Msg = [Message]()
+        a1.onReceive = { m in a1Msg.append(m) }
+        var a2Msg = [Message]()
+        a2.onReceive = { m in a2Msg.append(m) }
+        var b1Msg = [Message]()
+        b1.onReceive = { m in b1Msg.append(m) }
+        var b2Msg = [Message]()
+        b2.onReceive = { m in b2Msg.append(m) }
+
+        a1.send(Command(name: "a"))
+        b1.send(Command(name: "b"))
+
+        expect(a2Msg.count).toEventually(equal(1))
+        expect(Command(data: a2Msg[0].data!).name!) == "a"
+        expect(a1Msg.count) == 0
+
+        expect(b2Msg.count).toEventually(equal(1))
+        expect(Command(data: b2Msg[0].data!).name!) == "b"
+        expect(b1Msg.count) == 0
     }
 
 }
