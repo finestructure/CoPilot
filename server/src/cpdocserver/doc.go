@@ -1,13 +1,21 @@
 package main
 
+
 import (
   "fmt"
 )
 
+
+type message struct {
+  content []byte
+  sender  *client
+}
+
+
 type doc struct {
   id string
 	clients map[*client]bool
-	broadcast chan []byte
+	broadcast chan message
 	register chan *client
 	unregister chan *client
 }
@@ -21,7 +29,7 @@ func GetDoc(id string) *doc {
     fmt.Println("New:", id)
     d := &doc{
       id:          id,
-    	broadcast:   make(chan []byte, maxMessageSize),
+    	broadcast:   make(chan message, 1024),
     	register:    make(chan *client),
     	unregister:  make(chan *client),
     	clients:     make(map[*client]bool),
@@ -62,16 +70,21 @@ func (d *doc) run() {
 }
 
 
-func (d *doc) broadcastMessage(m []byte) {
+func (d *doc) broadcastMessage(m message) {
 	for c := range d.clients {
-		select {
-		case c.send <- m:
-			break
+    // don't echo to sender
+    if c == m.sender {
+      continue
+    }
+    
+    select {
+    case c.send <- m.content:
+      break
 
-		// We can't reach the client
-		default:
-			close(c.send)
-			delete(d.clients, c)
-		}
-	}
+    // can't reach the client
+    default:
+      close(c.send)
+      delete(d.clients, c)
+    }
+  }
 }

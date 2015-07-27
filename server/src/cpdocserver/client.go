@@ -68,11 +68,12 @@ func (c *client) readPump() {
 	})
 
 	for {
-		_, message, err := c.ws.ReadMessage()
+		_, content, err := c.ws.ReadMessage()
 		if err != nil {
 			break
 		}
 
+    message := message{content, c}
 		c.doc.broadcast <- message
 	}
 }
