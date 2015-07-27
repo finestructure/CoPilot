@@ -76,19 +76,16 @@ class CPServerTests: XCTestCase {
 
         var sMsg = [Message]()
         s.onReceive = { msg in
-            print("s: \(msg)")
             sMsg.append(msg)
         }
 
         var c1Msg = [Message]()
         c1.onReceive = { msg in
-            print("c1: \(msg)")
             c1Msg.append(msg)
         }
 
         var c2Msg = [Message]()
         c2.onReceive = { msg in
-            print("c2: \(msg)")
             c2Msg.append(msg)
         }
 

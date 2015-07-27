@@ -25,7 +25,7 @@ struct BonjourService {
 func publish(service  service: BonjourService, name: String) -> NSNetService {
     let s = NSNetService(domain: service.domain, type: service.type, name: name, port: service.port)
     s.publish()
-    NSLog("published \(name) - \(service)")
+    //    NSLog("published \(name) - \(service)")
     return s
 }
 

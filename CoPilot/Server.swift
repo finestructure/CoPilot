@@ -36,14 +36,14 @@ class Server: NSObject {
     }
     
     func start() {
-        NSLog("starting server...")
+        //        NSLog("starting server...")
         self.publishService()
         self.server.start()
     }
     
     
     func stop() {
-        NSLog("stopping server...")
+        //        NSLog("stopping server...")
         self.unpublishService()
         self.server.stop()
     }
@@ -80,12 +80,12 @@ extension Server {
 extension Server: PSWebSocketServerDelegate {
     
     func serverDidStart(server: PSWebSocketServer!) {
-        NSLog("server started")
+        //        NSLog("server started")
         self.isRunning = true
     }
     
     func serverDidStop(server: PSWebSocketServer!) {
-        NSLog("server stopped")
+        //        NSLog("server stopped")
         self.isRunning = false
     }
     
@@ -100,18 +100,18 @@ extension Server: PSWebSocketServerDelegate {
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
-        NSLog("received message: \(message)")
+        //        NSLog("received message: \(message)")
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: NSError!) {
         self.sockets = self.sockets.filter { $0.socket != webSocket }
         self.onError?(error)
-        NSLog("failed: \(error.localizedDescription)")
+        //        NSLog("failed: \(error.localizedDescription)")
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
         self.sockets = self.sockets.filter { $0.socket != webSocket }
-        NSLog("closed: \(code) \(reason) clean: \(wasClean)")
+        //        NSLog("closed: \(code) \(reason) clean: \(wasClean)")
     }
 
 }
