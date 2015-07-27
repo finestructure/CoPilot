@@ -1,3 +1,5 @@
+// Based on GollabEdit https://github.com/marmelab/gollabedit
+
 package main
 
 import (
