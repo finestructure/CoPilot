@@ -107,4 +107,22 @@ class CPServerTests: XCTestCase {
         expect(sMsg.count).toEventually(equal(1))
     }
 
+
+    func test_no_echo() {
+        let s = connectWebsocket(docUrl("3"))
+        expect(s).toNot(beNil())
+        var messages = [Message]()
+        s.onReceive = { msg in
+            messages.append(msg)
+        }
+        s.send(Command(name: "1"))
+
+        let c = connectWebsocket(docUrl("3"))
+        c.send(Command(name: "2"))
+
+        // make sure the first command does not get echoed back to "s", only the second one should appear
+        expect(messages.count).toEventually(beGreaterThan(0))
+        expect(Command(data: messages[0].data!).name) == "2"
+    }
+
 }
