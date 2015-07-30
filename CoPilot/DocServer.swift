@@ -12,14 +12,14 @@ import FeinstrukturUtils
 
 extension WebSocket {
     func send(command: Command) {
-        self.send(command.serialize())
+        self.send(Message(command.serialize()))
     }
 }
 
 
 extension Server {
     func broadcast(command: Command, exclude: WebSocket? = nil) {
-        self.broadcast(command.serialize(), exclude: exclude)
+        self.broadcast(Message(command.serialize()), exclude: exclude)
     }
 }
 
@@ -64,7 +64,7 @@ class DocServer: DocNode {
                 let res = apply(self._document, changeSet: changes)
                 if res.succeeded {
                     self.commit(res.value!)
-                    self.server.broadcast(msg.data!, exclude: websocket)
+                    self.server.broadcast(msg, exclude: websocket)
                 } else {
                     if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                         let mine = self._document.text
@@ -85,7 +85,7 @@ class DocServer: DocNode {
                 self._connections[websocket] = name
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
-                self.server.broadcast(msg.data!, exclude: websocket)
+                self.server.broadcast(msg, exclude: websocket)
             default:
                 print("messageHandler: ignoring command: \(cmd)")
             }

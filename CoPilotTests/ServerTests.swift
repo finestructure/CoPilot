@@ -29,7 +29,7 @@ class ServerTests: XCTestCase {
     func test_broadcast() {
         let server = startServer()
         let client = createClient()
-        server.broadcast("hello")
+        server.broadcast(Message("hello"))
         expect(client.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
     }
     
@@ -37,7 +37,7 @@ class ServerTests: XCTestCase {
     func test_send() {
         let server = startServer()
         let client = createClient()
-        client.send("foo")
+        client.send(Message("foo"))
         expect(server.sockets.count).toEventually(equal(1), timeout: 5)
         expect(server.sockets[0].lastMessage?.string).toEventually(equal("foo"), timeout: 5)
     }
@@ -51,7 +51,7 @@ class ServerTests: XCTestCase {
         let server = startServer()
         let client = createClient()
         
-        server.broadcast(changeSet!.serialize())
+        server.broadcast(Message(changeSet!.serialize()))
         expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
         let d = client.lastMessage!.data
         expect(d).toNot(beNil())
