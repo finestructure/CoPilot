@@ -15,6 +15,8 @@ class ServerTests: XCTestCase {
 
     func test_server() {
         let server = startServer()
+        defer { server.stop() }
+
         var open = false
         let socket = WebSocket(url: TestUrl) {
             open = true
@@ -28,6 +30,8 @@ class ServerTests: XCTestCase {
     
     func test_broadcast() {
         let server = startServer()
+        defer { server.stop() }
+
         let c1 = createClient()
         let c2 = createClient()
         server.broadcast(Message("hello"))
@@ -38,24 +42,28 @@ class ServerTests: XCTestCase {
     
     func test_send() {
         let server = startServer()
+        defer { server.stop() }
+
         let client = createClient()
         client.send(Message("foo"))
         expect(server.sockets.count).toEventually(equal(1), timeout: 5)
-        expect(server.sockets[0].lastMessage?.string).toEventually(equal("foo"), timeout: 5)
+        expect(server.sockets.first?.lastMessage?.string).toEventually(equal("foo"), timeout: 5)
     }
     
     
     func test_sendChanges() {
         let initialServerDoc = Document("Some Document")
         let finalServerDoc = Document("Server Document")
+
         let changeSet = Changeset(source: initialServerDoc, target: finalServerDoc)
         
         let server = startServer()
+        defer { server.stop() }
         let client = createClient()
         
         server.broadcast(Message(changeSet!.serialize()))
         expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
-        let d = client.lastMessage!.data
+        let d = client.lastMessage?.data
         expect(d).toNot(beNil())
         let c = Changeset(data: d!)
         expect(c).toNot(beNil())

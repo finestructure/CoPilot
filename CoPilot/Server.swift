@@ -136,6 +136,9 @@ extension Server: PSWebSocketServerDelegate {
         let socket = WebSocket(socket: webSocket)
         self.sockets.append(socket)
         self.onClientConnect?(socket.id)
+        socket.onReceive = { msg in
+            self.onReceive?(msg, socket.id)
+        }
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
