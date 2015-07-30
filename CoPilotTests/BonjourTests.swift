@@ -63,14 +63,13 @@ class BonjourTests: XCTestCase {
         let publishedService = publish(service: CoPilotService, name: "Test")
         expect(publishedService).toNot(beNil()) // just to silence the warning, using _ will make the test fail
 
-        var resolver: Resolver?
-        let b = Browser(service: CoPilotService) { service in
-            resolver = Resolver(service: service, timeout: 1) { _ in }
-        }
+        var service: NSNetService?
+        let b = Browser(service: CoPilotService) { svc in service = svc }
         expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
+        expect(service).toEventuallyNot(beNil(), timeout: 5)
 
-        expect(resolver).toEventuallyNot(beNil(), timeout: 5)
-        expect(resolver?.resolved).toEventually(beTrue())
+        let resolver = Resolver(service: service!, timeout: 1) { _ in }
+        expect(resolver.resolved).toEventually(beTrue())
     }
 
 }
