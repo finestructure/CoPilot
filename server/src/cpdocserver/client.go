@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/websocket"
   "github.com/gorilla/mux"
+  "code.google.com/p/go-uuid/uuid"
 )
 
 const (
@@ -17,6 +18,7 @@ const (
 )
 
 type client struct {
+  id string
 	ws *websocket.Conn
 	send chan []byte
   doc *doc
@@ -43,6 +45,7 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 	}
 
 	c := &client{
+    id: uuid.New(),
 		send: make(chan []byte, maxMessageSize),
 		ws: ws,
     doc: d,

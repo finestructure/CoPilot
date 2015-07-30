@@ -18,6 +18,7 @@ type doc struct {
 	broadcast chan message
 	register chan *client
 	unregister chan *client
+  master *client
 }
 
 
@@ -48,6 +49,9 @@ func (d *doc) run() {
 	for {
 		select {
 		case c := <- d.register:
+      if d.master == nil {
+        d.master = c
+      }
 			d.clients[c] = true
 			break
 
@@ -57,8 +61,18 @@ func (d *doc) run() {
 				delete(d.clients, c)
 				close(c.send)
 			}
+      
+      // close the document if there are no more clients
       if len(d.clients) == 0 {
         delete(docs, d.id)
+      }
+      
+      // if the master unregistered, we close everything down
+      if c == d.master {
+        for i := range d.clients {
+          close(i.send)
+          delete(docs, d.id)
+        }
       }
 			break
 
