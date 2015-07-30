@@ -15,8 +15,9 @@ typealias ClientHandler = (ConnectionId -> Void)
 
 protocol DocumentService {
 
-    func publish(name: String) -> ConnectionId
-    func unpublish(id: ConnectionId)
+    func publish(name: String)
+    func unpublish()
+    var onPublished: (Void -> Void)? { get set }
     var onClientConnect: ClientHandler? { get set }
     var onClientDisconnect: ClientHandler? { get set }
     func broadcast(message: Message, except: [ConnectionId])
