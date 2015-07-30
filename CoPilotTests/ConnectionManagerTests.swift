@@ -30,7 +30,7 @@ class ConnectionManagerTests: XCTestCase {
         expect(ConnectionManager.isConnected(sub)) == false
 
         ConnectionManager.publish(pub)
-        let service = publish(service: CoPilotService, name: "Test")
+        let service = CoPilotService.publish(name: "Test")
         ConnectionManager.subscribe(service, editor: sub)
         
         expect(ConnectionManager.isPublished(pub)) == true
@@ -46,7 +46,7 @@ class ConnectionManagerTests: XCTestCase {
         let pub = createEditor()
         let sub = createEditor()
         ConnectionManager.publish(pub)
-        let service = publish(service: CoPilotService, name: "Test")
+        let service = CoPilotService.publish(name: "Test")
         ConnectionManager.subscribe(service, editor: sub)
 
         expect(ConnectionManager.published({ $0.editor == sub })).to(beNil())

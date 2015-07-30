@@ -63,7 +63,7 @@ extension Server {
     
     func publishService() {
         if self.netService == nil {
-            self.netService = publish(service: self.bonjourService, name: self.name)
+            self.netService = self.bonjourService.publish(name: self.name)
             self.onPublished?(self.netService)
         }
     }
