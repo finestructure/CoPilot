@@ -45,6 +45,7 @@ enum Message: CustomStringConvertible {
 
 
 class WebSocket: NSObject {
+    let id: ConnectionId = NSUUID().UUIDString
     let socket: PSWebSocket
     var lastMessage: Message?
     

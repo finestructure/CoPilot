@@ -28,9 +28,11 @@ class ServerTests: XCTestCase {
     
     func test_broadcast() {
         let server = startServer()
-        let client = createClient()
+        let c1 = createClient()
+        let c2 = createClient()
         server.broadcast(Message("hello"))
-        expect(client.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
+        expect(c1.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
+        expect(c2.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
     }
     
     

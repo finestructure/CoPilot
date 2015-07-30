@@ -17,11 +17,15 @@ class Server: NSObject {
     var isRunning = false
     let name: String
     let host: String?
-    var onPublished: ((NSNetService) -> Void)?
     var onError: ((NSError!) -> Void)?
     var onConnect: ((WebSocket!) -> Void)?
     var sockets = [WebSocket]()
-    
+
+    // backing store for DocumentService protocol
+    var _onPublished: (Void -> Void)?
+    var _onClientConnect: ClientHandler?
+    var _onClientDisconnect: ClientHandler?
+
     init(name: String, service: BonjourService, host: String? = nil) {
         self.name = name
         self.bonjourService = service
@@ -37,40 +41,63 @@ class Server: NSObject {
     
     func start() {
         NSLog("starting server...")
-        self.publishService()
+        self.publish(self.name)
         self.server.start()
     }
     
     
     func stop() {
         NSLog("stopping server...")
-        self.unpublishService()
+        self.unpublish()
         self.server.stop()
-    }
-    
-    
-    func broadcast(message: Message, exclude: WebSocket? = nil) {
-        for s in self.sockets.filter({ $0 != exclude }) {
-            s.send(message)
-        }
     }
     
 }
 
 
-// MARK: - Helpers
-extension Server {
-    
-    func publishService() {
+// MARK: - DocumentService
+extension Server: DocumentService {
+
+    func publish(name: String) {
         if self.netService == nil {
-            self.netService = self.bonjourService.publish(name: self.name)
-            self.onPublished?(self.netService)
+            self.netService = self.bonjourService.publish(name: name)
+            self.onPublished?()
+        }
+    }
+
+
+    func unpublish() {
+        self.netService?.stop()
+    }
+
+
+    var onPublished: (Void -> Void)? {
+        get { return _onPublished }
+        set { self._onPublished = newValue }
+    }
+
+
+    var onClientConnect: ClientHandler? {
+        get { return _onClientConnect }
+        set { self._onClientConnect = newValue }
+    }
+
+
+    var onClientDisconnect: ClientHandler? {
+        get { return _onClientDisconnect }
+        set { self._onClientDisconnect = newValue }
+    }
+
+
+    func broadcast(message: Message, exceptIds: [ConnectionId] = []) {
+        for s in self.sockets.filter({ !exceptIds.contains($0.id) }) {
+            s.send(message)
         }
     }
 
     
-    func unpublishService() {
-        self.netService?.stop()
+    func send(message: Message, receiverId: ConnectionId) {
+        self.sockets.first{ $0.id == receiverId }?.send(message)
     }
 
 }

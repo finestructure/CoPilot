@@ -20,8 +20,8 @@ protocol DocumentService {
     var onPublished: (Void -> Void)? { get set }
     var onClientConnect: ClientHandler? { get set }
     var onClientDisconnect: ClientHandler? { get set }
-    func broadcast(message: Message, except: [ConnectionId])
-    func send(message: Message, receiver to: ConnectionId)
+    func broadcast(message: Message, exceptIds: [ConnectionId])
+    func send(message: Message, receiverId: ConnectionId)
 
 }
 

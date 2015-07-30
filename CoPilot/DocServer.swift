@@ -18,8 +18,8 @@ extension WebSocket {
 
 
 extension Server {
-    func broadcast(command: Command, exclude: WebSocket? = nil) {
-        self.broadcast(Message(command.serialize()), exclude: exclude)
+    func broadcast(command: Command, exceptIds: [ConnectionId] = []) {
+        self.broadcast(Message(command.serialize()), exceptIds: exceptIds)
     }
 }
 
@@ -64,7 +64,7 @@ class DocServer: DocNode {
                 let res = apply(self._document, changeSet: changes)
                 if res.succeeded {
                     self.commit(res.value!)
-                    self.server.broadcast(msg, exclude: websocket)
+                    self.server.broadcast(msg, exceptIds: [websocket.id])
                 } else {
                     if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                         let mine = self._document.text
@@ -85,7 +85,7 @@ class DocServer: DocNode {
                 self._connections[websocket] = name
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
-                self.server.broadcast(msg, exclude: websocket)
+                self.server.broadcast(msg, exceptIds: [websocket.id])
             default:
                 print("messageHandler: ignoring command: \(cmd)")
             }

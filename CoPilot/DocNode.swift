@@ -38,7 +38,7 @@ class DocNode {
     internal var _onCursorUpdate: CursorUpdate?
     internal var _onDisconnect: (NSError? -> Void)?
 
-    var id = NSUUID()
+    let id = NSUUID()
     var name: String
     var selectionColor = randomElement(Colors)!
     var document: Document { return self._document }
