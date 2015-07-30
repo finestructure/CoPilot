@@ -145,7 +145,7 @@ class DocClientServerTests: XCTestCase {
         // we do this by changing the underlying client ivar without triggering the .Update messages
         self.server._document = Document("server")
 
-        // and then send an update from the server
+        // and then send an update from the client
         client.update(Document("client"))
 
         expect(self.server.document.text).toEventually(equal("server"))

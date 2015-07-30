@@ -10,7 +10,8 @@ import Foundation
 
 
 typealias ConnectionId = String
-typealias ClientHandler = (ConnectionId -> Void)
+typealias ClientHandler = ConnectionId -> Void
+typealias MessageConnectionIdHandler = (Message, ConnectionId) -> Void
 
 
 protocol DocumentService {
@@ -23,6 +24,7 @@ protocol DocumentService {
     var onPublished: (Void -> Void)? { get set }
     var onClientConnect: ClientHandler? { get set }
     var onClientDisconnect: ClientHandler? { get set }
+    var onReceive: MessageConnectionIdHandler? { get set }
     var onError: ErrorHandler? { get set }
 
 }

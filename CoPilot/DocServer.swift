@@ -27,28 +27,29 @@ extension Server {
 class DocServer: DocNode {
     
     private var server: Server! = nil
-    private var _connections = [WebSocket: DisplayName]()
+    private var _connections = [ConnectionId: DisplayName]()
 
     init(name: String, service: BonjourService = CoPilotService, document: Document) {
         self.server = Server(name: name, service: service)
 
         super.init(name: name, document: document)
 
-        self.server.onConnect = { ws in
-            self.resetClient(ws)
-            ws.onReceive = self.onReceive(ws)
-            ws.onDisconnect = { error in
-                // println("### server.onDisconnect")
-                self._connections.removeValueForKey(ws)
-                self.onDisconnect?(error)
-            }
+        self.server.onClientConnect = { clientId in
+            self.resetClient(clientId)
+        }
+        self.server.onClientDisconnect = { clientId in
+            self._connections.removeValueForKey(clientId)
+        }
+        self.server.onReceive = self.onReceive()
+        self.server.onError = { error in
+            self.onDisconnect?(error)
         }
         self.server.start()
     }
 
 
-    func onReceive(websocket: WebSocket) -> MessageHandler {
-        return { msg in
+    func onReceive() -> MessageConnectionIdHandler {
+        return { msg, clientId in
             guard let data = msg.data else {
                 print("message does not contain data")
                 return
@@ -64,7 +65,7 @@ class DocServer: DocNode {
                 let res = apply(self._document, changeSet: changes)
                 if res.succeeded {
                     self.commit(res.value!)
-                    self.server.broadcast(msg, exceptIds: [websocket.id])
+                    self.server.broadcast(msg, exceptIds: [clientId])
                 } else {
                     if let ancestor = self.revisions.objectForKey(changes.baseRev) as? String {
                         let mine = self._document.text
@@ -73,19 +74,20 @@ class DocServer: DocNode {
                            let merged = merge(mine, ancestor: ancestor, yours: yours) {
                             self.commit(Document(merged))
                         } else {
-                            self.resetClient(websocket)
+                            self.resetClient(clientId)
                         }
                     } else { // instead of sending an override we could also request the rev from the other side's cache
-                        self.resetClient(websocket)
+                        self.resetClient(clientId)
                     }
                 }
             case .GetDoc:
-                websocket.send(Command(document: self._document))
+                let cmd = Command(document: self._document)
+                self.server.send(Message(cmd.serialize()), receiverId: clientId)
             case .Name(let name):
-                self._connections[websocket] = name
+                self._connections[clientId] = name
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
-                self.server.broadcast(msg, exceptIds: [websocket.id])
+                self.server.broadcast(msg, exceptIds: [clientId])
             default:
                 print("messageHandler: ignoring command: \(cmd)")
             }
@@ -93,10 +95,10 @@ class DocServer: DocNode {
     }
 
 
-    func resetClient(websocket: WebSocket) {
+    func resetClient(clientId: ConnectionId) {
         // send Doc to force resync - server wins
-        // print("#### resetting client")
-        websocket.send(Command(document: self._document))
+        let cmd = Command(document: self._document)
+        self.server.send(Message(cmd.serialize()), receiverId: clientId)
     }
 
 

@@ -17,13 +17,13 @@ class Server: NSObject {
     var isRunning = false
     let name: String
     let host: String?
-    var onConnect: ((WebSocket!) -> Void)?
     var sockets = [WebSocket]()
 
     // backing store for DocumentService protocol
     var _onPublished: (Void -> Void)?
     var _onClientConnect: ClientHandler?
     var _onClientDisconnect: ClientHandler?
+    var _onReceive: MessageConnectionIdHandler?
     var _onError: (NSError -> Void)?
 
     init(name: String, service: BonjourService, host: String? = nil) {
@@ -84,25 +84,31 @@ extension Server: DocumentService {
 
 
     var onPublished: (Void -> Void)? {
-        get { return _onPublished }
+        get { return self._onPublished }
         set { self._onPublished = newValue }
     }
 
 
     var onClientConnect: ClientHandler? {
-        get { return _onClientConnect }
+        get { return self._onClientConnect }
         set { self._onClientConnect = newValue }
     }
 
 
     var onClientDisconnect: ClientHandler? {
-        get { return _onClientDisconnect }
+        get { return self._onClientDisconnect }
         set { self._onClientDisconnect = newValue }
     }
 
 
+    var onReceive: MessageConnectionIdHandler? {
+        get { return self._onReceive }
+        set { self._onReceive = newValue }
+    }
+
+
     var onError: ErrorHandler? {
-        get { return _onError }
+        get { return self._onError }
         set { self._onError = newValue }
     }
 
@@ -129,7 +135,7 @@ extension Server: PSWebSocketServerDelegate {
     func server(server: PSWebSocketServer!, webSocketDidOpen webSocket: PSWebSocket!) {
         let socket = WebSocket(socket: webSocket)
         self.sockets.append(socket)
-        self.onConnect?(socket)
+        self.onClientConnect?(socket.id)
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
