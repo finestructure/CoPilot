@@ -17,7 +17,6 @@ class Server: NSObject {
     var isRunning = false
     let name: String
     let host: String?
-    var onError: ((NSError!) -> Void)?
     var onConnect: ((WebSocket!) -> Void)?
     var sockets = [WebSocket]()
 
@@ -25,6 +24,7 @@ class Server: NSObject {
     var _onPublished: (Void -> Void)?
     var _onClientConnect: ClientHandler?
     var _onClientDisconnect: ClientHandler?
+    var _onError: (NSError -> Void)?
 
     init(name: String, service: BonjourService, host: String? = nil) {
         self.name = name
@@ -71,6 +71,18 @@ extension Server: DocumentService {
     }
 
 
+    func broadcast(message: Message, exceptIds: [ConnectionId] = []) {
+        for s in self.sockets.filter({ !exceptIds.contains($0.id) }) {
+            s.send(message)
+        }
+    }
+
+    
+    func send(message: Message, receiverId: ConnectionId) {
+        self.sockets.first{ $0.id == receiverId }?.send(message)
+    }
+
+
     var onPublished: (Void -> Void)? {
         get { return _onPublished }
         set { self._onPublished = newValue }
@@ -89,15 +101,9 @@ extension Server: DocumentService {
     }
 
 
-    func broadcast(message: Message, exceptIds: [ConnectionId] = []) {
-        for s in self.sockets.filter({ !exceptIds.contains($0.id) }) {
-            s.send(message)
-        }
-    }
-
-    
-    func send(message: Message, receiverId: ConnectionId) {
-        self.sockets.first{ $0.id == receiverId }?.send(message)
+    var onError: ErrorHandler? {
+        get { return _onError }
+        set { self._onError = newValue }
     }
 
 }

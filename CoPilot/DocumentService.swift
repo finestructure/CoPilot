@@ -17,11 +17,13 @@ protocol DocumentService {
 
     func publish(name: String)
     func unpublish()
+    func broadcast(message: Message, exceptIds: [ConnectionId])
+    func send(message: Message, receiverId: ConnectionId)
+
     var onPublished: (Void -> Void)? { get set }
     var onClientConnect: ClientHandler? { get set }
     var onClientDisconnect: ClientHandler? { get set }
-    func broadcast(message: Message, exceptIds: [ConnectionId])
-    func send(message: Message, receiverId: ConnectionId)
+    var onError: ErrorHandler? { get set }
 
 }
 
