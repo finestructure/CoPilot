@@ -36,7 +36,7 @@ extension DocNode {
 
 func createClient(document  document: Document) -> DocClient {
     var service: NSNetService?
-    let b = Browser(service: CoPilotService) { s in
+    let b = Browser(service: CoPilotBonjourService) { s in
         service = s
     }
     expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
@@ -76,7 +76,7 @@ class DocClientServerTests: XCTestCase {
         let t = Timer(interval: 0.1) { self.server.update(doc()) }
         expect(t).toNot(beNil()) // just to silence the warning, using _ will make the test fail
         var service: NSNetService!
-        let b = Browser(service: CoPilotService) { s in service = s }
+        let b = Browser(service: CoPilotBonjourService) { s in service = s }
         expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
         expect(service).toEventuallyNot(beNil(), timeout: 5)
         
@@ -91,7 +91,7 @@ class DocClientServerTests: XCTestCase {
         let doc = { Document(randomElement(words)!) }
         self.server = DocServer(name: "foo", document: doc())
         _ = Timer(interval: 0.1) { self.server.update(doc()) }
-        let url = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+        let url = NSURL(string: "ws://localhost:\(CoPilotBonjourService.port)")!
 
         let client = DocClient(url: url, document: Document(""))
         var changeCount = 0
@@ -145,7 +145,7 @@ class DocClientServerTests: XCTestCase {
         // we do this by changing the underlying client ivar without triggering the .Update messages
         self.server._document = Document("server")
 
-        // and then send an update from the server
+        // and then send an update from the client
         client.update(Document("client"))
 
         expect(self.server.document.text).toEventually(equal("server"))

@@ -17,11 +17,15 @@ class Server: NSObject {
     var isRunning = false
     let name: String
     let host: String?
-    var onPublished: ((NSNetService) -> Void)?
-    var onError: ((NSError!) -> Void)?
-    var onConnect: ((WebSocket!) -> Void)?
     var sockets = [WebSocket]()
-    
+
+    // backing store for DocumentService protocol
+    var _onPublished: (Void -> Void)?
+    var _onClientConnect: ClientHandler?
+    var _onClientDisconnect: ClientHandler?
+    var _onReceive: MessageConnectionIdHandler?
+    var _onError: (NSError -> Void)?
+
     init(name: String, service: BonjourService, host: String? = nil) {
         self.name = name
         self.bonjourService = service
@@ -37,40 +41,75 @@ class Server: NSObject {
     
     func start() {
         //        NSLog("starting server...")
-        self.publishService()
+        self.publish(self.name)
         self.server.start()
     }
     
     
     func stop() {
         //        NSLog("stopping server...")
-        self.unpublishService()
+        self.unpublish()
         self.server.stop()
-    }
-    
-    
-    func broadcast(message: AnyObject, exclude: WebSocket? = nil) {
-        for s in self.sockets.filter({ $0 != exclude }) {
-            s.send(message)
-        }
     }
     
 }
 
 
-// MARK: - Helpers
-extension Server {
-    
-    func publishService() {
+// MARK: - DocumentService
+extension Server: DocumentService {
+
+    func publish(name: String) {
         if self.netService == nil {
-            self.netService = publish(service: self.bonjourService, name: self.name)
-            self.onPublished?(self.netService)
+            self.netService = self.bonjourService.publish(name: name)
+            self.onPublished?()
+        }
+    }
+
+
+    func unpublish() {
+        self.netService?.stop()
+    }
+
+
+    func broadcast(message: Message, exceptIds: [ConnectionId] = []) {
+        for s in self.sockets.filter({ !exceptIds.contains($0.id) }) {
+            s.send(message)
         }
     }
 
     
-    func unpublishService() {
-        self.netService?.stop()
+    func send(message: Message, receiverId: ConnectionId) {
+        self.sockets.first{ $0.id == receiverId }?.send(message)
+    }
+
+
+    var onPublished: (Void -> Void)? {
+        get { return self._onPublished }
+        set { self._onPublished = newValue }
+    }
+
+
+    var onClientConnect: ClientHandler? {
+        get { return self._onClientConnect }
+        set { self._onClientConnect = newValue }
+    }
+
+
+    var onClientDisconnect: ClientHandler? {
+        get { return self._onClientDisconnect }
+        set { self._onClientDisconnect = newValue }
+    }
+
+
+    var onReceive: MessageConnectionIdHandler? {
+        get { return self._onReceive }
+        set { self._onReceive = newValue }
+    }
+
+
+    var onError: ErrorHandler? {
+        get { return self._onError }
+        set { self._onError = newValue }
     }
 
 }
@@ -96,7 +135,10 @@ extension Server: PSWebSocketServerDelegate {
     func server(server: PSWebSocketServer!, webSocketDidOpen webSocket: PSWebSocket!) {
         let socket = WebSocket(socket: webSocket)
         self.sockets.append(socket)
-        self.onConnect?(socket)
+        self.onClientConnect?(socket.id)
+        socket.onReceive = { msg in
+            self.onReceive?(msg, socket.id)
+        }
     }
     
     func server(server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {

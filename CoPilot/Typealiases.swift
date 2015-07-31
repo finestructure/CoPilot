@@ -17,4 +17,5 @@ typealias DocumentProvider = (Void -> Document)
 typealias DocumentUpdate = (Document -> Void)
 typealias MessageHandler = (Message -> Void)
 typealias ResolutionHandler = (WebSocket -> Void)
+typealias ErrorHandler = (NSError -> Void)
 

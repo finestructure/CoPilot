@@ -32,7 +32,7 @@ class MainController: NSWindowController {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.window?.delegate = self
-        self.browser = Browser(service: CoPilotService) { _ in
+        self.browser = Browser(service: CoPilotBonjourService) { _ in
             self.servicesTableView.reloadData()
         }
         self.browser.onRemove = { _ in
