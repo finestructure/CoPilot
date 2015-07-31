@@ -17,7 +17,7 @@ extension WebSocket {
 }
 
 
-extension Server {
+extension BonjourServer {
     func broadcast(command: Command, exceptIds: [ConnectionId] = []) {
         self.broadcast(Message(command.serialize()), exceptIds: exceptIds)
     }
@@ -26,11 +26,11 @@ extension Server {
 
 class DocServer: DocNode {
     
-    private var server: Server! = nil
+    private var server: BonjourServer! = nil
     private var _connections = [ConnectionId: DisplayName]()
 
     init(name: String, service: BonjourService = CoPilotBonjourService, document: Document) {
-        self.server = Server(name: name, service: service)
+        self.server = BonjourServer(name: name, service: service)
 
         super.init(name: name, document: document)
 
