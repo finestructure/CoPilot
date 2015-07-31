@@ -45,6 +45,7 @@ enum Message: CustomStringConvertible {
 
 
 class WebSocket: NSObject {
+    let id: ConnectionId = NSUUID().UUIDString
     let socket: PSWebSocket
     var lastMessage: Message?
     
@@ -75,8 +76,13 @@ class WebSocket: NSObject {
     }
 
 
-    func send(message: AnyObject) {
-        self.socket.send(message)
+    func send(message: Message) {
+        switch message {
+        case .Text(let s):
+            self.socket.send(s)
+        case .Data(let d):
+            self.socket.send(d)
+        }
     }
 
 

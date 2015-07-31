@@ -16,11 +16,11 @@ class BonjourTests: XCTestCase {
     var resolved = false
     
     func test_publish() {
-        let service = publish(service: CoPilotService, name: "Test")
+        let service = CoPilotBonjourService.publish(name: "Test")
         expect(service).toNot(beNil())
         
         var found: NSNetService?
-        let b = Browser(service: CoPilotService) { service in
+        let b = Browser(service: CoPilotBonjourService) { service in
             found = service
         }
         expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
@@ -32,10 +32,10 @@ class BonjourTests: XCTestCase {
     
     func test_Browser_add_remove() {
         var services = [NSNetService]()
-        services.append( publish(service: CoPilotService, name: "Test1") )
+        services.append( CoPilotBonjourService.publish(name: "Test1") )
         
         var found = false
-        let b = Browser(service: CoPilotService) { service in
+        let b = Browser(service: CoPilotBonjourService) { service in
             if service.name.hasPrefix("Test") {
                 found = true
             }
@@ -45,7 +45,7 @@ class BonjourTests: XCTestCase {
         expect(initial) > 0
 
         found = false
-        services.append( publish(service: CoPilotService, name: "Test2") )
+        services.append( CoPilotBonjourService.publish(name: "Test2") )
         expect(found).toEventually(beTrue(), timeout: 5)
         expect(b.count) == initial + 1
         
@@ -60,11 +60,11 @@ class BonjourTests: XCTestCase {
     
     
     func test_resolve() {
-        let publishedService = publish(service: CoPilotService, name: "Test")
+        let publishedService = CoPilotBonjourService.publish(name: "Test")
         expect(publishedService).toNot(beNil()) // just to silence the warning, using _ will make the test fail
 
         var service: NSNetService?
-        let b = Browser(service: CoPilotService) { svc in service = svc }
+        let b = Browser(service: CoPilotBonjourService) { svc in service = svc }
         expect(b).toNot(beNil()) // just to silence the warning, using _ will make the test fail
         expect(service).toEventuallyNot(beNil(), timeout: 5)
 

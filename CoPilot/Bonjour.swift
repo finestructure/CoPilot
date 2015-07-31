@@ -9,23 +9,23 @@
 import Foundation
 
 
-let CoPilotService = BonjourService(domain: "local", type: "_copilot._tcp", port: 8137)
+let CoPilotBonjourService = BonjourService(domain: "local", type: "_copilot._tcp", port: 8137)
 
 
 struct BonjourService {
     let domain: String
     let type: String
     let port: Int32
+
     var description: String {
         return "\(domain):\(type):\(port)"
     }
-}
 
-
-func publish(service  service: BonjourService, name: String) -> NSNetService {
-    let s = NSNetService(domain: service.domain, type: service.type, name: name, port: service.port)
-    s.publish()
-    NSLog("published \(name) - \(service)")
-    return s
+    func publish(name name: String) -> NSNetService {
+        let s = NSNetService(domain: self.domain, type: self.type, name: name, port: self.port)
+        s.publish()
+        NSLog("published \(name) - \(self)")
+        return s
+    }
 }
 

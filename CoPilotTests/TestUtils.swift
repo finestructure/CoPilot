@@ -10,11 +10,11 @@ import Foundation
 import Nimble
 
 
-let TestUrl = NSURL(string: "ws://localhost:\(CoPilotService.port)")!
+let TestUrl = NSURL(string: "ws://localhost:\(CoPilotBonjourService.port)")!
 
 
 func startServer() -> Server {
-    let s = Server(name: "foo", service: CoPilotService)
+    let s = Server(name: "foo", service: CoPilotBonjourService)
     var started = false
     s.onPublished = { ns in
         expect(ns).toNot(beNil())

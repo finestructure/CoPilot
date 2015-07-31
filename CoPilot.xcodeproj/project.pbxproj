@@ -28,6 +28,8 @@
 		5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
 		5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
 		5A4D7DAB1AF366B1005E0294 /* CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */; };
+		5A595B8E1B6A2A4A00900491 /* DocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A595B8D1B6A2A4A00900491 /* DocumentService.swift */; };
+		5A595B8F1B6A2A4A00900491 /* DocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A595B8D1B6A2A4A00900491 /* DocumentService.swift */; };
 		5A6377701B0B4B4B005C2637 /* DocNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63776F1B0B4B4B005C2637 /* DocNode.swift */; };
 		5A6377711B0B4B4B005C2637 /* DocNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63776F1B0B4B4B005C2637 /* DocNode.swift */; };
 		5A66AA141AF91CFC0098BD77 /* DocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A66AA131AF91CFC0098BD77 /* DocServer.swift */; };
@@ -274,6 +276,7 @@
 		5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientServerTests.swift; sourceTree = "<group>"; };
 		5A4D7D9C1AF363FB005E0294 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
+		5A595B8D1B6A2A4A00900491 /* DocumentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentService.swift; sourceTree = "<group>"; };
 		5A63776F1B0B4B4B005C2637 /* DocNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocNode.swift; sourceTree = "<group>"; };
 		5A66AA131AF91CFC0098BD77 /* DocServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocServer.swift; sourceTree = "<group>"; };
 		5A6A69951B034E7A00F718C5 /* test_a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_a.txt; sourceTree = "<group>"; };
@@ -479,6 +482,7 @@
 				5ACE1BA91AFDEABE00154511 /* Changeset.swift */,
 				5A0983CF1AE39E5B001ADB1F /* Diff.swift */,
 				5ACE1B9B1AFDEA4F00154511 /* Document.swift */,
+				5A595B8D1B6A2A4A00900491 /* DocumentService.swift */,
 				078536781B3A965900C61FCD /* String+ext.swift */,
 			);
 			name = Diff;
@@ -799,6 +803,7 @@
 				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
 				5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */,
 				5AA3C0E71B1394D800CC9B4F /* Server.swift in Sources */,
+				5A595B8F1B6A2A4A00900491 /* DocumentService.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
 				5AA1D6611AFA52AA00FD107E /* Utils.swift in Sources */,
 				5ABAACF21B11016900703634 /* Protocols.swift in Sources */,
@@ -838,6 +843,7 @@
 				07B4D09C1B419D5F002F37AD /* Typealiases.swift in Sources */,
 				5AA336EF1AFA06B2000E37B2 /* DocClient.swift in Sources */,
 				5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */,
+				5A595B8E1B6A2A4A00900491 /* DocumentService.swift in Sources */,
 				5AA3C0E61B1394D800CC9B4F /* Server.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
