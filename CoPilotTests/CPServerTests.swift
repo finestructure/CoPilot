@@ -32,9 +32,13 @@ class CPServerTests: XCTestCase {
         s.onDisconnect = { error in
             fail("error: \(error)")
         }
-        s.send(Command(name: "server"))
-        expect(message).toEventuallyNot(beNil())
-        expect(Command(data: message!.data!).name) == "server"
+        if s.isOpen {
+            s.send(Command(name: "server"))
+            expect(message).toEventuallyNot(beNil())
+            expect(Command(data: message!.data!).name) == "server"
+        } else {
+            fail("socket not open - is cpserver running?")
+        }
     }
 
 
@@ -58,13 +62,17 @@ class CPServerTests: XCTestCase {
             fail("error: \(error)")
         }
 
-        s.send(Command(name: "ping"))
-        expect(message).toEventuallyNot(beNil())
-        expect(Command(data: message!.data!).name) == "ping"
+        if s.isOpen {
+            s.send(Command(name: "ping"))
+            expect(message).toEventuallyNot(beNil())
+            expect(Command(data: message!.data!).name) == "ping"
 
-        c.send(Command(name: "pong"))
-        expect(response).toEventuallyNot(beNil())
-        expect(Command(data: response!.data!).name) == "pong"
+            c.send(Command(name: "pong"))
+            expect(response).toEventuallyNot(beNil())
+            expect(Command(data: response!.data!).name) == "pong"
+        } else {
+            fail("socket not open - is cpserver running?")
+        }
     }
 
 
@@ -88,19 +96,23 @@ class CPServerTests: XCTestCase {
             c2Msg.append(msg)
         }
 
-        s.send(Command(name: "server"))
+        if s.isOpen {
+            s.send(Command(name: "server"))
 
-        expect(c1Msg.count).toEventually(equal(1))
-        expect(Command(data: c1Msg[0].data!).name) == "server"
-        expect(c2Msg.count).toEventually(equal(1))
-        expect(Command(data: c2Msg[0].data!).name) == "server"
-        expect(sMsg.count) == 0
+            expect(c1Msg.count).toEventually(equal(1))
+            expect(Command(data: c1Msg[0].data!).name) == "server"
+            expect(c2Msg.count).toEventually(equal(1))
+            expect(Command(data: c2Msg[0].data!).name) == "server"
+            expect(sMsg.count) == 0
 
-        c1.send(Command(name: "c1"))
+            c1.send(Command(name: "c1"))
 
-        expect(c1Msg.count) == 1
-        expect(c2Msg.count).toEventually(equal(2))
-        expect(sMsg.count).toEventually(equal(1))
+            expect(c1Msg.count) == 1
+            expect(c2Msg.count).toEventually(equal(2))
+            expect(sMsg.count).toEventually(equal(1))
+        } else {
+            fail("socket not open - is cpserver running?")
+        }
     }
 
 
@@ -111,14 +123,19 @@ class CPServerTests: XCTestCase {
         s.onReceive = { msg in
             messages.append(msg)
         }
-        s.send(Command(name: "1"))
 
-        let c = connectWebsocket(docUrl("3"))
-        c.send(Command(name: "2"))
+        if s.isOpen {
+            s.send(Command(name: "1"))
 
-        // make sure the first command does not get echoed back to "s", only the second one should appear
-        expect(messages.count).toEventually(beGreaterThan(0))
-        expect(Command(data: messages[0].data!).name) == "2"
+            let c = connectWebsocket(docUrl("3"))
+            c.send(Command(name: "2"))
+
+            // make sure the first command does not get echoed back to "s", only the second one should appear
+            expect(messages.count).toEventually(beGreaterThan(0))
+            expect(Command(data: messages[0].data!).name) == "2"
+        } else {
+            fail("socket not open - is cpserver running?")
+        }
     }
 
 
@@ -137,16 +154,20 @@ class CPServerTests: XCTestCase {
         var b2Msg = [Message]()
         b2.onReceive = { m in b2Msg.append(m) }
 
-        a1.send(Command(name: "a"))
-        b1.send(Command(name: "b"))
+        if a1.isOpen {
+            a1.send(Command(name: "a"))
+            b1.send(Command(name: "b"))
 
-        expect(a2Msg.count).toEventually(equal(1))
-        expect(Command(data: a2Msg[0].data!).name!) == "a"
-        expect(a1Msg.count) == 0
+            expect(a2Msg.count).toEventually(equal(1))
+            expect(Command(data: a2Msg[0].data!).name!) == "a"
+            expect(a1Msg.count) == 0
 
-        expect(b2Msg.count).toEventually(equal(1))
-        expect(Command(data: b2Msg[0].data!).name!) == "b"
-        expect(b1Msg.count) == 0
+            expect(b2Msg.count).toEventually(equal(1))
+            expect(Command(data: b2Msg[0].data!).name!) == "b"
+            expect(b1Msg.count) == 0
+        } else {
+            fail("socket not open - is cpserver running?")
+        }
     }
 
 }
