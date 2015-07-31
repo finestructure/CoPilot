@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Server: NSObject {
+class BonjourServer: NSObject {
     
     let server: PSWebSocketServer
     var netService: NSNetService!
@@ -56,7 +56,7 @@ class Server: NSObject {
 
 
 // MARK: - DocumentService
-extension Server: DocumentService {
+extension BonjourServer: DocumentService {
 
     func publish(name: String) {
         if self.netService == nil {
@@ -116,7 +116,7 @@ extension Server: DocumentService {
 
 
 // MARK: - PSWebSocketServerDelegate
-extension Server: PSWebSocketServerDelegate {
+extension BonjourServer: PSWebSocketServerDelegate {
     
     func serverDidStart(server: PSWebSocketServer!) {
         //        NSLog("server started")
