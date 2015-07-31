@@ -24,7 +24,7 @@ class UrlController: NSWindowController {
 
     override func awakeFromNib() {
         self.subscribeButton.enabled = false
-        self.portField.stringValue = ":\(CoPilotService.port)"
+        self.portField.stringValue = ":\(CoPilotBonjourService.port)"
         self.observer = observe(NSControlTextDidChangeNotification, object: self.hostField) { _ in
             self.subscribeButton.enabled = (self.hostField.stringValue.characters.count > 0)
         }
@@ -39,7 +39,7 @@ class UrlController: NSWindowController {
 
 
     @IBAction func subscribePressed(sender: AnyObject) {
-        if let url = NSURL(string: "ws://\(self.hostField.stringValue):\(CoPilotService.port)"),
+        if let url = NSURL(string: "ws://\(self.hostField.stringValue):\(CoPilotBonjourService.port)"),
            let editor = self.activeEditor {
             print("subscribing to \(url)")
             ConnectionManager.subscribe(url, editor: editor)

@@ -29,7 +29,7 @@ class DocServer: DocNode {
     private var server: Server! = nil
     private var _connections = [ConnectionId: DisplayName]()
 
-    init(name: String, service: BonjourService = CoPilotService, document: Document) {
+    init(name: String, service: BonjourService = CoPilotBonjourService, document: Document) {
         self.server = Server(name: name, service: service)
 
         super.init(name: name, document: document)

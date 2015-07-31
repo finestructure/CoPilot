@@ -9,7 +9,7 @@
 import Foundation
 
 
-let CoPilotService = BonjourService(domain: "local", type: "_copilot._tcp", port: 8137)
+let CoPilotBonjourService = BonjourService(domain: "local", type: "_copilot._tcp", port: 8137)
 
 
 struct BonjourService {
