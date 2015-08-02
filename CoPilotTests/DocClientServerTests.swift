@@ -58,13 +58,12 @@ class DocClientServerTests: XCTestCase {
         var messages = [Message]()
         c.onReceive = { msg in
             messages.append(msg)
-            _ = Command(data: msg.data!)
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
     }
 
     
-    func test_DocClient_nsNetService() {
+    func test_nsNetService() {
         let doc = { Document(randomElement(words)!) }
         let server = DocServer(name: "foo", document: doc())
         defer { server.stop() }
@@ -82,7 +81,7 @@ class DocClientServerTests: XCTestCase {
     }
 
 
-    func test_DocClient_url() {
+    func test_connect_url() {
         let doc = { Document(randomElement(words)!) }
         let server = DocServer(name: "foo", document: doc())
         defer { server.stop() }
@@ -96,7 +95,7 @@ class DocClientServerTests: XCTestCase {
     }
 
     
-    func test_DocClient_applyChanges() {
+    func test_sendChanges() {
         let server = DocServer(name: "foo", document: Document("foo"))
         defer { server.stop() }
         let client1 = createClient(document: Document(""))
