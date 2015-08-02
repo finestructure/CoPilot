@@ -58,7 +58,6 @@ func (d *doc) run() {
 		case c := <- d.unregister:
 			_, ok := d.clients[c]
 			if ok {
-				close(c.send)
 				delete(d.clients, c)
 			}
       
@@ -71,8 +70,8 @@ func (d *doc) run() {
       if c == d.master {
         for i := range d.clients {
           close(i.send)
-          delete(docs, d.id)
         }
+        delete(docs, d.id)
       }
 			break
 
