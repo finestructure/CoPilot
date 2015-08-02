@@ -58,8 +58,8 @@ func (d *doc) run() {
 		case c := <- d.unregister:
 			_, ok := d.clients[c]
 			if ok {
-				delete(d.clients, c)
 				close(c.send)
+				delete(d.clients, c)
 			}
       
       // close the document if there are no more clients
