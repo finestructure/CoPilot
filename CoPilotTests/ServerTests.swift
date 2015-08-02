@@ -32,11 +32,11 @@ class ServerTests: XCTestCase {
         let server = startServer()
         defer { server.stop() }
 
-        let c1 = createClient()
-        let c2 = createClient()
+        let s1 = connectWebsocket(TestUrl)
+        let s2 = connectWebsocket(TestUrl)
         server.broadcast(Message("hello"))
-        expect(c1.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
-        expect(c2.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
+        expect(s1.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
+        expect(s2.lastMessage?.string).toEventually(equal("hello"), timeout: 5)
     }
     
     
@@ -44,8 +44,8 @@ class ServerTests: XCTestCase {
         let server = startServer()
         defer { server.stop() }
 
-        let client = createClient()
-        client.send(Message("foo"))
+        let s = connectWebsocket(TestUrl)
+        s.send(Message("foo"))
         expect(server.sockets.count).toEventually(equal(1), timeout: 5)
         expect(server.sockets.first?.lastMessage?.string).toEventually(equal("foo"), timeout: 5)
     }
@@ -59,11 +59,11 @@ class ServerTests: XCTestCase {
         
         let server = startServer()
         defer { server.stop() }
-        let client = createClient()
+        let s = connectWebsocket(TestUrl)
         
         server.broadcast(Message(changeSet!.serialize()))
-        expect(client.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
-        let d = client.lastMessage?.data
+        expect(s.lastMessage?.data).toEventuallyNot(beNil(), timeout: 5)
+        let d = s.lastMessage?.data
         expect(d).toNot(beNil())
         let c = Changeset(data: d!)
         expect(c).toNot(beNil())

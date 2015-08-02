@@ -54,9 +54,9 @@ class DocClientServerTests: XCTestCase {
         server.setBufferTime(0)
         let t = Timer(interval: 0.1) { server.update(doc()) }
         expect(t).toNot(beNil()) // just to silence the warning, using _ will make the test fail
-        let c = createClient()
+        let s = connectWebsocket(TestUrl)
         var messages = [Message]()
-        c.onReceive = { msg in
+        s.onReceive = { msg in
             messages.append(msg)
         }
         expect(messages.count).toEventually(beGreaterThan(1), timeout: 5)
