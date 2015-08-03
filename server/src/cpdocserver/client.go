@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+  "fmt"
 
 	"github.com/gorilla/websocket"
   "github.com/gorilla/mux"
@@ -76,6 +77,7 @@ func (c *client) readPump() {
 			break
 		}
 
+    fmt.Println("readPump:", string(content))
     message := message{content, c}
 		c.doc.broadcast <- message
 	}
@@ -92,6 +94,7 @@ func (c *client) writePump() {
 	for {
 		select {
 		case message, ok := <-c.send:
+      // fmt.Println("writePump:", ok, string(message))
 			if !ok {
 				c.write(websocket.CloseMessage, []byte{})
 				return

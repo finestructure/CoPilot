@@ -84,6 +84,7 @@ func (d *doc) run() {
 
 
 func (d *doc) broadcastMessage(m message) {
+  fmt.Println("broadcast:", string(m.content))
 	for c := range d.clients {
     // don't echo to sender
     if c == m.sender {

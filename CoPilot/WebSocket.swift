@@ -44,6 +44,23 @@ enum Message: CustomStringConvertible {
 }
 
 
+extension Message: Equatable {
+
+}
+
+
+func ==(lhs: Message, rhs: Message) -> Bool {
+    switch (lhs, rhs) {
+    case (.Text(let x), .Text(let y)):
+        return x == y
+    case (.Data(let x), .Data(let y)):
+        return x == y
+    default:
+        return false
+    }
+}
+
+
 class WebSocket: NSObject {
     let id: ConnectionId = NSUUID().UUIDString
     let socket: PSWebSocket

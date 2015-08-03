@@ -15,6 +15,18 @@ func docUrl(docId: String) -> NSURL {
 }
 
 
+extension WebSocket {
+    func send(string: String) {
+        self.send(Message(string))
+    }
+}
+
+
+extension Message {
+    init(encodeAsData: String) { self = Message.Data(encodeAsData.dataUsingEncoding(NSUTF8StringEncoding)!) }
+}
+
+
 class CPServerTests: XCTestCase {
 
     func test_cpserver() {
@@ -155,19 +167,35 @@ class CPServerTests: XCTestCase {
         b2.onReceive = { m in b2Msg.append(m) }
 
         if a1.isOpen {
-            a1.send(Command(name: "a"))
-            b1.send(Command(name: "b"))
+            a1.send("a")
+            b1.send("b")
 
             expect(a2Msg.count).toEventually(equal(1))
-            expect(Command(data: a2Msg[0].data!).name!) == "a"
+            expect(a2Msg[0]) == Message(encodeAsData: "a")
             expect(a1Msg.count) == 0
 
             expect(b2Msg.count).toEventually(equal(1))
-            expect(Command(data: b2Msg[0].data!).name!) == "b"
+            expect(b2Msg.first) == Message(encodeAsData: "b")
             expect(b1Msg.count) == 0
         } else {
             fail("socket not open - is cpserver running?")
         }
     }
+
+//    func test_sendChanges() {
+//        let svc: DocumentService = CPServer(document: Document("foo"))
+//        svc.publish("d1")
+//        defer { svc.unpublish() }
+//
+//        let client1 = createClient(document: Document(""))
+//        // wait for the initial .Doc to set up the client
+//        expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
+//
+//        let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
+//        let client2 = createClient(document: client2Doc)
+//        server.update(Document("foobar"))
+//        expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
+//    }
+
 
 }
