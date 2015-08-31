@@ -160,8 +160,10 @@ class DiffTests: XCTestCase {
         // transforming it into b
 
         // line starts and ends
-        expect(a[50..<52]) == ";\n"
-        expect(b[104..<108]) == "ere "
+        let s1 = a[50..<52] // 2015-08-31 placing this inline causes weird analyser errors in beta 6 (7A192o)
+        expect(s1) == ";\n"
+        let s2 = b[104..<108] // "variable used with its own initial value", "let declarations cannot be computed properties"
+        expect(s2) == "ere "
 
         let lines = a.split("\n").map { $0 + "\n" }
         let counts = lines.map { UInt($0.characters.count) }

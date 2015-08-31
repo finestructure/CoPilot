@@ -136,7 +136,7 @@ extension DocServer: DocumentConnectable {
     
     
     var connections: [DisplayName] {
-        return self._connections.values.array
+        return Array(self._connections.values)
     }
 
 }
