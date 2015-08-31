@@ -171,8 +171,8 @@ func writeTemp(content: String) -> NSURL? {
 
 func tempUrl() -> NSURL {
     let id = NSProcessInfo.processInfo().globallyUniqueString
-    let path = NSTemporaryDirectory().stringByAppendingPathComponent(id)
-    return NSURL(fileURLWithPath: path)
+    let temp = NSURL(fileURLWithPath: NSTemporaryDirectory())
+    return temp.URLByAppendingPathComponent(id)
 }
 
 
