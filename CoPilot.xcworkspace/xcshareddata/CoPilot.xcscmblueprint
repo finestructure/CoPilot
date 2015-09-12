@@ -1,36 +1,36 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++8C77F30",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++0AF9B88",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53+++74E070B" : 0,
-    "3692ABDCB445527429496D19963AFF94CAB1E068+++A8BEED2" : 0,
-    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++90CB071" : 0,
-    "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++8C77F30" : 0,
-    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++937D167" : 0,
-    "95438028B10BBB846574013D29F154A00556A9D1+++3A810AB" : 0,
-    "95438028B10BBB846574013D29F154A00556A9D1+++C504B0D" : 0,
-    "3692ABDCB445527429496D19963AFF94CAB1E068+++B86A4B6" : 0,
-    "95438028B10BBB846574013D29F154A00556A9D1+++7BC9EF2" : 0,
-    "95438028B10BBB846574013D29F154A00556A9D1+++C72CF17" : 0,
-    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++897CD37" : 0,
-    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++DB64DD8" : 0
+    "95438028B10BBB846574013D29F154A00556A9D1+++6421F9C" : 0,
+    "3692ABDCB445527429496D19963AFF94CAB1E068+++17D72F3" : 0,
+    "95438028B10BBB846574013D29F154A00556A9D1+++3735DAD" : 0,
+    "3692ABDCB445527429496D19963AFF94CAB1E068+++EC24928" : 0,
+    "95438028B10BBB846574013D29F154A00556A9D1+++ECDD8E1" : 0,
+    "95438028B10BBB846574013D29F154A00556A9D1+++AF21398" : 0,
+    "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53+++D71D33A" : 0,
+    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++6556E6A" : 0,
+    "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++0AF9B88" : 0,
+    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++FA91BE9" : 0,
+    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++EC953EE" : 0,
+    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++E22AE14" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "79C3448B-81A1-4E47-B480-46F258516F65",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53+++74E070B" : "CoPilotExternal\/CryptoSwift",
-    "3692ABDCB445527429496D19963AFF94CAB1E068+++A8BEED2" : "CoPilot\/External\/PocketSocket\/",
-    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++90CB071" : "CoPilotExternal\/FeinstrukturUtils",
-    "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++8C77F30" : "CoPilot",
-    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++937D167" : "CoPilot\/External\/aerogear-diffmatchpatch\/",
-    "95438028B10BBB846574013D29F154A00556A9D1+++3A810AB" : "CoPilotExternal\/FeinstrukturUtils\/External\/Nimble",
-    "95438028B10BBB846574013D29F154A00556A9D1+++C504B0D" : "CoPilot\/External\/FeinstrukturUtils\/External\/Nimble\/",
-    "3692ABDCB445527429496D19963AFF94CAB1E068+++B86A4B6" : "CoPilotExternal\/PocketSocket",
-    "95438028B10BBB846574013D29F154A00556A9D1+++7BC9EF2" : "CoPilot\/External\/Nimble\/",
-    "95438028B10BBB846574013D29F154A00556A9D1+++C72CF17" : "CoPilotExternal\/FeinstrukturUtils\/External\/Nimble",
-    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++897CD37" : "CoPilotExternal\/aerogear-diffmatchpatch",
-    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++DB64DD8" : "CoPilot\/External\/FeinstrukturUtils\/"
+    "95438028B10BBB846574013D29F154A00556A9D1+++6421F9C" : "CoPilot\/External\/Nimble\/",
+    "3692ABDCB445527429496D19963AFF94CAB1E068+++17D72F3" : "CoPilot\/External\/PocketSocket\/",
+    "95438028B10BBB846574013D29F154A00556A9D1+++3735DAD" : "CoPilot\/External\/FeinstrukturUtils\/External\/Nimble\/",
+    "3692ABDCB445527429496D19963AFF94CAB1E068+++EC24928" : "CoPilotExternal\/PocketSocket",
+    "95438028B10BBB846574013D29F154A00556A9D1+++ECDD8E1" : "CoPilotExternal\/FeinstrukturUtils\/External\/Nimble",
+    "95438028B10BBB846574013D29F154A00556A9D1+++AF21398" : "CoPilotExternal\/FeinstrukturUtils\/External\/Nimble",
+    "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53+++D71D33A" : "CoPilotExternal\/CryptoSwift",
+    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++6556E6A" : "CoPilot\/External\/FeinstrukturUtils\/",
+    "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++0AF9B88" : "CoPilot",
+    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++FA91BE9" : "CoPilotExternal\/aerogear-diffmatchpatch",
+    "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++EC953EE" : "CoPilotExternal\/FeinstrukturUtils",
+    "DAA19F4F923C1982D440E1A401FC51BC084FF297+++E22AE14" : "CoPilot\/External\/aerogear-diffmatchpatch\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "CoPilot",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -39,62 +39,62 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/PocketSocket.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3692ABDCB445527429496D19963AFF94CAB1E068+++A8BEED2"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3692ABDCB445527429496D19963AFF94CAB1E068+++17D72F3"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/PocketSocket.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3692ABDCB445527429496D19963AFF94CAB1E068+++B86A4B6"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3692ABDCB445527429496D19963AFF94CAB1E068+++EC24928"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/CoPilot.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++8C77F30"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Quick\/Nimble.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++3A810AB"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5DECC3D92606A8E639BB23E9F74A619917E98DD9+++0AF9B88"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/Nimble.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++7BC9EF2"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++3735DAD"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/Nimble.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++C504B0D"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++6421F9C"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Quick\/Nimble.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++C72CF17"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++AF21398"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Quick\/Nimble.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++ECDD8E1"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/CryptoSwift.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53+++74E070B"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C3D8ED1CB28D809ADCE2C0DE74935E8A502ACD53+++D71D33A"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/aerogear-diffmatchpatch-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAA19F4F923C1982D440E1A401FC51BC084FF297+++897CD37"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAA19F4F923C1982D440E1A401FC51BC084FF297+++E22AE14"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/aerogear-diffmatchpatch-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAA19F4F923C1982D440E1A401FC51BC084FF297+++937D167"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAA19F4F923C1982D440E1A401FC51BC084FF297+++FA91BE9"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/FeinstrukturUtils.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++90CB071"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++6556E6A"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:feinstruktur\/FeinstrukturUtils.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++DB64DD8"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA01C41D6DE042C1144A7BF4C7FC2FCE204556DD+++EC953EE"
     }
   ]
 }

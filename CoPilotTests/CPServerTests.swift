@@ -47,7 +47,9 @@ class CPServerTests: XCTestCase {
         if s.isOpen {
             s.send(Command(name: "server"))
             expect(message).toEventuallyNot(beNil())
-            expect(Command(data: message!.data!).name) == "server"
+            if let data = message?.data {
+                expect(Command(data: data).name) == "server"
+            }
         } else {
             fail("socket not open - is cpserver running?")
         }
@@ -114,7 +116,9 @@ class CPServerTests: XCTestCase {
             expect(c1Msg.count).toEventually(equal(1))
             expect(Command(data: c1Msg[0].data!).name) == "server"
             expect(c2Msg.count).toEventually(equal(1))
-            expect(Command(data: c2Msg[0].data!).name) == "server"
+            if let data = c2Msg.first?.data {
+                expect(Command(data: data).name) == "server"
+            }
             expect(sMsg.count) == 0
 
             c1.send(Command(name: "c1"))
