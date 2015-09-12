@@ -79,7 +79,9 @@ class CPServerTests: XCTestCase {
         if s.isOpen {
             s.send(Command(name: "ping"))
             expect(message).toEventuallyNot(beNil())
-            expect(Command(data: message!.data!).name) == "ping"
+            if let data = message?.data {
+                expect(Command(data: data).name) == "ping"
+            }
 
             c.send(Command(name: "pong"))
             expect(response).toEventuallyNot(beNil())
