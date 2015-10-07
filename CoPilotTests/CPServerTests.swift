@@ -29,7 +29,7 @@ extension Message {
 
 class CPServerTests: XCTestCase {
 
-    func test_cpserver() {
+    func _test_cpserver() {
         let s = connectWebsocket(docUrl("1"))
         expect(s).toNot(beNil())
         let c = connectWebsocket(docUrl("1"))
@@ -56,7 +56,7 @@ class CPServerTests: XCTestCase {
     }
 
 
-    func test_birectional() {
+    func _test_birectional() {
         let s = connectWebsocket(docUrl("1"))
         expect(s).toNot(beNil())
         let c = connectWebsocket(docUrl("1"))
@@ -92,7 +92,7 @@ class CPServerTests: XCTestCase {
     }
 
 
-    func test_two_subscribers() {
+    func _test_two_subscribers() {
         let s = connectWebsocket(docUrl("2"))
         let c1 = connectWebsocket(docUrl("2"))
         let c2 = connectWebsocket(docUrl("2"))
@@ -134,7 +134,7 @@ class CPServerTests: XCTestCase {
     }
 
 
-    func test_no_echo() {
+    func _test_no_echo() {
         let s = connectWebsocket(docUrl("3"))
         expect(s).toNot(beNil())
         var messages = [Message]()
@@ -157,7 +157,7 @@ class CPServerTests: XCTestCase {
     }
 
 
-    func test_document_separation() {
+    func _test_document_separation() {
         let a1 = connectWebsocket(docUrl("a"))
         let a2 = connectWebsocket(docUrl("a"))
         let b1 = connectWebsocket(docUrl("b"))
