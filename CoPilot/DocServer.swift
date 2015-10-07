@@ -10,13 +10,6 @@ import Cocoa
 import FeinstrukturUtils
 
 
-extension WebSocket {
-    func send(command: Command) {
-        self.send(Message(command.serialize()))
-    }
-}
-
-
 extension BonjourServer {
     func broadcast(command: Command, exceptIds: [ConnectionId] = []) {
         self.broadcast(Message(command.serialize()), exceptIds: exceptIds)

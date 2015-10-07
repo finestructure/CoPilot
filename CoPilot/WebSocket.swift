@@ -61,7 +61,7 @@ func ==(lhs: Message, rhs: Message) -> Bool {
 }
 
 
-class WebSocket: NSObject {
+class WebSocket: NSObject, Socket {
     let id: ConnectionId = NSUUID().UUIDString
     let socket: PSWebSocket
     var lastMessage: Message?

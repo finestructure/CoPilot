@@ -15,7 +15,7 @@ func docUrl(docId: String) -> NSURL {
 }
 
 
-extension WebSocket {
+extension Socket {
     func send(string: String) {
         self.send(Message(string))
     }

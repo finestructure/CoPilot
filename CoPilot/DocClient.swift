@@ -12,7 +12,7 @@ import FeinstrukturUtils
 
 class DocClient: DocNode {
 
-    private var socket: WebSocket?
+    private var socket: Socket?
     private var resolver: Resolver?
     private var connection: DisplayName?
 
@@ -36,7 +36,7 @@ class DocClient: DocNode {
         super.init(name: name, document: document)
 
         self.connection = url.absoluteString ?? "Unknown remote document"
-        self.socket = WebSocket(url: url)
+        self.socket = WebSocket(url: url) // TODO: rabbit socket alternative
         self.configureSocket()
         self.socket?.open()
     }

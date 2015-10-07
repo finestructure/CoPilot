@@ -48,7 +48,7 @@ extension Resolver: NSNetServiceDelegate {
         if let host = sender.hostName {
             let port = sender.port
             let url = NSURL(scheme: "ws", host: "\(host):\(port)", path: "/")
-            let socket = WebSocket(url: url!)
+            let socket = WebSocket(url: url!) // TODO: rabbit alternative?
             self.onResolve?(socket)
         }
     }
