@@ -211,3 +211,5 @@ xcuserdata
 # manual additions
 server/bin
 server/pkg
+*.xcscmblueprint
+

@@ -10,3 +10,6 @@
 [submodule "External/PocketSocket"]
 	path = External/PocketSocket
 	url = git@github.com:feinstruktur/PocketSocket.git
+[submodule "External/HastyHare"]
+	path = External/HastyHare
+	url = git@github.com:feinstruktur/HastyHare.git
