@@ -26,6 +26,7 @@
 		5A3013C11B0297DD003403FA /* DiffMatchPatch.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A3134D01B4C33F3000D83E3 /* issue_36_server.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A3134CF1B4C33F3000D83E3 /* issue_36_server.txt */; };
 		5A3134DD1B4C3400000D83E3 /* issue_36_client.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A3134DC1B4C3400000D83E3 /* issue_36_client.txt */; };
+		5A3F80C41BC5972000C93337 /* HastyHare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F80BC1BC5963900C93337 /* HastyHare.framework */; };
 		5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */; };
 		5A4D7D9D1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
 		5A4D7D9E1AF363FB005E0294 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D7D9C1AF363FB005E0294 /* Command.swift */; };
@@ -143,6 +144,27 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D5BC0AF128CA8E200B8F5FF;
 			remoteInfo = DiffMatchPatchTest;
+		};
+		5A3F80BB1BC5963900C93337 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5A04A4D01BB94DBD00FB4A58;
+			remoteInfo = HastyHare;
+		};
+		5A3F80BD1BC5963900C93337 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5A04A4DA1BB94DBD00FB4A58;
+			remoteInfo = HastyHareTests;
+		};
+		5A3F80C51BC5973300C93337 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A04A4CF1BB94DBD00FB4A58;
+			remoteInfo = HastyHare;
 		};
 		5A6A69821B03423F00F718C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -277,6 +299,7 @@
 		5A17D91B1AF3CF9100429B79 /* new_playground.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = new_playground.txt; sourceTree = "<group>"; };
 		5A3134CF1B4C33F3000D83E3 /* issue_36_server.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = issue_36_server.txt; sourceTree = "<group>"; };
 		5A3134DC1B4C3400000D83E3 /* issue_36_client.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = issue_36_client.txt; sourceTree = "<group>"; };
+		5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HastyHare.xcodeproj; path = External/HastyHare/HastyHare.xcodeproj; sourceTree = "<group>"; };
 		5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClientServerTests.swift; sourceTree = "<group>"; };
 		5A4D7D9C1AF363FB005E0294 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
@@ -325,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A3F80C41BC5972000C93337 /* HastyHare.framework in Frameworks */,
 				5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */,
 				5AD1E7FD1AE26B070017CEEE /* DiffMatchPatch.framework in Frameworks */,
@@ -390,6 +414,7 @@
 		5A0156A21AE2629200EED621 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */,
 				5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */,
 				5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */,
 				5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */,
@@ -416,6 +441,15 @@
 				5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */,
 				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
 				5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A3F80AE1BC5963900C93337 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A3F80BC1BC5963900C93337 /* HastyHare.framework */,
+				5A3F80BE1BC5963900C93337 /* HastyHareTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -562,6 +596,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5A3F80C61BC5973300C93337 /* PBXTargetDependency */,
 				5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */,
 				5AD1E87E1AE2A3090017CEEE /* PBXTargetDependency */,
 				5AD1E7FF1AE26B1F0017CEEE /* PBXTargetDependency */,
@@ -632,6 +667,10 @@
 					ProjectRef = 5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */;
 				},
 				{
+					ProductGroup = 5A3F80AE1BC5963900C93337 /* Products */;
+					ProjectRef = 5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */;
+				},
+				{
 					ProductGroup = 5A0156A41AE2629C00EED621 /* Products */;
 					ProjectRef = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
 				},
@@ -696,6 +735,20 @@
 			fileType = wrapper.cfbundle;
 			path = DiffMatchPatchTest.xctest;
 			remoteRef = 5A0156C01AE263F500EED621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A3F80BC1BC5963900C93337 /* HastyHare.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HastyHare.framework;
+			remoteRef = 5A3F80BB1BC5963900C93337 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A3F80BE1BC5963900C93337 /* HastyHareTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HastyHareTests.xctest;
+			remoteRef = 5A3F80BD1BC5963900C93337 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */ = {
@@ -880,6 +933,11 @@
 			name = "Nimble-OSX";
 			targetProxy = 5A0156B31AE262F800EED621 /* PBXContainerItemProxy */;
 		};
+		5A3F80C61BC5973300C93337 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HastyHare;
+			targetProxy = 5A3F80C51BC5973300C93337 /* PBXContainerItemProxy */;
+		};
 		5A6A69831B03423F00F718C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "FeinstrukturUtils-OSX";
@@ -1011,6 +1069,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1049,6 +1108,7 @@
 					"$(PROJECT_DIT)/External/**",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

@@ -8,6 +8,7 @@
 
 import XCTest
 import Nimble
+import HastyHare
 
 
 func docUrl(docId: String) -> NSURL {
