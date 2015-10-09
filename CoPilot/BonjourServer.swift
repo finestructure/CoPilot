@@ -24,7 +24,7 @@ class BonjourServer: NSObject {
     var _onClientConnect: ClientHandler?
     var _onClientDisconnect: ClientHandler?
     var _onReceive: MessageConnectionIdHandler?
-    var _onError: (NSError -> Void)?
+    var _onError: (NSError? -> Void)?
 
     init(name: String, service: BonjourService, host: String? = nil) {
         self.name = name

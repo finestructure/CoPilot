@@ -14,8 +14,8 @@ protocol Socket {
     func close()
     func send(message: Message)
     var id: ConnectionId { get }
-    var onConnect: (Void -> Void)? { get set }
-    var onDisconnect: (NSError? -> Void)? { get set }
+    var onConnect: ConnectionHandler? { get set }
+    var onDisconnect: ErrorHandler? { get set }
     var onReceive: MessageHandler? { get set }
 }
 

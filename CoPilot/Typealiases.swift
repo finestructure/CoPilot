@@ -15,7 +15,8 @@ typealias Position = UInt
 typealias CursorUpdate = (Selection -> Void)
 typealias DocumentProvider = (Void -> Document)
 typealias DocumentUpdate = (Document -> Void)
+typealias ConnectionHandler = (Void -> Void)
 typealias MessageHandler = (Message -> Void)
 typealias ResolutionHandler = (Socket -> Void)
-typealias ErrorHandler = (NSError -> Void)
+typealias ErrorHandler = (NSError? -> Void)
 
