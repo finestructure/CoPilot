@@ -13,3 +13,6 @@
 [submodule "External/HastyHare"]
 	path = External/HastyHare
 	url = git@github.com:feinstruktur/HastyHare.git
+[submodule "External/Async"]
+	path = External/Async
+	url = git@github.com:duemunk/Async.git

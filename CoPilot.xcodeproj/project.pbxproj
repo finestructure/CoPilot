@@ -14,6 +14,7 @@
 		07B4D0A81B41A2D0002F37AD /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4D09B1B419D5F002F37AD /* Typealiases.swift */; };
 		5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01569D1AE2619700EED621 /* DiffTests.swift */; };
 		5A0156B21AE262A900EED621 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0156AF1AE2629C00EED621 /* Nimble.framework */; };
+		5A06AB991BC6D4BC0072214E /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
 		5A0983D01AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
@@ -144,6 +145,27 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D5BC0AF128CA8E200B8F5FF;
 			remoteInfo = DiffMatchPatchTest;
+		};
+		5A06AB891BC6D4A20072214E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF70E4E91ABF124A00B4FDD4;
+			remoteInfo = "Async iOS";
+		};
+		5A06AB8B1BC6D4A20072214E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF41E41E1AC5FB2400A1DDB2;
+			remoteInfo = "Async OSX";
+		};
+		5A06AB9A1BC6D4D80072214E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BF41E4141AC5FB2400A1DDB2;
+			remoteInfo = "Async OSX";
 		};
 		5A3F80BB1BC5963900C93337 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -293,6 +315,7 @@
 		5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = External/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DiffMatchPatch.xcodeproj; path = "External/aerogear-diffmatchpatch/DiffMatchPatch.xcodeproj"; sourceTree = "<group>"; };
 		5A0156C51AE2644800EED621 /* CoPilotTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilotTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A06AB841BC6D4A20072214E /* Async.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Async.xcodeproj; path = External/Async/Async.xcodeproj; sourceTree = "<group>"; };
 		5A0983CF1AE39E5B001ADB1F /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		5A0983E41AE39F68001ADB1F /* CoPilot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoPilot-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A0A05E11BC58FA30065EEF0 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
@@ -348,6 +371,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A06AB991BC6D4BC0072214E /* Async.framework in Frameworks */,
 				5A3F80C41BC5972000C93337 /* HastyHare.framework in Frameworks */,
 				5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5AD1E8761AE2A2BC0017CEEE /* FeinstrukturUtils.framework in Frameworks */,
@@ -415,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */,
+				5A06AB841BC6D4A20072214E /* Async.xcodeproj */,
 				5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */,
 				5AD1E8211AE29FE80017CEEE /* FeinstrukturUtils.xcodeproj */,
 				5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */,
@@ -441,6 +466,15 @@
 				5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */,
 				5A0156C11AE263F500EED621 /* DiffMatchPatchTest.xctest */,
 				5A6B141E1AE65AE3006EBB31 /* DiffMatchPatch OSX Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A06AB851BC6D4A20072214E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A06AB8A1BC6D4A20072214E /* Async.framework */,
+				5A06AB8C1BC6D4A20072214E /* Async.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -596,6 +630,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5A06AB9B1BC6D4D80072214E /* PBXTargetDependency */,
 				5A3F80C61BC5973300C93337 /* PBXTargetDependency */,
 				5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */,
 				5AD1E87E1AE2A3090017CEEE /* PBXTargetDependency */,
@@ -658,6 +693,10 @@
 			productRefGroup = 5A9BE17E1AD90862002817C0 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 5A06AB851BC6D4A20072214E /* Products */;
+					ProjectRef = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+				},
 				{
 					ProductGroup = 5A0156BA1AE263F500EED621 /* Products */;
 					ProjectRef = 5A0156B91AE263F500EED621 /* DiffMatchPatch.xcodeproj */;
@@ -735,6 +774,20 @@
 			fileType = wrapper.cfbundle;
 			path = DiffMatchPatchTest.xctest;
 			remoteRef = 5A0156C01AE263F500EED621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A06AB8A1BC6D4A20072214E /* Async.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Async.framework;
+			remoteRef = 5A06AB891BC6D4A20072214E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A06AB8C1BC6D4A20072214E /* Async.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Async.framework;
+			remoteRef = 5A06AB8B1BC6D4A20072214E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5A3F80BC1BC5963900C93337 /* HastyHare.framework */ = {
@@ -932,6 +985,11 @@
 			isa = PBXTargetDependency;
 			name = "Nimble-OSX";
 			targetProxy = 5A0156B31AE262F800EED621 /* PBXContainerItemProxy */;
+		};
+		5A06AB9B1BC6D4D80072214E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Async OSX";
+			targetProxy = 5A06AB9A1BC6D4D80072214E /* PBXContainerItemProxy */;
 		};
 		5A3F80C61BC5973300C93337 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
