@@ -105,44 +105,22 @@ class RabbitServerTests: XCTestCase {
     func test_cpserver() {
         do { // document host
             let s = connectDoc("doc1")
-            s.send("ping")
+            s.send(Command(name: "server"))
         }
         do { // document client
             var s = connectDoc("doc1")
 
-            var msg: String?
+            var msg: Message?
             s.onReceive = { m in
-                msg = m.string
+                msg = m
             }
-            expect(msg).toEventuallyNot(beNil(), timeout: 2)
-            expect(msg) == Optional("ping")
-        }
-    }
-
-
-    func _test_cpserver() {
-        let s = connectWebsocket(docUrl("1"))
-        expect(s).toNot(beNil())
-        let c = connectWebsocket(docUrl("1"))
-        expect(c).toNot(beNil())
-        var message: Message?
-        c.onReceive = { msg in
-            message = msg
-        }
-        c.onDisconnect = { error in
-            fail("error: \(error)")
-        }
-        s.onDisconnect = { error in
-            fail("error: \(error)")
-        }
-        if s.isOpen {
-            s.send(Command(name: "server"))
-            expect(message).toEventuallyNot(beNil())
-            if let data = message?.data {
-                expect(Command(data: data).name) == "server"
+            expect(msg?.data).toEventuallyNot(beNil(), timeout: 2)
+            if let d = msg?.data {
+                let cmd = Command(data: d)
+                expect(cmd.name) == Optional("server")
+            } else {
+                fail("could not decode message")
             }
-        } else {
-            fail("socket not open - is cpserver running?")
         }
     }
 
