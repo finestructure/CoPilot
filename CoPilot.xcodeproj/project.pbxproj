@@ -19,8 +19,8 @@
 		5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
-		5A0A05E21BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; settings = {ASSET_TAGS = (); }; };
-		5A0A05E31BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; settings = {ASSET_TAGS = (); }; };
+		5A0A05E21BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; };
+		5A0A05E31BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; };
 		5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* new_playground.txt */; };
 		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -44,6 +44,10 @@
 		5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B14251AE674E3006EBB31 /* MainController.swift */; };
 		5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B14261AE674E3006EBB31 /* MainController.xib */; };
 		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
+		5A745AFA1BE7D48B0025D941 /* RabbitDocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */; };
+		5A745B111BE7D5D80025D941 /* RabbitDocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */; };
+		5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F80BC1BC5963900C93337 /* HastyHare.framework */; };
+		5A745B151BE7DA9C0025D941 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
 		5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
 		5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */; };
 		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
@@ -216,6 +220,27 @@
 			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
 			remoteInfo = "DiffMatchPatch OSX Tests";
 		};
+		5A745AFD1BE7D48C0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 14CD471B1BDF23B9008F83EC;
+			remoteInfo = "Async tvOS";
+		};
+		5A745B0B1BE7D48C0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F5DF1551BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOS";
+		};
+		5A745B0D1BE7D48C0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOSTests";
+		};
 		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
@@ -334,6 +359,8 @@
 		5A6B13EB1AE655FF006EBB31 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		5A6B14251AE674E3006EBB31 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
+		5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitDocServer.swift; sourceTree = "<group>"; };
+		5A745B131BE7DA840025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
 		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
 		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
@@ -384,6 +411,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A745B151BE7DA9C0025D941 /* Async.framework in Frameworks */,
+				5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */,
 				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
 				5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */,
@@ -455,6 +484,8 @@
 				5A0156AD1AE2629C00EED621 /* NimbleTests.xctest */,
 				5A0156AF1AE2629C00EED621 /* Nimble.framework */,
 				5A0156B11AE2629C00EED621 /* NimbleTests.xctest */,
+				5A745B0C1BE7D48C0025D941 /* Nimble.framework */,
+				5A745B0E1BE7D48C0025D941 /* NimbleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -475,6 +506,7 @@
 			children = (
 				5A06AB8A1BC6D4A20072214E /* Async.framework */,
 				5A06AB8C1BC6D4A20072214E /* Async.framework */,
+				5A745AFE1BE7D48C0025D941 /* Async.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -583,6 +615,7 @@
 				5AA336EE1AFA06B2000E37B2 /* DocClient.swift */,
 				5A63776F1B0B4B4B005C2637 /* DocNode.swift */,
 				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
+				5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */,
 				5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */,
 			);
 			name = Model;
@@ -612,6 +645,7 @@
 		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A745B131BE7DA840025D941 /* Async.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -811,6 +845,27 @@
 			remoteRef = 5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5A745AFE1BE7D48C0025D941 /* Async.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Async.framework;
+			remoteRef = 5A745AFD1BE7D48C0025D941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A745B0C1BE7D48C0025D941 /* Nimble.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Nimble.framework;
+			remoteRef = 5A745B0B1BE7D48C0025D941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A745B0E1BE7D48C0025D941 /* NimbleTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NimbleTests.xctest;
+			remoteRef = 5A745B0D1BE7D48C0025D941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
@@ -915,6 +970,7 @@
 				5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */,
 				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
 				5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */,
+				5A745B111BE7D5D80025D941 /* RabbitDocServer.swift in Sources */,
 				5AA3C0E71B1394D800CC9B4F /* BonjourServer.swift in Sources */,
 				5A595B8F1B6A2A4A00900491 /* DocumentService.swift in Sources */,
 				5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */,
@@ -963,6 +1019,7 @@
 				5AA3C0E61B1394D800CC9B4F /* BonjourServer.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
+				5A745AFA1BE7D48B0025D941 /* RabbitDocServer.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* BonjourService.swift in Sources */,
 				0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */,
 				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
@@ -1178,6 +1235,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/HastyHare/External/Async/build/Debug",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1204,6 +1265,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/HastyHare/External/Async/build/Debug",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
