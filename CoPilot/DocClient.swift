@@ -42,6 +42,16 @@ class DocClient: DocNode {
     }
 
 
+    init(name: String = "DocClient", connectionId: NSUUID, document: Document) {
+        super.init(name: name, document: document)
+
+        self.connection = connectionId.UUIDString
+        self.socket = RabbitSocket(connectionId: connectionId.UUIDString)
+        self.configureSocket()
+        self.socket?.open()
+    }
+
+
     func configureSocket() {
         self.socket?.onConnect = {
             self.socket?.send(Command(name: self.name))

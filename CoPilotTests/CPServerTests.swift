@@ -81,9 +81,9 @@ class RabbitServerTests: XCTestCase {
         let s = RabbitDocServer(name: "doc1", document: Document("foo"))
         defer { s.stop() }
 
-        let client1 = RabbitDocClient(connectionId: s.id, document: Document(""))
-//        // wait for the initial .Doc to set up the client
-//        expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
+        let client1 = DocClient(connectionId: s.id, document: Document(""))
+        // wait for the initial .Doc to set up the client
+        expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 //
 //        let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
 //        let client2 = createClient(document: client2Doc)
