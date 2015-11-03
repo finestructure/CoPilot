@@ -61,7 +61,6 @@ class RabbitServerTests: XCTestCase {
     }
 
 
-
     //    func test_sendChanges() {
     //        let svc: DocumentService = CPServer(document: Document("foo"))
     //        svc.publish("d1")
@@ -79,10 +78,10 @@ class RabbitServerTests: XCTestCase {
 
 
     func test_sendChanges() {
-        let svc = RabbitDocServer(name: "doc1", document: Document("foo"))
-        defer { svc.stop() }
+        let s = RabbitDocServer(name: "doc1", document: Document("foo"))
+        defer { s.stop() }
 
-//        let client1 = createClient(document: Document(""))
+        let client1 = RabbitDocClient(connectionId: s.id, document: Document(""))
 //        // wait for the initial .Doc to set up the client
 //        expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 //

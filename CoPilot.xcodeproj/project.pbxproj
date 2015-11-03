@@ -48,6 +48,8 @@
 		5A745B111BE7D5D80025D941 /* RabbitDocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */; };
 		5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F80BC1BC5963900C93337 /* HastyHare.framework */; };
 		5A745B151BE7DA9C0025D941 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
+		5A745B171BE7DF2D0025D941 /* RabbitDocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B161BE7DF2D0025D941 /* RabbitDocClient.swift */; };
+		5A745B181BE7DF2D0025D941 /* RabbitDocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B161BE7DF2D0025D941 /* RabbitDocClient.swift */; };
 		5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
 		5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */; };
 		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
@@ -361,6 +363,7 @@
 		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
 		5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitDocServer.swift; sourceTree = "<group>"; };
 		5A745B131BE7DA840025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
+		5A745B161BE7DF2D0025D941 /* RabbitDocClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitDocClient.swift; sourceTree = "<group>"; };
 		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
 		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
@@ -615,6 +618,7 @@
 				5AA336EE1AFA06B2000E37B2 /* DocClient.swift */,
 				5A63776F1B0B4B4B005C2637 /* DocNode.swift */,
 				5A66AA131AF91CFC0098BD77 /* DocServer.swift */,
+				5A745B161BE7DF2D0025D941 /* RabbitDocClient.swift */,
 				5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */,
 				5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */,
 			);
@@ -988,6 +992,7 @@
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
 				5AB0E1BA1B6238D8001815A0 /* CPServerTests.swift in Sources */,
+				5A745B181BE7DF2D0025D941 /* RabbitDocClient.swift in Sources */,
 				0785367A1B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
@@ -1018,6 +1023,7 @@
 				5A595B8E1B6A2A4A00900491 /* DocumentService.swift in Sources */,
 				5AA3C0E61B1394D800CC9B4F /* BonjourServer.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
+				5A745B171BE7DF2D0025D941 /* RabbitDocClient.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
 				5A745AFA1BE7D48B0025D941 /* RabbitDocServer.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* BonjourService.swift in Sources */,
