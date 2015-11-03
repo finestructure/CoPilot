@@ -50,6 +50,8 @@
 		5A745B151BE7DA9C0025D941 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
 		5A745B1A1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */; };
 		5A745B1B1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */; };
+		5A745B1D1BE8BB050025D941 /* RabbitServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B1C1BE8BB050025D941 /* RabbitServer.swift */; };
+		5A745B1E1BE8BB050025D941 /* RabbitServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B1C1BE8BB050025D941 /* RabbitServer.swift */; };
 		5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
 		5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */; };
 		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
@@ -364,6 +366,7 @@
 		5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitDocServer.swift; sourceTree = "<group>"; };
 		5A745B131BE7DA840025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
 		5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitSocket.swift; sourceTree = "<group>"; };
+		5A745B1C1BE8BB050025D941 /* RabbitServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitServer.swift; sourceTree = "<group>"; };
 		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
 		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
@@ -603,6 +606,7 @@
 				5AA3C0E51B1394D800CC9B4F /* BonjourServer.swift */,
 				5AC8A9761AE542440097FF8D /* BonjourService.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
+				5A745B1C1BE8BB050025D941 /* RabbitServer.swift */,
 				5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
 				5A0A05E11BC58FA30065EEF0 /* Socket.swift */,
@@ -971,6 +975,7 @@
 				5A4D7DAB1AF366B1005E0294 /* CommandTests.swift in Sources */,
 				5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */,
 				5AC8A9781AE542440097FF8D /* BonjourService.swift in Sources */,
+				5A745B1E1BE8BB050025D941 /* RabbitServer.swift in Sources */,
 				5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */,
 				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
 				5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */,
@@ -1032,6 +1037,7 @@
 				5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */,
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
 				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
+				5A745B1D1BE8BB050025D941 /* RabbitServer.swift in Sources */,
 				5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */,
 				5AD6D3611B17516300A3985E /* UrlController.swift in Sources */,
 				5AB3A85C1B0BBBAB0068EE3A /* Selection.swift in Sources */,
