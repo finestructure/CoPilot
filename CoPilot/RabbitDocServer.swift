@@ -18,7 +18,7 @@ class RabbitDocServer: DocNode {
     override init(name: String, document: Document) {
         super.init(name: name, document: document)
 
-        self.server = RabbitServer(connectionId: self.id)
+        self.server = RabbitServer(name: name, connectionId: self.id)
 
         self.server.onClientConnect = { clientId in
             self.resetClient(clientId)
