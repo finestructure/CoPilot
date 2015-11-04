@@ -46,7 +46,7 @@ class DocClient: DocNode {
         super.init(name: name, document: document)
 
         self.connection = connectionId.UUIDString
-        self.socket = RabbitSocket(connectionId: connectionId.UUIDString)
+        self.socket = RabbitSocket(docId: connectionId.UUIDString)
         self.configureSocket()
         self.socket?.open()
     }

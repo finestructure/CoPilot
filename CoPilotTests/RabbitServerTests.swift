@@ -16,12 +16,12 @@ class RabbitServerTests: XCTestCase {
 
     func test_socket() {
         do { // document host
-            let s = RabbitSocket(connectionId: "doc1")
+            let s = RabbitSocket(docId: "doc1")
             s.open()
             s.send(Command(name: "server"))
         }
         do { // document client
-            let s = RabbitSocket(connectionId: "doc1")
+            let s = RabbitSocket(docId: "doc1")
             s.open()
 
             var msg: Message?

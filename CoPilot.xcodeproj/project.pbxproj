@@ -47,11 +47,11 @@
 		5A745AFA1BE7D48B0025D941 /* RabbitDocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */; };
 		5A745B111BE7D5D80025D941 /* RabbitDocServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745AF91BE7D48B0025D941 /* RabbitDocServer.swift */; };
 		5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F80BC1BC5963900C93337 /* HastyHare.framework */; };
-		5A745B151BE7DA9C0025D941 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
 		5A745B1A1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */; };
 		5A745B1B1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */; };
 		5A745B1D1BE8BB050025D941 /* RabbitServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B1C1BE8BB050025D941 /* RabbitServer.swift */; };
 		5A745B1E1BE8BB050025D941 /* RabbitServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B1C1BE8BB050025D941 /* RabbitServer.swift */; };
+		5A745B211BE8D45E0025D941 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
 		5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
 		5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */; };
 		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
@@ -245,6 +245,13 @@
 			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
 			remoteInfo = "Nimble-tvOSTests";
 		};
+		5A745B221BE8D46B0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BF41E4141AC5FB2400A1DDB2;
+			remoteInfo = "Async OSX";
+		};
 		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
@@ -367,6 +374,7 @@
 		5A745B131BE7DA840025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
 		5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitSocket.swift; sourceTree = "<group>"; };
 		5A745B1C1BE8BB050025D941 /* RabbitServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitServer.swift; sourceTree = "<group>"; };
+		5A745B1F1BE8D4550025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
 		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
 		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
@@ -417,7 +425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A745B151BE7DA9C0025D941 /* Async.framework in Frameworks */,
+				5A745B211BE8D45E0025D941 /* Async.framework in Frameworks */,
 				5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */,
 				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
@@ -653,6 +661,7 @@
 		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A745B1F1BE8D4550025D941 /* Async.framework */,
 				5A745B131BE7DA840025D941 /* Async.framework */,
 			);
 			name = Frameworks;
@@ -697,6 +706,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5A745B231BE8D46B0025D941 /* PBXTargetDependency */,
 				5A6A69941B03428200F718C5 /* PBXTargetDependency */,
 				5A6A69921B03427D00F718C5 /* PBXTargetDependency */,
 				5A6A69831B03423F00F718C5 /* PBXTargetDependency */,
@@ -1079,6 +1089,11 @@
 			isa = PBXTargetDependency;
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5A6A69931B03428200F718C5 /* PBXContainerItemProxy */;
+		};
+		5A745B231BE8D46B0025D941 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Async OSX";
+			targetProxy = 5A745B221BE8D46B0025D941 /* PBXContainerItemProxy */;
 		};
 		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

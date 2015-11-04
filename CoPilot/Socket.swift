@@ -10,6 +10,7 @@ import Foundation
 
 
 protocol Socket {
+    // FIXME: add connection state and/or error feedback - i.e. how can you tell the socket didn't connect?
     func open()
     func close()
     func send(message: Message)

@@ -21,7 +21,7 @@ class RabbitServer {
 
     init(name: String, connectionId: NSUUID) {
         self.name = name
-        self.socket = RabbitSocket(connectionId: connectionId.UUIDString)
+        self.socket = RabbitSocket(docId: connectionId.UUIDString)
     }
 
 }

@@ -11,25 +11,39 @@ import Async
 import HastyHare
 
 
+let CoPilotExchange = "CoPilot-Fanout"
+let Hostname = "dockerhost"
+let Port = 5672
+let Username = "guest"
+let Password = "guest"
+
+
 class RabbitSocket: Socket {
-    let id: ConnectionId
+    let docId: ConnectionId
+    let _id = NSUUID()
 
     private var connection: Connection?
     private var channel: Channel?
     private var consumer: Consumer?
     private var exchange: Exchange?
 
-    init(connectionId: ConnectionId) {
-        self.id = connectionId
+    init(docId: ConnectionId) {
+        self.docId = docId
+    }
+
+    var id: ConnectionId {
+        return self._id.UUIDString
     }
 
     func open() {
         self.connection = self.connect()
-        self.channel = self.connection?.openChannel()
-        self.exchange = self.channel?.declareExchange("doc_exchange")
-        let q = self.channel?.declareQueue(self.id)
-        q?.bindToExchange("doc_exchange", bindingKey: self.id)
-        self.onConnect?()
+        if self.connection?.connected ?? false {
+            self.channel = self.connection?.openChannel()
+            self.exchange = self.channel?.declareExchange(CoPilotExchange, type: .Fanout)
+            let q = self.channel?.declareQueue(self.id)
+            q?.bindToExchange(CoPilotExchange, bindingKey: self.id)
+            self.onConnect?()
+        }
     }
 
     func close() {
@@ -63,12 +77,8 @@ class RabbitSocket: Socket {
     }
 
     func connect() -> Connection {
-        let hostname = "dockerhost"
-        let port = 5672
-        let username = "guest"
-        let password = "guest"
-        let c = Connection(host: hostname, port: port)
-        c.login(username, password: password)
+        let c = Connection(host: Hostname, port: Port)
+        c.login(Username, password: Password)
         return c
     }
 }
