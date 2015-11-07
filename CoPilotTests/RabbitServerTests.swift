@@ -15,26 +15,29 @@ import Async
 class RabbitServerTests: XCTestCase {
 
     func test_socket() {
+
+        var msg: Message?
+
+        do { // document client
+            let s = RabbitSocket(docId: "doc1")
+            s.open()
+            s.onReceive = { m in
+                msg = m
+            }
+        }
+
         do { // document host
             let s = RabbitSocket(docId: "doc1")
             s.open()
             s.send(Command(name: "server"))
         }
-        do { // document client
-            let s = RabbitSocket(docId: "doc1")
-            s.open()
 
-            var msg: Message?
-            s.onReceive = { m in
-                msg = m
-            }
-            expect(msg?.data).toEventuallyNot(beNil(), timeout: 2)
-            if let d = msg?.data {
-                let cmd = Command(data: d)
-                expect(cmd.name) == Optional("server")
-            } else {
-                fail("could not decode message")
-            }
+        expect(msg?.data).toEventuallyNot(beNil(), timeout: 2)
+        if let d = msg?.data {
+            let cmd = Command(data: d)
+            expect(cmd.name) == Optional("server")
+        } else {
+            fail("could not decode message")
         }
     }
 

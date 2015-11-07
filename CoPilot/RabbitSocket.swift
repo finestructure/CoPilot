@@ -18,6 +18,11 @@ let Username = "guest"
 let Password = "guest"
 
 
+func exchangeNameForDocId(docId: ConnectionId) -> String {
+    return "CoPilot-\(docId)"
+}
+
+
 class RabbitSocket: Socket {
     let docId: ConnectionId
     let _id = NSUUID()
@@ -39,10 +44,23 @@ class RabbitSocket: Socket {
         self.connection = self.connect()
         if self.connection?.connected ?? false {
             self.channel = self.connection?.openChannel()
-            self.exchange = self.channel?.declareExchange(CoPilotExchange, type: .Fanout)
-            let q = self.channel?.declareQueue(self.id)
-            q?.bindToExchange(CoPilotExchange, bindingKey: self.id)
-            self.onConnect?()
+            let exName = exchangeNameForDocId(self.docId)
+            if let ex = self.channel?.declareExchange(exName, type: .Fanout) {
+                self.exchange = ex
+                let q = self.channel?.declareQueue(self.id)
+                let success = q?.bindToExchange(ex, bindingKey: self.id) ?? false
+                if !success {
+                    // FIXME: Socket.open needs error handling signature
+                    print("error: could not bind to exchange \(ex.name)")
+                }
+                self.onConnect?()
+            } else {
+                // FIXME: Socket.open needs error handling signature
+                print("error: could not declase exchange \(exName)")
+            }
+        } else {
+            // FIXME: Socket.open needs error handling signature
+            print("error: not connected")
         }
     }
 
@@ -65,12 +83,16 @@ class RabbitSocket: Socket {
     var onDisconnect: ErrorHandler?
     var onReceive: MessageHandler? {
         didSet {
-            self.consumer = self.channel?.consumer(self.id)
-            // FIXME: this needs to be more than just a one-off
             Async.background {
-                if let s = self.consumer?.pop() {
-                    let msg = Message(s)
-                    self.onReceive?(msg)
+                if let ch = self.channel {
+                    self.consumer = {
+                        let cons = ch.consumer(self.id)
+                        cons.listen { d in
+                            let msg = Message(d)
+                            self.onReceive?(msg)
+                        }
+                        return cons
+                    }()
                 }
             }
         }
@@ -81,4 +103,5 @@ class RabbitSocket: Socket {
         c.login(Username, password: Password)
         return c
     }
+    
 }
