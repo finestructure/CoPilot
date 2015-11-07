@@ -23,7 +23,7 @@ func exchangeNameForDocId(docId: ConnectionId) -> String {
 }
 
 
-class RabbitSocket: Socket {
+class RabbitSocket {
     let docId: ConnectionId
     let _id = NSUUID()
 
@@ -31,10 +31,33 @@ class RabbitSocket: Socket {
     private var channel: Channel?
     private var consumer: Consumer?
     private var exchange: Exchange?
+    private var _onConnect: ConnectionHandler?
+    private var _onDisconnect: ErrorHandler?
+    private var _onReceive: MessageHandler?
 
     init(docId: ConnectionId) {
         self.docId = docId
     }
+
+    func startConsuming() {
+        Async.background {
+            guard let ch = self.channel else {
+                return
+            }
+
+            let cons = ch.consumer(self.id)
+            cons.listen { d in
+                let msg = Message(d)
+                self.onReceive?(msg)
+            }
+            self.consumer = cons
+        }
+    }
+
+}
+
+
+extension RabbitSocket: Socket {
 
     var id: ConnectionId {
         return self._id.UUIDString
@@ -79,22 +102,21 @@ class RabbitSocket: Socket {
         }
     }
 
-    var onConnect: ConnectionHandler?
-    var onDisconnect: ErrorHandler?
+    var onConnect: ConnectionHandler? {
+        get { return self._onConnect }
+        set { self._onConnect = newValue }
+    }
+
+    var onDisconnect: ErrorHandler? {
+        get { return self._onDisconnect }
+        set { self._onDisconnect = newValue }
+    }
+
     var onReceive: MessageHandler? {
-        didSet {
-            Async.background {
-                if let ch = self.channel {
-                    self.consumer = {
-                        let cons = ch.consumer(self.id)
-                        cons.listen { d in
-                            let msg = Message(d)
-                            self.onReceive?(msg)
-                        }
-                        return cons
-                    }()
-                }
-            }
+        get { return self._onReceive }
+        set {
+            self._onReceive = newValue
+            self.startConsuming()
         }
     }
 
@@ -103,5 +125,5 @@ class RabbitSocket: Socket {
         c.login(Username, password: Password)
         return c
     }
-    
+
 }
