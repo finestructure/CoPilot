@@ -27,16 +27,16 @@ class DocServer: DocNode {
         switch serverType {
         case .BonjourServer:
             self.server = BonjourServer(name: name, service: CoPilotBonjourService)
+            self.server.onClientDisconnect = { clientId in
+                self._connections.removeValueForKey(clientId)
+            }
         case .RabbitServer:
             self.server = RabbitServer(name: name, docId: self.id.UUIDString)
+            // RabbitServer does not get notified of client connects or disconnets since it's not connected to the clients directly
+            // we handle client connects by looking for a .Name message with a new name in onReceive
+            // TODO: add a heartbeat mechanism to find out if clients dropped off
         }
 
-        self.server.onClientConnect = { clientId in
-            self.resetClient(clientId)
-        }
-        self.server.onClientDisconnect = { clientId in
-            self._connections.removeValueForKey(clientId)
-        }
         self.server.onReceive = self.onReceive()
         self.server.onError = { error in
             self.onDisconnect?(error)
@@ -81,6 +81,9 @@ class DocServer: DocNode {
                 let cmd = Command(document: self._document)
                 self.server.send(Message(cmd.serialize()), receiverId: clientId)
             case .Name(let name):
+                if self._connections[clientId] == nil {
+                    self.resetClient(clientId)
+                }
                 self._connections[clientId] = name
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
