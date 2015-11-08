@@ -45,12 +45,14 @@ class RabbitSocket {
                 return
             }
 
-            let cons = ch.consumer(self.id)
-            cons.listen { d in
-                let msg = Message(d)
-                self.onReceive?(msg)
-            }
-            self.consumer = cons
+            self.consumer = {
+                let c = ch.consumer(self.id)
+                c.listen { d in
+                    let msg = Message(d)
+                    self.onReceive?(msg)
+                }
+                return c
+            }()
         }
     }
 
@@ -68,9 +70,9 @@ extension RabbitSocket: Socket {
         if self.connection?.connected ?? false {
             self.channel = self.connection?.openChannel()
             let exName = exchangeNameForDocId(self.docId)
-            if let ex = self.channel?.declareExchange(exName, type: .Fanout) {
+            if let ex = self.channel?.declareExchange(exName, type: .Fanout, autoDelete: true) {
                 self.exchange = ex
-                let q = self.channel?.declareQueue(self.id)
+                let q = self.channel?.declareQueue(self.id, exclusive: true)
                 let success = q?.bindToExchange(ex, bindingKey: self.id) ?? false
                 if !success {
                     // FIXME: Socket.open needs error handling signature
