@@ -68,7 +68,7 @@ class RabbitServerTests: XCTestCase {
     
     // FIXME: enable
     func _test_sendChanges() {
-        let server = RabbitDocServer(name: "doc1", document: Document("foo"))
+        let server = DocServer(name: "doc1", document: Document("foo"), serverType: .RabbitServer)
         defer { server.stop() }
 
         let client1 = DocClient(connectionId: server.id, document: Document(""))

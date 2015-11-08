@@ -10,22 +10,26 @@ import Cocoa
 import FeinstrukturUtils
 
 
-extension BonjourServer {
-    func broadcast(command: Command, exceptIds: [ConnectionId] = []) {
-        self.broadcast(Message(command.serialize()), exceptIds: exceptIds)
-    }
+enum DocServerType {
+    case BonjourServer
+    case RabbitServer
 }
 
 
 class DocServer: DocNode {
     
-    private var server: BonjourServer! = nil
+    private var server: DocumentService! = nil
     private var _connections = [ConnectionId: DisplayName]()
 
-    init(name: String, service: BonjourService = CoPilotBonjourService, document: Document) {
-        self.server = BonjourServer(name: name, service: service)
-
+    init(name: String, document: Document, serverType: DocServerType = .BonjourServer) {
         super.init(name: name, document: document)
+
+        switch serverType {
+        case .BonjourServer:
+            self.server = BonjourServer(name: name, service: CoPilotBonjourService)
+        case .RabbitServer:
+            self.server = RabbitServer(name: name, docId: self.id.UUIDString)
+        }
 
         self.server.onClientConnect = { clientId in
             self.resetClient(clientId)

@@ -19,9 +19,9 @@ class RabbitServer {
     var _onReceive: MessageConnectionIdHandler?
     var _onError: ErrorHandler?
 
-    init(name: String, connectionId: NSUUID) {
+    init(name: String, docId: ConnectionId) {
         self.name = name
-        self.socket = RabbitSocket(docId: connectionId.UUIDString)
+        self.socket = RabbitSocket(docId: docId)
     }
 
 }
