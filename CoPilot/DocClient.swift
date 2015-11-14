@@ -72,7 +72,7 @@ class DocClient: DocNode {
         }
 
         let cmd = Command(data: data)
-        print("#### client cmd: \(cmd)")
+        print("#### \(self.name) cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):
             self.commit(doc)

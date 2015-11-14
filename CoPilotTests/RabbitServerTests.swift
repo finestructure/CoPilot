@@ -39,6 +39,58 @@ class RabbitServerTests: XCTestCase {
         } else {
             fail("could not decode message")
         }
+
+    }
+
+
+    func test_socket_3way() {
+        var messages = [
+            "1": [Command](),
+            "2": [Command](),
+            "server": [Command](),
+        ]
+
+        // server
+        let server: RabbitSocket = {
+            let s = RabbitSocket(docId: "doc1")
+            s.open()
+            s.onReceive = { m in
+                let cmd = Command(data: m.data!)
+                messages["server"]?.append(cmd)
+            }
+            return s
+        }()
+        server.send(Command(name: "server"))
+
+        // client 1
+        let c1: RabbitSocket = {
+            let s = RabbitSocket(docId: "doc1")
+            s.open()
+            s.onReceive = { m in
+                messages["1"]?.append(Command(data: m.data!))
+            }
+            return s
+        }()
+        c1.send(Command(name: "c1"))
+
+        // client 2
+        let c2: RabbitSocket = {
+            let s = RabbitSocket(docId: "doc1")
+            s.open()
+            s.onReceive = { m in
+                messages["2"]?.append(Command(data: m.data!))
+            }
+            return s
+        }()
+        c2.send(Command(name: "c2"))
+
+        let block = Async.background {  // Need to validate on a background queue to avoid deadlock/timeout. Without this, the first test will timeout (fail) and the remining will pass.
+            expect(messages["server"]?.description).toEventually(equal("[.Name server, .Name c1, .Name c2]"))
+            expect(messages["1"]?.description).toEventually(equal("[.Name c1, .Name c2]"))
+            expect(messages["2"]?.description).toEventually(equal("[.Name c2]"))
+        }
+        block.wait()
+
     }
 
 
@@ -68,15 +120,15 @@ class RabbitServerTests: XCTestCase {
     
     // FIXME: enable
     func test_sendChanges() {
-        let server = DocServer(name: "doc1", document: Document("foo"), serverType: .RabbitServer)
+        let server = DocServer(name: "doc name", document: Document("foo"), serverType: .RabbitServer)
         defer { server.stop() }
 
-        let client1 = DocClient(connectionId: server.id, document: Document(""))
+        let client1 = DocClient(name: "client1", connectionId: server.id, document: Document(""))
         // wait for the initial .Doc to set up the client
         expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
 
         let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
-        let client2 = DocClient(connectionId: server.id, document: client2Doc)
+        let client2 = DocClient(name: "client2", connectionId: server.id, document: client2Doc)
         server.update(Document("foobar"))
         expect(client2.document.text).toEventually(equal("foobar"), timeout: 5)
     }

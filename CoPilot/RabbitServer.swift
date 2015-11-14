@@ -30,7 +30,7 @@ class RabbitServer {
 extension RabbitServer: DocumentService {
 
     func publish(name: String) {
-        // TODO: bind to header exchange with id
+        self.socket.open()
     }
 
     func unpublish() {
@@ -38,11 +38,13 @@ extension RabbitServer: DocumentService {
     }
 
     func broadcast(message: Message, exceptIds: [ConnectionId]) {
-        // TODO: send to header exchange with exceptId param
+        // TODO: handle exceptIds
+        self.socket.send(message)
     }
 
     func send(message: Message, receiverId: ConnectionId) {
-        // TODO: send to header exchange with receiverId param
+        // TODO: handle receiverId param
+        self.socket.send(message)
     }
 
     func start() {

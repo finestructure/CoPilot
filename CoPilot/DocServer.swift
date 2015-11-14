@@ -53,7 +53,7 @@ class DocServer: DocNode {
             }
 
             let cmd = Command(data: data)
-            // println("#### server cmd: \(cmd)")
+            print("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc:
                 print("server not accepting .Doc commands")
