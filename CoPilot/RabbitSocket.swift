@@ -74,11 +74,12 @@ extension RabbitSocket: Socket {
                 self.exchange = ex
                 let q = self.channel?.declareQueue(self.id, exclusive: true)
                 let success = q?.bindToExchange(ex, bindingKey: self.id) ?? false
-                if !success {
+                if success {
+                    self.onConnect?()
+                } else {
                     // FIXME: Socket.open needs error handling signature
                     print("error: could not bind to exchange \(ex.name)")
                 }
-                self.onConnect?()
             } else {
                 // FIXME: Socket.open needs error handling signature
                 print("error: could not declase exchange \(exName)")

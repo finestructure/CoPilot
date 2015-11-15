@@ -31,6 +31,8 @@ extension RabbitServer: DocumentService {
 
     func publish(name: String) {
         self.socket.open()
+        // TODO: should check if `open()` was successful before calling `onPublished()`
+        self.onPublished?()
     }
 
     func unpublish() {
@@ -75,7 +77,13 @@ extension RabbitServer: DocumentService {
 
     var onReceive: MessageConnectionIdHandler? {
         get { return self._onReceive }
-        set { self._onReceive = newValue }
+        set {
+            self._onReceive = newValue
+            self.socket.onReceive = { msg in
+                // FIXME: this is not going to work - we need to get the real client id here to pass on
+                self._onReceive?(msg, "unknown_id")
+            }
+        }
     }
 
     var onError: ErrorHandler? {
