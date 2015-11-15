@@ -15,11 +15,12 @@ import Async
 class RabbitServerTests: XCTestCase {
 
     func test_socket() {
+        let docId = NSUUID().UUIDString
 
         var msg: Message?
 
         do { // document client
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
             s.open()
             s.onReceive = { m in
                 msg = m
@@ -27,7 +28,7 @@ class RabbitServerTests: XCTestCase {
         }
 
         do { // document host
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
             s.open()
             s.send(Command(name: "server"))
         }
@@ -49,10 +50,11 @@ class RabbitServerTests: XCTestCase {
             "2": [Command](),
             "server": [Command](),
         ]
+        let docId = NSUUID().UUIDString
 
         // server
         let server: RabbitSocket = {
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
             s.open()
             s.onReceive = { m in
                 let cmd = Command(data: m.data!)
@@ -64,7 +66,7 @@ class RabbitServerTests: XCTestCase {
 
         // client 1
         let c1: RabbitSocket = {
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
             s.open()
             s.onReceive = { m in
                 messages["1"]?.append(Command(data: m.data!))
@@ -75,7 +77,7 @@ class RabbitServerTests: XCTestCase {
 
         // client 2
         let c2: RabbitSocket = {
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
             s.open()
             s.onReceive = { m in
                 messages["2"]?.append(Command(data: m.data!))
@@ -94,19 +96,17 @@ class RabbitServerTests: XCTestCase {
     }
 
 
-    func test_docServerComms() {
-        // another test en route to getting `test_sendChanges` to pass - talking to DocServer from a socket instead of DocClient
-//        let server = DocServer(name: "doc name", document: Document("foo"), serverType: .RabbitServer)
-//        defer { server.stop() }
+    func test_handshake_RabbitSocket() {
+        // simulate the client server handshare via RabbitSockets (lower level than DocServer/DocClient)
+        let docId = NSUUID().UUIDString
+
         let server: RabbitSocket = {
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
             s.open()
             s.onReceive = { m in
                 let cmd = Command(data: m.data!)
-                print("server received: \(cmd)")
                 if let name = cmd.name {
-                    print("resetting client \(name)")
-                    s.send(Command(document: Document("a doc")))
+                    s.send(Command(document: Document("a doc for \(name)")))
                 }
             }
             return s
@@ -116,7 +116,46 @@ class RabbitServerTests: XCTestCase {
         var receivedDoc = false
         var connected = true
         let client: RabbitSocket = {
-            let s = RabbitSocket(docId: "doc1")
+            let s = RabbitSocket(docId: docId)
+            s.onConnect = {
+                connected = true
+            }
+            s.open()
+            s.onReceive = { m in
+                let cmd = Command(data: m.data!)
+                if let doc = cmd.document {
+                    if doc.text == "a doc for client" {
+                        receivedDoc = true
+                    }
+                }
+            }
+            return s
+        }()
+        expect(connected).toEventually(beTrue())
+        client.send(Command(name: "client"))
+
+        let block = Async.background {
+            expect(receivedDoc).toEventually(beTrue(), timeout: 5)
+        }
+        block.wait()
+    }
+
+
+    func test_docServerComms() {
+        // another test en route to getting `test_sendChanges` to pass - talking to DocServer from a socket instead of DocClient
+        let server = DocServer(name: "doc name", document: Document("foo"), serverType: .RabbitServer)
+        var published = false
+        server.onPublished = {
+            published = true
+        }
+        defer { server.stop() }
+        server.start()
+        expect(published).toEventually(beTrue())
+
+        var receivedDoc = false
+        var connected = true
+        let client: RabbitSocket = {
+            let s = RabbitSocket(docId: server.id.UUIDString)
             s.onConnect = {
                 connected = true
             }

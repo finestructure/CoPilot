@@ -21,7 +21,7 @@ class DocServer: DocNode {
     private var server: DocumentService! = nil
     private var _connections = [ConnectionId: DisplayName]()
 
-    init(name: String, document: Document, serverType: DocServerType = .BonjourServer) {
+    init(name: String, document: Document, serverType: DocServerType = .BonjourServer, start: Bool = true) {
         super.init(name: name, document: document)
 
         switch serverType {
@@ -41,7 +41,9 @@ class DocServer: DocNode {
         self.server.onError = { error in
             self.onDisconnect?(error)
         }
-        self.server.start()
+        if start {
+            self.server.start()
+        }
     }
 
 
@@ -102,10 +104,20 @@ class DocServer: DocNode {
     }
 
 
+    func start() {
+        self.server.start()
+    }
+
+
     func stop() {
         self.server.stop()
     }
 
+
+    var onPublished: (Void -> Void)? {
+        get { return self.server.onPublished }
+        set { self.server.onPublished = newValue }
+    }
 }
 
 
