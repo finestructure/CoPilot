@@ -12,7 +12,7 @@ Please see the [CoPilot Homepage](http://feinstruktur.com/copilot) for further d
 
 ## Compatibility
 
-CoPilot has been tested on Xcode 6.3.2, 6.4, and 7beta. It should also run on other versions of Xcode.
+CoPilot has been tested on Xcode 6.3.2, 6.4, and 7.x. It should also run on other versions of Xcode but you may have to add its UUID to Info.plist.
 
 ## Installing
 
