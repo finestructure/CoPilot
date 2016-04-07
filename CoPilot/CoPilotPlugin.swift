@@ -46,8 +46,8 @@ class CoPilotPlugin: NSObject {
         super.init()
 
         self.bundle = bundle
-        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:"publish", key:"a")
-        self.subscribeMenuItem = self.menuItem("CoPilot Subscribe", action:"subscribe", key:"z")
+        self.publishMenuItem = self.menuItem(publishMenuTitle(), action:#selector(CoPilotPlugin.publish), key:"a")
+        self.subscribeMenuItem = self.menuItem("CoPilot Subscribe", action:#selector(CoPilotPlugin.subscribe), key:"z")
 
         observers.append(
             observe("NSApplicationDidFinishLaunchingNotification", object: nil) { _ in
@@ -85,11 +85,11 @@ class CoPilotPlugin: NSObject {
         let isConnected = { ConnectionManager.isConnected(XcodeUtils.activeEditor!) }
         
         switch menuItem.action {
-        case Selector("publish"):
+        case #selector(CoPilotPlugin.publish):
             return hasEditor()
-        case Selector("subscribe"):
+        case #selector(CoPilotPlugin.subscribe):
             return hasEditor() && !isConnected()
-        case Selector("showConnected"):
+        case #selector(CoPilotPlugin.showConnected):
             return hasEditor()
         default:
             return NSApplication.sharedApplication().nextResponder?.validateMenuItem(menuItem) ?? false
@@ -108,7 +108,7 @@ extension CoPilotPlugin {
             item!.submenu!.addItem(NSMenuItem.separatorItem())
             item!.submenu!.addItem(self.publishMenuItem)
             item!.submenu!.addItem(self.subscribeMenuItem)
-            item!.submenu!.addItem(self.menuItem("CoPilot Show Connections", action:"showConnected", key:"x"))
+            item!.submenu!.addItem(self.menuItem("CoPilot Show Connections", action:#selector(CoPilotPlugin.showConnected), key:"x"))
             self.menusAdded = true
         }
     }
