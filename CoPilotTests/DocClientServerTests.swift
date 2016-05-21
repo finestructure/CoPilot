@@ -76,7 +76,7 @@ class DocClientServerTests: XCTestCase {
         
         let client = DocClient(service: service, document: Document(""))
         var changeCount = 0
-        client.onDocumentUpdate = { _ in changeCount++ }
+        client.onDocumentUpdate = { _ in changeCount += 1 }
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
 
@@ -90,7 +90,7 @@ class DocClientServerTests: XCTestCase {
 
         let client = DocClient(url: url, document: Document(""))
         var changeCount = 0
-        client.onDocumentUpdate = { _ in changeCount++ }
+        client.onDocumentUpdate = { _ in changeCount += 1 }
         expect(changeCount).toEventually(beGreaterThan(0), timeout: 5)
     }
 

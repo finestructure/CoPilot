@@ -95,11 +95,13 @@ extension Patch: SequenceType {
     
     public func generate() -> AnyGenerator<Diff> {
         var next = 0
-        return anyGenerator {
+        return AnyGenerator {
             if (next == self.diffs.count) {
                 return nil
             }
-            return self[next++]
+            let res = self[next]
+            next += 1
+            return res
         }
     }
     
