@@ -93,7 +93,7 @@ class RabbitServerTests: XCTestCase {
 
 
     func test_handshake_RabbitSocket() {
-        // simulate the client server handshare via RabbitSockets (lower level than DocServer/DocClient)
+        // simulate the client server handshake via RabbitSockets (lower level than DocServer/DocClient)
         let docId = NSUUID().UUIDString
 
         let server: RabbitSocket = {
@@ -136,7 +136,7 @@ class RabbitServerTests: XCTestCase {
 
     func test_docServerComms() {
         // another test en route to getting `test_sendChanges` to pass - talking to DocServer from a socket instead of DocClient
-        let server = DocServer(name: "doc name", document: Document("foo"), serverType: .RabbitServer)
+        let server = DocServer(name: "doc name", document: Document("foo"), serverType: .RabbitServer, start: false)
         var published = false
         server.onPublished = {
             published = true
@@ -145,7 +145,7 @@ class RabbitServerTests: XCTestCase {
         server.start()
         expect(published).toEventually(beTrue())
 
-        var receivedDoc = false
+        var received = false
         var connected = true
         let client: RabbitSocket = {
             let s = RabbitSocket(docId: server.id.UUIDString)
@@ -155,19 +155,16 @@ class RabbitServerTests: XCTestCase {
             s.open()
             s.onReceive = { m in
                 let cmd = Command(data: m.data!)
-                print("client received: \(cmd)")
-                if let doc = cmd.document {
-                    print("doc: \(doc)")
-                    receivedDoc = true
+                if cmd.name == "client" {
+                    received = true
                 }
             }
             return s
         }()
         expect(connected).toEventually(beTrue())
-        print("sending client name")
         client.send(Command(name: "client"))
 
-        expect(receivedDoc).toEventually(beTrue(), timeout: 5)
+        expect(received).toEventually(beTrue(), timeout: 5)
     }
 
 

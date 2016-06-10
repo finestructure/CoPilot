@@ -12,7 +12,7 @@ import HastyHare
 
 
 let CoPilotExchange = "CoPilot-Fanout"
-let Hostname = "dockerhost"
+let Hostname = "localhost"
 let Port = 5672
 let Username = "guest"
 let Password = "guest"

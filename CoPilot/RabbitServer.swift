@@ -50,12 +50,12 @@ extension RabbitServer: DocumentService {
     }
 
     func start() {
-        print("starting RabbitServer")
+        //        print("starting RabbitServer")
         self.publish(self.name)
     }
 
     func stop() {
-        print("stopping RabbitServer")
+        //        print("stopping RabbitServer")
         self.unpublish()
         self.socket.close()
     }
