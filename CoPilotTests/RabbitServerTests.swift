@@ -86,13 +86,9 @@ class RabbitServerTests: XCTestCase {
         }()
         c2.send(Command(name: "c2"))
 
-        let block = Async.background {  // Need to validate on a background queue to avoid deadlock/timeout. Without this, the first test will timeout (fail) and the remining will pass.
-            expect(messages["server"]?.description).toEventually(equal("[.Name server, .Name c1, .Name c2]"))
-            expect(messages["1"]?.description).toEventually(equal("[.Name c1, .Name c2]"))
-            expect(messages["2"]?.description).toEventually(equal("[.Name c2]"))
-        }
-        block.wait()
-
+        expect(messages["server"]?.description).toEventually(equal("[.Name server, .Name c1, .Name c2]"))
+        expect(messages["1"]?.description).toEventually(equal("[.Name c1, .Name c2]"))
+        expect(messages["2"]?.description).toEventually(equal("[.Name c2]"))
     }
 
 
@@ -134,10 +130,7 @@ class RabbitServerTests: XCTestCase {
         expect(connected).toEventually(beTrue())
         client.send(Command(name: "client"))
 
-        let block = Async.background {
-            expect(receivedDoc).toEventually(beTrue(), timeout: 5)
-        }
-        block.wait()
+        expect(receivedDoc).toEventually(beTrue(), timeout: 5)
     }
 
 
@@ -174,10 +167,7 @@ class RabbitServerTests: XCTestCase {
         print("sending client name")
         client.send(Command(name: "client"))
 
-        let block = Async.background {
-            expect(receivedDoc).toEventually(beTrue(), timeout: 5)
-        }
-        block.wait()
+        expect(receivedDoc).toEventually(beTrue(), timeout: 5)
     }
 
 
