@@ -320,6 +320,13 @@
 			remoteGlobalIDString = EEE5E36018B37F8700BAE47A;
 			remoteInfo = PSAutobahnClientTests;
 		};
+		5AFFF70A1D0B0DC400F95246 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A04A4CF1BB94DBD00FB4A58;
+			remoteInfo = HastyHare;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -702,6 +709,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5AFFF70B1D0B0DC400F95246 /* PBXTargetDependency */,
 				5A745B231BE8D46B0025D941 /* PBXTargetDependency */,
 				5A6A69941B03428200F718C5 /* PBXTargetDependency */,
 				5A6A69921B03427D00F718C5 /* PBXTargetDependency */,
@@ -1103,6 +1111,11 @@
 			isa = PBXTargetDependency;
 			name = "FeinstrukturUtils-OSX";
 			targetProxy = 5AD1E87D1AE2A3090017CEEE /* PBXContainerItemProxy */;
+		};
+		5AFFF70B1D0B0DC400F95246 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HastyHare;
+			targetProxy = 5AFFF70A1D0B0DC400F95246 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
