@@ -19,8 +19,8 @@
 		5A0983D11AE39E5B001ADB1F /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0983CF1AE39E5B001ADB1F /* Diff.swift */; };
 		5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; };
 		5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1E7F91AE26ABD0017CEEE /* DiffMatchPatch.framework */; };
-		5A0A05E21BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; settings = {ASSET_TAGS = (); }; };
-		5A0A05E31BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; settings = {ASSET_TAGS = (); }; };
+		5A0A05E21BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; };
+		5A0A05E31BC58FA30065EEF0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A05E11BC58FA30065EEF0 /* Socket.swift */; };
 		5A17D91C1AF3CF9100429B79 /* new_playground.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A17D91B1AF3CF9100429B79 /* new_playground.txt */; };
 		5A3013BD1B02978D003403FA /* FeinstrukturUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD1E8751AE2A2BC0017CEEE /* FeinstrukturUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A3013BF1B0297DD003403FA /* libPocketSocket-OSX.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -44,6 +44,12 @@
 		5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B14251AE674E3006EBB31 /* MainController.swift */; };
 		5A6B14281AE674E3006EBB31 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B14261AE674E3006EBB31 /* MainController.xib */; };
 		5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B13EB1AE655FF006EBB31 /* Resolver.swift */; };
+		5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F80BC1BC5963900C93337 /* HastyHare.framework */; };
+		5A745B1A1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */; };
+		5A745B1B1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */; };
+		5A745B1D1BE8BB050025D941 /* RabbitServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B1C1BE8BB050025D941 /* RabbitServer.swift */; };
+		5A745B1E1BE8BB050025D941 /* RabbitServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A745B1C1BE8BB050025D941 /* RabbitServer.swift */; };
+		5A745B211BE8D45E0025D941 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A06AB8C1BC6D4A20072214E /* Async.framework */; };
 		5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
 		5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */; };
 		5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76F5A21B02359800B67B7F /* ConnectionManager.swift */; };
@@ -58,7 +64,7 @@
 		5AA336F01AFA06B2000E37B2 /* DocClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA336EE1AFA06B2000E37B2 /* DocClient.swift */; };
 		5AA3C0E61B1394D800CC9B4F /* BonjourServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3C0E51B1394D800CC9B4F /* BonjourServer.swift */; };
 		5AA3C0E71B1394D800CC9B4F /* BonjourServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3C0E51B1394D800CC9B4F /* BonjourServer.swift */; };
-		5AB0E1BA1B6238D8001815A0 /* CPServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB0E1B91B6238D8001815A0 /* CPServerTests.swift */; };
+		5AB0E1BA1B6238D8001815A0 /* RabbitServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB0E1B91B6238D8001815A0 /* RabbitServerTests.swift */; };
 		5AB0E1C71B62399A001815A0 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB0E1C61B62399A001815A0 /* TestUtils.swift */; };
 		5AB35B8F1AF22F2B00AF2F22 /* libPocketSocket-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */; };
 		5AB3A85C1B0BBBAB0068EE3A /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */; };
@@ -216,6 +222,34 @@
 			remoteGlobalIDString = 6FF402C51AE4F71400ED7FEB;
 			remoteInfo = "DiffMatchPatch OSX Tests";
 		};
+		5A745AFD1BE7D48C0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 14CD471B1BDF23B9008F83EC;
+			remoteInfo = "Async tvOS";
+		};
+		5A745B0B1BE7D48C0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F5DF1551BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOS";
+		};
+		5A745B0D1BE7D48C0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0156A31AE2629C00EED621 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOSTests";
+		};
+		5A745B221BE8D46B0025D941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A06AB841BC6D4A20072214E /* Async.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BF41E4141AC5FB2400A1DDB2;
+			remoteInfo = "Async OSX";
+		};
 		5AB35B8D1AF22F1C00AF2F22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AD85FC11AF22C95007A52F9 /* PocketSocket.xcodeproj */;
@@ -286,6 +320,13 @@
 			remoteGlobalIDString = EEE5E36018B37F8700BAE47A;
 			remoteInfo = PSAutobahnClientTests;
 		};
+		5AFFF70A1D0B0DC400F95246 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A3F80AD1BC5963900C93337 /* HastyHare.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A04A4CF1BB94DBD00FB4A58;
+			remoteInfo = HastyHare;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -334,6 +375,10 @@
 		5A6B13EB1AE655FF006EBB31 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		5A6B14251AE674E3006EBB31 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		5A6B14261AE674E3006EBB31 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
+		5A745B131BE7DA840025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
+		5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitSocket.swift; sourceTree = "<group>"; };
+		5A745B1C1BE8BB050025D941 /* RabbitServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitServer.swift; sourceTree = "<group>"; };
+		5A745B1F1BE8D4550025D941 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = External/HastyHare/External/Async/build/Debug/Async.framework; sourceTree = "<group>"; };
 		5A76F5A21B02359800B67B7F /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerTests.swift; sourceTree = "<group>"; };
 		5A76F5B21B02377500B67B7F /* ConnectedEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedEditor.swift; sourceTree = "<group>"; };
@@ -345,7 +390,7 @@
 		5AA1D65F1AFA52AA00FD107E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5AA336EE1AFA06B2000E37B2 /* DocClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocClient.swift; sourceTree = "<group>"; };
 		5AA3C0E51B1394D800CC9B4F /* BonjourServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonjourServer.swift; sourceTree = "<group>"; };
-		5AB0E1B91B6238D8001815A0 /* CPServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPServerTests.swift; sourceTree = "<group>"; };
+		5AB0E1B91B6238D8001815A0 /* RabbitServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitServerTests.swift; sourceTree = "<group>"; };
 		5AB0E1C61B62399A001815A0 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		5AB3A85B1B0BBBAB0068EE3A /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		5ABAACF01B11016900703634 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -384,6 +429,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A745B211BE8D45E0025D941 /* Async.framework in Frameworks */,
+				5A745B121BE7DA830025D941 /* HastyHare.framework in Frameworks */,
 				5ADA758E1AF24CB30074D8F0 /* libPocketSocket-OSX.dylib in Frameworks */,
 				5A0983DD1AE39EE0001ADB1F /* DiffMatchPatch.framework in Frameworks */,
 				5A0983DB1AE39ED2001ADB1F /* FeinstrukturUtils.framework in Frameworks */,
@@ -409,11 +456,11 @@
 				5AC8A9671AE4E3870097FF8D /* BonjourTests.swift */,
 				5A4D7DAA1AF366B1005E0294 /* CommandTests.swift */,
 				5A76F5AF1B0236B600B67B7F /* ConnectionManagerTests.swift */,
-				5AB0E1B91B6238D8001815A0 /* CPServerTests.swift */,
 				5A01569D1AE2619700EED621 /* DiffTests.swift */,
-				5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */,
-				5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */,
 				5A4B411D1AF3C71400BEC7BF /* DocClientServerTests.swift */,
+				5AFE91571B04AB0C00E6E5A1 /* IssueTests.swift */,
+				5AB0E1B91B6238D8001815A0 /* RabbitServerTests.swift */,
+				5AD85FBA1AF2263E007A52F9 /* ServerTests.swift */,
 				5A01569B1AE2619700EED621 /* Supporting Files */,
 			);
 			path = CoPilotTests;
@@ -455,6 +502,8 @@
 				5A0156AD1AE2629C00EED621 /* NimbleTests.xctest */,
 				5A0156AF1AE2629C00EED621 /* Nimble.framework */,
 				5A0156B11AE2629C00EED621 /* NimbleTests.xctest */,
+				5A745B0C1BE7D48C0025D941 /* Nimble.framework */,
+				5A745B0E1BE7D48C0025D941 /* NimbleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -475,6 +524,7 @@
 			children = (
 				5A06AB8A1BC6D4A20072214E /* Async.framework */,
 				5A06AB8C1BC6D4A20072214E /* Async.framework */,
+				5A745AFE1BE7D48C0025D941 /* Async.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -565,12 +615,14 @@
 		5ACE1BAD1AFDEB4E00154511 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5AA3C0E51B1394D800CC9B4F /* BonjourServer.swift */,
 				5AC8A9761AE542440097FF8D /* BonjourService.swift */,
 				5AC8A9731AE541C80097FF8D /* Browser.swift */,
+				5A745B1C1BE8BB050025D941 /* RabbitServer.swift */,
+				5A745B191BE8BA4E0025D941 /* RabbitSocket.swift */,
 				5A6B13EB1AE655FF006EBB31 /* Resolver.swift */,
-				5AA3C0E51B1394D800CC9B4F /* BonjourServer.swift */,
-				5ADA75911AF24D220074D8F0 /* WebSocket.swift */,
 				5A0A05E11BC58FA30065EEF0 /* Socket.swift */,
+				5ADA75911AF24D220074D8F0 /* WebSocket.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -612,6 +664,8 @@
 		BD2F004D9881D13D7864FD9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A745B1F1BE8D4550025D941 /* Async.framework */,
+				5A745B131BE7DA840025D941 /* Async.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -655,6 +709,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				5AFFF70B1D0B0DC400F95246 /* PBXTargetDependency */,
+				5A745B231BE8D46B0025D941 /* PBXTargetDependency */,
 				5A6A69941B03428200F718C5 /* PBXTargetDependency */,
 				5A6A69921B03427D00F718C5 /* PBXTargetDependency */,
 				5A6A69831B03423F00F718C5 /* PBXTargetDependency */,
@@ -811,6 +867,27 @@
 			remoteRef = 5A6B141D1AE65AE3006EBB31 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5A745AFE1BE7D48C0025D941 /* Async.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Async.framework;
+			remoteRef = 5A745AFD1BE7D48C0025D941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A745B0C1BE7D48C0025D941 /* Nimble.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Nimble.framework;
+			remoteRef = 5A745B0B1BE7D48C0025D941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A745B0E1BE7D48C0025D941 /* NimbleTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NimbleTests.xctest;
+			remoteRef = 5A745B0D1BE7D48C0025D941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5AB35B8E1AF22F1C00AF2F22 /* libPocketSocket-OSX.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
@@ -912,6 +989,7 @@
 				5A4D7DAB1AF366B1005E0294 /* CommandTests.swift in Sources */,
 				5AC8A9751AE541C80097FF8D /* Browser.swift in Sources */,
 				5AC8A9781AE542440097FF8D /* BonjourService.swift in Sources */,
+				5A745B1E1BE8BB050025D941 /* RabbitServer.swift in Sources */,
 				5A76F5B01B0236B600B67B7F /* ConnectionManagerTests.swift in Sources */,
 				5A4B411E1AF3C71400BEC7BF /* DocClientServerTests.swift in Sources */,
 				5A76F5B11B0236DA00B67B7F /* ConnectionManager.swift in Sources */,
@@ -925,13 +1003,14 @@
 				5AB0E1C71B62399A001815A0 /* TestUtils.swift in Sources */,
 				5AF58A231B032D6C00558448 /* XcodeUtils+mock.swift in Sources */,
 				5A0A05E31BC58FA30065EEF0 /* Socket.swift in Sources */,
+				5A745B1B1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */,
 				5A6B14291AE68651006EBB31 /* Resolver.swift in Sources */,
 				5AC8A9681AE4E3870097FF8D /* BonjourTests.swift in Sources */,
 				07B4D0A81B41A2D0002F37AD /* Typealiases.swift in Sources */,
 				5ACE1B9D1AFDEA4F00154511 /* Document.swift in Sources */,
 				5A01569E1AE2619700EED621 /* DiffTests.swift in Sources */,
 				5A76F5B41B02377500B67B7F /* ConnectedEditor.swift in Sources */,
-				5AB0E1BA1B6238D8001815A0 /* CPServerTests.swift in Sources */,
+				5AB0E1BA1B6238D8001815A0 /* RabbitServerTests.swift in Sources */,
 				0785367A1B3A965900C61FCD /* String+ext.swift in Sources */,
 				5ADA75931AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A66AA151AF91CFC0098BD77 /* DocServer.swift in Sources */,
@@ -963,12 +1042,14 @@
 				5AA3C0E61B1394D800CC9B4F /* BonjourServer.swift in Sources */,
 				5A6B13EC1AE655FF006EBB31 /* Resolver.swift in Sources */,
 				5A6B14271AE674E3006EBB31 /* MainController.swift in Sources */,
+				5A745B1A1BE8BA4E0025D941 /* RabbitSocket.swift in Sources */,
 				5AC8A9771AE542440097FF8D /* BonjourService.swift in Sources */,
 				0756ED751B393B0A007E065C /* DTXcodeUtils.m in Sources */,
 				5ADA75921AF24D220074D8F0 /* WebSocket.swift in Sources */,
 				5A7F36D31B04CD28006CFB97 /* ConnectedController.swift in Sources */,
 				5ACE1B9C1AFDEA4F00154511 /* Document.swift in Sources */,
 				5AEDE5471B01F706005F87F3 /* XcodeUtils.swift in Sources */,
+				5A745B1D1BE8BB050025D941 /* RabbitServer.swift in Sources */,
 				5A76F5A31B02359800B67B7F /* ConnectionManager.swift in Sources */,
 				5AD6D3611B17516300A3985E /* UrlController.swift in Sources */,
 				5AB3A85C1B0BBBAB0068EE3A /* Selection.swift in Sources */,
@@ -1011,6 +1092,11 @@
 			name = "DiffMatchPatch-OSX";
 			targetProxy = 5A6A69931B03428200F718C5 /* PBXContainerItemProxy */;
 		};
+		5A745B231BE8D46B0025D941 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Async OSX";
+			targetProxy = 5A745B221BE8D46B0025D941 /* PBXContainerItemProxy */;
+		};
 		5AB35B911AF22F4100AF2F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "PocketSocket-OSX";
@@ -1025,6 +1111,11 @@
 			isa = PBXTargetDependency;
 			name = "FeinstrukturUtils-OSX";
 			targetProxy = 5AD1E87D1AE2A3090017CEEE /* PBXContainerItemProxy */;
+		};
+		5AFFF70B1D0B0DC400F95246 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HastyHare;
+			targetProxy = 5AFFF70A1D0B0DC400F95246 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1178,6 +1269,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/HastyHare/External/Async/build/Debug",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1204,6 +1299,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/HastyHare/External/Async/build/Debug",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

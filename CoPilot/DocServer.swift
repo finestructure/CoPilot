@@ -10,34 +10,41 @@ import Cocoa
 import FeinstrukturUtils
 
 
-extension BonjourServer {
-    func broadcast(command: Command, exceptIds: [ConnectionId] = []) {
-        self.broadcast(Message(command.serialize()), exceptIds: exceptIds)
-    }
+enum DocServerType {
+    case BonjourServer
+    case RabbitServer
 }
 
 
 class DocServer: DocNode {
     
-    private var server: BonjourServer! = nil
+    private var server: DocumentService! = nil
     private var _connections = [ConnectionId: DisplayName]()
 
-    init(name: String, service: BonjourService = CoPilotBonjourService, document: Document) {
-        self.server = BonjourServer(name: name, service: service)
-
+    init(name: String, document: Document, serverType: DocServerType = .BonjourServer, start: Bool = true) {
         super.init(name: name, document: document)
 
-        self.server.onClientConnect = { clientId in
-            self.resetClient(clientId)
+        switch serverType {
+        case .BonjourServer:
+            self.server = BonjourServer(name: name, service: CoPilotBonjourService)
+            self.server.onClientDisconnect = { clientId in
+                self._connections.removeValueForKey(clientId)
+            }
+        case .RabbitServer:
+            print("stating server \(self.id.UUIDString)")
+            self.server = RabbitServer(name: name, docId: self.id.UUIDString)
+            // RabbitServer does not get notified of client connects or disconnets since it's not connected to the clients directly
+            // we handle client connects by looking for a .Name message with a new name in onReceive
+            // TODO: add a heartbeat mechanism to find out if clients dropped off
         }
-        self.server.onClientDisconnect = { clientId in
-            self._connections.removeValueForKey(clientId)
-        }
+
         self.server.onReceive = self.onReceive()
         self.server.onError = { error in
             self.onDisconnect?(error)
         }
-        self.server.start()
+        if start {
+            self.server.start()
+        }
     }
 
 
@@ -49,7 +56,7 @@ class DocServer: DocNode {
             }
 
             let cmd = Command(data: data)
-            // println("#### server cmd: \(cmd)")
+            print("#### server cmd: \(cmd)")
             switch cmd {
             case .Doc:
                 print("server not accepting .Doc commands")
@@ -77,6 +84,9 @@ class DocServer: DocNode {
                 let cmd = Command(document: self._document)
                 self.server.send(Message(cmd.serialize()), receiverId: clientId)
             case .Name(let name):
+                if self._connections[clientId] == nil {
+                    self.resetClient(clientId)
+                }
                 self._connections[clientId] = name
             case .Cursor(let selection):
                 self._onCursorUpdate?(selection)
@@ -95,10 +105,20 @@ class DocServer: DocNode {
     }
 
 
+    func start() {
+        self.server.start()
+    }
+
+
     func stop() {
         self.server.stop()
     }
 
+
+    var onPublished: (Void -> Void)? {
+        get { return self.server.onPublished }
+        set { self.server.onPublished = newValue }
+    }
 }
 
 

@@ -20,6 +20,8 @@ protocol DocumentService {
     func unpublish()
     func broadcast(message: Message, exceptIds: [ConnectionId])
     func send(message: Message, receiverId: ConnectionId)
+    func start()
+    func stop()
 
     var onPublished: (Void -> Void)? { get set }
     var onClientConnect: ClientHandler? { get set }
@@ -29,3 +31,9 @@ protocol DocumentService {
 
 }
 
+
+extension DocumentService {
+    func broadcast(command: Command, exceptIds: [ConnectionId] = []) {
+        self.broadcast(Message(command.serialize()), exceptIds: exceptIds)
+    }
+}

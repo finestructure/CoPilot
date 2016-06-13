@@ -36,7 +36,17 @@ class DocClient: DocNode {
         super.init(name: name, document: document)
 
         self.connection = url.absoluteString ?? "Unknown remote document"
-        self.socket = WebSocket(url: url) // TODO: rabbit socket alternative
+        self.socket = WebSocket(url: url)
+        self.configureSocket()
+        self.socket?.open()
+    }
+
+
+    init(name: String = "DocClient", connectionId: NSUUID, document: Document) {
+        super.init(name: name, document: document)
+
+        self.connection = connectionId.UUIDString
+        self.socket = RabbitSocket(docId: connectionId.UUIDString)
         self.configureSocket()
         self.socket?.open()
     }
@@ -48,7 +58,7 @@ class DocClient: DocNode {
         }
         self.socket?.onReceive = self.onReceive
         self.socket?.onDisconnect = { error in
-            // println("### client.onDisconnect")
+            print("### client.onDisconnect")
             self.connection = nil
             self.onDisconnect?(error)
         }
@@ -62,7 +72,7 @@ class DocClient: DocNode {
         }
 
         let cmd = Command(data: data)
-        // println("#### client cmd: \(cmd)")
+        print("#### \(self.name) cmd: \(cmd)")
         switch cmd {
         case .Doc(let doc):
             self.commit(doc)

@@ -38,7 +38,7 @@ class MainController: NSWindowController {
         self.browser.onRemove = { _ in
             self.servicesTableView.reloadData()
         }
-        self.servicesTableView.doubleAction = Selector("rowDoubleClicked:")
+        self.servicesTableView.doubleAction = #selector(MainController.rowDoubleClicked(_:))
         self.updateUI()
     }
     

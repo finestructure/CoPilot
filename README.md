@@ -12,7 +12,7 @@ Please see the [CoPilot Homepage](http://feinstruktur.com/copilot) for further d
 
 ## Compatibility
 
-CoPilot has been tested on Xcode 6.3.2, 6.4, and 7beta. It should also run on other versions of Xcode.
+CoPilot has been tested on Xcode 6.3.2, 6.4, and 7.x. It should also run on other versions of Xcode but you may have to add its UUID to Info.plist.
 
 ## Installing
 
@@ -20,7 +20,7 @@ CoPilot can be installed via by running the following command in the terminal:
 ```
 curl -fsSL https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/install.sh | sh
 ```
-Astute readers will recognise a striking similariry to Alcatraz' way of installing :) Alcatraz integration will hopefull follow soon, pending the merge of [this pull request](https://github.com/supermarin/Alcatraz/pull/295).
+Astute readers will recognise a striking similariry to Alcatraz' way of installing :) Until Alcatraz allows for binary installs this is the easiest way to get up and running. Yes, it's not great to pipe a URL into `sh` so please review [`install.sh`](https://raw.githubusercontent.com/feinstruktur/CoPilot/master/Misc/install.sh) or download and run it manually.
 
 ## Build Instructions
 
