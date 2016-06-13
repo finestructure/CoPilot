@@ -36,7 +36,7 @@ class DocClient: DocNode {
         super.init(name: name, document: document)
 
         self.connection = url.absoluteString ?? "Unknown remote document"
-        self.socket = WebSocket(url: url) // TODO: rabbit socket alternative
+        self.socket = WebSocket(url: url)
         self.configureSocket()
         self.socket?.open()
     }
@@ -58,7 +58,7 @@ class DocClient: DocNode {
         }
         self.socket?.onReceive = self.onReceive
         self.socket?.onDisconnect = { error in
-            // println("### client.onDisconnect")
+            print("### client.onDisconnect")
             self.connection = nil
             self.onDisconnect?(error)
         }

@@ -32,6 +32,7 @@ extension RabbitServer: DocumentService {
     func publish(name: String) {
         self.socket.open()
         // TODO: should check if `open()` was successful before calling `onPublished()`
+        print("connected: \(self.socket.connected)")
         self.onPublished?()
     }
 
@@ -50,12 +51,12 @@ extension RabbitServer: DocumentService {
     }
 
     func start() {
-        //        print("starting RabbitServer")
+        print("starting RabbitServer")
         self.publish(self.name)
     }
 
     func stop() {
-        //        print("stopping RabbitServer")
+        print("stopping RabbitServer")
         self.unpublish()
         self.socket.close()
     }

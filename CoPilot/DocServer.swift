@@ -31,6 +31,7 @@ class DocServer: DocNode {
                 self._connections.removeValueForKey(clientId)
             }
         case .RabbitServer:
+            print("stating server \(self.id.UUIDString)")
             self.server = RabbitServer(name: name, docId: self.id.UUIDString)
             // RabbitServer does not get notified of client connects or disconnets since it's not connected to the clients directly
             // we handle client connects by looking for a .Name message with a new name in onReceive

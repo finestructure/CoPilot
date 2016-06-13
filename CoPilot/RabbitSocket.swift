@@ -56,6 +56,9 @@ class RabbitSocket {
         }
     }
 
+    var connected: Bool {
+        return self.connect().connected
+    }
 }
 
 

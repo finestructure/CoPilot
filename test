@@ -106,5 +106,5 @@ function main {
 LOGFILE=test.log
 date 2>&1 | tee $LOGFILE
 uname -a 2>&1 | tee -a $LOGFILE
-main $@ | grep 'Test Case\|Test Suite\|Executed' | tee -a $LOGFILE
+main $@ | grep 'Test Case\|Test Suite\|Executed\|expected' | tee -a $LOGFILE
 

@@ -192,14 +192,19 @@ class RabbitServerTests: XCTestCase {
     }
 
     
-    // FIXME: enable
-    func _test_sendChanges() {
-        let server = DocServer(name: "doc name", document: Document("foo"), serverType: .RabbitServer)
+    func test_sendChanges() {
+        let server = DocServer(name: "doc name", document: Document("server"), serverType: .RabbitServer, start: false)
         defer { server.stop() }
+        var published = false
+        server.onPublished = {
+            published = true
+        }
+        server.start()
+        expect(published).toEventually(beTrue(), timeout: 5)
 
-        let client1 = DocClient(name: "client1", connectionId: server.id, document: Document(""))
+        let client1 = DocClient(name: "client1", connectionId: server.id, document: Document("client"))
         // wait for the initial .Doc to set up the client
-        expect(client1.document.text).toEventually(equal("foo"), timeout: 5)
+        expect(client1.document.text).toEventually(equal("server"), timeout: 5)
 
         let client2Doc = Document(contentsOfFile(name: "new_playground", type: "txt"))
         let client2 = DocClient(name: "client2", connectionId: server.id, document: client2Doc)
