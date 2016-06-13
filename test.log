@@ -1,0 +1,119 @@
+Mon 13 Jun 2016 11:47:41 BST
+Darwin Rhea.local 15.5.0 Darwin Kernel Version 15.5.0: Tue Apr 19 18:36:36 PDT 2016; root:xnu-3248.50.21~8/RELEASE_X86_64 x86_64
+Test Suite 'All tests' started at 2016-06-13 11:48:02.259
+Test Suite 'CoPilotTests.xctest' started at 2016-06-13 11:48:02.260
+Test Suite 'BonjourTests' started at 2016-06-13 11:48:02.260
+Test Case '-[CoPilotTests.BonjourTests test_Browser_add_remove]' started.
+Test Case '-[CoPilotTests.BonjourTests test_Browser_add_remove]' passed (3.866 seconds).
+Test Case '-[CoPilotTests.BonjourTests test_publish]' started.
+Test Case '-[CoPilotTests.BonjourTests test_publish]' passed (0.002 seconds).
+Test Case '-[CoPilotTests.BonjourTests test_resolve]' started.
+Test Case '-[CoPilotTests.BonjourTests test_resolve]' passed (0.033 seconds).
+Test Suite 'BonjourTests' passed at 2016-06-13 11:48:06.163.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 3.901 (3.903) seconds
+Test Suite 'CommandTests' started at 2016-06-13 11:48:06.164
+Test Case '-[CoPilotTests.CommandTests test_serialize_Cursor]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_Cursor]' passed (0.002 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_Doc]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_Doc]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_GetDocument]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_GetDocument]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_GetVersion]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_GetVersion]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_Name]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_Name]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_Undefined]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_Undefined]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_Update]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_Update]' passed (0.005 seconds).
+Test Case '-[CoPilotTests.CommandTests test_serialize_Version]' started.
+Test Case '-[CoPilotTests.CommandTests test_serialize_Version]' passed (0.001 seconds).
+Test Suite 'CommandTests' passed at 2016-06-13 11:48:06.179.
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.011 (0.015) seconds
+Test Suite 'ConnectionManagerTests' started at 2016-06-13 11:48:06.179
+Test Case '-[CoPilotTests.ConnectionManagerTests test_connected_published_subscribed]' started.
+Test Case '-[CoPilotTests.ConnectionManagerTests test_connected_published_subscribed]' passed (0.058 seconds).
+Test Case '-[CoPilotTests.ConnectionManagerTests test_filters]' started.
+Test Case '-[CoPilotTests.ConnectionManagerTests test_filters]' passed (0.012 seconds).
+Test Case '-[CoPilotTests.ConnectionManagerTests test_subscribe_url]' started.
+Test Case '-[CoPilotTests.ConnectionManagerTests test_subscribe_url]' passed (0.048 seconds).
+Test Suite 'ConnectionManagerTests' passed at 2016-06-13 11:48:06.300.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.118 (0.120) seconds
+Test Suite 'DiffTests' started at 2016-06-13 11:48:06.300
+Test Case '-[CoPilotTests.DiffTests test_adjustPos]' started.
+Test Case '-[CoPilotTests.DiffTests test_adjustPos]' passed (0.017 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_Document]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_Document]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_conflict]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_conflict]' passed (0.002 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_diverged]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_diverged]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_diverged2]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_diverged2]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_diverged3]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_Document_diverged3]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_error]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_error]' passed (0.003 seconds).
+Test Case '-[CoPilotTests.DiffTests test_apply_String]' started.
+Test Case '-[CoPilotTests.DiffTests test_apply_String]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_computeDiff]' started.
+Test Case '-[CoPilotTests.DiffTests test_computeDiff]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_computeDiff_nil_params]' started.
+Test Case '-[CoPilotTests.DiffTests test_computeDiff_nil_params]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_hash]' started.
+Test Case '-[CoPilotTests.DiffTests test_hash]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_merge]' started.
+Test Case '-[CoPilotTests.DiffTests test_merge]' passed (0.011 seconds).
+Test Case '-[CoPilotTests.DiffTests test_merge_failure]' started.
+Test Case '-[CoPilotTests.DiffTests test_merge_failure]' passed (0.007 seconds).
+Test Case '-[CoPilotTests.DiffTests test_patches]' started.
+Test Case '-[CoPilotTests.DiffTests test_patches]' passed (0.001 seconds).
+Test Case '-[CoPilotTests.DiffTests test_patches_long]' started.
+Test Case '-[CoPilotTests.DiffTests test_patches_long]' passed (0.003 seconds).
+Test Case '-[CoPilotTests.DiffTests test_preserve_position]' started.
+Test Case '-[CoPilotTests.DiffTests test_preserve_position]' passed (0.001 seconds).
+Test Suite 'DiffTests' passed at 2016-06-13 11:48:06.360.
+	 Executed 16 tests, with 0 failures (0 unexpected) in 0.052 (0.059) seconds
+Test Suite 'DocClientServerTests' started at 2016-06-13 11:48:06.360
+Test Case '-[CoPilotTests.DocClientServerTests test_conflict_client_update]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_conflict_client_update]' passed (1.454 seconds).
+Test Case '-[CoPilotTests.DocClientServerTests test_conflict_server_update]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_conflict_server_update]' passed (0.545 seconds).
+Test Case '-[CoPilotTests.DocClientServerTests test_DocClient_applyChanges]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_DocClient_applyChanges]' passed (0.555 seconds).
+Test Case '-[CoPilotTests.DocClientServerTests test_DocClient_nsNetService]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_DocClient_nsNetService]' passed (0.033 seconds).
+Test Case '-[CoPilotTests.DocClientServerTests test_DocClient_url]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_DocClient_url]' passed (0.012 seconds).
+Test Case '-[CoPilotTests.DocClientServerTests test_server]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_server]' passed (0.312 seconds).
+Test Case '-[CoPilotTests.DocClientServerTests test_sync_back]' started.
+Test Case '-[CoPilotTests.DocClientServerTests test_sync_back]' passed (1.097 seconds).
+Test Suite 'DocClientServerTests' passed at 2016-06-13 11:48:10.373.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 4.007 (4.013) seconds
+Test Suite 'IssueTests' started at 2016-06-13 11:48:10.374
+Test Case '-[CoPilotTests.IssueTests test_issue_14]' started.
+Test Case '-[CoPilotTests.IssueTests test_issue_14]' passed (1.111 seconds).
+Test Case '-[CoPilotTests.IssueTests test_issue_36]' started.
+Test Case '-[CoPilotTests.IssueTests test_issue_36]' passed (0.009 seconds).
+Test Case '-[CoPilotTests.IssueTests test_issue_7]' started.
+Test Case '-[CoPilotTests.IssueTests test_issue_7]' passed (0.002 seconds).
+Test Case '-[CoPilotTests.IssueTests test_issue_8]' started.
+Test Case '-[CoPilotTests.IssueTests test_issue_8]' passed (0.001 seconds).
+Test Suite 'IssueTests' passed at 2016-06-13 11:48:11.499.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 1.122 (1.125) seconds
+Test Suite 'ServerTests' started at 2016-06-13 11:48:11.499
+Test Case '-[CoPilotTests.ServerTests test_broadcast]' started.
+Test Case '-[CoPilotTests.ServerTests test_broadcast]' passed (0.033 seconds).
+Test Case '-[CoPilotTests.ServerTests test_send]' started.
+Test Case '-[CoPilotTests.ServerTests test_send]' passed (0.022 seconds).
+Test Case '-[CoPilotTests.ServerTests test_sendChanges]' started.
+Test Case '-[CoPilotTests.ServerTests test_sendChanges]' passed (0.024 seconds).
+Test Case '-[CoPilotTests.ServerTests test_server]' started.
+Test Case '-[CoPilotTests.ServerTests test_server]' passed (0.012 seconds).
+Test Suite 'ServerTests' passed at 2016-06-13 11:48:11.594.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.091 (0.094) seconds
+Test Suite 'CoPilotTests.xctest' passed at 2016-06-13 11:48:11.594.
+	 Executed 45 tests, with 0 failures (0 unexpected) in 9.301 (9.334) seconds
+Test Suite 'All tests' passed at 2016-06-13 11:48:11.595.
+	 Executed 45 tests, with 0 failures (0 unexpected) in 9.301 (9.336) seconds
