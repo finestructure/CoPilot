@@ -31,7 +31,7 @@ func contentsOfFile(name name: String, type: String) -> String {
 
 
 class DiffTests: XCTestCase {
-    
+
 
     func test_computeDiff() {
         let d = computeDiff("foo2bar", b: "foobar")
@@ -44,6 +44,16 @@ class DiffTests: XCTestCase {
         expect(d[2].text) == "bar"
     }
     
+    
+    func test_computeDiff_nil_params() {
+        let d1 = computeDiff("foo", b: nil)
+        expect(d1.count) == 0
+        let d2 = computeDiff(nil, b: "foo")
+        expect(d2.count) == 0
+        let d3 = computeDiff(nil, b: nil)
+        expect(d3.count) == 0
+    }
+
     
     func test_patches() {
         let res = computePatches("foo2bar", b: "foobar")
